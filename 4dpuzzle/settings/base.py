@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'images',
     'news',
     'stratunits',
+    'finds',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
