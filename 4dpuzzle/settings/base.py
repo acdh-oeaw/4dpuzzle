@@ -33,14 +33,15 @@ INSTALLED_APPS = [
     'django_filters',
     'django_tables2',
     'rest_framework',
+    'leaflet',
     'webpage',
     'vocabs',
     'places',
     'bib',
     'images',
     'news',
-    'stratunits',
-    'finds',
+    'archobs',
+    'browsing',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
@@ -51,7 +52,7 @@ REST_FRAMEWORK = {
 }
 
 SPAGHETTI_SAUCE = {
-    'apps': ['vocabs', 'places', 'bib'],
+    'apps': ['vocabs', 'places', 'bib', 'images', 'archobs'],
     'show_fields': False,
     'exclude': {'auth': ['user']}
 }
@@ -126,3 +127,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
+
+
+LEAFLET_CONFIG = {
+    'OVERLAYS': [
+        ('MAPBOX', 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            'attribution': 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            'accessToken': 'pk.eyJ1Ijoic2VubmllcmVyIiwiYSI6ImNpbHk1YWV0bDAwZnB2dW01d2l1Y3phdmkifQ.OljQLEhqeAygai2y6VoSwQ',
+            'maxZoom': 18,
+            'id': 'mapbox.light',
+        }),
+        ('dinamlex', 'https://maps.acdh.oeaw.ac.at/mapserv?map=/data/test.map&mode=tile&layers=test&tilemode=gmap&tile={x}+{y}+{z}', {'maxZoom': 18, 'opacity': 0.7}),
+        ('czoernig', 'https://maps.acdh.oeaw.ac.at/mapserv?map=/data/czoernig.map&mode=tile&layers=czoernig&tilemode=gmap&tile={x}+{y}+{z}', {'maxZoom': 18, 'opacity': 0.7}),
+        ('tirol', 'https://maps.acdh.oeaw.ac.at/mapserv?map=/data/tirol.map&mode=tile&layers=tirol&tilemode=gmap&tile={x}+{y}+{z}', {'maxZoom': 18, 'opacity': 0.7}),
+    ]
+}

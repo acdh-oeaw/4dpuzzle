@@ -13,19 +13,19 @@ class ImageDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ImageDetailView, self).get_context_data(**kwargs)
-        try:
-            context["next_entry"] = Image.objects.filter(id__gt=int(self.kwargs['pk']))[0].pk
-        except:
-            context["next_entry"] = None
-        try:
-            prev = [x.id for x in Image.objects.filter(id__lt=int(self.kwargs['pk']))][-1]
-        except:
-            prev = Image.objects.get(id=self.kwargs['pk'])
-        try:
-            Image.objects.get(id=int(prev)-1)
-            context["previous_entry"] = prev
-        except:
-            context["previous_entry"] = None
+        # try:
+        #     context["next_entry"] = Image.objects.filter(id__gt=int(self.kwargs['pk']))[0].pk
+        # except:
+        #     context["next_entry"] = None
+        # try:
+        #     prev = [x.id for x in Image.objects.filter(id__lt=int(self.kwargs['pk']))][-1]
+        # except:
+        #     prev = Image.objects.get(id=self.kwargs['pk'])
+        # try:
+        #     Image.objects.get(id=int(prev)-1)
+        #     context["previous_entry"] = prev
+        # except:
+        #     context["previous_entry"] = None
 
         return context
 

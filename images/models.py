@@ -28,6 +28,18 @@ class Image(models.Model):
     file_extension = models.CharField(
         blank=True, max_length=20, choices=FILE_EXTENSION_CHOICES, default='.jpg')
 
+    def get_next(self):
+        next = Image.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = Image.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
     def save(self, *args, **kwargs):
         if self.path is None:
             temp_path, _ = ServerPath.objects.get_or_create(name=IIIF_PATH)

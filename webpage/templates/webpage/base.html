@@ -39,7 +39,7 @@
             "message":"This website uses cookies to ensure you get the best experience on our website",
             "dismiss":"Got it!",
             "learnMore":"More info",
-            "link":"{% url 'webpage:imprint' %}",
+            "link":"{% url 'webpage:staticpage' template='imprint' %}",
             "theme":"dark-bottom"};
     </script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
@@ -82,9 +82,10 @@
                         </a>
                         <ul class="dropdown-menu procustom-dropdown-menu">
                             <li><a href="{% url 'webpage:start' %}">{% projects_metadata 'title' %}</a></li>
-                            <li><a href="{% url 'webpage:about' %}">About</a></li>
+                            <li><a href="{% url 'webpage:staticpage' template='about' %}">About</a></li>
+                            <li><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstruct TD</a></li>
                             <li><a href="{% url 'datamodel:plate' %}">Application's data model</a></li>
-                            <li><a href="{% url 'webpage:imprint' %}">Impressum / Imprint</a></li>
+                            <li><a href="{% url 'webpage:staticpage' template='imprint' %}">Impressum / Imprint</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -94,10 +95,15 @@
                         </a>
                         {% else %}
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Browse the Data <span class="caret"></span>
+                            Explore the Data <span class="caret"></span>
                         </a>
                         {% endif %}
                         <ul class="dropdown-menu procustom-dropdown-menu">
+                            <li class="dropdown-header">Arch-Objects</li>
+                            <li><a href="{% url 'archobs:brick-detail' pk=54 %}">Finds</a></li>
+                            <li><a href="{% url 'places:place_list' %}">Bricks</a></li>
+                            <li><a href="{% url 'places:place_list' %}">Strat-Units</a></li>
+                            <li role="separator" class="divider"></li>
                             <li><a href="{% url 'places:place_list' %}">Locations</a></li>
                             <li role="separator" class="divider"></li>
                             {% if user.is_authenticated %}

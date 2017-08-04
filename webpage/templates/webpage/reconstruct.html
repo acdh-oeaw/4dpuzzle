@@ -1,0 +1,27 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block title %} Reconstruct TD {% endblock %}
+{% block content %}
+<div class="container">
+    <h1>RECONSTRUCTING TD</h1>
+    <h2>ArcScene project with reconstructions of tombs</h2>
+    <div>
+        <p>Project description (text): aims of LBI 4DP project + achievements </p>
+
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="http://lbi-archpro.org/cs/Palast_Potree/Palast.html"></iframe>
+        </div>
+    </div>
+    <hr/>
+    <div>
+        <h2>ARCH4D Inspector</h2>
+
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="http://lbi-archpro.org/cs/TED_WebViewer"></iframe>
+        </div>
+    </div>
+    <hr/>
+
+</div>
+{% endblock %}
