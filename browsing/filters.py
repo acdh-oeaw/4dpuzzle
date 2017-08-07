@@ -29,3 +29,15 @@ class BrickListFilter(django_filters.FilterSet):
     class Meta:
         model = Brick
         fields = ['stratum_id', 'phase_id', 'brick_type']
+
+
+class FindListFilter(django_filters.FilterSet):
+    class Meta:
+        model = Find
+        fields = ['stratum_id', 'phase_id', 'find_type']
+
+
+class StratunitListFilter(django_filters.FilterSet):
+    class Meta:
+        model = Stratunit
+        fields = ['stratum_id', 'phase_id', 'resources_field']

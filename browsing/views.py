@@ -42,3 +42,31 @@ class BrickListView(GenericListView):
         context[self.context_filter_name] = self.filter
 
         return context
+
+
+class FindListView(GenericListView):
+    model = Find
+    table_class = FindTable
+    template_name = 'browsing/find_list_generic.html'
+    filter_class = FindListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+
+        return context
+
+
+class StratunitListView(GenericListView):
+    model = Stratunit
+    table_class = StratunitTable
+    template_name = 'browsing/stratunit_list_generic.html'
+    filter_class = StratunitListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+
+        return context
