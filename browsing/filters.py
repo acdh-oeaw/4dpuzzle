@@ -1,4 +1,5 @@
 import django_filters
+from dal import autocomplete
 from . import forms
 from browsing.forms import *
 from archobs.models import *
@@ -26,18 +27,51 @@ django_filters.filters.LOOKUP_TYPES = [
 
 
 class BrickListFilter(django_filters.FilterSet):
+
+    stratum_id = django_filters.CharFilter(
+        widget=autocomplete.Select2(
+            url='archobs-dal:strat-dal',
+            # attrs={'data-minimum-input-length': 1}
+        ),
+        lookup_expr='icontains',
+        label='Name',
+        help_text=False,
+    )
+
     class Meta:
         model = Brick
-        fields = ['stratum_id', 'phase_id', 'brick_type']
+        fields = ['phase_id', 'brick_type']
 
 
 class FindListFilter(django_filters.FilterSet):
+
+    stratum_id = django_filters.CharFilter(
+        widget=autocomplete.Select2(
+            url='archobs-dal:strat-dal',
+            # attrs={'data-minimum-input-length': 1}
+        ),
+        lookup_expr='icontains',
+        label='Name',
+        help_text=False,
+    )
+
     class Meta:
         model = Find
-        fields = ['stratum_id', 'phase_id', 'find_type']
+        fields = ['phase_id', 'find_type']
 
 
 class StratunitListFilter(django_filters.FilterSet):
+
+    stratum_id = django_filters.CharFilter(
+        widget=autocomplete.Select2(
+            url='archobs-dal:strat-dal',
+            # attrs={'data-minimum-input-length': 1}
+        ),
+        lookup_expr='icontains',
+        label='Name',
+        help_text=False,
+    )
+
     class Meta:
         model = Stratunit
-        fields = ['stratum_id', 'phase_id', 'resources_field']
+        fields = ['phase_id', 'resources_field']
