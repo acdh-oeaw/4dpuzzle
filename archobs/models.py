@@ -26,7 +26,7 @@ class Find(models.Model):
     def iiifjson(self):
         return "https://iiif.acdh.oeaw.ac.at/p4d/TD_F-I_j21/{}__{}/info.json".format(
             self.resource_i, self.excavation
-        ).replace(' ', '')
+        ).replace(' ', '').replace('lanum_', 'lanum')
 
     def __str__(self):
         return "{}".format(self.gisfind_id)
@@ -71,7 +71,7 @@ class Brick(models.Model):
     def iiifjson(self):
         return "https://iiif.acdh.oeaw.ac.at/p4d/TD_F-I_j21/{}__{}/info.json".format(
             self.resource_i, self.excavation
-        ).replace(' ', '')
+        ).replace(' ', '').replace('lanum_', 'lanum')
 
     def get_next(self):
         next = Brick.objects.filter(id__gt=self.id)
@@ -138,7 +138,7 @@ class Stratunit(models.Model):
     def iiifjson(self):
         return "https://iiif.acdh.oeaw.ac.at/p4d/TD_F-I_j21/{}__{}/info.json".format(
             self.resources_field, (self.excavation)
-        ).replace(' ', '')
+        ).replace(' ', '').replace('lanum_', 'lanum')
 
     def get_next(self):
         next = Stratunit.objects.filter(id__gt=self.id)
