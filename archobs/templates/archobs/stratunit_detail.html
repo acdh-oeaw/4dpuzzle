@@ -1,6 +1,6 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
-{% block title %}Brick: {{ object }}{% endblock %}
+{% block title %}Stratunit: {{ object }}{% endblock %}
 {% block scriptHeader %}
 <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
 <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
@@ -17,19 +17,19 @@
                 <div class="col-md-2">
                     {% if object.get_prev %}
                     <h2>
-                        <a href="{% url 'archobs:brick-detail' pk=object.get_prev %}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true" title="previous area"></span></a>
+                        <a href="{% url 'archobs:stratunit-detail' pk=object.get_prev %}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true" title="previous area"></span></a>
                     </h2>
                     {% endif %}
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                       <small>brick: </small>{{ object }}
+                      <small>stratunit: </small>{{ object }}
                     </h1>
                 </div>
                 <div class="col-md-2">
                 {% if object.get_next %}
                     <h2>
-                        <a href="{% url 'archobs:brick-detail' pk=object.get_next %}" style="float:right"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true" title="next area"></span></a>
+                        <a href="{% url 'archobs:stratunit-detail' pk=object.get_next %}" style="float:right"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true" title="next area"></span></a>
                     </h2>
                 {% endif %}
                 </div>
@@ -44,8 +44,12 @@
                             <td>{{ object.objectid }}</td>
                         </tr>
                         <tr>
-                            <th>gisbrick_i</th>
-                            <td>{{ object.gisbrick_i }}</td>
+                            <th>type</th>
+                            <td>{{ object.type }}</td>
+                        </tr>
+                        <tr>
+                            <th>gis_su_id</th>
+                            <td>{{ object.gis_su_id }}</td>
                         </tr>
                         <tr>
                             <th>excavation</th>
@@ -56,12 +60,16 @@
                             <td>{{ object.stratum_id }}</td>
                         </tr>
                         <tr>
-                            <th>stratum_gi</th>
-                            <td>{{ object.stratum_gi }}</td>
-                        </tr>
-                        <tr>
                             <th>phase_id</th>
                             <td>{{ object.phase_id }}</td>
+                        </tr>
+                        <tr>
+                            <th>phase_gis_field</th>
+                            <td>{{ object.phase_gis_field }}</td>
+                        </tr>
+                        <tr>
+                            <th>locus_id</th>
+                            <td>{{ object.locus_id }}</td>
                         </tr>
                         <tr>
                             <th>archaeolog</th>
@@ -76,40 +84,108 @@
                             <td>{{ object.archaeol_2 }}</td>
                         </tr>
                         <tr>
-                            <th>gis_su_id</th>
-                            <td>{{ object.gis_su_id }}</td>
+                            <th>height_top</th>
+                            <td>{{ object.height_top }}</td>
                         </tr>
                         <tr>
-                            <th>gis_locus_field</th>
-                            <td>{{ object.gis_locus_field }}</td>
+                            <th>height_t_1</th>
+                            <td>{{ object.height_t_1 }}</td>
                         </tr>
                         <tr>
-                            <th>brick_type</th>
-                            <td>{{ object.brick_type }}</td>
+                            <th>height_bot</th>
+                            <td>{{ object.height_bot }}</td>
                         </tr>
                         <tr>
-                            <th>brick_mate</th>
-                            <td>{{ object.brick_mate }}</td>
-                        </tr>
-                        <tr>
-                            <th>height_max</th>
-                            <td>{{ object.height_max }}</td>
+                            <th>height_b_1</th>
+                            <td>{{ object.height_b_1 }}</td>
                         </tr>
                         <tr>
                             <th>extrusion</th>
                             <td>{{ object.extrusion }}</td>
                         </tr>
                         <tr>
+                            <th>base_heigh</th>
+                            <td>{{ object.base_heigh }}</td>
+                        </tr>
+                        <tr>
+                            <th>eigner_map</th>
+                            <td>{{ object.eigner_map }}</td>
+                        </tr>
+                        <tr>
+                            <th>resources_field</th>
+                            <td>{{ object.resources_field }}</td>
+                        </tr>
+                        <tr>
+                            <th>pit_fill</th>
+                            <td>{{ object.pit_fill }}</td>
+                        </tr>
+                        <tr>
+                            <th>pit_find_g</th>
+                            <td>{{ object.pit_find_g }}</td>
+                        </tr>
+                        <tr>
+                            <th>bp_materia</th>
+                            <td>{{ object.bp_materia }}</td>
+                        </tr>
+                        <tr>
+                            <th>bp_door_st</th>
+                            <td>{{ object.bp_door_st }}</td>
+                        </tr>
+                        <tr>
+                            <th>bp_door_1</th>
+                            <td>{{ object.bp_door_1 }}</td>
+                        </tr>
+                        <tr>
+                            <th>wall_type</th>
+                            <td>{{ object.wall_type }}</td>
+                        </tr>
+                        <tr>
+                            <th>wall_brick</th>
+                            <td>{{ object.wall_brick }}</td>
+                        </tr>
+                        <tr>
+                            <th>wall_inter</th>
+                            <td>{{ object.wall_inter }}</td>
+                        </tr>
+                        <tr>
+                            <th>wall_bri_1</th>
+                            <td>{{ object.wall_bri_1 }}</td>
+                        </tr>
+                        <tr>
+                            <th>locus_laye</th>
+                            <td>{{ object.locus_laye }}</td>
+                        </tr>
+                        <tr>
+                            <th>shape_clas</th>
+                            <td>{{ object.shape_clas }}</td>
+                        </tr>
+                        <tr>
                             <th>orientatio</th>
                             <td>{{ object.orientatio }}</td>
                         </tr>
                         <tr>
-                            <th>resource_i</th>
-                            <td>{{ object.resource_i }}</td>
+                            <th>stratum</th>
+                            <td>{{ object.stratum }}</td>
                         </tr>
                         <tr>
-                            <th>base_heigh</th>
-                            <td>{{ object.base_heigh }}</td>
+                            <th>phase</th>
+                            <td>{{ object.phase }}</td>
+                        </tr>
+                        <tr>
+                            <th>wall_funct</th>
+                            <td>{{ object.wall_funct }}</td>
+                        </tr>
+                        <tr>
+                            <th>su_nummer</th>
+                            <td>{{ object.su_nummer }}</td>
+                        </tr>
+                        <tr>
+                            <th>wall_conne</th>
+                            <td>{{ object.wall_conne }}</td>
+                        </tr>
+                        <tr>
+                            <th>old_object</th>
+                            <td>{{ object.old_object }}</td>
                         </tr>
                         <tr>
                             <th>shape_leng</th>

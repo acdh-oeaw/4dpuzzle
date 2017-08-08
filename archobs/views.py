@@ -6,19 +6,16 @@ from .models import Brick, Find, Stratunit
 class BrickDetailView(DetailView):
 
     model = Brick
-    template_name = 'archobs/brick_detail.html'
 
 
 class FindDetailView(DetailView):
 
     model = Find
-    template_name = 'archobs/brick_detail.html'
 
 
 class StratunitDetailView(DetailView):
 
     model = Stratunit
-    template_name = 'archobs/brick_detail.html'
 
 
 class MainPageView(TemplateView):

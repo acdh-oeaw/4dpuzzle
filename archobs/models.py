@@ -23,8 +23,25 @@ class Find(models.Model):
     resource_i = models.CharField(blank=True, max_length=250)
     geom = models.MultiPointField(srid=4326)
 
+    def iiifjson(self):
+        return "https://iiif.acdh.oeaw.ac.at/p4d/TD_F-I_j21/{}__{}/info.json".format(
+            self.resource_i, self.excavation
+        ).replace(' ', '')
+
     def __str__(self):
         return "{}".format(self.gisfind_id)
+
+    def get_next(self):
+        next = Find.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = Find.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
 
 
 class Brick(models.Model):
@@ -50,6 +67,11 @@ class Brick(models.Model):
     shape_leng = models.FloatField(blank=True, null=True)
     shape_area = models.FloatField(blank=True, null=True)
     geom = models.MultiPolygonField(srid=4326)
+
+    def iiifjson(self):
+        return "https://iiif.acdh.oeaw.ac.at/p4d/TD_F-I_j21/{}__{}/info.json".format(
+            self.resource_i, self.excavation
+        ).replace(' ', '')
 
     def get_next(self):
         next = Brick.objects.filter(id__gt=self.id)
@@ -112,3 +134,20 @@ class Stratunit(models.Model):
 
     def __str__(self):
         return "{}".format(self.gis_su_id)
+
+    def iiifjson(self):
+        return "https://iiif.acdh.oeaw.ac.at/p4d/TD_F-I_j21/{}__{}/info.json".format(
+            self.resources_field, (self.excavation)
+        ).replace(' ', '')
+
+    def get_next(self):
+        next = Stratunit.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = Stratunit.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
