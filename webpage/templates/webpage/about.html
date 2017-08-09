@@ -3,34 +3,108 @@
 {% load webpage_extras %}
 {% block title %} About {% endblock %}
 {% block content %}
-<div class="container">
-    <h1>{% projects_metadata 'title' %}</h1>
-    <p>
-        {% projects_metadata 'description' %}
-    </p>
-    <div>
-        <h2>The Project</h2>
-        {% lorem %}
-    </div>
-    <div>
-        <h2>Project partners</h2>
-        {% lorem %}
-    </div>
-    <div>
-        <h2>Events</h2>
-        {% lorem %}
-    </div>
-    <div>
-        <h2>Publications</h2>
-        {% lorem %}
-    </div>
-    <div>
-        <h2>Contact</h2>
-        {% lorem %}
-    </div>
-    <div>
-        <h2>Copyright</h2>
-        {% lorem %}
+<div class="container-planning" style="padding-bottom:150px;">
+    <div class="container">
+		<div class="text-center">
+			<h1>About "A Puzzle in 4D"</h1>
+			<hr style="border-color:#83C653; border-width: 2px" width="10%">
+		</div>
+        <div class="row">
+					<div class="col-md-4">
+				<img class="img-responsive" style=" width:300px; margin-bottom: 30px; margin-top:30px; border-radius:0px;" src="{% static 'webpage/media/about_logo.jpeg' %}" />
+
+				<br />
+				<div class="container" >
+					<div class="col-md-4" style=" margin-left:-30px;background-color:#f2f2f2; border: 2px solid; border-radius: 25px; padding-bottom:35px;">
+						<h4><i class="fa fa-camera fa" style="color: #83C653" aria-hidden="true"></i>&nbsp;Image Gallery</h4>
+						<ul class="images">
+							<div class="row">
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about16.jpeg' %}" src="{% static 'webpage/media/about16_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Beschreibung">
+							</div>
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about02.jpeg' %}" src="{% static 'webpage/media/about02_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about03.jpeg' %}" src="{% static 'webpage/media/about03_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about04.jpeg' %}" src="{% static 'webpage/media/about04_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about17.jpeg' %}" src="{% static 'webpage/media/about17_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about13.jpeg' %}" src="{% static 'webpage/media/about13_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about07.jpeg' %}" src="{% static 'webpage/media/about07_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about08.jpeg' %}" src="{% static 'webpage/media/about08_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about09.jpeg' %}" src="{% static 'webpage/media/about09_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about14.jpeg' %}" src="{% static 'webpage/media/about14_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about15.jpeg' %}" src="{% static 'webpage/media/about15_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about12.jpeg' %}" src="{% static 'webpage/media/about12_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about18.jpeg' %}" src="{% static 'webpage/media/about18_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about19.jpeg' %}" src="{% static 'webpage/media/about19_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about20.jpeg' %}" src="{% static 'webpage/media/about20_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about21.jpeg' %}" src="{% static 'webpage/media/about21_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about22.jpeg' %}" src="{% static 'webpage/media/about22_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+							<div class="col-lg-4" style="">
+									<img originalUrl="{% static 'webpage/media/about23.jpeg' %}" src="{% static 'webpage/media/about23_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items">
+							</div>
+						</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<h2><i class="fa fa-database fa" style="color: #83C653" aria-hidden="true"></i>&nbsp;The Tell el-Daba resources: analogue and digital data</h2>
+				<p class="">During the last 50 years, over 80 excavation- and study seasons were undertaken at Tell el-Daba, first by the University of Vienna and from 1973 onwards by the Austrian Archaeological Institute (ÖAI). Resources are kept at the archives of the Austrian Archaeological Institute in Vienna and Cairo, at the excavation house in Tell el-Daba and the vast majority is kept at the OREA Institute in Vienna. The excavation methodology at TD, a combination of excavation in arbitrary spits and stratigraphic removal, remained unchanged throughout the 50 years of excavation. A major change in the documentation methodology occurred in 1996, with the introduction of the locus system. The locus system is often used in Near Eastern archaeology and was introduced by Wheeler. In many instances a locus corresponds to the definition of a stratigraphic unit, but generally what defines a locus is defined individually at each excavation. At TD, the surface of each new excavation area was defined as locus 1 (L1). <br />
+					Further changes in the documentation methodology took place as part of technological advances in the field, with increasingly digital documentation methods being used. For example, a first computer with a simple pottery database has been used on site from the late 1980s. Since 2000, analogue cameras have slowly been replaced by digital ones, field drawings have been digitized using AutoCAD during the post-excavation process and in 2004/5 an access database for field protocols has been created and is in use ever since. <br />Therefore, after 50 years of excavation, the TD archive at OREA consists of a large and heterogeneous set of analogue and digital resources. In some instances, one type of resource exists in different formats, i.e. analogue, digitized (scans) and born digital. For example, the field protocol, which contains the descriptions of archaeological features, exists in paper format, scans and partly the information is held in a database. Parts of the field drawings have been digitized using AutoCAD, some have been scanned, whereas others still exist as paper copies only. Also some of the analogue photos from the earlier campaigns (black and white negatives /colour positives) have been digitized as part of previous research projects.
+				</p>
+				<br><br>
+				<div class="clearfix"></div>
+				<h2><i class="fa fa-book" style="color: #83C653" aria-hidden="true"></i>&nbsp;Publications</h2>
+				<p class="text-justify">
+				<ul>
+					<li><b>In preparation:</b> Proceedings of the ICAANE Workshop “Old Excavation Data – What can we do?” (Editorial 4DP partners Aspöck, Kopetzky, Kucera, Stuhec).</li>
+					<li><b>Submitted:</b> Aspöck, E., Hiebel, G., Kopetzky, K., Durco, M. A puzzle in 4D: Archiving digital and analogue resources of the Austrian excavations at Tell el Daba, Egypt. In: Proceedings of the ICAANE Workshop “Old Excavation Data – What can we do?” (Editorial 4DP partners Aspöck, Kopetzky, Kucera, Stuhec).</li>
+				</p>
+
+			</div>
+		</div>
     </div>
 </div>
 {% endblock %}

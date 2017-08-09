@@ -18,22 +18,14 @@
         <link rel="mask-icon" href="{% static 'webpage/img/favicon/safari-pinned-tab.svg' %}" color="#00aba9"/>
         <meta name="theme-color" content="#ffffff"/>
     <!--favicons end -->
+
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="{% static 'webpage/libraries/bootstrap337/css/bootstrap.min.css' %}" />
-    <!-- custom css -->
-    <link rel="stylesheet" href="{% static 'webpage/css/style.css' %}" />
-    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,500" rel="stylesheet">
-    <!-- custom less -->
-    <link rel="stylesheet/less" type="text/css" href="{% static 'webpage/css/style.less' %}" />
-    <!--scroll to top CSS -->
-    <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}" />
-    <!-- LESS -->
-    <script type="text/javascript" src="{% static 'webpage/libraries/less/less.min.js' %}"></script>
-    <!-- jQuery -->
-    <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
-    <!--scroll to top -->
-    <script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
-    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'webpage/bower_components/bootstrap/dist/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'webpage/bower_components/font-awesome/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'webpage/bower_components/imageviewer/dist/viewer.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'webpage/css/main.min.css' %}" type="text/css"/>
+
     <script type="text/javascript">
         window.cookieconsent_options = {
             "message":"This website uses cookies to ensure you get the best experience on our website",
@@ -44,11 +36,7 @@
     </script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
     <!-- End Cookie Consent plugin -->
-    <!-- cool-share plugin http://tutorialzine.com/2014/08/cool-share-jquery-plugin/ -->
-    <link rel="stylesheet" href="{% static 'webpage/libraries/cool-share/plugin.css' %}" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
-    <script src="{% static 'webpage/libraries/cool-share/plugin.js' %}"></script>
-    <!-- End fo cool-share -->
+
     <!-- Piwik -->
 
     <!-- End Piwik Code -->
@@ -64,41 +52,37 @@
             </a>
         </div>
     </div>
-    <nav class="navbar navbar-default navbar-static-top procustom-navbar" id="top-procustom-navbar">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation!</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                 <ul class="nav navbar-nav">
+    <nav class="navbar navbar-default navbar-fixed-top">
+    	<div class="container">
+    		<!-- Brand and toggle get grouped for better mobile display -->
+    		<div class="navbar-header">
+    			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    				<span class="sr-only">Toggle navigation</span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    			</button>
+
+    		</div>
+    		<!-- Collect the nav links, forms, and other content for toggling -->
+    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    			<ul class="nav navbar-nav navbar-left">
+    				<li class="active"><a href="{% url 'webpage:staticpage' template='index' %}" class="smooth-scroll">HOME</a></li>
+    				<li class="dropdown">
+    					<a class="dropdown-toggle" data-toggle="dropdown" href="">ABOUT THE PROJECT
+    					<span class="caret"></span></a>
+    					<ul class="dropdown-menu">
+    						<li><a href="{% url 'webpage:staticpage' template='about' %}">What is "A Puzzle in 4D"?</a></li>
+    						<li><a href="{% url 'webpage:staticpage' template='team' %}">Team</a></li>
+    					</ul>
+    				</li>
+    				<li><a href="{% url 'webpage:staticpage' template='site' %}">ARCHAEOLOGICAL SITE</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu procustom-dropdown-menu">
-                            <li><a href="{% url 'webpage:start' %}">{% projects_metadata 'title' %}</a></li>
-                            <li><a href="{% url 'webpage:staticpage' template='about' %}">About</a></li>
-                            <li><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstruct TD</a></li>
-                            <li><a href="{% url 'datamodel:plate' %}">Application's data model</a></li>
-                            <li><a href="{% url 'webpage:staticpage' template='imprint' %}">Impressum / Imprint</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        {% if user.is_authenticated %}
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Curate and Browse the Data <span class="caret"></span>
-                        </a>
-                        {% else %}
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Explore the Data <span class="caret"></span>
-                        </a>
-                        {% endif %}
-                        <ul class="dropdown-menu procustom-dropdown-menu">
+    					<a class="dropdown-toggle" data-toggle="dropdown" href="#">TELL EL DABA-ARCHIVE
+    					<span class="caret"></span></a>
+    					<ul class="dropdown-menu">
                             <li class="dropdown-header">Arch-Objects</li>
                             <li><a href="{% url 'browsing:browse_finds' %}">Finds</a></li>
                             <li><a href="{% url 'browsing:browse_bricks' %}">Bricks</a></li>
@@ -110,31 +94,21 @@
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{% url 'bib:synczotero' %}">Import new Items from Zotero</a></li>
                             {% endif %}
-                        </ul>
-                    </li>
+    					</ul>
+    				</li>
+
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Analyze the Data <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu procustom-dropdown-menu"></ul>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Vocabs Curationb <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu procustom-dropdown-menu">
-                            <li><a href="{% url 'vocabs:skosconceptscheme_list' %}">Concept Schemes</a></li>
-                            <li><a href="{% url 'vocabs:browse_vocabs' %}">Concepts</a></li>
-                            <li><a href="{% url 'vocabs:skoslabel_list' %}">Labels</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{% url 'vocabs:skos_import' %}">Import SKOS (RDF/XML)</a></li>
-                            <li><a href="{% url 'vocabs:skos_csv_import' %}">Import Vocabs from CSV</a></li>
-                            <li><a href="{% url 'api-root' %}">Export SKOS (API)</a></li>
-                        </ul>
-                    </li>
-                    {% endif %}
-                </ul>
+    					<a class="dropdown-toggle" data-toggle="dropdown" href="#">TELL EL DABA-4D
+    					<span class="caret"></span></a>
+    					<ul class="dropdown-menu">
+    						<li><a href="#">Explore the site</a></li>
+    						<li><a href="#">Movies</a></li>
+                            <li><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstruct TD</a></li>
+    					</ul>
+    				</li>
+    				<li><a href="events.html">EVENTS</a></li>
+
+    			</ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         {% if user.is_authenticated %}
@@ -155,59 +129,41 @@
                         {% endif %}
                     </li>
                 </ul>
-            </div>
-        </div>
+    		</div><!-- /.navbar-collapse -->
+    	</div><!-- /.container-fluid -->
     </nav>
 </header>
 <section class="main-content">
     {% block procustom-index %}{% endblock %}
-    <div id="content" class="container">{% block content %}{% endblock %}</div>
+    <div id="content">{% block content %}{% endblock %}</div>
 </section>
 <div style="text-align:center">
     <span class="socialShare"><!-- The share buttons will be inserted here --></span>
 </div>
-<footer>
+<footer id="footer" class="clearfix">
     <div class="container">
-        <div class="row text-center">
-            <div class="col-sm-6">
-                <a href="https://www.oeaw.ac.at/acdh/" class="navlink" target="_blank">
-                    <img src="{% static 'webpage/img/acdh_logo_02.png' %}" id="acdh-logo" alt="ACDH" title="Austrian Centre for Digital Humanities"/>
-                </a>
-            </div>
-            <div class="col-sm-6">
-                <a href="{% projects_metadata 'github' %}" class="navlink" target="_blank">
-                    <img src="{% static 'webpage/img/GitHub-Mark-Light-64px.png' %}" id="github-logo" alt="{{ metadata.github }}" title="Github source code"/>
-                </a>
+        <div class="col-md-8">
+            <div class="row">
+							<img src="{% static 'webpage/media/logo_sw.png' %}" width="50%" class="">
             </div>
         </div>
-        <div style="text-align:right">
-            <small>Version: {% projects_metadata 'version' %}</small>
+        <div class="col-md-4">
+					<h3 class="text-success" style="margin-bottom: 20px;">Contact:</h3>
+					<p>Hollandstrasse 11-13</p>
+					 <p>A-1020 Vienna, Austria</p>
+					<p> +43 1 51581-6101</p>
+					<p><a href="mailto:Edeltraud.Aspoeck@oeaw.ac.at">Edeltraud.Aspoeck@oeaw.ac.at</a></p>
+					<p style="margin-top: 20px;">
+							<a class="fa fa-twitter footer-socialicon" target="_blank" href="https://twitter.com/orea_digarch"></a>
+							<a class="fa fa-home footer-socialicon" target="_blank" href="http://www.orea.oeaw.ac.at/forschung/digital-archaeology/"></a>
+					</p>
         </div>
-    </div>
+	</div>
 </footer>
 {% block scripts %}
-<script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
-<!-- cool share -->
-<script type="text/javascript">
-    $(function (){
-        var options = {
-            twitter: {
-            text: '',
-            via: ''
-        },
-        facebook : true,
-        googlePlus : true
-        };
-        $('.socialShare').shareButtons(options);
-    });
-</script>
-<!-- scroll-up-bottom -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        $.apScrollTop({'onInit': function(evt) {console.log('apScrollTop: init');}});
-    });
-</script>
+<script src="{% static 'webpage/bower_components/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'webpage/bower_components/bootstrap/dist/js/bootstrap.min.js'  %}"></script>
+<script src="{% static 'webpage/bower_components/imageviewer/dist/viewer.js' %}"></script>
 {% endblock %}
 {% block scripts2 %}
 {% endblock scripts2 %}

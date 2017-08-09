@@ -2,27 +2,84 @@
 {% load staticfiles %}
 {% load webpage_extras %}
 {% block content %}
-    <div class="container text-center">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="{% static 'webpage/img/ACDH_Panorama_Postkarte_motiv01.jpg' %}" alt="First" width="1200" height="600" title="by Sandra Lehecka" />
-                    <div class="carousel-caption"></div>
-                </div>
-                <div class="item">
-                    <img src="{% static 'webpage/img/ACDH_Panorama_Postkarte_motiv02.jpg' %}" alt="a nice feature picture" width="1200" height="600" title="by Sandra Lehecka" />
-                    <div class="carousel-caption"></div>
+<div class="container-top">
+    <div class="container" style="height:250px;">
+        <div class="row">
+                    <div class="col-md-12">
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-welcome">
+    <div class="container">
+        <div class="text-center">
+            <h1>Tell el Daba - A Puzzle in 4D</h1>
+            <hr style="border-color:#83C653; border-width: 2px" width="10%">
+            <p>Since 1966, Austrian excavations took place at Tell el-Daba (TD) in Egypt, an archaeological site revealing evidence from a society with contacts to many parts of the eastern Mediterranean dating to the 12th to 18th dynasties (early second millennium BC). After 50 years of fieldwork campaigns, the TD archive at OREA (Austrian Academy of Sciences) contains a huge and heterogeneous resource of digital and non-digital photographs, plans, drawings and written documentation.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="container-info">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-6">
+                <img class="img-responsive" style="border-radius:50%; width:400px;" src="{% static 'webpage/media/image1.png' %}" />
+            </div>
+            <div class="col-md-6">
+                <p>The ‘A Puzzle in 4D’ project aims to provide long-term preservation for the rich archaeological resources of this Austrian long-term excavation project. The project is also a case study for the development of a repository for archaeological data at the Austrian Academy of Sciences. On this website we want to show an overview of the archaeological results of the excavations at TD and describe the resources that were created throughout the excavations as well as the challenges we face preparing these resources for archiving. We will introduce our datamodel and the requirements for the system architecture.
+                </p> <br />
+                <h4><i class="fa fa-exclamation-circle fa-2x" style="color: #83C653" aria-hidden="true"></i>&nbsp;
+                The Tell el Dabca archive will be online soon on this website. It will provide an online searchable database and digitized resources of the excavations in TD.</h4> <br />
+                <a href="about.html" class="btn btn-default btn-lg">Explore More</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-welcome">
+    <div class="container"
+        <div class="row" style="margin-top: 40px;">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-3">
+                        <i class="fa fa-globe fa-4x" style="color: #83C653" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-9">
+                        <h3>Archaeological Site</h3>
+                        <p class="text-justify">Tell el Daba (TD) is an archaeological site situated in the eastern Nile delta regions of Egypt revealing archaeological evidence from the 12th to 18th dynasties (early second millennium BC). Excavations at TD reveal that there was a wealthy society with contacts to many parts of the eastern Mediterranean. A unique connection to Minoan culture has been shown through thousands of fragments of Minoan-style wall paintings discovered in one of the TD palaces, depicting e.g. scenes with bulls and bull-leapers which have become a trademark of the site. </p>
+                        <a href="about.html" class="btn btn-default">Explore More</a>
+                    </div>
                 </div>
             </div>
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"></a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"></a>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-3">
+                        <i class="fa fa-archive fa-4x" style="color: #83C653" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-9">
+                        <h3>Tell el Daba-Archiv</h3>
+                        <p class="text-justify">As we have seen above, 50 years of excavation at TD created a huge amount of digital and analogue data and to a degree heterogeneous resources. A series of challenges arises for the digital archiving of these resources including conceptual and technical ones, as well as the challenge of establishing a retention policy.</p>
+                        <a href="about.html" class="btn btn-default disabled">Explore More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-3">
+                        <i class="fa fa-eye fa-4x" style="color: #83C653" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-9">
+                        <h3>Explore Tell el Daba</h3>
+                        <p class="text-justify">Explore Tell el Daba in 4D </p>
+                        <a href="about.html" class="btn btn-default disabled">Explore More</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h1 style="text-align:center">{% projects_metadata 'title' %}</h1>
-        <h3>{% projects_metadata 'subtitle' %}</h3>
-        <p>{% projects_metadata 'description' %}</p>
     </div>
+</div>
 {% endblock %}
