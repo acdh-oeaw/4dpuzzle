@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="{% static 'webpage/bower_components/font-awesome/css/font-awesome.min.css' %}" />
     <link rel="stylesheet" href="{% static 'webpage/bower_components/imageviewer/dist/viewer.css' %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'webpage/css/main.min.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'webpage/css/style.css' %}" type="text/css"/>
+
 
     <script type="text/javascript">
         window.cookieconsent_options = {
@@ -178,6 +180,14 @@
 {% endblock %}
 {% block scripts2 %}
 {% endblock scripts2 %}
+<script>
+$(function () {
+    var options = {
+    url: 'originalUrl'};
+        $('.images').viewer(options);
+});
+
+</script>
 <noscript>
     <img src="//piwik.apollo.arz.oeaw.ac.at/piwik.php?idsite=67" style="border:0;" alt=""/>
 </noscript>

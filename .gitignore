@@ -30,6 +30,7 @@ postgres.py
 dev_secret.py
 pg_local.py
 pg.py
+dev_local.py
 
 # documentation build files
 
