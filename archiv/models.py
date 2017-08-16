@@ -89,9 +89,8 @@ class Fielddrawing(models.Model):
         return "{}".format(self.document_id)
 
     def iiifjson(self):
-        return "https://iiif.acdh.oeaw.ac.at/p4d/TD_F-I_j21/{}/info.json".format(
-            self.document_id
-        ).replace(' ', '')
+
+        return "{}".format(self.scan.all()[0])
 
     def __str__(self):
         return "{}".format(self.document_id)
