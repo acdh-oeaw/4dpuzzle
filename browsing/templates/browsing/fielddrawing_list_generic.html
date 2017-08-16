@@ -1,0 +1,11 @@
+{% extends "browsing/generic_list.html" %}
+{% block list_title %}Search all Fielddrawings{% endblock %}
+
+{% block create_button %}
+
+{% endblock %}
+
+
+{% block reset_button %}
+ <a class ="btn btn-default"  href="{% url 'browsing:browse_fielddrawings' %}">reset search</a>
+{% endblock %}

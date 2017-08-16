@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^archobs-json/', include('archobs.api_urls', namespace='archobs-json')),
     url(r'^archobs-dal/', include('archobs.dal_urls', namespace='archobs-dal')),
     url(r'^archobs/', include('archobs.urls', namespace='archobs')),
+    url(r'^archiv/', include('archiv.urls', namespace='archiv')),
     url(r'^', include('webpage.urls', namespace='webpage')),
 ]

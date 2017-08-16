@@ -87,3 +87,23 @@ class Fielddrawing(models.Model):
 
     def __str__(self):
         return "{}".format(self.document_id)
+
+    def iiifjson(self):
+        return "https://iiif.acdh.oeaw.ac.at/p4d/TD_F-I_j21/{}/info.json".format(
+            self.document_id
+        ).replace(' ', '')
+
+    def __str__(self):
+        return "{}".format(self.document_id)
+
+    def get_next(self):
+        next = Fielddrawing.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = Fielddrawing.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False

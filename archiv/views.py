@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
+from django.views.generic.detail import DetailView
+from .models import Fielddrawing
 
-# Create your views here.
+
+class FielddrawingDetailView(DetailView):
+
+    model = Fielddrawing

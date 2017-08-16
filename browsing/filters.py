@@ -5,6 +5,7 @@ from browsing.forms import *
 from archobs.models import *
 from vocabs.models import *
 from places.models import *
+from archiv.models import Fielddrawing
 
 # To do: django_filters.MethodFilter are commented because raising errors after version upgrade
 # test and remove if not needed anymore
@@ -24,6 +25,13 @@ django_filters.filters.LOOKUP_TYPES = [
     ('icontains', 'Contains (case insensitive)'),
     ('not_contains', 'Does not contain'),
 ]
+
+
+class FielddrawingListFilter(django_filters.FilterSet):
+
+    class Meta:
+        model = Fielddrawing
+        fields = '__all__'
 
 
 class BrickListFilter(django_filters.FilterSet):
