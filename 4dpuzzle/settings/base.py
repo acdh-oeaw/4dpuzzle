@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'images',
     'news',
     'archobs',
+    'archiv',
     'browsing',
 ]
 
@@ -52,7 +53,7 @@ REST_FRAMEWORK = {
 }
 
 SPAGHETTI_SAUCE = {
-    'apps': ['vocabs', 'places', 'bib', 'images', 'archobs'],
+    'apps': ['vocabs', 'places', 'bib', 'images', 'archobs', 'archiv'],
     'show_fields': False,
     'exclude': {'auth': ['user']}
 }
