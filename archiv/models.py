@@ -1,6 +1,7 @@
 from django.db import models
 from vocabs.models import SkosConcept
 from images.models import Image
+from archobs.models import Find
 
 
 class Person(models.Model):
@@ -142,6 +143,13 @@ class Fielddrawing(models.Model):
 
     def __str__(self):
         return "{}".format(self.document_id)
+
+    def rel_archob_finds(self):
+        libfinds = Find.objects.filter(resource_i=self.document_id)
+        if len(libfinds) > 0:
+            return list(libfinds)
+        else:
+            return None
 
     def iiifjson(self):
         try:

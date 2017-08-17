@@ -106,7 +106,16 @@
                             <td>{% for x in object.exobject.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                     </table>
+                    {% if object.rel_archob_finds %}
+                        <table class="table table-bordered table-hover table-condensed">
+                            {% for x in object.rel_archob_finds %}
+                                <tr><td><a href="{% url 'archobs:find-detail' pk=x.id %}">{{ x }}</a></td></tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
                 </div>
+
+
                 <div class="col-md-6">
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary" id="zoom-in">Zoom In</button>
