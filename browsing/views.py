@@ -30,6 +30,20 @@ class GenericListView(SingleTableView):
         return context
 
 
+class FotoListView(GenericListView):
+    model = Foto
+    table_class = FotoTable
+    template_name = 'browsing/foto_list_generic.html'
+    filter_class = FotoListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+
+        return context
+
+
 class FielddrawingListView(GenericListView):
     model = Fielddrawing
     table_class = FielddrawingTable

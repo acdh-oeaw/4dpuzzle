@@ -1,7 +1,7 @@
 import django_tables2 as tables
 from django_tables2.utils import A
 from archobs.models import *
-from archiv.models import Fielddrawing
+from archiv.models import Fielddrawing, Foto
 
 
 class BrickTable(tables.Table):
@@ -37,6 +37,16 @@ class StratunitTable(tables.Table):
 class FielddrawingTable(tables.Table):
     id = tables.LinkColumn(
         'archiv:fielddrawing-detail', args=[A('pk')])
+
+    class Meta:
+        model = Stratunit
+        fields = ['id', 'document_id', 'year']
+        attrs = {"class": "table table-hover table-striped table-condensed"}
+
+
+class FotoTable(tables.Table):
+    id = tables.LinkColumn(
+        'archiv:foto-detail', args=[A('pk')])
 
     class Meta:
         model = Stratunit

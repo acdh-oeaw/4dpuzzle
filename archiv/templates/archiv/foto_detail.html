@@ -1,0 +1,147 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% block title %}Foto: {{ object }}{% endblock %}
+{% block scriptHeader %}
+{% endblock %}
+{% block content %}
+<div class="panel panel-body">
+    <div class="panel panel-default procustom-panel-create">
+        <div class="panel-heading procustom-panel-heading">
+            <div class="row">
+                <div class="col-md-2">
+                    {% if object.get_prev %}
+                    <h2>
+                        <a href="{% url 'archiv:foto-detail' pk=object.get_prev %}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true" title="previous area"></span></a>
+                    </h2>
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <h1 style="text-align: center;">
+                       <small>foto: </small>{{ object }}
+                    </h1>
+                </div>
+                <div class="col-md-2">
+                {% if object.get_next %}
+                    <h2>
+                        <a href="{% url 'archiv:foto-detail' pk=object.get_next %}" style="float:right"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true" title="next area"></span></a>
+                    </h2>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <tr>
+                            <th>composed_id</th>
+                            <td>{{ object.composed_id }}</td>
+                        </tr>
+                        <tr>
+                            <th>document_id</th>
+                            <td>{{ object.document_id }}</td>
+                        </tr>
+                        <tr>
+                            <th>photo_title</th>
+                            <td>{{ object.photo_title }}</td>
+                        </tr>
+                        <tr>
+                            <th>film_number</th>
+                            <td>{{ object.film_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>film_id</th>
+                            <td>{{ object.film_id }}</td>
+                        </tr>
+                        <tr>
+                            <th>photo_number</th>
+                            <td>{{ object.photo_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>digital_photo_type</th>
+                            <td>{{ object.digital_photo_type }}</td>
+                        </tr>
+                        <tr>
+                            <th>foto_format</th>
+                            <td>{{ object.foto_format }}</td>
+                        </tr>
+                        <tr>
+                            <th>photographer</th>
+                            <td>{{ object.photographer }}</td>
+                        </tr>
+                        <tr>
+                            <th>original_film_folder</th>
+                            <td>{{ object.original_film_folder }}</td>
+                        </tr>
+                        <tr>
+                            <th>foto_type</th>
+                            <td>{{ object.foto_type }}</td>
+                        </tr>
+                        <tr>
+                            <th>content_type</th>
+                            <td>{% for x in object.content_type.all %} {{ x }} <br/> {% endfor %}</td>
+                        </tr>
+                        <tr>
+                            <th>site</th>
+                            <td>{{ object.site }}</td>
+                        </tr>
+                        <tr>
+                            <th>year</th>
+                            <td>{{ object.year }}</td>
+                        </tr>
+                        <tr>
+                            <th>archobject</th>
+                            <td>{% for x in object.archobject.all %} {{ x }} <br/> {% endfor %}</td>
+                        </tr>
+                        <tr>
+                            <th>exobject</th>
+                            <td>{% for x in object.exobject.all %} {{ x }} <br/> {% endfor %}</td>
+                        </tr>
+                        <tr>
+                            <th>scale</th>
+                            <td>{{ object.scale }}</td>
+                        </tr>
+                        <tr>
+                            <th>metadata_creation_date</th>
+                            <td>{{ object.metadata_creation_date }}</td>
+                        </tr>
+                        <tr>
+                            <th>metadata_comment</th>
+                            <td>{{ object.metadata_comment }}</td>
+                        </tr>
+                        <tr>
+                            <th>metadata_creator</th>
+                            <td>{% for x in object.metadata_creator.all %} {{ x }} <br/> {% endfor %}</td>
+                        </tr>
+                        <tr>
+                            <th>scan</th>
+                            <td>{% for x in object.scan.all %} {{ x }} <br/> {% endfor %}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" id="zoom-in">Zoom In</button>
+                        <button type="button" class="btn btn-primary" id="home">Default</button>
+                        <button type="button" class="btn btn-primary" id="zoom-out">Zoom Out</button>
+                        <button type="button" class="btn btn-primary" id="full-page">Full Sceen</button>
+                    </div>
+                    <div id="openseadragon1" style="width: 100%; height: 400px"></div>
+                    <script src="{% static 'images/openseadragon/openseadragon.min.js' %}"></script>
+                    <script type="text/javascript">
+                        var viewer = OpenSeadragon({
+                            id: "openseadragon1",
+                            tileSources: "{{ object.iiifjson }}",
+                            zoomInButton:   "zoom-in",
+                            zoomOutButton:  "zoom-out",
+                            homeButton:     "home",
+                            fullPageButton: "full-page",
+                        });
+                    </script>
+                </div>
+        </div>
+    </div>
+    </div>
+    <div id="map"/>
+</div>
+{% endblock %}

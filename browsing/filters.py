@@ -5,7 +5,7 @@ from browsing.forms import *
 from archobs.models import *
 from vocabs.models import *
 from places.models import *
-from archiv.models import Fielddrawing
+from archiv.models import Fielddrawing, Foto
 
 # To do: django_filters.MethodFilter are commented because raising errors after version upgrade
 # test and remove if not needed anymore
@@ -32,6 +32,13 @@ class FielddrawingListFilter(django_filters.FilterSet):
     class Meta:
         model = Fielddrawing
         fields = '__all__'
+
+
+class FotoListFilter(django_filters.FilterSet):
+
+    class Meta:
+        model = Foto
+        fields = ['document_id', 'archobject']
 
 
 class BrickListFilter(django_filters.FilterSet):

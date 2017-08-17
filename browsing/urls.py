@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'finds/$', views.FindListView.as_view(), name='browse_finds'),
     url(r'stratunits/$', views.StratunitListView.as_view(), name='browse_stratunits'),
     url(r'fielddrawings/$', views.FielddrawingListView.as_view(), name='browse_fielddrawings'),
+    url(r'fotos/$', views.FotoListView.as_view(), name='browse_fotos'),
 ]

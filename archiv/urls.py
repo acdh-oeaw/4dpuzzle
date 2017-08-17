@@ -6,4 +6,8 @@ urlpatterns = [
         r'^fielddrawing/(?P<pk>[0-9]+)$', views.FielddrawingDetailView.as_view(),
         name='fielddrawing-detail'
     ),
+    url(
+        r'^foto/(?P<pk>[0-9]+)$', views.FotoDetailView.as_view(),
+        name='foto-detail'
+    ),
 ]

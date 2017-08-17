@@ -60,7 +60,7 @@ class Scan(Image):
     creator_scan = models.ManyToManyField(Person, blank=True, related_name='creator_scan')
     scan_date = models.DateField(blank=True, null=True)
     equipment = models.ForeignKey(SkosConcept, blank=True, null=True)
-    resolution = models.IntegerField(blank=True, null=True)
+    resolution = models.CharField(max_length=300, blank=True, null=True)
 
 
 class Foto(models.Model):
@@ -73,10 +73,14 @@ class Foto(models.Model):
     digital_photo_type = models.ForeignKey(
         SkosConcept, blank=True, null=True, related_name='digital_photo_type'
     )
-    foto_format = models.ForeignKey(SkosConcept, blank=True, null=True, related_name="foto_format")
+    foto_format = models.ForeignKey(
+        SkosConcept, blank=True, null=True, related_name="foto_format"
+    )
     photographer = models.ForeignKey(Person, blank=True, null=True)
     original_film_folder = models.CharField(max_length=20, blank=True)
-    foto_type = models.ForeignKey(SkosConcept, blank=True, null=True, related_name='foto_type')
+    foto_type = models.ForeignKey(
+        SkosConcept, blank=True, null=True, related_name='foto_type'
+    )
     content_type = models.ManyToManyField(
         SkosConcept, blank=True, related_name="content_type"
     )
@@ -84,18 +88,22 @@ class Foto(models.Model):
     year = models.CharField(max_length=300, blank=True)
     archobject = models.ManyToManyField(ArchObject, blank=True)
     exobject = models.ManyToManyField(ExObject, blank=True)
-    scale = models.ManyToManyField(SkosConcept, blank=True, related_name="foto_scale")
+    scale = models.ForeignKey(SkosConcept, blank=True, null=True, related_name="foto_scale")
     metadata_creation_date = models.DateField(blank=True, null=True)
     metadata_creator = models.ManyToManyField(Person, blank=True, related_name="metadata_creator")
     metadata_comment = models.TextField(blank=True)
     scan = models.ManyToManyField(Scan, blank=True)
 
     def __str__(self):
-        return "{}".format(self.document_id)
+        return "{}".format(self.composed_id)
 
     def iiifjson(self):
+        try:
+            scan = self.scan.all()[0]
+        except:
+            scan = None
 
-        return "{}".format(self.scan.all()[0])
+        return "{}".format(scan)
 
     def get_next(self):
         next = Foto.objects.filter(id__gt=self.id)
@@ -136,7 +144,12 @@ class Fielddrawing(models.Model):
         return "{}".format(self.document_id)
 
     def iiifjson(self):
-        return "{}".format(self.scan.all()[0])
+        try:
+            scan = self.scan.all()[0]
+        except:
+            scan = None
+
+        return "{}".format(scan)
 
     def get_next(self):
         next = Fielddrawing.objects.filter(id__gt=self.id)
