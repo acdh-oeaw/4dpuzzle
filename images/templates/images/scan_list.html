@@ -21,7 +21,7 @@
             {% for object in object_list %}
                 <tr>
                     <td>
-                        <a href="{% url 'images:image_detail' pk=object.id %}">{{ object }}</a>
+                        <a href="{% url 'images:scan_detail' pk=object.id %}">{{ object }}</a>
                     </td>
                 </tr>
             {% endfor %}

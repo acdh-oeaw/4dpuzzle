@@ -1,5 +1,50 @@
 # This is an auto-generated Django model module created by ogrinspect.
 from django.contrib.gis.db import models
+from vocabs.models import SkosConcept
+
+
+class ArchObject(models.Model):
+    name = models.CharField(max_length=300, blank=True)
+    object_type = models.ForeignKey(SkosConcept, blank=True, null=True)
+
+    def __str__(self):
+        return "{} ({})".format(self.name, self.object_type)
+
+
+class ExObject(models.Model):
+    name = models.CharField(max_length=300, blank=True)
+    object_type = models.ForeignKey(SkosConcept, blank=True, null=True)
+
+    def __str__(self):
+        return "{} ({})".format(self.name, self.object_type)
+
+
+class Site(models.Model):
+    name = models.CharField(max_length=300, blank=True)
+
+    def __str__(self):
+        return "{}".format(self.name)
+
+
+class Area(models.Model):
+    name = models.CharField(max_length=300, blank=True)
+
+    def __str__(self):
+        return "{}".format(self.name)
+
+
+class SquareTrench(models.Model):
+    name = models.CharField(max_length=300, blank=True)
+
+    def __str__(self):
+        return "{}".format(self.name)
+
+
+class Planum(models.Model):
+    name = models.CharField(max_length=300, blank=True)
+
+    def __str__(self):
+        return "{}".format(self.name)
 
 
 class Find(models.Model):

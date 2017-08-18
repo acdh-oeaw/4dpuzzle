@@ -1,67 +1,9 @@
 from django.db import models
-from vocabs.models import SkosConcept
-from images.models import Image
+from archobs.models import ArchObject, ExObject, Site, Area, SquareTrench, Planum
+from images.models import Scan
 from archobs.models import Find
-
-
-class Person(models.Model):
-    fullname = models.CharField(max_length=300, blank=True)
-    name = models.CharField(max_length=300, blank=True)
-    surname = models.CharField(max_length=300, blank=True)
-
-    def __str__(self):
-        return "{}".format(self.fullname)
-
-
-class ArchObject(models.Model):
-    name = models.CharField(max_length=300, blank=True)
-    object_type = models.ForeignKey(SkosConcept, blank=True, null=True)
-
-    def __str__(self):
-        return "{} ({})".format(self.name, self.object_type)
-
-
-class ExObject(models.Model):
-    name = models.CharField(max_length=300, blank=True)
-    object_type = models.ForeignKey(SkosConcept, blank=True, null=True)
-
-    def __str__(self):
-        return "{} ({})".format(self.name, self.object_type)
-
-
-class Site(models.Model):
-    name = models.CharField(max_length=300, blank=True)
-
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-class Area(models.Model):
-    name = models.CharField(max_length=300, blank=True)
-
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-class SquareTrench(models.Model):
-    name = models.CharField(max_length=300, blank=True)
-
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-class Planum(models.Model):
-    name = models.CharField(max_length=300, blank=True)
-
-    def __str__(self):
-        return "{}".format(self.name)
-
-
-class Scan(Image):
-    creator_scan = models.ManyToManyField(Person, blank=True, related_name='creator_scan')
-    scan_date = models.DateField(blank=True, null=True)
-    equipment = models.ForeignKey(SkosConcept, blank=True, null=True)
-    resolution = models.CharField(max_length=300, blank=True, null=True)
+from places.models import Person
+from vocabs.models import SkosConcept
 
 
 class Foto(models.Model):
