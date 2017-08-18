@@ -3,8 +3,7 @@
 {% block Titel %} {{ object.id }} {% endblock %}
 {% block content %}
 
-<div class="container">
-    <div class="panel panel-default procustom-panel-create">
+<div class="panel panel-default procustom-panel-create">
         <div class="panel-heading procustom-panel-heading">
             <div class="row">
                 <div class="col-md-2">
@@ -16,7 +15,7 @@
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                      {{ object.filename }}
+                       <small>scan of: </small>{{ object.filename }}
                     </h1>
                 </div>
                 <div class="col-md-2">
@@ -56,6 +55,17 @@
                             <th>IIIF-Json</th>
                             <td><a href="{{ object.full_path }}">{{ object.full_path }}</td>
                         </tr>
+                        <tr>
+                            <th>related objects</th>
+                            <td>
+                                {% for x in object.fielddrawing_set.all %}
+                                    <a href="{% url 'archiv:fielddrawing-detail' pk=x.id %}">{{ x }}</a><br/>
+                                {% endfor %}
+                                {% for x in object.foto_set.all %}
+                                    <small>{{ x.foto_type }} </small><a href="{% url 'archiv:foto-detail' pk=x.id %}">{{ x }}</a><br/>
+                                {% endfor %}
+                            </td>
+                        </tr>
                     </table>
                 </div>
                 <div class="col-md-6">
@@ -80,6 +90,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
+
 {% endblock content %}
