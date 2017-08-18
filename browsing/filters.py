@@ -31,7 +31,7 @@ class FielddrawingListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Fielddrawing
-        fields = '__all__'
+        fields = ['document_id', 'archobject']
 
 
 class FotoListFilter(django_filters.FilterSet):

@@ -69,6 +69,7 @@ class Scan(Image):
     scan_date = models.DateField(blank=True, null=True)
     equipment = models.ForeignKey(SkosConcept, blank=True, null=True)
     resolution = models.CharField(max_length=300, blank=True, null=True)
+    scan_type = models.ForeignKey(SkosConcept, blank=True, null=True, related_name="scan_type")
 
     def get_next(self):
         next = Scan.objects.filter(id__gt=self.id)

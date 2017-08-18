@@ -29,24 +29,56 @@
             </div>
         </div>
         <div class="panel-body" style="text-align:center">
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary" id="zoom-in">Zoom In</button>
-                <button type="button" class="btn btn-primary" id="home">Default</button>
-                <button type="button" class="btn btn-primary" id="zoom-out">Zoom Out</button>
-                <button type="button" class="btn btn-primary" id="full-page">Full Sceen</button>
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <tr>
+                            <th>creator_scan</th>
+                            <td>{% for x in object.creator_scan.all %}{{ x }}<br/> {% endfor %}</td>
+                        </tr>
+                        <tr>
+                            <th>scan_type</th>
+                            <td>{{ object.scan_type }}</td>
+                        </tr>
+                        <tr>
+                            <th>scan_date</th>
+                            <td>{{ object.scan_date }}</td>
+                        </tr>
+                        <tr>
+                            <th>equipment</th>
+                            <td>{{ object.equipment }}</td>
+                        </tr>
+                        <tr>
+                            <th>resolution</th>
+                            <td>{{ object.resolution }}</td>
+                        </tr>
+                        <tr>
+                            <th>IIIF-Json</th>
+                            <td><a href="{{ object.full_path }}">{{ object.full_path }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" id="zoom-in">Zoom In</button>
+                        <button type="button" class="btn btn-primary" id="home">Default</button>
+                        <button type="button" class="btn btn-primary" id="zoom-out">Zoom Out</button>
+                        <button type="button" class="btn btn-primary" id="full-page">Full Sceen</button>
+                    </div>
+                    <div id="openseadragon1" style="width: 100%; height: 400px"></div>
+                    <script src="{% static 'images/openseadragon/openseadragon.min.js' %}"></script>
+                    <script type="text/javascript">
+                        var viewer = OpenSeadragon({
+                            id: "openseadragon1",
+                            tileSources: "{{ object }}",
+                            zoomInButton:   "zoom-in",
+                            zoomOutButton:  "zoom-out",
+                            homeButton:     "home",
+                            fullPageButton: "full-page",
+                        });
+                    </script>
+                </div>
             </div>
-            <div id="openseadragon1" style="width: 100%; height: 400px"></div>
-            <script src="{% static 'images/openseadragon/openseadragon.min.js' %}"></script>
-            <script type="text/javascript">
-                var viewer = OpenSeadragon({
-                    id: "openseadragon1",
-                    tileSources: "{{ object }}",
-                    zoomInButton:   "zoom-in",
-                    zoomOutButton:  "zoom-out",
-                    homeButton:     "home",
-                    fullPageButton: "full-page",
-                });
-            </script>
         </div>
     </div>
 </div>
