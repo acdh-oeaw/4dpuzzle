@@ -29,15 +29,15 @@ class ScanDetailView(DetailView):
 
         return context
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ScanDetailView, self).dispatch(*args, **kwargs)
+    # @method_decorator(login_required)
+    # def dispatch(self, *args, **kwargs):
+    #     return super(ScanDetailView, self).dispatch(*args, **kwargs)
 
 
 class ScanListView(ListView):
     model = Scan
     template_name = 'images/image_list.html'
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ScanListView, self).dispatch(*args, **kwargs)
+    # @method_decorator(login_required)
+    # def dispatch(self, *args, **kwargs):
+    #     return super(ScanListView, self).dispatch(*args, **kwargs)
