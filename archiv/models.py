@@ -1,7 +1,6 @@
 from django.db import models
-from archobs.models import ArchObject, ExObject, Site, Area, SquareTrench, Planum
+from archobs.models import ArchObject, ExObject, Site, Area, SquareTrench, Planum, Find
 from images.models import Scan
-from archobs.models import Find
 from places.models import Person
 from vocabs.models import SkosConcept
 
