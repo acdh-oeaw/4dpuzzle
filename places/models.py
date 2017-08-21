@@ -1,6 +1,15 @@
 from django.db import models
 
 
+class Person(models.Model):
+    fullname = models.CharField(max_length=300, blank=True)
+    name = models.CharField(max_length=300, blank=True)
+    surname = models.CharField(max_length=300, blank=True)
+
+    def __str__(self):
+        return "{}".format(self.fullname)
+
+
 class AlternativeName(models.Model):
     name = models.CharField(max_length=250, blank=True, help_text="Alternative Name")
 

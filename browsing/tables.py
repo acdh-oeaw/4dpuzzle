@@ -2,6 +2,17 @@ import django_tables2 as tables
 from django_tables2.utils import A
 from archobs.models import *
 from archiv.models import Fielddrawing, Foto
+from images.models import Scan
+
+
+class ScanTable(tables.Table):
+    id = tables.LinkColumn(
+        'images:scan_detail', args=[A('pk')])
+
+    class Meta:
+        model = Scan
+        fields = ['id', 'scan_type', 'creator_scan']
+        attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
 class BrickTable(tables.Table):

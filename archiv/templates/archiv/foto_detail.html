@@ -115,7 +115,7 @@
                         </tr>
                         <tr>
                             <th>scan</th>
-                            <td>{% for x in object.scan.all %} {{ x }} <br/> {% endfor %}</td>
+                            <td>{% for x in object.scan.all %} <a href="{% url 'images:scan_detail' pk=x.id %}">{{ x }}</a> <br/> {% endfor %}</td>
                         </tr>
                     </table>
                 </div>

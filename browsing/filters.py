@@ -6,7 +6,7 @@ from archobs.models import *
 from vocabs.models import *
 from places.models import *
 from archiv.models import Fielddrawing, Foto
-
+from images.models import Scan
 # To do: django_filters.MethodFilter are commented because raising errors after version upgrade
 # test and remove if not needed anymore
 
@@ -27,11 +27,18 @@ django_filters.filters.LOOKUP_TYPES = [
 ]
 
 
+class ScanListFilter(django_filters.FilterSet):
+
+    class Meta:
+        model = Scan
+        fields = ['creator_scan', 'equipment', 'resolution', 'scan_type']
+
+
 class FielddrawingListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Fielddrawing
-        fields = '__all__'
+        fields = ['document_id', 'archobject']
 
 
 class FotoListFilter(django_filters.FilterSet):
