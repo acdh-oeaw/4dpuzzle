@@ -7,7 +7,7 @@ body {
     flex-direction: column;
     height: 100%;
 
-   
+
 }
 
 header {
@@ -20,7 +20,7 @@ header {
 }
 
 footer{
-    flex: 0 0 auto;  
+    flex: 0 0 auto;
 }
 .panel-default > .procustom-panel-heading {
     background-color: #fff;
@@ -28,8 +28,8 @@ footer{
     text-align: center;
 }
 .table a, table a {
-     color: #3733fa; 
-     text-decoration: none; 
+     color: #3733fa;
+     text-decoration: none;
 }
 .table, table {
     font-size: 15px;
