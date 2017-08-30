@@ -34,3 +34,10 @@ footer{
 .table, table {
     font-size: 15px;
 }
+
+a{
+  color:#83C653;
+}
+a:hover{
+  color:#83C653;
+}
