@@ -45,10 +45,6 @@ class ScanListView(GenericListView):
 
         return context
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ScanListView, self).dispatch(*args, **kwargs)
-
 
 class FotoListView(GenericListView):
     model = Foto
@@ -63,10 +59,6 @@ class FotoListView(GenericListView):
 
         return context
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(FotoListView, self).dispatch(*args, **kwargs)
-
 
 class FielddrawingListView(GenericListView):
     model = Fielddrawing
@@ -80,10 +72,6 @@ class FielddrawingListView(GenericListView):
         context[self.context_filter_name] = self.filter
 
         return context
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(FielddrawingListView, self).dispatch(*args, **kwargs)
 
 
 class BrickListView(GenericListView):
