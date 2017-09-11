@@ -100,6 +100,14 @@ class Fielddrawing(models.Model):
 
         return "{}".format(scan)
 
+    def iiif_endpoint(self):
+        try:
+            scan = self.scan.all()[0]
+        except:
+            scan = None
+
+        return "{}".format(scan.iiif_endpoint)
+
     def get_next(self):
         next = Fielddrawing.objects.filter(id__gt=self.id)
         if next:

@@ -63,6 +63,16 @@ class Image(models.Model):
     def __str__(self):
         return self.full_path
 
+    @property
+    def iiif_endpoint(self):
+        if self.directory == "":
+            return "{}/{}".format(self.path, self.filename)
+        else:
+            return "{}{}/{}".format(self.path, self.directory, self.filename)
+
+    def __str__(self):
+        return self.full_path
+
 
 class Scan(Image):
     creator_scan = models.ManyToManyField(Person, blank=True, related_name='creator_scan')
@@ -97,6 +107,16 @@ class Scan(Image):
             return "{}/{}/info.json".format(self.path, self.filename)
         else:
             return "{}{}/{}/info.json".format(self.path, self.directory, self.filename)
+
+    def __str__(self):
+        return self.full_path
+
+    @property
+    def iiif_endpoint(self):
+        if self.directory == "":
+            return "{}/{}".format(self.path, self.filename)
+        else:
+            return "{}{}/{}".format(self.path, self.directory, self.filename)
 
     def __str__(self):
         return self.full_path
