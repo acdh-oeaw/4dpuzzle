@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'archobs',
     'archiv',
     'browsing',
+    'sparql',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
