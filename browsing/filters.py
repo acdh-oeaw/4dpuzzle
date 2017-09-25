@@ -34,14 +34,32 @@ class ScanListFilter(django_filters.FilterSet):
         fields = ['creator_scan', 'equipment', 'resolution', 'scan_type']
 
 
-class FielddrawingListFilter(django_filters.FilterSet):
+class ArchivBaseFilter(django_filters.FilterSet):
+    area = django_filters.ModelChoiceFilter(queryset=Area.objects.all())
+    square_trence = django_filters.ModelMultipleChoiceFilter(
+        queryset=SquareTrench.objects
+    )
+    planum = django_filters.ModelMultipleChoiceFilter(
+        queryset=Planum.objects
+    )
+
+
+class FielddrawingListFilter(ArchivBaseFilter):
+
+    area = django_filters.ModelChoiceFilter(queryset=Area.objects.all())
+    square_trence = django_filters.ModelMultipleChoiceFilter(
+        queryset=SquareTrench.objects
+    )
+    planum = django_filters.ModelMultipleChoiceFilter(
+        queryset=Planum.objects
+    )
 
     class Meta:
         model = Fielddrawing
-        fields = ['document_id', 'archobject']
+        fields = ['document_id', 'area', 'square_trence', 'planum', 'archobject', 'exobject']
 
 
-class FotoListFilter(django_filters.FilterSet):
+class FotoListFilter(ArchivBaseFilter):
 
     class Meta:
         model = Foto
