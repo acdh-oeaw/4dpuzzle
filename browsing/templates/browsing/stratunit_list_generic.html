@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
 <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
 <script src="{% static 'webpage/leaflet.ajax/leaflet.ajax.js' %}"></script>
+
 <style>
     #map { height: 800px; }
 </style>
@@ -24,9 +25,10 @@
     <div id="map"/>
     <script type="text/javascript">
 
+
         var mymap = L.map('map', {
           fullscreenControl: true,
-      }).setView([30.7884880840777, 31.8182515645971], 22);
+        }).setView([30.7884880840777, 31.8182515645971], 22);
 
         var baseLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -36,9 +38,22 @@
         });
 
         baseLayer.addTo(mymap);
-        L.geoJson.ajax("{% url 'archobs-json:stratunitsgeojson' %}").addTo(mymap);
+        var myJson = L.geoJson.ajax("{% url 'archobs-json:stratunitsgeojson' %}");
+        console.log(myJson);
+        // myJson.addTo(mymap);
 
+        function onEachFeature(feature, layer) {
+            // does this feature have a property named popupContent?
+            if (feature.properties && feature.properties.gis_su_id) {
+                layer.bindPopup(feature.properties.gis_su_id);
+            }
+        };
 
+        $.getJSON( "{% url 'archobs-json:stratunitsgeojson' %}", function( data ) {
+            L.geoJson(data, {
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+          });
 
         var defaultLayers = {
             "Default": baseLayer

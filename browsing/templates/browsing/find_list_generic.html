@@ -36,7 +36,20 @@
         });
 
         baseLayer.addTo(mymap);
-        L.geoJson.ajax("{% url 'archobs-json:findsgeojson' %}").addTo(mymap);
+
+        function onEachFeature(feature, layer) {
+            // does this feature have a property named popupContent?
+            if (feature.properties && feature.properties.excavation) {
+                layer.bindPopup(feature.properties.excavation);
+            }
+        };
+
+        $.getJSON( "{% url 'archobs-json:findsgeojson' %}", function( data ) {
+            console.log(data);
+            L.geoJson(data, {
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+          });
 
 
 
