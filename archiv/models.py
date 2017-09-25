@@ -77,6 +77,10 @@ class Fielddrawing(models.Model):
     paper_type = models.ManyToManyField(SkosConcept, blank=True, related_name="paper_type")
     archobject = models.ManyToManyField(ArchObject, blank=True)
     exobject = models.ManyToManyField(ExObject, blank=True)
+    site = models.ForeignKey(Site, blank=True, null=True)
+    area = models.ForeignKey(Area, blank=True, null=True)
+    square_trence = models.ManyToManyField(SquareTrench, blank=True)
+    planum = models.ManyToManyField(Planum, blank=True)
 
     def __str__(self):
         return "{}".format(self.document_id)
