@@ -44,7 +44,7 @@ class ArchivBaseFilter(django_filters.FilterSet):
     )
 
 
-class FielddrawingListFilter(ArchivBaseFilter):
+class FielddrawingListFilter(django_filters.FilterSet):
 
     area = django_filters.ModelChoiceFilter(queryset=Area.objects.all())
     square_trence = django_filters.ModelMultipleChoiceFilter(
@@ -59,7 +59,7 @@ class FielddrawingListFilter(ArchivBaseFilter):
         fields = ['document_id', 'area', 'square_trence', 'planum', 'archobject', 'exobject']
 
 
-class FotoListFilter(ArchivBaseFilter):
+class FotoListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Foto

@@ -5,17 +5,7 @@ from places.models import Person
 from vocabs.models import SkosConcept
 
 
-class ArchivBaseClass(models.Model):
-    site = models.ForeignKey(Site, blank=True, null=True)
-    area = models.ForeignKey(Area, blank=True, null=True)
-    square_trence = models.ManyToManyField(SquareTrench, blank=True)
-    planum = models.ManyToManyField(Planum, blank=True)
-
-    class Meta:
-        abstract = True
-
-
-class Foto(ArchivBaseClass):
+class Foto(models.Model):
     composed_id = models.CharField(max_length=500, blank=True)
     document_id = models.CharField(max_length=300, blank=True)
     photo_title = models.CharField(max_length=300, blank=True)
@@ -70,7 +60,7 @@ class Foto(ArchivBaseClass):
         return False
 
 
-class Fielddrawing(ArchivBaseClass):
+class Fielddrawing(models.Model):
     document_id = models.CharField(max_length=500, blank=True)
     document_type = models.ManyToManyField(SkosConcept, blank=True, related_name="document_type")
     document_subtype = models.ManyToManyField(

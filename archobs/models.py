@@ -14,6 +14,24 @@ class ExObject(models.Model):
     name = models.CharField(max_length=300, blank=True)
     object_type = models.ForeignKey(SkosConcept, blank=True, null=True)
 
+    def fetch_location(self):
+        location_parts = self.name.split('_')
+        if len(location_parts) != 4:
+            parsed_location = {
+                'Site': None,
+                'Area': None,
+                'SquareTrench': None,
+                'Planum': None
+            }
+        else:
+            parsed_location = {
+                'Site': location_parts[0],
+                'Area': location_parts[1],
+                'SquareTrench': location_parts[2],
+                'Planum': location_parts[3]
+            }
+        return parsed_location
+
     def __str__(self):
         return "{} ({})".format(self.name, self.object_type)
 
