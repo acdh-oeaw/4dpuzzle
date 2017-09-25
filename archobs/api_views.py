@@ -22,3 +22,9 @@ def brick_geojson(request, pk):
 
     bricks_as_geojson = serialize('geojson', Brick.objects.filter(id=pk))
     return HttpResponse(bricks_as_geojson, content_type='json')
+
+
+def find_geojson(request, pk):
+
+    finds_as_geojson = serialize('geojson', Find.objects.filter(id=pk))
+    return HttpResponse(finds_as_geojson, content_type='json')

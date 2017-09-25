@@ -29,7 +29,7 @@ find_mapping = {
 finds_shp = os.path.abspath(
     os.path.join(
         os.path.dirname(__file__), 'data', 'shapes',
-        'finds.shp'
+        'converted_finds.shp'
     ),
 )
 
@@ -88,7 +88,7 @@ stratunit_mapping = {
 
 stratunit_shp = os.path.abspath(
     os.path.join(
-        os.path.dirname(__file__), 'data', 'shapes', 'stratunits.shp'
+        os.path.dirname(__file__), 'data', 'shapes', 'converted_stratunits.shp'
     ),
 )
 
@@ -129,7 +129,7 @@ brick_mapping = {
 bricks_shp = os.path.abspath(
     os.path.join(
         os.path.dirname(__file__), 'data', 'shapes',
-        'bricks.shp'
+        'converted_bricks.shp'
     ),
 )
 

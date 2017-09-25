@@ -145,7 +145,7 @@
     });
 
     baseLayer.addTo(mymap);
-    L.geoJson.ajax("{% url 'archobs-json:single_brick' pk=object.id %}").addTo(mymap);
+    L.geoJson.ajax("{% url 'archobs-json:findgeojson' pk=object.id %}").addTo(mymap);
 
 
 

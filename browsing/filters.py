@@ -63,7 +63,7 @@ class FotoListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Foto
-        fields = ['document_id', 'archobject']
+        fields = ['document_id', 'archobject', 'exobject']
 
 
 class BrickListFilter(django_filters.FilterSet):
