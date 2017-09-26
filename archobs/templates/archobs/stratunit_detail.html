@@ -228,7 +228,7 @@
 
     var mymap = L.map('map', {
       fullscreenControl: true,
-  }).setView([30.7884398, 31.8181869], 10);
+  }).setView([30.7884398, 31.8181869], 15);
 
     var baseLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -238,7 +238,7 @@
     });
 
     baseLayer.addTo(mymap);
-    L.geoJson.ajax("{% url 'archobs-json:single_brick' pk=object.id %}").addTo(mymap);
+    L.geoJson.ajax("{% url 'archobs-json:stratunitgeojson' pk=object.id %}").addTo(mymap);
 
 
 

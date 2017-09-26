@@ -86,7 +86,7 @@ class Find(models.Model):
     geom = models.MultiPointField(srid=4326)
 
     def iiifjson(self):
-        return "https://iiif.acdh.oeaw.ac.at/p4d/TD_F-I_j21/{}__{}/info.json".format(
+        return "https://4dpuzzle-iiif.acdh.oeaw.ac.at/{}__{}/info.json".format(
             self.resource_i, self.excavation
         ).replace(' ', '').replace('lanum_', 'lanum')
 
@@ -131,7 +131,7 @@ class Brick(models.Model):
     geom = models.MultiPolygonField(srid=4326)
 
     def iiifjson(self):
-        return "https://iiif.acdh.oeaw.ac.at/p4d/TD_F-I_j21/{}__{}/info.json".format(
+        return "https://4dpuzzle-iiif.acdh.oeaw.ac.at/{}__{}/info.json".format(
             self.resource_i, self.excavation
         ).replace(' ', '').replace('lanum_', 'lanum')
 
@@ -198,7 +198,7 @@ class Stratunit(models.Model):
         return "{}".format(self.gis_su_id)
 
     def iiifjson(self):
-        return "https://iiif.acdh.oeaw.ac.at/p4d/TD_F-I_j21/{}__{}/info.json".format(
+        return "https://4dpuzzle-iiif.acdh.oeaw.ac.at/{}__{}/info.json".format(
             self.resources_field, (self.excavation)
         ).replace(' ', '').replace('lanum_', 'lanum')
 

@@ -25,9 +25,8 @@
     <div id="map"/>
     <script type="text/javascript">
 
-
         var mymap = L.map('map', {
-          fullscreenControl: true,
+            fullscreenControl: true,
         }).setView([30.7884880840777, 31.8182515645971], 22);
 
         var baseLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -38,14 +37,22 @@
         });
 
         baseLayer.addTo(mymap);
-        var myJson = L.geoJson.ajax("{% url 'archobs-json:stratunitsgeojson' %}");
-        console.log(myJson);
-        // myJson.addTo(mymap);
+
+        function createTableRows(propertyObject, className){
+            var returnTable = "<table class='table table-hover table-striped table-condensed'>";
+            var pk =propertyObject.pk
+            var linkToObject = "../../archobs/"+className+"/"+pk;
+            returnTable += "<tr><td>linkToObject</td><td><a href='"+linkToObject+"'>follow link</a></td>";
+            for (var [key, value] of Object.entries(propertyObject)) {
+                returnTable += "<tr><td>"+key+"</td><td>"+value+"</td>";
+            };
+            return returnTable += "</table>"
+        };
 
         function onEachFeature(feature, layer) {
-            // does this feature have a property named popupContent?
-            if (feature.properties && feature.properties.gis_su_id) {
-                layer.bindPopup(feature.properties.gis_su_id);
+            if (feature.properties) {
+                var popupContent = createTableRows(feature.properties, 'stratunit');
+                layer.bindPopup(popupContent);
             }
         };
 
@@ -54,6 +61,8 @@
                 onEachFeature: onEachFeature
             }).addTo(mymap);
           });
+
+
 
         var defaultLayers = {
             "Default": baseLayer

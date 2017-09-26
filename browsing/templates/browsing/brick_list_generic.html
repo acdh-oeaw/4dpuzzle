@@ -25,8 +25,8 @@
     <script type="text/javascript">
 
         var mymap = L.map('map', {
-          fullscreenControl: true,
-      }).setView([30.7884880840777, 31.8182515645971], 22);
+            fullscreenControl: true,
+        }).setView([30.7884880840777, 31.8182515645971], 22);
 
         var baseLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -36,7 +36,32 @@
         });
 
         baseLayer.addTo(mymap);
-        L.geoJson.ajax("{% url 'archobs-json:bricksgeojson' %}").addTo(mymap);
+
+        function createTableRows(propertyObject, className){
+            var returnTable = "<table class='table table-hover table-striped table-condensed'>";
+            var pk =propertyObject.pk
+            var linkToObject = "../../archobs/"+className+"/"+pk;
+            returnTable += "<tr><td>linkToObject</td><td><a href='"+linkToObject+"'>follow link</a></td>";
+            for (var [key, value] of Object.entries(propertyObject)) {
+                returnTable += "<tr><td>"+key+"</td><td>"+value+"</td>";
+            };
+            return returnTable += "</table>"
+        };
+
+        function onEachFeature(feature, layer) {
+            if (feature.properties) {
+                var popupContent = createTableRows(feature.properties, 'brick');
+                layer.bindPopup(popupContent);
+            }
+        };
+
+        $.getJSON( "{% url 'archobs-json:bricksgeojson' %}", function( data ) {
+            L.geoJson(data, {
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+          });
+
+
 
         var defaultLayers = {
             "Default": baseLayer
