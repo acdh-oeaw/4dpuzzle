@@ -103,7 +103,9 @@
                         </tr>
                         <tr>
                             <th>exobject</th>
-                            <td>{% for x in object.exobject.all %} {{ x }} <br/> {% endfor %}</td>
+                            <td>
+                                {% for x in object.exobject.all %}
+                                    <a href="{% url 'archobs:exobject-detail' pk=x.id %}">{{ x }}</a> <br/> {% endfor %}</td>
                         </tr>
                     </table>
                     {% if object.rel_archob_finds %}

@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
-from .models import Brick, Find, Stratunit
+from .models import Brick, Find, Stratunit, ExObject
 
 
 class BrickDetailView(DetailView):
@@ -18,5 +18,6 @@ class StratunitDetailView(DetailView):
     model = Stratunit
 
 
-class MainPageView(TemplateView):
-    template_name = 'archobs/index.html'
+class ExObjectDetailView(DetailView):
+
+    model = ExObject

@@ -32,6 +32,18 @@ class ExObject(models.Model):
             }
         return parsed_location
 
+    def get_next(self):
+        next = ExObject.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = ExObject.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
     def __str__(self):
         return "{} ({})".format(self.name, self.object_type)
 

@@ -32,6 +32,20 @@ class GenericListView(SingleTableView):
         return context
 
 
+class ExObjectListView(GenericListView):
+    model = ExObject
+    table_class = ExObjectTable
+    template_name = 'browsing/scan_list_generic.html'
+    filter_class = ExObjectListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+
+        return context
+
+
 class ScanListView(GenericListView):
     model = Scan
     table_class = ScanTable

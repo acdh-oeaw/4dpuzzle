@@ -1,6 +1,6 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
-{% block title %}Find: {{ object }}{% endblock %}
+{% block title %}Excavation Object: {{ object }}{% endblock %}
 {% block scriptHeader %}
 <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
 <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
@@ -17,7 +17,7 @@
                 <div class="col-md-2">
                     {% if object.get_prev %}
                     <h2>
-                        <a href="{% url 'archobs:find-detail' pk=object.get_prev %}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true" title="previous area"></span></a>
+                        <a href="{% url 'archobs:exobject-detail' pk=object.get_prev %}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true" title="previous area"></span></a>
                     </h2>
                     {% endif %}
                 </div>
@@ -29,7 +29,7 @@
                 <div class="col-md-2">
                 {% if object.get_next %}
                     <h2>
-                        <a href="{% url 'archobs:find-detail' pk=object.get_next %}" style="float:right"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true" title="next area"></span></a>
+                        <a href="{% url 'archobs:exobject-detail' pk=object.get_next %}" style="float:right"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true" title="next area"></span></a>
                     </h2>
                 {% endif %}
                 </div>
@@ -40,68 +40,44 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-hover table-condensed">
                         <tr>
-                            <th>gisfind_id</th>
-                            <td>{{ object.gisfind_id }}</td>
+                            <th>name</th>
+                            <td>{{ object.name }}</td>
                         </tr>
                         <tr>
-                            <th>excavation</th>
-                            <td>{{ object.excavation }}</td>
+                            <th>located in</th>
+                            <td>
+                                {% for key, value in object.fetch_location.items %}
+                                    {{ key }}: {{ value }}<br/>
+                                {% endfor %}
+                            </td>
                         </tr>
                         <tr>
-                            <th>stratum_id</th>
-                            <td>{{ object.stratum_id }}</td>
+                            <th>object_type</th>
+                            <td>
+                                {% for x in object_type.all %}
+                                    {{ x }}<br/>
+                                {% endfor %}
+                            </td>
                         </tr>
                         <tr>
-                            <th>stratum_gi</th>
-                            <td>{{ object.stratum_gi }}</td>
+                            <th>
+                                related Fielddrawings
+                            </th>
+                            <td>
+                                {% for x in object.exobject_fielddrawing.all %}
+                                    <a href="{% url 'archiv:fielddrawing-detail' pk=x.id %}">{{ x }}</a><br/>
+                                {% endfor %}
+                            </td>
                         </tr>
                         <tr>
-                            <th>phase_id</th>
-                            <td>{{ object.phase_id }}</td>
-                        </tr>
-                        <tr>
-                            <th>phase_gis_field</th>
-                            <td>{{ object.phase_gis_field }}</td>
-                        </tr>
-                        <tr>
-                            <th>archaeolog</th>
-                            <td>{{ object.archaeolog }}</td>
-                        </tr>
-                        <tr>
-                            <th>gis_locus_field</th>
-                            <td>{{ object.gis_locus_field }}</td>
-                        </tr>
-                        <tr>
-                            <th>gis_su_id</th>
-                            <td>{{ object.gis_su_id }}</td>
-                        </tr>
-                        <tr>
-                            <th>gis_commen</th>
-                            <td>{{ object.gis_commen }}</td>
-                        </tr>
-                        <tr>
-                            <th>find_mater</th>
-                            <td>{{ object.find_mater }}</td>
-                        </tr>
-                        <tr>
-                            <th>height</th>
-                            <td>{{ object.height }}</td>
-                        </tr>
-                        <tr>
-                            <th>find_inven</th>
-                            <td>{{ object.find_inven }}</td>
-                        </tr>
-                        <tr>
-                            <th>find_local</th>
-                            <td>{{ object.find_local }}</td>
-                        </tr>
-                        <tr>
-                            <th>eigner_map</th>
-                            <td>{{ object.eigner_map }}</td>
-                        </tr>
-                        <tr>
-                            <th><abbr title="resource_i">related Fielddrawings</abbr></th>
-                            <td><a href="{% url 'browsing:browse_fielddrawings' %}?document_id={{object.resource_i}}"</a>{{object.resource_i}}</td>
+                            <th>
+                                related Fotos
+                            </th>
+                            <td>
+                                {% for x in object.exobject_foto.all %}
+                                    <a href="{% url 'archiv:foto-detail' pk=x.id %}">{{ x }}</a><br/>
+                                {% endfor %}
+                            </td>
                         </tr>
                     </table>
                 </div>

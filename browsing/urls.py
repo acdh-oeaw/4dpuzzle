@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'fielddrawings/$', views.FielddrawingListView.as_view(), name='browse_fielddrawings'),
     url(r'fotos/$', views.FotoListView.as_view(), name='browse_fotos'),
     url(r'scans/$', views.ScanListView.as_view(), name='browse_scans'),
+    url(r'exobjects/$', views.ExObjectListView.as_view(), name='browse_exobjects'),
 ]

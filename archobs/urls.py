@@ -7,4 +7,7 @@ urlpatterns = [
     url(
         r'^stratunit/(?P<pk>[0-9]+)$', views.StratunitDetailView.as_view(),  name='stratunit-detail'
     ),
+    url(
+        r'^exobject/(?P<pk>[0-9]+)$', views.ExObjectDetailView.as_view(),  name='exobject-detail'
+    ),
 ]

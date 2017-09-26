@@ -34,6 +34,13 @@ class ScanListFilter(django_filters.FilterSet):
         fields = ['creator_scan', 'equipment', 'resolution', 'scan_type']
 
 
+class ExObjectListFilter(django_filters.FilterSet):
+
+    class Meta:
+        model = ExObject
+        fields = ['name']
+
+
 class ArchivBaseFilter(django_filters.FilterSet):
     area = django_filters.ModelChoiceFilter(queryset=Area.objects.all())
     square_trence = django_filters.ModelMultipleChoiceFilter(

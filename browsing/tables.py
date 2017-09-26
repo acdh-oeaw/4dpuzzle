@@ -5,6 +5,15 @@ from archiv.models import Fielddrawing, Foto
 from images.models import Scan
 
 
+class ExObjectTable(tables.Table):
+    id = tables.LinkColumn('archobs:exobject-detail', args=[A('pk')])
+
+    class Meta:
+        model = ExObject
+        fields = ['id', 'name']
+        attrs = {"class": "table table-hover table-striped table-condensed"}
+
+
 class ScanTable(tables.Table):
     id = tables.LinkColumn(
         'images:scan_detail', args=[A('pk')])
