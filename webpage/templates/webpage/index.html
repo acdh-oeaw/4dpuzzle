@@ -16,7 +16,7 @@
 <div class="container-welcome">
     <div class="container">
         <div class="text-center">
-            <h1>Tell el Daba - A Puzzle in 4D</h1>
+            <h1>A Puzzle in 4D - Tell el-Daba</h1>
             <hr style="border-color:#83C653; border-width: 2px" width="10%">
             <p>The project A Puzzle in 4D aims to provide digital long-term preservation for the rich archaeological resources of the Austrian excavation project at Tell el-Daba in Egypt.
             Since 1966, Austrian excavations took place at Tell el-Daba (TD) in Egypt, an archaeological site revealing evidence from a society with contacts to many parts of the eastern Mediterranean dating to the 12th to 18th dynasties (early second millennium BC). After 50 years of fieldwork campaigns, the TD archive at OREA (Austrian Academy of Sciences) contains a huge and heterogeneous resource of digital and non-digital photographs, plans, drawings and written documentation.
@@ -31,10 +31,10 @@
             <img class="img-responsive" style="border-radius:50%; width:400px;" src="{% static 'webpage/media/image1.png' %}" />
           </div>
           <div class="col-md-6">
-              <p>In the A Puzzle in 4D project we prepare the archaeological resources of the TD excavations for digital long-term preservation and advanced spatio-temporal analysis based on international standards. Large parts of the TD archive will be made available open access online for researchers and the interested public. The project is a case study for the development of a repository for archaeological data at the ÖAW ACDH (Austrian Academy of Sciences).</p>
-              <p>On this website you will find information about the work we carry out in the <a href="{% url 'webpage:staticpage' template='about' %}"><i>A Puzzle in 4D project</i></a>. In the <i>Tell el-Daba archive</i> section you will find information on the approach we take to the development of the archive, with regular updates on where we stand at the moment. You can see reconstructions of excavation results on the <a href="{% url 'webpage:staticpage' template='reconstruct' %}"><i>Tell el-Daba 4D</i></a> pages and see how a spatio-temporal analysis of the complex resources can be carried out in an Archaeological-Information system. And, last but not least, you can visit the <a href="{% url 'webpage:staticpage' template='site' %}"><i>archaeological site</i></a> Tell el-Daba, providing information about the excavation results and their interpretation.</p>
+              <p>In the A Puzzle in 4D project we prepare the archaeological resources of the TD excavations for digital long-term preservation and advanced spatio-temporal analysis based on international standards. Large parts of the TD archive will be made available open access online for researchers and the interested public. The project is a case study for the development of a repository for archaeological data at the ÖAW ACDH (Austrian Academy of Sciences, Austrian Center for Digital Humanities).</p>
+              <p>On this website you will find information about the work we carry out in the <a href="{% url 'webpage:staticpage' template='about' %}"><i>A Puzzle in 4D project</i></a>. In the <a href="{% url 'webpage:staticpage' template='archive' %}"><i>Tell el-Daba digital archive</i></a> section you will find information on the approach we take to the development of the archive, with regular updates on where we stand at the moment. You can see reconstructions of excavation results on the <a href="{% url 'webpage:staticpage' template='reconstruct' %}"><i>Tell el-Daba 4D</i></a> pages and see how a spatio-temporal analysis of the complex resources can be carried out in an Archaeological-Information system. And, last but not least, you can visit the <a href="{% url 'webpage:staticpage' template='site' %}"><i>archaeological site</i></a> Tell el-Daba, providing information about the excavation results and their interpretation.</p>
               <h4 style="color:#83C653"><i class="fa fa-exclamation-circle fa-2x" style="color: #83C653" aria-hidden="true"></i>&nbsp;
-              The Tell el-Daba archive will be online soon on this website. It will provide an online searchable database and digitized resources of the excavations.</h4> <br />
+              <b>The Tell el-Daba digital archive will be online soon on this website. It will provide an online searchable database and digitized resources of the excavations.</b></h4> <br />
           </div>
         </div>
     </div>
@@ -62,9 +62,9 @@
                         <i class="fa fa-database fa-4x" style="color: #83C653" aria-hidden="true"></i>
                     </div>
                     <div class="col-md-9">
-                        <h3>Tell el Daba-Archiv</h3>
+                        <h3>Tell el-Daba digital archive</h3>
                         <p class="text-justify">We have developed a data model based on the CIDOC CRM ontology and extensions that represents the excavated physical reality, the excavation activity, the documentation and the digitisation of the documentation.</p>
-                        <a href="{% url 'webpage:staticpage' template='about' %}" class="btn btn-default disabled">Explore More</a>
+                        <a href="{% url 'webpage:staticpage' template='archive' %}" class="btn btn-default ">Explore More</a>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                         <i class="fa fa-eye fa-4x" style="color: #83C653" aria-hidden="true"></i>
                     </div>
                     <div class="col-md-9">
-                        <h3>Explore Tell el Daba</h3>
+                        <h3>Tell el-Daba 4D</h3>
                         <p class="text-justify">The archaeological evidence of one part of the excavations (area F/I square j-21) has been reconstructed. A 4D archaeological information system has been developed to analyse the evidence. </p>
 
                         <a href="{% url 'webpage:staticpage' template='reconstruct' %}" class="btn btn-default">Explore More</a>

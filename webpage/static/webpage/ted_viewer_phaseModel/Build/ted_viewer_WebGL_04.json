@@ -1,0 +1,9 @@
+{
+"TOTAL_MEMORY": 268435456,
+"dataUrl": "ted_viewer_WebGL_04.data.unityweb",
+"asmCodeUrl": "ted_viewer_WebGL_04.asm.code.unityweb",
+"asmMemoryUrl": "ted_viewer_WebGL_04.asm.memory.unityweb",
+"asmFrameworkUrl": "ted_viewer_WebGL_04.asm.framework.unityweb",
+"splashScreenStyle": "Dark",
+"backgroundColor": "#222C36"
+}

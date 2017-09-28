@@ -5,38 +5,55 @@
 {% block content %}
 <div class="container">
     <h1>RECONSTRUCTING TD</h1>
-    <h2>ArcScene project with reconstructions of tombs</h2>
+    <h2>Wooden reconstruction of Tell el-Daba F/I palace</h2>
     <div>
         <div class="row">
 					<div class="col-md-8">
             <div class="embed-responsive embed-responsive-16by9">
-                <img class="img-responsive" style="" src="{% static 'webpage/media/reconstruct_arcscene.jpeg' %}" />
+                <img class="img-responsive" style="" src="{% static 'webpage/media/reconstruct_wood_palace.jpeg' %}" />
             </div>
           </div>
           <div class="col-md-4">
-            <p style="color: #83C653"> <i class="fa fa-exclamation-circle fa-2x" style="color: #83C653" aria-hidden="true"></i>&nbsp;The 3d model will be completetd by the mid of October 2017.
+            <p>This scan shows a wooden model of the palace of area F/I, which was produced for the exhibition “Pharaonen und Fremde” at the Vienna city hall in 1994. The model is based on the field documentation of this building, which was excavated between 1979 and 1989. It shows the palace of area F/I in its final stage, just before this building was abandoned.
+            To the south of this palace were gardens, in which the elite of this area buried their dead. These were laid to rest in mud-brick constructed tombs, which were arranged in parallels rows. In the entrance areas of the major tombs donkeys were buried in pairs. While in a small distance from the tombs, clearly belonging to these, trees were planted in rows.
+            To the west of the palace, outside of its enclosure wall a vineyard with an irrigation system was discovered. Subterranean water pipelines made of burnt bricks brought the water from the Nile to the garden.
             </p>
-            <a href="{% url 'webpage:staticpage' template='reconstruct_arcscene' %}" class="btn btn-default disabled">Explore More</a>
+            <p>
+            This model was the starting point for the up-to-date 3D reconstruction of the palace done in the “A puzzle in 4D” project. The latter shows some minor changes, which are based on a very detailed reinvestigation of the architectural remains.
+            </p>
+            <a href="{% url 'webpage:staticpage' template='reconstruct_arcscene' %}" class="btn btn-default">Explore More</a>
           </div>
         </div>
     </div>
     <hr/>
-    <!--
-    <h2>ARCH4D Inspector</h2>
+    <h2>Phase Model</h2>
     <div>
       <div class="row">
         <div class="col-md-8">
           <div class="embed-responsive embed-responsive-16by9">
-              <img class="img-responsive" style="" src="{% static 'webpage/media/reconstruct_arch4d.jpeg' %}" />
+              <img class="img-responsive" style="" src="{% static 'webpage/media/reconstruct_phaseModel.jpeg' %}" />
           </div>
         </div>
         <div class="col-md-4">
-          <a href="{% url 'webpage:staticpage' template='reconstruct_arch4d' %}" class="btn btn-default">Explore More</a>
+          <a href="{% url 'webpage:staticpage' template='reconstruct_phaseModel' %}" class="btn btn-default">Explore More</a>
         </div>
       </div>
     </div>
       <hr/>
-    -->
+      <h2>Walkthrough Tell el-Daba</h2>
+      <div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="embed-responsive embed-responsive-16by9">
+                <img class="img-responsive" style="" src="{% static 'webpage/media/reconstruct_walkthrough.jpeg' %}" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <a href="{% url 'webpage:staticpage' template='reconstruct_walkthrough' %}" class="btn btn-default">Explore More</a>
+          </div>
+        </div>
+      </div>
+        <hr/>
     <h2>Other 3D Models</h2>
     <div>
       <div class="row">
@@ -53,6 +70,33 @@
       </div>
     </div>
     <hr/>
-
+    <h2>Video: HMC+ Workflow</h2>
+    <div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="embed-responsive embed-responsive-16by9">
+              <img class="img-responsive" style="" src="{% static 'webpage/media/video_hmc.jpeg' %}" />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <a href="{% url 'webpage:staticpage' template='video_hmc' %}" class="btn btn-default">Watch now</a>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <h2>Video: Reconstruct Tell el-Daba</h2>
+    <div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="embed-responsive embed-responsive-16by9">
+              <img class="img-responsive" style="" src="{% static 'webpage/media/video_td.jpeg' %}" />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <a href="{% url 'webpage:staticpage' template='video_td' %}" class="btn btn-default">Watch now</a>
+        </div>
+      </div>
+    </div>
+    <hr/>
 </div>
 {% endblock %}

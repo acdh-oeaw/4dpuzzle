@@ -93,41 +93,34 @@
     					</ul>
     				</li>
     				<li><a href="{% url 'webpage:staticpage' template='site' %}">ARCHAEOLOGICAL SITE</a></li>
-                    <li class="dropdown">
-    					<a class="dropdown-toggle" data-toggle="dropdown" href="#">TELL EL DABA-ARCHIVE
+            <li class="dropdown">
+    					<a class="dropdown-toggle" data-toggle="dropdown" href="#">DIGITAL ARCHIVE
     					<span class="caret"></span></a>
     					<ul class="dropdown-menu">
-                            <li><a href="{% url 'browsing:browse_fielddrawings' %}">Explore Fielddrawings</a></li>
-                            <li><a href="{% url 'browsing:browse_fotos' %}">Explore Fotos</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{% url 'browsing:browse_scans' %}">Explore Scans</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{% url 'sparql:query' %}">Explore via SPARQL</a></li>
+                <li><a href="{% url 'webpage:staticpage' template='archive' %}">Creation of the digital archive</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'webpage:staticpage' template='explore' %}">Explore TD resources </a></li>
     					</ul>
     				</li>
-
-
-                    <li class="dropdown">
-    					<a class="dropdown-toggle" data-toggle="dropdown" href="#">TELL EL DABA-4D
+            <li class="dropdown">
+    					<a class="dropdown-toggle" data-toggle="dropdown" href="#">TELL EL-DABA 4D
     					<span class="caret"></span></a>
     					<ul class="dropdown-menu">
-    						<li><a href="#">Explore the site</a></li>
-    						<li><a href="#">Movies</a></li>
-                            <li><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstruct TD</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="http://arcg.is/1aTHPa">ArcGisOnline</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Arch-Objects</li>
-                            <li><a href="{% url 'browsing:browse_finds' %}">Finds</a></li>
-                            <li><a href="{% url 'browsing:browse_bricks' %}">Bricks</a></li>
-                            <li><a href="{% url 'browsing:browse_stratunits' %}">Strat-Units</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{% url 'places:place_list' %}">Locations</a></li>
-                            <li role="separator" class="divider"></li>
-                            {% if user.is_authenticated %}
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{% url 'bib:synczotero' %}">Import new Items from Zotero</a></li>
-                            {% endif %}
+                <li><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstruct TD</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="http://arcg.is/1aTHPa">ArcGisOnline</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Arch-Objects</li>
+                <li><a href="{% url 'browsing:browse_finds' %}">Finds</a></li>
+                <li><a href="{% url 'browsing:browse_bricks' %}">Bricks</a></li>
+                <li><a href="{% url 'browsing:browse_stratunits' %}">Strat-Units</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'places:place_list' %}">Locations</a></li>
+                <li role="separator" class="divider"></li>
+                {% if user.is_authenticated %}
+                    <li role="separator" class="divider"></li>
+                    <li><a href="{% url 'bib:synczotero' %}">Import new Items from Zotero</a></li>
+                {% endif %}
     					</ul>
     				</li>
     				<li><a href="{% url 'webpage:staticpage' template='events' %}">EVENTS & PUBLICATIONS</a></li>
