@@ -230,4 +230,59 @@ def run_brick(verbose=True):
     )
     lm.save(strict=True, verbose=verbose)
 
-# C:\Users\pandorfer\ownCloud\GIT\Redmine\4dpuzzle>python manage.py ogrinspect archobs/data/shapes/shp_fuer_ACDH/Bricks_20170928.shp Brick --srid=4326 --mapping --multi >hansi.py --settings=4dpuzzle.settings.pg_local
+
+terrain_mapping = {
+    'fid_field': 'FID_',
+    'entity': 'Entity',
+    'layer': 'Layer',
+    'color': 'Color',
+    'linetype': 'Linetype',
+    'elevation': 'Elevation',
+    'linewt': 'LineWt',
+    'refname': 'RefName',
+    'geom': 'MULTILINESTRING25D',
+}
+
+terrain_shp = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),  'data', 'shapes',
+        'shp_fuer_ACDH', 'TD_reconstructed_terrain.shp'
+    ),
+)
+
+
+def run_terrain(verbose=True):
+    lm = LayerMapping(
+        Terrain, terrain_shp, terrain_mapping,
+        transform=True, encoding='utf-8',
+    )
+    lm.save(strict=True, verbose=verbose)
+
+
+trench_mapping = {
+    'fid_field': 'FID_',
+    'entity': 'Entity',
+    'layer': 'Layer',
+    'color': 'Color',
+    'linetype': 'Linetype',
+    'elevation': 'Elevation',
+    'linewt': 'LineWt',
+    'refname': 'RefName',
+    'geom': 'MULTILINESTRING25D',
+}
+
+trench_shp = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),  'data', 'shapes',
+        'shp_fuer_ACDH', 'TD_reconstructed_terrain.shp'
+    ),
+)
+
+
+def run_trench(verbose=True):
+    lm = LayerMapping(
+        Trench, trench_shp, trench_mapping,
+        transform=True, encoding='utf-8',
+    )
+    lm.save(strict=True, verbose=verbose)
+# python manage.py ogrinspect archobs/data/shapes/shp_fuer_ACDH/Bricks_20170928.shp Brick --srid=4326 --mapping --multi >hansi.py --settings=4dpuzzle.settings.pg_local

@@ -3,13 +3,33 @@ from django.core.serializers import serialize
 from .models import *
 
 
+def trenchs_geojson(request):
+    trenchs_as_geojson = serialize('geojson', Trench.objects.all())
+    return HttpResponse(trenchs_as_geojson, content_type='json')
+
+
+def trench_geojson(request, pk):
+    trench_as_geojson = serialize('geojson', Trench.objects.filter(id=pk))
+    return HttpResponse(trench_as_geojson, content_type='json')
+
+
+def terrains_geojson(request):
+    terrains_as_geojson = serialize('geojson', Terrain.objects.all())
+    return HttpResponse(terrains_as_geojson, content_type='json')
+
+
+def terrain_geojson(request, pk):
+    terrain_as_geojson = serialize('geojson', Terrain.objects.filter(id=pk))
+    return HttpResponse(terrain_as_geojson, content_type='json')
+
+
 def excavationobjects_geojson(request):
     excavationobjects_as_geojson = serialize('geojson', ExcavationObject.objects.all())
     return HttpResponse(excavationobjects_as_geojson, content_type='json')
 
 
-def excavationobject_geojson(request):
-    excavationobject_as_geojson = serialize('geojson', ExcavationObject.objects.all())
+def excavationobject_geojson(request, pk):
+    excavationobject_as_geojson = serialize('geojson', ExcavationObject.objects.filter(id=pk))
     return HttpResponse(excavationobject_as_geojson, content_type='json')
 
 

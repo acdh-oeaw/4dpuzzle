@@ -20,5 +20,21 @@ urlpatterns = [
         r'^excavationobject/(?P<pk>[0-9]+)$',
         api_views.excavationobject_geojson, name='excavationobject'
     ),
+    url(
+        r'^terrains/$',
+        api_views.terrains_geojson, name='terrainsgeojson'
+    ),
+    url(
+        r'^terrain/(?P<pk>[0-9]+)$',
+        api_views.terrain_geojson, name='terraingeojson'
+    ),
+    url(
+        r'^trenchs/$',
+        api_views.trenchs_geojson, name='trenchsgeojson'
+    ),
+    url(
+        r'^trench/(?P<pk>[0-9]+)$',
+        api_views.trench_geojson, name='trenchgeojson'
+    ),
 
 ]

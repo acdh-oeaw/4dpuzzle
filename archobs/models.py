@@ -2,6 +2,30 @@ from django.contrib.gis.db import models
 from vocabs.models import SkosConcept
 
 
+class Trench(models.Model):
+    fid_field = models.IntegerField(blank=True, null=True)
+    entity = models.CharField(blank=True, null=True, max_length=16)
+    layer = models.CharField(blank=True, null=True, max_length=254)
+    color = models.IntegerField(blank=True, null=True)
+    linetype = models.CharField(blank=True, null=True, max_length=254)
+    elevation = models.FloatField(blank=True, null=True)
+    linewt = models.IntegerField(blank=True, null=True)
+    refname = models.CharField(blank=True, null=True, max_length=254)
+    geom = models.MultiLineStringField(blank=True, null=True, srid=4326)
+
+
+class Terrain(models.Model):
+    fid_field = models.IntegerField(blank=True, null=True)
+    entity = models.CharField(blank=True, null=True, max_length=16)
+    layer = models.CharField(blank=True, null=True, max_length=254)
+    color = models.IntegerField(blank=True, null=True)
+    linetype = models.CharField(blank=True, null=True, max_length=254)
+    elevation = models.FloatField(blank=True, null=True)
+    linewt = models.IntegerField(blank=True, null=True)
+    refname = models.CharField(blank=True, null=True, max_length=254)
+    geom = models.MultiLineStringField(srid=4326)
+
+
 class ArchObject(models.Model):
     name = models.CharField(max_length=300, blank=True)
     object_type = models.ForeignKey(SkosConcept, blank=True, null=True)

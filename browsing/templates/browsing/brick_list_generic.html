@@ -82,10 +82,51 @@
           };
 
          $.getJSON( "{% url 'archobs-json:findsgeojson' %}", function( data ) {
-              var findlayer = L.geoJson(data, {
+                L.geoJson(data, {
                   onEachFeature: onEachFeatureFinds,
                   style: myStyleFinds
               }).addTo(mymap);
+            });
+
+            function onEachFeatureTerrain(feature, layer) {
+                if (feature.properties) {
+                    var popupContent = createTableRows(feature.properties, 'brick');
+                    layer.bindPopup(popupContent);
+                }
+            };
+
+            var myStyleTerrain = {
+                "color": '#00cc00',
+                "weight": 1,
+                "opacity": 0.5
+            };
+
+            $.getJSON( "{% url 'archobs-json:terrainsgeojson' %}", function( data ) {
+                L.geoJson(data, {
+                    onEachFeature: onEachFeatureTerrain,
+                    style: myStyleTerrain
+                }).addTo(mymap);
+              });
+
+
+            function onEachFeatureTrench(feature, layer) {
+                if (feature.properties) {
+                    var popupContent = createTableRows(feature.properties, 'brick');
+                    layer.bindPopup(popupContent);
+                }
+            };
+
+            var myStyleTrench = {
+                "color": '#ff0000',
+                "weight": 1,
+                "opacity": 0.8
+            };
+
+            $.getJSON( "{% url 'archobs-json:trenchsgeojson' %}", function( data ) {
+                L.geoJson(data, {
+                    onEachFeature: onEachFeatureTrench,
+                    style: myStyleTrench
+                }).addTo(mymap);
             });
 
 
