@@ -1,0 +1,27 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block title %} Reconstruct TD {% endblock %}
+{% block content %}
+<div class="container">
+
+  <script src="{% static 'webpage/ted_viewer_phaseModel/TemplateData/UnityProgress.js' %}"></script>
+  <script src="{% static 'webpage/ted_viewer_phaseModel/Build/UnityLoader.js' %}"></script>
+  <script>
+    var gameInstance = UnityLoader.instantiate("gameContainer", "{% static 'webpage/ted_viewer_phaseModel/Build/ted_viewer_WebGL_04.json' %}", {onProgress: UnityProgress});
+  </script>
+
+  <h1>RECONSTRUCTING TD</h1>
+  <div class="webgl-content">
+    <div id="gameContainer" style="width: 960px; height: 600px"></div>
+    <div class="footer">
+      <div class="webgl-logo"></div>
+      <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+
+    </div>
+  </div>
+  <br>
+  <a href="{% url 'webpage:staticpage' template='reconstruct' %}">< Back to "Reconstruct TD"</a>
+</div>
+  <br>
+{% endblock %}

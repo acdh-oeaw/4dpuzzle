@@ -1,0 +1,28 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block content %}
+<div class="container-planning">
+  <div class="container">
+		<div class="text-center">
+			<h1>Explore TD resources</h1>
+			<hr style="border-color:#83C653; border-width: 2px" width="10%">
+		</div>
+    <div class="row">
+			<div class="col-md-12">
+      <p>
+        Here you have access to analogue TD resources which have been digitized (scanned and provided with metadata) already. You can query field drawings and photos.
+        <ul>
+          <li>field drawings</li><!-- <a href="{% url 'browsing:browse_fielddrawings' %}">field drawings</a> -->
+          <li>photos</li><!-- <a href="{% url 'browsing:browse_fotos' %}">photos</a> -->
+          <li>scans</li><!-- <a href="{% url 'browsing:browse_scans' %}">scans</a> -->
+          <li>via SPARQL</li><!-- a href="{% url 'sparql:query' %}">via SPARQL</a> -->
+        </ul>
+      </p>
+
+
+			</div>
+		</div>
+  </div>
+</div>
+{% endblock %}
