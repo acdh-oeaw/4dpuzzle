@@ -133,7 +133,7 @@ class Fielddrawing(models.Model):
         return "{}".format(self.document_id)
 
     def rel_archob_finds(self):
-        libfinds = Find.objects.filter(resource_i=self.document_id)
+        libfinds = Find.objects.filter(orea_gis_i=self.document_id)
         if len(libfinds) > 0:
             return list(libfinds)
         else:
