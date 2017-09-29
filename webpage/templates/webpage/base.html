@@ -106,8 +106,18 @@
     					<a class="dropdown-toggle" data-toggle="dropdown" href="#">TELL EL-DABA 4D
     					<span class="caret"></span></a>
     					<ul class="dropdown-menu">
+                <li><a href="{% url 'webpage:staticpage' template='ais' %}">Introduction to the Tell el-Daba Archaeological Information System </a></li>
+                <li><a href="{% url 'webpage:staticpage' template='casestudy' %}">Case study area F/I  </a></li>
+                <li><a href="{% url 'webpage:staticpage' template='gisstudy' %}">GIS Projects </a></li>
+                <li><a href="{% url 'webpage:staticpage' template='hmc' %}">HMC+ </a></li>
+              </ul>
+    				</li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">RECONSTRUCTIONS
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
                 <li><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstruct TD</a></li>
-                <li role="separator" class="divider"></li>
+                <!--<li role="separator" class="divider"></li>
                 <li><a href="http://arcg.is/1aTHPa">ArcGisOnline</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Arch-Objects</li>
@@ -116,14 +126,14 @@
                 <li><a href="{% url 'browsing:browse_stratunits' %}">Strat-Units</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="{% url 'places:place_list' %}">Locations</a></li>
-                <li role="separator" class="divider"></li>
+                <li role="separator" class="divider"></li>-->
                 {% if user.is_authenticated %}
                     <li role="separator" class="divider"></li>
                     <li><a href="{% url 'bib:synczotero' %}">Import new Items from Zotero</a></li>
                 {% endif %}
-    					</ul>
-    				</li>
-    				<li><a href="{% url 'webpage:staticpage' template='events' %}">EVENTS & PUBLICATIONS</a></li>
+              </ul>
+            </li>
+    				<li><a href="{% url 'webpage:staticpage' template='events' %}">PUBLICATIONS</a></li>
 
     			</ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -161,7 +171,11 @@
     <div class="container">
         <div class="col-md-8">
             <div class="row">
-							<img src="{% static 'webpage/media/4dpuzzle_logo_weiß.png' %}" width="50%" class="">
+							<img src="{% static 'webpage/media/4dpuzzle_logo_weiß.png' %}" width="50%" class=""><br><br>
+              <p>
+                <a href="{% url 'webpage:staticpage' template='license' %}">Terms of Use / License</a><br>
+              <a href="{% url 'webpage:staticpage' template='imprint' %}">Imprint</a>
+            </p>
             </div>
         </div>
         <div class="col-md-4">
@@ -175,7 +189,7 @@
 					<p style="margin-top: 20px;">
 							<a class="fa fa-twitter footer-socialicon" target="_blank" href="https://twitter.com/orea_digarch"></a>
 							<a class="fa fa-home footer-socialicon" target="_blank" href="http://www.orea.oeaw.ac.at/forschung/digital-archaeology/"></a>
-					</p>
+          </p>
         </div>
 	</div>
 </footer>

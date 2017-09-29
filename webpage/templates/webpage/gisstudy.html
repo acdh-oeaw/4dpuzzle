@@ -1,0 +1,41 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block content %}
+<div class="container-planning" style="padding-bottom:150px;">
+    <div class="container">
+		<div class="text-center">
+			<h1>GIS projects </h1>
+			<hr style="border-color:#83C653; border-width: 2px" width="10%">
+		</div>
+        <div class="row">
+					<div class="col-md-4">
+            <ul class="images">
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/gis_arcmap_tumb.jpeg' %}" originalUrl="{% static 'webpage/media/gis_arcmap.jpeg' %}" />
+              <b>Figure 1</b>: ArcMap.
+            </ul>
+        <br />
+				<br />
+
+			</div>
+			<div class="col-md-8">
+				<p class="">
+        To test the AIS one area of Tell el Daba (F/I) which contains the remains of a palace has been analysed. You can access the 2-dimensional GIS project to explore the archaeological evidence of an Egyptian palace (link to 2D ArcGIS online). In this movie you can see how the GIS works with the stratigraphic sequencer for the analysis of stratigraphy (link to HMC+ movie).</p>
+        <p>
+        The archaeological features have been reconstructed in a 3-dimensional GIS to test hypotheses of archaeological interpretation (link to 3D ArcGIS online). For example, if we digitally reconstruct walls we can see if our interpretation works if the wall does not interfere with other types of archaeological evidence - or if we have created a reconstruction that is not possible.
+        </p>
+        <h3>2D GIS online (will be online October 2017)</h3>
+        <p>
+          You can access the 2-dimensional GIS project that to explore the archaeological evidence of an Egyptian palace. It is possible to see the evidence according to phases (straten) and types of evidence (e.g. tombs).<br><br>
+        </p>
+        <h3>3D GIS online (will be online January 2018)</h3>
+        <p>
+        In the 3D GIS project, you can explore the digitized archaeological features of one square trench (j/21) in Tell el-Daba area F/I. It is possible to see the evidence according to phases (straten) and types of evidence (e.g. tombs).
+      </p>
+			</div>
+
+		</div>
+    </div>
+</div>
+
+{% endblock %}
