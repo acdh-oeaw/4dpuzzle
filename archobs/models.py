@@ -102,8 +102,8 @@ class Find(models.Model):
 
     def iiifjson(self):
         return "https://4dpuzzle-iiif.acdh.oeaw.ac.at/{}__{}/info.json".format(
-            self.resource_i, self.excavation
-        ).replace(' ', '').replace('lanum_', 'lanum')
+            self.resources_field, self.excavation
+        )
 
     def __str__(self):
         return "{}".format(self.orea_gis_i)
@@ -143,8 +143,8 @@ class FindSpot(models.Model):
 
     def iiifjson(self):
         return "https://4dpuzzle-iiif.acdh.oeaw.ac.at/{}__{}/info.json".format(
-            self.resource_i, self.excavation
-        ).replace(' ', '').replace('lanum_', 'lanum')
+            self.resources_field, self.excavation
+        )
 
     def __str__(self):
         return "{}".format(self.orea_gis_i)
@@ -184,8 +184,8 @@ class Brick(models.Model):
 
     def iiifjson(self):
         return "https://4dpuzzle-iiif.acdh.oeaw.ac.at/{}__{}/info.json".format(
-            self.resource_i, self.excavation
-        ).replace(' ', '').replace('lanum_', 'lanum')
+            self.resources_field, self.excavation
+        )
 
     def get_next(self):
         next = Brick.objects.filter(id__gt=self.id)
