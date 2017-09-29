@@ -12,4 +12,13 @@ urlpatterns = [
         api_views.stratunits_geojson, name='stratunitsgeojson'
     ),
     url(r'^stratunitgeojson/(?P<pk>[0-9]+)$', api_views.stratunit_geojson, name='stratunitgeojson'),
+    url(
+        r'^excavationobjects/$',
+        api_views.excavationobjects_geojson, name='excavationobjects'
+    ),
+    url(
+        r'^excavationobject/(?P<pk>[0-9]+)$',
+        api_views.excavationobject_geojson, name='excavationobject'
+    ),
+
 ]

@@ -1,11 +1,10 @@
 {% extends "browsing/generic_list.html" %}
 {% load staticfiles %}
-{% block list_title %}Search all Archaeological Objects{% endblock %}
+{% block list_title %}Search all Excavation Objects{% endblock %}
 {% block scriptHeader %}
 <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
 <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
 <script src="{% static 'webpage/leaflet.ajax/leaflet.ajax.js' %}"></script>
-
 <style>
     #map { height: 800px; }
 </style>
@@ -17,7 +16,7 @@
 
 
 {% block reset_button %}
- <a class ="btn btn-default"  href="{% url 'browsing:browse_stratunits' %}">reset search</a>
+ <a class ="btn btn-default"  href="{% url 'browsing:browse_bricks' %}">reset search</a>
 {% endblock %}
 
 {% block map %}
@@ -51,12 +50,12 @@
 
         function onEachFeature(feature, layer) {
             if (feature.properties) {
-                var popupContent = createTableRows(feature.properties, 'stratunit');
+                var popupContent = createTableRows(feature.properties, 'excavationobject');
                 layer.bindPopup(popupContent);
             }
         };
 
-        $.getJSON( "{% url 'archobs-json:stratunitsgeojson' %}", function( data ) {
+        $.getJSON( "{% url 'archobs-json:excavationobjects' %}", function( data ) {
             L.geoJson(data, {
                 onEachFeature: onEachFeature
             }).addTo(mymap);

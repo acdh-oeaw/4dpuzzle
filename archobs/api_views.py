@@ -1,6 +1,16 @@
 from django.http import HttpResponse
 from django.core.serializers import serialize
-from .models import Brick, Find, Stratunit
+from .models import *
+
+
+def excavationobjects_geojson(request):
+    excavationobjects_as_geojson = serialize('geojson', ExcavationObject.objects.all())
+    return HttpResponse(excavationobjects_as_geojson, content_type='json')
+
+
+def excavationobject_geojson(request):
+    excavationobject_as_geojson = serialize('geojson', ExcavationObject.objects.all())
+    return HttpResponse(excavationobject_as_geojson, content_type='json')
 
 
 def stratunits_geojson(request):

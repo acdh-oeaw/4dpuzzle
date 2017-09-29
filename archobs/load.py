@@ -2,6 +2,64 @@ import os
 from django.contrib.gis.utils import LayerMapping
 from .models import *
 
+photogis_mapping = {
+    'objectid': 'OBJECTID',
+    'orea_gis_i': 'OREA_GIS_i',
+    'photo_numb': 'Photo_numb',
+    'excavation': 'Excavation',
+    'photo_dire': 'Photo_dire',
+    'gis_commen': 'GIS_commen',
+    'shape_leng': 'Shape_Leng',
+    'shape_area': 'Shape_Area',
+    'geom': 'MULTIPOLYGON',
+}
+
+photogis_shp = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__), 'data', 'shapes',
+        'shp_fuer_ACDH', 'Photos_20170928.shp'
+    ),
+)
+
+
+def run_photogis(verbose=True):
+    lm = LayerMapping(
+        PhotoGis, photogis_shp, photogis_mapping,
+        transform=True, encoding='utf-8',
+    )
+    lm.save(strict=True, verbose=verbose)
+
+
+excavationobject_mapping = {
+    'objectid': 'OBJECTID',
+    'orea_gis_i': 'OREA_GIS_I',
+    'excavation': 'Excavation',
+    'excavati_1': 'Excavati_1',
+    'base_heigh': 'Base_heigh',
+    'extrusion': 'Extrusion',
+    'shape_leng': 'Shape_Leng',
+    'shape_area': 'Shape_Area',
+    'resources_field': 'Resources_',
+    'eigner_map': 'Eigner_map',
+    'geom': 'MULTIPOLYGON',
+}
+
+excavationobject_shp = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__), 'data', 'shapes',
+        'shp_fuer_ACDH', 'Excavation_objects_20170928.shp'
+    ),
+)
+
+
+def run_excavationobject(verbose=True):
+    lm = LayerMapping(
+        ExcavationObject, excavationobject_shp, excavationobject_mapping,
+        transform=True, encoding='utf-8',
+    )
+    lm.save(strict=True, verbose=verbose)
+
+
 findspot_mapping = {
     'objectid': 'OBJECTID',
     'orea_gis_i': 'OREA_GIS_I',
@@ -22,6 +80,7 @@ findspot_mapping = {
     'resources_field': 'Resources_',
     'geom': 'MULTIPOINT',
 }
+
 findspot_shp = os.path.abspath(
     os.path.join(
         os.path.dirname(__file__), 'data', 'shapes',
@@ -36,6 +95,7 @@ def run_findspot(verbose=True):
         transform=True, encoding='utf-8',
     )
     lm.save(strict=True, verbose=verbose)
+
 
 find_mapping = {
     'objectid': 'OBJECTID',

@@ -1,6 +1,6 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
-{% block title %}Stratunit: {{ object }}{% endblock %}
+{% block title %}Archaeological Object: {{ object }}{% endblock %}
 {% block scriptHeader %}
 <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
 <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                      <small>stratunit: </small>{{ object }}
+                      <small>Archaeological_object </small>{{ object }}
                     </h1>
                 </div>
                 <div class="col-md-2">
@@ -44,12 +44,12 @@
                             <td>{{ object.objectid }}</td>
                         </tr>
                         <tr>
-                            <th>type</th>
-                            <td>{{ object.type }}</td>
+                            <th>resources_field</th>
+                            <td>{{ object.resources_field }}</td>
                         </tr>
                         <tr>
-                            <th>gis_su_id</th>
-                            <td>{{ object.gis_su_id }}</td>
+                            <th>orea_gis_i</th>
+                            <td>{{ object.orea_gis_i }}</td>
                         </tr>
                         <tr>
                             <th>excavation</th>
@@ -64,12 +64,12 @@
                             <td>{{ object.phase_id }}</td>
                         </tr>
                         <tr>
-                            <th>phase_gis_field</th>
-                            <td>{{ object.phase_gis_field }}</td>
-                        </tr>
-                        <tr>
                             <th>locus_id</th>
                             <td>{{ object.locus_id }}</td>
+                        </tr>
+                        <tr>
+                            <th>locus_wall</th>
+                            <td>{{ object.locus_wall }}</td>
                         </tr>
                         <tr>
                             <th>archaeolog</th>
@@ -148,10 +148,6 @@
                             <td>{{ object.wall_inter }}</td>
                         </tr>
                         <tr>
-                            <th>wall_bri_1</th>
-                            <td>{{ object.wall_bri_1 }}</td>
-                        </tr>
-                        <tr>
                             <th>locus_laye</th>
                             <td>{{ object.locus_laye }}</td>
                         </tr>
@@ -164,28 +160,12 @@
                             <td>{{ object.orientatio }}</td>
                         </tr>
                         <tr>
-                            <th>stratum</th>
-                            <td>{{ object.stratum }}</td>
-                        </tr>
-                        <tr>
-                            <th>phase</th>
-                            <td>{{ object.phase }}</td>
-                        </tr>
-                        <tr>
                             <th>wall_funct</th>
                             <td>{{ object.wall_funct }}</td>
                         </tr>
                         <tr>
-                            <th>su_nummer</th>
-                            <td>{{ object.su_nummer }}</td>
-                        </tr>
-                        <tr>
                             <th>wall_conne</th>
                             <td>{{ object.wall_conne }}</td>
-                        </tr>
-                        <tr>
-                            <th>old_object</th>
-                            <td>{{ object.old_object }}</td>
                         </tr>
                         <tr>
                             <th>shape_leng</th>

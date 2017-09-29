@@ -27,6 +27,13 @@ django_filters.filters.LOOKUP_TYPES = [
 ]
 
 
+class ExcavationObjectListFilter(django_filters.FilterSet):
+
+    class Meta:
+        model = ExcavationObject
+        fields = ['orea_gis_i', 'resources_field', 'objectid']
+
+
 class ScanListFilter(django_filters.FilterSet):
 
     class Meta:
@@ -121,4 +128,4 @@ class StratunitListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Stratunit
-        fields = ['phase_id', 'resources_field']
+        exclude = ['geom']

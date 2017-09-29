@@ -76,6 +76,40 @@ class Planum(models.Model):
         return "{}".format(self.name)
 
 
+class ExcavationObject(models.Model):
+    objectid = models.IntegerField(blank=True, null=True)
+    orea_gis_i = models.CharField(blank=True, null=True, max_length=254)
+    excavation = models.CharField(blank=True, null=True, max_length=254)
+    excavati_1 = models.CharField(blank=True, null=True, max_length=254)
+    base_heigh = models.FloatField(blank=True, null=True)
+    extrusion = models.IntegerField(blank=True, null=True)
+    shape_leng = models.FloatField(blank=True, null=True)
+    shape_area = models.FloatField(blank=True, null=True)
+    resources_field = models.CharField(blank=True, null=True, max_length=254)
+    eigner_map = models.CharField(blank=True, null=True, max_length=254)
+    geom = models.MultiPolygonField(srid=4326)
+
+    def iiifjson(self):
+        return "https://4dpuzzle-iiif.acdh.oeaw.ac.at/{}__{}/info.json".format(
+            self.resources_field, self.excavation
+        )
+
+    def __str__(self):
+        return "{}".format(self.orea_gis_i)
+
+    def get_next(self):
+        next = ExcavationObject.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = ExcavationObject.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+
 class Find(models.Model):
     objectid = models.IntegerField(blank=True, null=True)
     orea_gis_i = models.CharField(blank=True, null=True, max_length=254)
@@ -150,13 +184,13 @@ class FindSpot(models.Model):
         return "{}".format(self.orea_gis_i)
 
     def get_next(self):
-        next = Find.objects.filter(id__gt=self.id)
+        next = FindSpot.objects.filter(id__gt=self.id)
         if next:
             return next.first().id
         return False
 
     def get_prev(self):
-        prev = Find.objects.filter(id__lt=self.id).order_by('-id')
+        prev = FindSpot.objects.filter(id__lt=self.id).order_by('-id')
         if prev:
             return prev.first().id
         return False
@@ -245,8 +279,8 @@ class Stratunit(models.Model):
 
     def iiifjson(self):
         return "https://4dpuzzle-iiif.acdh.oeaw.ac.at/{}__{}/info.json".format(
-            self.resources_field, (self.excavation)
-        ).replace(' ', '').replace('lanum_', 'lanum')
+            self.resources_field, self.excavation
+        )
 
     def get_next(self):
         next = Stratunit.objects.filter(id__gt=self.id)
@@ -256,6 +290,38 @@ class Stratunit(models.Model):
 
     def get_prev(self):
         prev = Stratunit.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return prev.first().id
+        return False
+
+
+class PhotoGis(models.Model):
+    objectid = models.IntegerField(blank=True, null=True)
+    orea_gis_i = models.CharField(blank=True, null=True, max_length=254)
+    photo_numb = models.CharField(blank=True, null=True, max_length=254)
+    excavation = models.CharField(blank=True, null=True, max_length=254)
+    photo_dire = models.CharField(blank=True, null=True, max_length=254)
+    gis_commen = models.CharField(blank=True, null=True, max_length=254)
+    shape_leng = models.FloatField(blank=True, null=True)
+    shape_area = models.FloatField(blank=True, null=True)
+    geom = models.MultiPolygonField(blank=True, null=True, srid=4326)
+
+    def __str__(self):
+        return "{}".format(self.orea_gis_i)
+
+    # def iiifjson(self):
+    #     return "https://4dpuzzle-iiif.acdh.oeaw.ac.at/{}__{}/info.json".format(
+    #         self.resources_field, self.excavation
+    #     )
+
+    def get_next(self):
+        next = PhotoGis.objects.filter(id__gt=self.id)
+        if next:
+            return next.first().id
+        return False
+
+    def get_prev(self):
+        prev = PhotoGis.objects.filter(id__lt=self.id).order_by('-id')
         if prev:
             return prev.first().id
         return False

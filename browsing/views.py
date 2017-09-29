@@ -88,6 +88,20 @@ class FielddrawingListView(GenericListView):
         return context
 
 
+class ExcavationObjectListView(GenericListView):
+    model = ExcavationObject
+    table_class = ExcavationObjectTable
+    template_name = 'browsing/excavationobject_list_generic.html'
+    filter_class = ExcavationObjectListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+
+        return context
+
+
 class BrickListView(GenericListView):
     model = Brick
     table_class = BrickTable
