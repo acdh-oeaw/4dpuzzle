@@ -10,7 +10,7 @@ class ExcavationObjectTable(tables.Table):
         'archobs:excavationobject-detail', args=[A('pk')])
 
     class Meta:
-        model = Brick
+        model = ExcavationObject
         fields = ['id', 'orea_gis_i', 'excavation']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
@@ -40,7 +40,7 @@ class BrickTable(tables.Table):
 
     class Meta:
         model = Brick
-        fields = ['id', 'stratum_gi', 'brick_type']
+        fields = ['id', 'archaeolog', 'brick_type', 'brick_mate']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 

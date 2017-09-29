@@ -31,7 +31,7 @@ class ExcavationObjectListFilter(django_filters.FilterSet):
 
     class Meta:
         model = ExcavationObject
-        fields = ['orea_gis_i', 'resources_field', 'objectid']
+        exclude = ['geom']
 
 
 class ScanListFilter(django_filters.FilterSet):
@@ -70,7 +70,7 @@ class FielddrawingListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Fielddrawing
-        fields = ['document_id', 'area', 'square_trence', 'planum', 'archobject', 'exobject']
+        exclude = ['scan']
 
 
 class FotoListFilter(django_filters.FilterSet):
@@ -82,19 +82,9 @@ class FotoListFilter(django_filters.FilterSet):
 
 class BrickListFilter(django_filters.FilterSet):
 
-    stratum_id = django_filters.CharFilter(
-        widget=autocomplete.Select2(
-            url='archobs-dal:strat-dal',
-            # attrs={'data-minimum-input-length': 1}
-        ),
-        lookup_expr='icontains',
-        label='Name',
-        help_text=False,
-    )
-
     class Meta:
         model = Brick
-        fields = ['phase_id', 'brick_type']
+        exclude = ['geom']
 
 
 class FindListFilter(django_filters.FilterSet):
@@ -111,7 +101,7 @@ class FindListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Find
-        fields = ['phase_id', 'find_type']
+        exclude = ['geom']
 
 
 class StratunitListFilter(django_filters.FilterSet):

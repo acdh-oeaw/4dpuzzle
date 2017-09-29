@@ -7,7 +7,7 @@ from vocabs.models import SkosConcept
 try:
     base_url = settings.IIIF_BASE
 except:
-    base_url = "https://4dpuzzle-iiif.acdh.oeaw.ac.at/"
+    base_url = "https://4dpuzzle-iiif.acdh.oeaw.ac.at"
 
 IIIF_PATH = "{}{}".format(base_url, os.path.basename(settings.BASE_DIR))
 FILE_EXTENSION_CHOICES = (
