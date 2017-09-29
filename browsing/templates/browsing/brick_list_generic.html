@@ -16,7 +16,7 @@
 
 
 {% block reset_button %}
- <a class ="btn btn-default"  href="{% url 'browsing:browse_bricks' %}">reset search</a>
+ <a class ="btn btn-default"  href="{% url 'browsing:browse_excavationobjects' %}">reset search</a>
 {% endblock %}
 
 {% block map %}
@@ -55,22 +55,49 @@
             }
         };
 
+        var myStyle = {
+            "color": "#ff7800",
+            "weight": 0,
+            "opacity": 0.65
+        };
+
         $.getJSON( "{% url 'archobs-json:bricksgeojson' %}", function( data ) {
             L.geoJson(data, {
-                onEachFeature: onEachFeature
+                onEachFeature: onEachFeature,
+                style: myStyle
             }).addTo(mymap);
           });
+
+          function onEachFeatureFinds(feature, layer) {
+              if (feature.properties) {
+                  var popupContent = createTableRows(feature.properties, 'find');
+                  layer.bindPopup(popupContent);
+              }
+          };
+
+          var myStyleFinds = {
+              "color": '#3366ff',
+              "weight": 0,
+              "opacity": 0.80
+          };
+
+         $.getJSON( "{% url 'archobs-json:findsgeojson' %}", function( data ) {
+              var findlayer = L.geoJson(data, {
+                  onEachFeature: onEachFeatureFinds,
+                  style: myStyleFinds
+              }).addTo(mymap);
+            });
 
 
 
         var defaultLayers = {
-            "Default": baseLayer
+            "Default": baseLayer,
         }
 
         var overlayMaps = {
             "Dinamlex": L.tileLayer('https://maps.acdh.oeaw.ac.at/mapserv?map=/data/test.map&mode=tile&layers=test&tilemode=gmap&tile={x}+{y}+{z}', {'maxZoom': 18, 'opacity': 0.7}),
             "Tirol": L.tileLayer('https://maps.acdh.oeaw.ac.at/mapserv?map=/data/tirol.map&mode=tile&layers=tirol&tilemode=gmap&tile={x}+{y}+{z}', {'maxZoom': 18, 'opacity': 0.7}),
-            "Czoernig": L.tileLayer('https://maps.acdh.oeaw.ac.at/mapserv?map=/data/czoernig.map&mode=tile&layers=czoernig&tilemode=gmap&tile={x}+{y}+{z}', {'maxZoom': 18, 'opacity': 0.7})
+            "Czoernig": L.tileLayer('https://maps.acdh.oeaw.ac.at/mapserv?map=/data/czoernig.map&mode=tile&layers=czoernig&tilemode=gmap&tile={x}+{y}+{z}', {'maxZoom': 18, 'opacity': 0.7}),
         };
         L.control.layers(defaultLayers, overlayMaps).addTo(mymap);
     </script>

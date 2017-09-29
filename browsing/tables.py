@@ -5,6 +5,16 @@ from archiv.models import Fielddrawing, Foto
 from images.models import Scan
 
 
+class ExcavationObjectTable(tables.Table):
+    id = tables.LinkColumn(
+        'archobs:excavationobject-detail', args=[A('pk')])
+
+    class Meta:
+        model = ExcavationObject
+        fields = ['id', 'orea_gis_i', 'excavation']
+        attrs = {"class": "table table-hover table-striped table-condensed"}
+
+
 class ExObjectTable(tables.Table):
     id = tables.LinkColumn('archobs:exobject-detail', args=[A('pk')])
 
@@ -30,7 +40,7 @@ class BrickTable(tables.Table):
 
     class Meta:
         model = Brick
-        fields = ['id', 'stratum_gi', 'brick_type']
+        fields = ['id', 'archaeolog', 'brick_type', 'brick_mate']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
@@ -50,7 +60,7 @@ class StratunitTable(tables.Table):
 
     class Meta:
         model = Stratunit
-        fields = ['id', 'stratum_gi', 'resources_field']
+        fields = ['id', 'excavation', 'resources_field', 'archaeol_2']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 

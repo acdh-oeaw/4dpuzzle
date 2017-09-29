@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
-from .models import Brick, Find, Stratunit, ExObject
+from .models import *
 
 
 class BrickDetailView(DetailView):
@@ -16,6 +16,11 @@ class FindDetailView(DetailView):
 class StratunitDetailView(DetailView):
 
     model = Stratunit
+
+
+class ExcavationObjectDetailView(DetailView):
+
+    model = ExcavationObject
 
 
 class ExObjectDetailView(DetailView):

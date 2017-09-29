@@ -10,4 +10,8 @@ urlpatterns = [
     url(
         r'^exobject/(?P<pk>[0-9]+)$', views.ExObjectDetailView.as_view(),  name='exobject-detail'
     ),
+    url(
+        r'^excavationobject/(?P<pk>[0-9]+)$',
+        views.ExcavationObjectDetailView.as_view(), name='excavationobject-detail'
+    ),
 ]
