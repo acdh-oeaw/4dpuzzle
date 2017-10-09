@@ -90,9 +90,10 @@
     					<ul class="dropdown-menu">
     						<li><a href="{% url 'webpage:staticpage' template='about' %}">What is "A Puzzle in 4D"?</a></li>
     						<li><a href="{% url 'webpage:staticpage' template='team' %}">Team</a></li>
+                <li><a href="{% url 'webpage:staticpage' template='events' %}">Publications</a></li>
+                <li><a href="{% url 'webpage:staticpage' template='site' %}">Archaeological Site</a></li>
     					</ul>
     				</li>
-    				<li><a href="{% url 'webpage:staticpage' template='site' %}">ARCHAEOLOGICAL SITE</a></li>
             <li class="dropdown">
     					<a class="dropdown-toggle" data-toggle="dropdown" href="#">DIGITAL ARCHIVE
     					<span class="caret"></span></a>
@@ -110,14 +111,19 @@
                 <li><a href="{% url 'webpage:staticpage' template='casestudy' %}">Case study area F/I  </a></li>
                 <li><a href="{% url 'webpage:staticpage' template='gisstudy' %}">GIS Projects </a></li>
                 <li><a href="{% url 'webpage:staticpage' template='hmc' %}">HMC+ </a></li>
+                <li><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstruct TD</a></li>
+                {% if user.is_authenticated %}
+                    <li role="separator" class="divider"></li>
+                    <li><a href="{% url 'bib:synczotero' %}">Import new Items from Zotero</a></li>
+                {% endif %}
               </ul>
     				</li>
-            <li class="dropdown">
+            <!--<li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">RECONSTRUCTIONS
               <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstruct TD</a></li>
-                <!--<li role="separator" class="divider"></li>
+
+                <li role="separator" class="divider"></li>
                 <li><a href="http://arcg.is/1aTHPa">ArcGisOnline</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Arch-Objects</li>
@@ -127,15 +133,10 @@
                 <li><a href="{% url 'browsing:browse_stratunits' %}">Archaeological Ojects</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="{% url 'places:place_list' %}">Locations</a></li>
-                <li role="separator" class="divider"></li>-->
-                {% if user.is_authenticated %}
-                    <li role="separator" class="divider"></li>
-                    <li><a href="{% url 'bib:synczotero' %}">Import new Items from Zotero</a></li>
-                {% endif %}
-              </ul>
-            </li>
-    				<li><a href="{% url 'webpage:staticpage' template='events' %}">PUBLICATIONS</a></li>
+                <li role="separator" class="divider"></li>
 
+              </ul>
+            </li>-->
     			</ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
