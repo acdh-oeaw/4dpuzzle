@@ -31,7 +31,10 @@ class ArchObject(models.Model):
     object_type = models.ForeignKey(SkosConcept, blank=True, null=True)
 
     def __str__(self):
-        return "{} ({})".format(self.name, self.object_type)
+        if self.object_type:
+            return "{} ({})".format(self.name, self.object_type)
+        else:
+            return "{}".format(self.name)
 
 
 class ExObject(models.Model):
@@ -69,7 +72,10 @@ class ExObject(models.Model):
         return False
 
     def __str__(self):
-        return "{} ({})".format(self.name, self.object_type)
+        if self.object_type:
+            return "{} ({})".format(self.name, self.object_type)
+        else:
+            return "{}".format(self.name)
 
 
 class Site(models.Model):
