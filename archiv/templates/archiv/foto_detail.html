@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                       <small>foto: </small>{{ object }}
+                       <small>photo id: </small>{{ object.document_id }}
                     </h1>
                 </div>
                 <div class="col-md-2">
@@ -34,35 +34,35 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-hover table-condensed">
                         <tr>
-                            <th>composed_id</th>
+                            <th>file name</th>
                             <td>{{ object.composed_id }}</td>
                         </tr>
                         <tr>
-                            <th>document_id</th>
+                            <th>document id</th>
                             <td>{{ object.document_id }}</td>
                         </tr>
                         <tr>
-                            <th>photo_title</th>
+                            <th>photo title</th>
                             <td>{{ object.photo_title }}</td>
                         </tr>
                         <tr>
-                            <th>film_number</th>
+                            <th>film number</th>
                             <td>{{ object.film_number }}</td>
                         </tr>
                         <tr>
-                            <th>film_id</th>
+                            <th>film id</th>
                             <td>{{ object.film_id }}</td>
                         </tr>
                         <tr>
-                            <th>photo_number</th>
+                            <th>photo number</th>
                             <td>{{ object.photo_number }}</td>
                         </tr>
                         <tr>
-                            <th>digital_photo_type</th>
+                            <th>digital phototype</th>
                             <td>{{ object.digital_photo_type }}</td>
                         </tr>
                         <tr>
-                            <th>foto_format</th>
+                            <th>photo format</th>
                             <td>{{ object.foto_format }}</td>
                         </tr>
                         <tr>
@@ -70,15 +70,15 @@
                             <td>{{ object.photographer }}</td>
                         </tr>
                         <tr>
-                            <th>original_film_folder</th>
+                            <th>original filmfolder</th>
                             <td>{{ object.original_film_folder }}</td>
                         </tr>
                         <tr>
-                            <th>foto_type</th>
+                            <th>photo type</th>
                             <td>{{ object.foto_type }}</td>
                         </tr>
                         <tr>
-                            <th>content_type</th>
+                            <th>content type</th>
                             <td>{% for x in object.content_type.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
@@ -90,11 +90,11 @@
                             <td>{{ object.year }}</td>
                         </tr>
                         <tr>
-                            <th>archobject</th>
+                            <th>archaeological object</th>
                             <td>{% for x in object.archobject.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>exobject</th>
+                            <th>excavation object</th>
                             <td>
                                 {% for x in object.exobject.all %}
                                     <a href="{% url 'archobs:exobject-detail' pk=x.id %}">{{ x }}</a> <br/> {% endfor %}</td>
@@ -104,15 +104,15 @@
                             <td>{{ object.scale }}</td>
                         </tr>
                         <tr>
-                            <th>metadata_creation_date</th>
+                            <th>metadata creation date</th>
                             <td>{{ object.metadata_creation_date }}</td>
                         </tr>
                         <tr>
-                            <th>metadata_comment</th>
+                            <th>metadata comment</th>
                             <td>{{ object.metadata_comment }}</td>
                         </tr>
                         <tr>
-                            <th>metadata_creator</th>
+                            <th>metadata creator</th>
                             <td>{% for x in object.metadata_creator.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>

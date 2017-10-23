@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-8">
                     <h1 style="text-align: center;">
-                       <small>fielddrawing: </small>{{ object }}
+                       <small>field drawing: </small>{{ object }}
                     </h1>
                 </div>
                 <div class="col-md-2">
@@ -34,15 +34,15 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-hover table-condensed">
                         <tr>
-                            <th>document_id</th>
+                            <th>document id</th>
                             <td>{{ object.document_id }}</td>
                         </tr>
                         <tr>
-                            <th>document_type</th>
+                            <th>document type</th>
                             <td>{% for x in object.document_type.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>document_subtype</th>
+                            <th>document subtype</th>
                             <td>{% for x in object.document_subtype.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
@@ -58,7 +58,7 @@
                             <td>{{ object.area }}</td>
                         </tr>
                         <tr>
-                            <th>square_trence</th>
+                            <th>square trench</th>
                             <td>{% for x in object.square_trence.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
@@ -66,15 +66,15 @@
                             <td>{% for x in object.planum.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>perspective_of_drawing</th>
+                            <th>perspective of drawing</th>
                             <td>{% for x in object.perspective_of_drawing.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>stratum_commentary</th>
+                            <th>stratum comment</th>
                             <td>{{ object.stratum_commentary }}</td>
                         </tr>
                         <tr>
-                            <th>drawn_by</th>
+                            <th>drawn by</th>
                             <td>{% for x in object.drawn_by.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
@@ -94,15 +94,15 @@
                             <td>{% for x in object.scale.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>paper_type</th>
+                            <th>paper type</th>
                             <td>{% for x in object.paper_type.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>archobject</th>
+                            <th>archaeological object</th>
                             <td>{% for x in object.archobject.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>exobject</th>
+                            <th>excavation object</th>
                             <td>
                                 {% for x in object.exobject.all %}
                                     <a href="{% url 'archobs:exobject-detail' pk=x.id %}">{{ x }}</a> <br/> {% endfor %}</td>
