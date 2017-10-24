@@ -4,7 +4,7 @@
 {% block title %} Reconstruct TD {% endblock %}
 {% block content %}
 <div class="container">
-    <h1>RECONSTRUCTING Tell el-Daba</h1>
+    <h1>RECONSTRUCTING TD</h1>
     <h2>Introduction to reconstructions </h2>
     <p>
     The main motivation for the visualisation of the finds of the TD F/I palace is to share and disseminate the current state of knowledge of existing and reconstructed architectural structures and their interpretation. In order to reach a wider public, it was decided to choose a format suitable for the presentation over the internet, which also allows a presentation of the final content on mobile devices as well as cinematic formats providing image sequences which could be used on and offline. So-called ‘3D Real-time Environments’ and ‘walk–through’ allow users to interact with a 3D environment to discover the reconstructed site on their own pace studying the included archaeological information and experiencing architectural spaces from a first-person view.
@@ -16,7 +16,6 @@
         <div class="embed-responsive embed-responsive-16by9">
             <a href="{% url 'webpage:staticpage' template='reconstruct_arcscene' %}"><img class="img-responsive" style="" src="{% static 'webpage/media/reconstruct_wood_palace.jpeg' %}" /></a>
         </div>
-        <br>
         <p>This scan shows a wooden model of the palace of area F/I, which was produced for the exhibition “Pharaonen und Fremde” at the Vienna city hall in 1994. The model is based on the field documentation of this building, which was excavated between 1979 and 1989. It shows the palace of area F/I in its final stage, just before this building was abandoned.
         </p>
         <a href="{% url 'webpage:staticpage' template='reconstruct_arcscene' %}" class="btn btn-default">Explore More</a>
@@ -27,7 +26,6 @@
         <div class="embed-responsive embed-responsive-16by9">
             <a href="{% url 'webpage:staticpage' template='reconstruct_phaseModel' %}"><img class="img-responsive" style="" src="{% static 'webpage/media/reconstruct_phaseModel.jpeg' %}" /></a>
         </div>
-        <br>
         <p style="color:red;">
           Loading the application could take a few minutes, depending on your internet access. If your browser has not enough memory, please close all other tabs of your browser, restart it and reload the application.
         </p>
@@ -45,7 +43,6 @@
         <div class="embed-responsive embed-responsive-16by9">
             <a href="{% url 'webpage:staticpage' template='reconstruct_walkthrough' %}"><img class="img-responsive" style="" src="{% static 'webpage/media/reconstruct_walkthrough.jpeg' %}" /></a>
         </div>
-        <br>
         <p style="color:red;">
           Loading the application could take a few minutes, depending on your internet access. If your browser has not enough memory, please close all other tabs of your browser, restart it and reload the application.
         </p>
@@ -69,7 +66,6 @@
         <div class="embed-responsive embed-responsive-16by9">
             <a href="{% url 'webpage:staticpage' template='reconstruct_models' %}"><img class="img-responsive" style="" src="{% static 'webpage/media/reconstruct_3dmodels.jpeg' %}" /></a>
         </div>
-        <br>
         <p style="color: #83C653">The 3d models will be completetd by the mid of October 2017.
         </p>
         <a href="{% url 'webpage:staticpage' template='reconstruct_models' %}" class="btn btn-default">Explore More</a>
@@ -80,7 +76,6 @@
         <div class="embed-responsive embed-responsive-16by9">
             <img class="img-responsive" style="" src="{% static 'webpage/media/reconstruct_3dGis.jpeg' %}" />
         </div>
-        <br>
         <p style="color: #83C653"> The 3d GIS will be completetd by January 2018.
         </p>
         <a href="{% url 'webpage:staticpage' template='reconstruct_models' %}" class="btn btn-default disabled">Explore More</a>
@@ -91,7 +86,6 @@
         <div class="embed-responsive embed-responsive-16by9">
             <a href="{% url 'webpage:staticpage' template='video_td' %}"><img class="img-responsive" style="" src="{% static 'webpage/media/video_td.jpeg' %}" /></a>
         </div>
-        <br>
         <p>This short film leads you through the reconstruction of a large palace-like building that was excavated by the Austrian Archaeological Institute (ÖAI) during the years 1979 till 1989. This reconstruction is based on the field documentation and the finds retrieved from the building. Since only the foundations, floors and a few courses of the walls were preserved from this palace, for the non-preserved parts used in this reconstruction other documentation of Middle Kingdom architecture were used such as wooden house models, preserved architectural element from other excavations as well as wall paintings and reliefs.
         </p>
         <a href="{% url 'webpage:staticpage' template='video_td' %}" class="btn btn-default">Watch now</a>
