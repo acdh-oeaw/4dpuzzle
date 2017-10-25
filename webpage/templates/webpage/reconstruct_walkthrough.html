@@ -11,14 +11,10 @@
     var gameInstance = UnityLoader.instantiate("gameContainer", "{% static 'webpage/ted_viewer_walkthrough/Build/ted_FP_WebGL_08.json' %}", {onProgress: UnityProgress});
   </script>
 
-  <h1>RECONSTRUCTING TD</h1>
+  <h1>Tell el-Daba: Palace Area F/I - Walkthrough</h1>
   <div class="webgl-content">
     <div id="gameContainer" style="width: 960px; height: 600px"></div>
-    <div class="footer">
-      <div class="webgl-logo"></div>
-      <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
-
-    </div>
+      <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)">Fullscreen: <i class="fa fa-arrows-alt" aria-hidden="true" style="cursor:pointer;"></i></div>
   </div>
   <br>
   <a href="{% url 'webpage:staticpage' template='reconstruct' %}">< Back to "Reconstruct TD"</a>
