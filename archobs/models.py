@@ -25,7 +25,6 @@ class Terrain(models.Model):
     refname = models.CharField(blank=True, null=True, max_length=254)
     geom = models.MultiLineStringField(srid=4326)
 
-
 class ArchObject(models.Model):
     name = models.CharField(max_length=300, blank=True)
     object_type = models.ForeignKey(SkosConcept, blank=True, null=True)
@@ -35,7 +34,6 @@ class ArchObject(models.Model):
             return "{} ({})".format(self.name, self.object_type)
         else:
             return "{}".format(self.name)
-
 
 class ExObject(models.Model):
     name = models.CharField(max_length=300, blank=True)
@@ -90,7 +88,6 @@ class Area(models.Model):
 
     def __str__(self):
         return "{}".format(self.name)
-
 
 class SquareTrench(models.Model):
     name = models.CharField(max_length=300, blank=True)

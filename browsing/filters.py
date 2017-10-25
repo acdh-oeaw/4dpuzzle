@@ -59,25 +59,18 @@ class ArchivBaseFilter(django_filters.FilterSet):
 
 
 class FielddrawingListFilter(django_filters.FilterSet):
-
-    area = django_filters.ModelChoiceFilter(queryset=Area.objects.all())
-    square_trence = django_filters.ModelMultipleChoiceFilter(
-        queryset=SquareTrench.objects
-    )
-    planum = django_filters.ModelMultipleChoiceFilter(
-        queryset=Planum.objects
-    )
-
+    #archobject = django_filters.ModelMultipleChoiceFilter(queryset=ArchObject.objects)
     class Meta:
         model = Fielddrawing
-        exclude = ['scan']
+        #exclude = ['scan']
+        fields = ['area', 'square_trence', 'planum','year', 'document_id']
 
 
 class FotoListFilter(django_filters.FilterSet):
-
+    #foto_type = django_filters.ModelMultipleChoiceFilter(queryset=FotoType.objects)
     class Meta:
         model = Foto
-        fields = ['document_id', 'archobject', 'exobject']
+        fields = [ 'film_number','photo_number','foto_type','year']
 
 
 class BrickListFilter(django_filters.FilterSet):
