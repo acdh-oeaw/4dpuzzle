@@ -70,7 +70,7 @@ class FotoListFilter(django_filters.FilterSet):
     #foto_type = django_filters.ModelMultipleChoiceFilter(queryset=FotoType.objects)
     class Meta:
         model = Foto
-        fields = [ 'film_number','photo_number','foto_type','year']
+        fields = [ 'film_number','photo_number','foto_type','year', 'document_id']
 
 
 class BrickListFilter(django_filters.FilterSet):
