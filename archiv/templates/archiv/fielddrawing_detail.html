@@ -31,78 +31,78 @@
         </div>
         <div class="panel-body" style="text-align:center">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <table class="table table-bordered table-hover table-condensed">
                         <tr>
-                            <th>document id</th>
-                            <td>{{ object.document_id }}</td>
+                            <th>document id <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="This is the unique identifier of the document. It consists of abbreviations for site_document type_inventory number."></i></th>
+                            <td>{{ object.document_id}}</td>
                         </tr>
                         <tr>
-                            <th>document type</th>
+                            <th>document type <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Definition of resource type (in this case field drawing)."></i></th>
                             <td>{% for x in object.document_type.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>document subtype</th>
+                            <th>document subtype <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Definition of the contains of the resource (e.g.: Planum, Profil, Detail, Sondage)."></i></th>
                             <td>{% for x in object.document_subtype.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>scan</th>
+                            <th>scan </th>
                             <td>{% for x in object.scan.all %} <a href="{% url 'images:scan_detail' pk=x.id %}">{{ x }}</a> <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>site</th>
+                            <th>site <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Archaeological site (here: Tell el Daba – TD)."></th>
                             <td>{{ object.site }}</td>
                         </tr>
                         <tr>
-                            <th>area</th>
+                            <th>area <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Excavation area e.g.: F-I, A-II, H-III."></i></th>
                             <td>{{ object.area }}</td>
                         </tr>
                         <tr>
-                            <th>square trench</th>
+                            <th>square trench <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Name of the square trench of the excavation area, taken from grid system e.g.: o21, k19."></i></th>
                             <td>{% for x in object.square_trence.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>planum</th>
+                            <th>planum <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Number of the planum (e.g.: Planum1, Planum2)."></i></th>
                             <td>{% for x in object.planum.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>perspective of drawing</th>
+                            <th>perspective of drawing <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Compass direction of drawer."></i></th>
                             <td>{% for x in object.perspective_of_drawing.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>stratum comment</th>
+                            <th>stratum comment <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Exact copy of the stratum commentary on the field drawing."></i></th>
                             <td>{{ object.stratum_commentary }}</td>
                         </tr>
                         <tr>
-                            <th>drawn by</th>
+                            <th>drawn by <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Autor/drawer"></i></th>
                             <td>{% for x in object.drawn_by.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>year</th>
-                            <td>{{ object.year }}</td>
+                            <th>year <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Year of the production of the field drawing."></i></th>
+                            <td>{{ object.year}}</td>
                         </tr>
                         <tr>
-                            <th>season</th>
+                            <th>season <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Season of the production of the field drawing."></i></th>
                             <td>{% for x in object.season.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>month</th>
+                            <th>month <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Month of the production of the field drawing."></i></th>
                             <td>{% for x in object.month.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>scale</th>
+                            <th>scale <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Drawing scale."></i></th>
                             <td>{% for x in object.scale.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>paper type</th>
+                            <th>paper type <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Paper type e.g. graph paper, transparent paper, copy paper."></i></th>
                             <td>{% for x in object.paper_type.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>archaeological object</th>
+                            <th>archaeological object <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Archaeological object ID contains: Abbreviation of site_area_square trench_description of archaeological object."></i></th>
                             <td>{% for x in object.archobject.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>excavation object</th>
+                            <th>excavation object <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Excavation object ID contains: Abbreviation of site_area_square trench_description of excavation object."></i></th>
                             <td>
                                 {% for x in object.exobject.all %}
                                     <a href="{% url 'archobs:exobject-detail' pk=x.id %}">{{ x }}</a> <br/> {% endfor %}</td>
@@ -116,9 +116,13 @@
                         </table>
                     {% endif %}
                 </div>
+                <script>
+                $(document).ready(function(){
+                    $('[data-toggle="tooltip"]').tooltip();
+                });
+                </script>
 
-
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary" id="zoom-in">Zoom In</button>
                         <button type="button" class="btn btn-primary" id="home">Default</button>
