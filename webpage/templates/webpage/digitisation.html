@@ -1,0 +1,92 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block content %}
+<div class="container-planning" style="padding-bottom:150px;">
+    <div class="container">
+    <a href="{% url 'webpage:staticpage' template='archive' %}"> < Back to "Creation of the digital archive "</a>
+		<div class="text-center">
+			<h1>Digitisation of Tell el-Daba resources </h1>
+			<hr style="border-color:#83C653; border-width: 2px" width="10%">
+		</div>
+        <div class="row">
+					<div class="col-md-4">
+            <ul class="images">
+      				<img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/digitisation01.jpeg' %}" originalUrl="{% static 'webpage/media/digitisation01.jpeg' %}" alt="Model of metadata creation."/>
+              <b>Figure 1</b>: Model of metadata creation.
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/image1.png' %}" originalUrl="{% static 'webpage/media/image1.png' %}" alt="Scanning over-sized plans."/>
+              <b>Figure 2</b>: Scanning over-sized plans.
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/digitisation_table1.jpeg' %}" originalUrl="{% static 'webpage/media/digitisation_table1.jpeg' %}" alt="List of analogue and digitised analogue resources with estimated numbers (project midterm). Many digital copies/scans were made before 4DP project and have no metadata records (‘scans/digital objects’)."/>
+              <b>Table 1</b>: List of analogue and digitised analogue resources with estimated numbers (project midterm). Many digital copies/scans were made before 4DP project and have no metadata records (‘scans/digital objects’).
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/digitisation_table2.jpeg' %}" originalUrl="{% static 'webpage/media/digitisation_table2.jpeg' %}" alt="4DP scanning standards."/>
+              <b>Table 2</b>: 4DP scanning standards.
+            </ul>
+        <br />
+				<br />
+
+			</div>
+			<div class="col-md-8">
+				<p>
+          ‘Digitisation’ of Tell el-Daba resources for digital archiving includes:
+        </p>
+        <ol>
+          <li>Digitisation of analogue resources and metadata creation for long-term preservation.</li>
+          <li>Processing of digital objects and metadata creation for long-term preservation.</li>
+        </ol>
+        <p>
+          The first 2,5 years of the project were dedicated to analogue resources. We have developed and tested metadata forms for each analogue resource type and processed a large number of resources (Table 1). This process included a series of corrections and adaptions of forms and data as part of feedback cycles and quality assurance.
+        </p>
+        <p>
+        For the creation of the metadata record for analogue resources we have developed a workflow based on several spreadsheets (MS Excel, <b>Figure 1</b>). There is a separate excel file for each resource type with information about the resources and the scanning process – if an analogue resource was digitised. A metadata master file contains metadata of physical objects such as excavation objects, archaeological objects, finds, bulk finds (convolutes, animal bones, stone registry), locus, stratum/phase. These metadata were collected from the resources describing physical objects. 4DPuzzle identifiers (for archaeological objects and finds without TD inventory numbers) and a list of terms to specify types of archaeological objects (for data entry) are included in the metadata master file and it defines the most important attributes and relationships of physical objects (like “part of” relations of excavation objects or “falls within” relations between archaeological objects and excavation objects). Identifiers for physical objects relate the resource files to the metadata master file.
+        </p>
+        <p>
+        The file names for the digitised resources are created from the unique identifier of a resource and, additionally, a short description of its content (e.g. TD_FZ_1234__TD_F-I_j21_Planum1 tells us that the unique identifier of the resource is TD_FZ_1234 (first part of file name) and that this field drawing (FZ) shows Tell el-Daba area F/I, square j21, Planum 1). It allows information about the contents of the file to be understood by a human being without opening it.
+        </p>
+        <p>
+          <b>Digitisation workflow</b>
+          <ul>
+            <li><b>Scanning of the resource</b>: there are different requirements for different resource types. For example, field drawings of ‘Plana’ (levels) are standardized A3 drawings, which can be digitized quickly by creating a digital copy with the scanner. Field drawings of sections often consist of many different A3 drawings, which have to be stitched together, which is more time consuming. </li>
+            <li><b>Create metadata record for the resources</b>: includes creation of the unique identifier for the resource (see description in WP3) and the scan title (a short description of its content) which automatically creates the filename (see above); entering identifiers of archaeological- and excavation objects, loci and stratum to link the record to them; enter additional metadata for the respective resource and the digitization process (like scale, ppi rate and used hardware);</li>
+            <li>If necessary, create the relevant identifiers in the <b>master metadata table</b>. </li>
+            <li><b>The analogue resource is marked</b> with a pencil to show that it has been scanned (name of person who created the scan and date).</li>
+            <li>The same workflow applies to digital copies of resources. In this case, the last step is to change the filename according to our standards (see above).</li>
+            <li>If necessary (some irregularities were encountered during metadata creation and a decision was made), <b>data logs</b> have to be updated.</li>
+            <li>At the end of each workday, all metadata files are committed to the <b>git-repository</b> (<b>Fig. 1</b>). Additionally, we create backups of all updated files by copying them into a backup folder on our netdrives.</li>
+          </ul>
+        </p>
+        <p>
+          <b>Scanning standards</b>
+        </p>
+        <p>
+          Based on guides of good practice we have developed parameters for scanning analogue resources (ADS, Archaeological Data Service/Digital Antiquity 2017, IANUS, Forschungsdatenzentrum Archäologie und Altertumswissenschaften 2014, table 2.1).
+        </p>
+        <p>
+          There are differences in how the resources are getting digitised. For example, convolutes (sheets of cardboard with pencil drawings of profiles from several pieces of pottery) usually consist of several, up to eight, items, which have to be scanned and then combined to one image. For each image there is only one metadata record. In this case, the scanning is more time-consuming, while creation of metadata is quick. In other cases, it may be the other way round. For example, the recording of metadata of the field drawings is more complicated, as it contains a higher level of detail, in particular if different types of archaeological objects have been documented additionally to the drawing of the archaeological evidence of the respective level. In other cases, analogue resources have already been scanned in Egypt, and we only need to assemble the scans and enter metadata.
+        </p>
+        <p>
+          Oversized drawings and maps were scanned using the Wide Tek 25 A2-scanner at the ÖAW ACDH (<b>Fig. 2</b>) and merged using stitching software and additionally Photoshop (stitching software was too inaccurate).
+        </p>
+        <p>
+          <b>Data management</b>
+        </p>
+        <p>
+          All project data are currently stored on our ÖAW network drive. The digital copies of TD resources will be transferred to the ACDH repository for long-term archiving once available. The ÖAW network drives are maintained with daily backups. After each workday, the current versions of the metadata files are committed to the git repository and, additionally, copies are made in a backup folder on our project network drive. After that, files are converted to RDF and transferred to a triple store provided by the ACDH (Data integration, storage, archiving and open access) and can be queried over the web user interface.
+        </p>
+        <p>
+          Data logs are kept for each type of resource. They contain descriptions of the metadata fields and documentation of all the decisions we have made when encountering irregularities of documentation.
+        </p>
+        <p>
+          The main aims until the end of the project are to:
+          <ol>
+            <li>Develop digitisation workflows for all types of digital and analogue resources and document these workflows, so they can be applied in future digitization work. </li>
+            <li>Complete digitisation of endangered analogue and digital resources (photos from the earlier campaigns, ink-drawn plans on tracing paper, digital objects with outdated file formats).</li>
+          </ol>
+        </p>
+
+			</div>
+
+		</div>
+    </div>
+</div>
+
+{% endblock %}
