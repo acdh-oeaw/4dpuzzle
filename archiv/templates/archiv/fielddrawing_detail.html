@@ -5,6 +5,12 @@
 {% endblock %}
 {% block content %}
 <div class="panel panel-body">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Digital Archive</li>
+    <li class="breadcrumb-item"><a href="{% url 'webpage:staticpage' template='explore' %}">Explore TD resources</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'browsing:browse_fielddrawings' %}">Search all field drawings</a></li>
+    <li class="breadcrumb-item">field drawing {{ object }}</a></li>
+  </ol>
     <div class="panel panel-default procustom-panel-create">
         <div class="panel-heading procustom-panel-heading">
             <div class="row">

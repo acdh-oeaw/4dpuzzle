@@ -21,8 +21,13 @@ $("#goto option").each(function() {
 
 });
 </script>
-
+<div class="container-planning" style="padding-bottom:150px;">
 <div class="container">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Digital Archive</li>
+    <li class="breadcrumb-item"><a href="{% url 'webpage:staticpage' template='explore' %}">Explore TD resources</a></li>
+    <li class="breadcrumb-item">{% block list_breadcrumb %}{% endblock %}</li>
+  </ol>
 <div class="panel panel-default procustom-panel-list">
     <div class="panel-heading procustom-panel-heading">
 
@@ -204,6 +209,7 @@ $("#goto option").each(function() {
   </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 {% block customScripts %}{% endblock %}

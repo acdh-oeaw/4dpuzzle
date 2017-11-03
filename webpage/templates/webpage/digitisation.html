@@ -4,7 +4,11 @@
 {% block content %}
 <div class="container-planning" style="padding-bottom:150px;">
     <div class="container">
-    <a href="{% url 'webpage:staticpage' template='archive' %}"> < Back to "Creation of the digital archive "</a>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">Digital Archive</li>
+        <li class="breadcrumb-item"><a href="{% url 'webpage:staticpage' template='archive' %}">Creation of the digital archive</a></li>
+        <li class="breadcrumb-item">Digitisation</li>
+      </ol>
 		<div class="text-center">
 			<h1>Digitisation of Tell el-Daba resources </h1>
       <h4>(Edeltraud Aspöck, Gerald Hiebel, Martina Simon)</h4>

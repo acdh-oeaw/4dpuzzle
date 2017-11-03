@@ -8,7 +8,13 @@
 <link href='//cdn.jsdelivr.net/g/yasqe@2.2(yasqe.min.css),yasr@2.4(yasr.min.css)' rel='stylesheet' type='text/css'/>
 <script src='//cdn.jsdelivr.net/yasr/2.4/yasr.bundled.min.js'></script>
 <script src='//cdn.jsdelivr.net/yasqe/2.11.10/yasqe.bundled.min.js'></script>
+<div class="container-planning" style="padding-bottom:150px;">
 <div class="container">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Digital Archive</li>
+    <li class="breadcrumb-item"><a href="{% url 'webpage:staticpage' template='explore' %}">Explore TD resources</a></li>
+    <li class="breadcrumb-item">SPARQL</li>
+  </ol>
     <div class="panel panel-default procustom-panel-create">
         <div class="panel-heading procustom-panel-heading">
             <h1 style="text-align: center;">Example-Queries</h1>
@@ -46,6 +52,7 @@
                 </table>
             </div>
         </div>
+</div>
 </div>
 <script>
 var yasqe = YASQE.fromTextArea(document.getElementById('id_query'),{

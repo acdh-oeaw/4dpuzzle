@@ -3,8 +3,13 @@
 {% load webpage_extras %}
 {% block title %} Reconstruct TD {% endblock %}
 {% block content %}
+<div class="container-planning" style="padding-bottom:150px;">
 <div class="container">
-    <h1>RECONSTRUCTING Tell el-Daba</h1>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Tell el-Daba 4D</li>
+    <li class="breadcrumb-item">Reconstructing TD</li>
+  </ol>
+    <h1>Reconstructing Tell el-Daba</h1>
     <h2>Introduction to reconstructions </h2>
     <p>
     The main motivation for the visualisation of the finds of the TD F/I palace is to share and disseminate the current state of knowledge of existing and reconstructed architectural structures and their interpretation. In order to reach a wider public, it was decided to choose a format suitable for the presentation over the internet, which also allows a presentation of the final content on mobile devices as well as cinematic formats providing image sequences which could be used on and offline. So-called ‘3D Real-time Environments’ and ‘walk–through’ allow users to interact with a 3D environment to discover the reconstructed site on their own pace studying the included archaeological information and experiencing architectural spaces from a first-person view.
@@ -87,7 +92,7 @@
         <p style="color: #83C653"> The 3d GIS will be completed January 2018.
         </p>
         <p>
-          The 3D GIS will show a reconstruction of the complex layers of archaeological objects of area F/I, square trench j/12. 
+          The 3D GIS will show a reconstruction of the complex layers of archaeological objects of area F/I, square trench j/12.
         </p>
         <a href="{% url 'webpage:staticpage' template='reconstruct_models' %}" class="btn btn-default disabled">Explore More</a>
       </div>
@@ -104,6 +109,7 @@
       </div>
 
     </div>
+</div>
 </div>
 
 {% endblock %}

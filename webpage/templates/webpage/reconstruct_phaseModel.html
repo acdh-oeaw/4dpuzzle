@@ -3,8 +3,13 @@
 {% load webpage_extras %}
 {% block title %} Reconstruct TD {% endblock %}
 {% block content %}
+<div class="container-planning" style="padding-bottom:150px;">
 <div class="container">
-
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Tell el-Daba 4D</li>
+    <li class="breadcrumb-item"><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstructing TD</a></li>
+    <li class="breadcrumb-item">Phase model</li>
+  </ol>
   <script src="{% static 'webpage/ted_viewer_phaseModel/TemplateData/UnityProgress.js' %}"></script>
   <script src="{% static 'webpage/ted_viewer_phaseModel/Build/UnityLoader.js' %}"></script>
   <script>
@@ -17,7 +22,7 @@
       <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)">Fullscreen: <i class="fa fa-arrows-alt" aria-hidden="true" style="cursor:pointer;"></i></div>
   </div>
   <br>
-  <a href="{% url 'webpage:staticpage' template='reconstruct' %}">< Back to "Reconstruct TD"</a>
+</div>
 </div>
   <br>
 {% endblock %}
