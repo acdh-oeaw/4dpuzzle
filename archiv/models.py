@@ -71,7 +71,7 @@ class Fielddrawing(models.Model):
     )
     document_subtype = models.ManyToManyField(
         SkosConcept, blank=True, related_name="document_subtype",
-        help_text="Definition of the contains of the resource (e.g.: Planum, Profil, Detail, Sondage)"
+        help_text="Content of the resource (e.g.: Planum, Profil, Detail, Sondage)"
     )
     scan = models.ManyToManyField(Scan, blank=True)
     perspective_of_drawing = models.ManyToManyField(
@@ -80,22 +80,22 @@ class Fielddrawing(models.Model):
     )
     stratum_commentary = models.CharField(
         max_length=300, blank=True,
-        help_text="Exact copy of the stratum commentary on the field drawing"
+        help_text="Information about the stratum written on the field drawing"
     )
     drawn_by = models.ManyToManyField(
         Person, blank=True,
         help_text="Autor/drawer"
     )
     year = models.CharField(
-        max_length=300, blank=True, help_text="Year of the production of the field drawing"
+        max_length=300, blank=True, help_text="Year of the creation of the field drawing"
     )
     season = models.ManyToManyField(
         SkosConcept, blank=True, related_name="season",
-        help_text="Season of the production of the field drawing"
+        help_text="Season of the creation of the field drawing"
     )
     month = models.ManyToManyField(
         SkosConcept, blank=True, related_name="month",
-        help_text="Month of the production of the field drawing"
+        help_text="Month of the creation of the field drawing"
     )
     scale = models.ManyToManyField(
         SkosConcept, blank=True, related_name="scale", help_text="Drawing scale"
@@ -123,7 +123,7 @@ class Fielddrawing(models.Model):
     )
     square_trence = models.ManyToManyField(
         SquareTrench, blank=True,
-        help_text="Name of the square trench of the excavation area, taken from grid system e.g.: o21, k19"
+        help_text="Location of the square trench in the excavation grid system e.g.: o21, k19"
     )
     planum = models.ManyToManyField(
         Planum, blank=True, help_text="Number of the planum (e.g.: Planum1, Planum2)"

@@ -1,0 +1,44 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block title %} Reconstruct TD {% endblock %}
+{% block content %}
+<div class="container-planning" style="padding-bottom:150px;">
+<div class="container">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Tell el-Daba 4D</li>
+    <li class="breadcrumb-item">Movies</li>
+  </ol>
+    <h1>Movies</h1>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <h2>Video: Reconstruct Tell el-Daba</h2>
+        <div class="embed-responsive embed-responsive-16by9">
+            <a href="{% url 'webpage:staticpage' template='video_td' %}"><img class="img-responsive" style="" src="{% static 'webpage/media/video_td.jpeg' %}" /></a>
+        </div>
+        <br>
+        <p>This short film leads you through the reconstruction of a large palace-like building that was excavated by the Austrian Archaeological Institute (ÖAI) during the years 1979 till 1989. This reconstruction is based on the field documentation and the finds retrieved from the building. Since only the foundations, floors and a few courses of the walls were preserved from this palace, for the non-preserved parts used in this reconstruction other documentation of Middle Kingdom architecture were used such as wooden house models, preserved architectural element from other excavations as well as wall paintings and reliefs.
+        </p>
+        <a href="{% url 'webpage:staticpage' template='video_td' %}" class="btn btn-default">Watch now</a>
+      </div>
+
+      <div class="col-md-4">
+        <h2>Video: HMC+<br><br></h2>
+        <div class="embed-responsive embed-responsive-16by9">
+          <a href="{% url 'webpage:staticpage' template='video_hmc' %}"><img class="img-responsive" style="" src="{% static 'webpage/media/video_hmc.jpeg' %}" /></a>
+        </div>
+        <br>
+        <p>
+          The program Harris Matrix Composer+ (HMC+)  helps archaeologists with generating the stratigraphic sequence of an archaeological site hand in hand with its digitized field drawings. It was developed on the basis of the program Harris Matrix Composer to deal with the challenges of Tell el-Daba and to be able to connect the stratigraphic sequence with GIS through a plug-in.</p>
+          <p>Each archaeological feature has a unique identifier that is the juncture between GIS and HMC+. With this it is possible to directly examine whether the created stratigraphic sequence corresponds with what was drawn in the field. The phases of an archaeological site are also visualised within HMC+. The researchers can enter the beginning and end date of each archaeological feature to place the feature within its according phase. They get a quick overview of the development of the site and of archaeological features that might not be in direct stratigraphic relation but existed at the same time.</p>
+          <p>By being able to set four grades of confidence in the placement of an archaeological feature within the stratigraphic matrix, researchers have another tool to deal with legacy data like Tell el-Daba where not all stratigraphic relations were recorded at excavation and many relationships have to be reconstructed based on the available documentation.</p>
+        <a href="{% url 'webpage:staticpage' template='video_hmc' %}" class="btn btn-default">Watch Video now</a>
+      </div>
+
+    </div>
+</div>
+</div>
+
+{% endblock %}

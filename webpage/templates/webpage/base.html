@@ -89,19 +89,22 @@
     					<span class="caret"></span></a>
     					<ul class="dropdown-menu">
     						<li><a href="{% url 'webpage:staticpage' template='about' %}">What is "A Puzzle in 4D"?</a></li>
-                <li><a href="{% url 'webpage:staticpage' template='site' %}">Archaeological Site</a></li>
-                <li><a href="{% url 'webpage:staticpage' template='events' %}">Publications & Events</a></li>
-    						<li><a href="https://www.zotero.org/4dpuzzle" target="_blank">Tell el-Daba Bibliography</a></li>
                 <li><a href="{% url 'webpage:staticpage' template='team' %}">Team</a></li>
-
+                <li><a href="{% url 'webpage:staticpage' template='events' %}">Publications & Events</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'webpage:staticpage' template='site' %}">Archaeological Site</a></li>
+                <li><a href="{% url 'webpage:staticpage' template='casestudy' %}">Case Study area F/I square j/21  </a></li>
+                <li><a href="https://www.zotero.org/4dpuzzle" target="_blank">Tell el-Daba Bibliography</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'webpage:staticpage' template='archive' %}">Creation of the digital archive</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'webpage:staticpage' template='ais' %}">Archaeological Information System </a></li>
     					</ul>
     				</li>
             <li class="dropdown">
     					<a class="dropdown-toggle" data-toggle="dropdown" href="#">DIGITAL ARCHIVE
     					<span class="caret"></span></a>
     					<ul class="dropdown-menu">
-                <li><a href="{% url 'webpage:staticpage' template='archive' %}">Creation of the digital archive</a></li>
-                <li role="separator" class="divider"></li>
                 <li><a href="{% url 'webpage:staticpage' template='explore' %}">Explore TD resources </a></li>
     					</ul>
     				</li>
@@ -109,11 +112,10 @@
     					<a class="dropdown-toggle" data-toggle="dropdown" href="#">TELL EL-DABA 4D
     					<span class="caret"></span></a>
     					<ul class="dropdown-menu">
-                <li><a href="{% url 'webpage:staticpage' template='ais' %}">Introduction Archaeological Information System </a></li>
-                <li><a href="{% url 'webpage:staticpage' template='casestudy' %}">Case Study area F/I square j/21  </a></li>
                 <li><a href="{% url 'webpage:staticpage' template='gisstudy' %}">GIS Projects </a></li>
-                <li><a href="{% url 'webpage:staticpage' template='hmc' %}">HMC+ </a></li>
-                <li><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstruct TD</a></li>
+                <!--<li><a href="{% url 'webpage:staticpage' template='hmc' %}">HMC+ </a></li>-->
+                <li><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstructions</a></li>
+                <li><a href="{% url 'webpage:staticpage' template='movies' %}">Movies</a></li>
                 {% if user.is_authenticated %}
                     <li role="separator" class="divider"></li>
                     <li><a href="{% url 'bib:synczotero' %}">Import new Items from Zotero</a></li>

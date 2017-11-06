@@ -40,7 +40,7 @@
                 <div class="col-md-7">
                     <table class="table table-bordered table-hover table-condensed">
                         <tr>
-                            <th>document id <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="This is the unique identifier of the document. It consists of abbreviations for site_document type_inventory number."></i></th>
+                            <th>document id <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="This is the unique identifier of the document. It consists of abbreviations for site_document type_inventory number (e.g.: ‘TD_FZ_1234’ means ‘Tell el-Daba_field drawing _1234’)."></i></th>
                             <td>{{ object.document_id}}</td>
                         </tr>
                         <tr>
@@ -48,7 +48,7 @@
                             <td>{% for x in object.document_type.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>document subtype <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Definition of the contains of the resource (e.g.: Planum, Profil, Detail, Sondage)."></i></th>
+                            <th>document subtype <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Content of the resource (e.g.: Planum, Profil, Detail, Sondage)."></i></th>
                             <td>{% for x in object.document_subtype.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
@@ -64,7 +64,7 @@
                             <td>{{ object.area }}</td>
                         </tr>
                         <tr>
-                            <th>square trench <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Name of the square trench of the excavation area, taken from grid system e.g.: o21, k19."></i></th>
+                            <th>square trench <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Location of the square trench in the excavation grid system e.g.: o21, k19."></i></th>
                             <td>{% for x in object.square_trence.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
@@ -76,7 +76,7 @@
                             <td>{% for x in object.perspective_of_drawing.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>stratum comment <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Exact copy of the stratum commentary on the field drawing."></i></th>
+                            <th>stratum comment <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Information about the stratum written on the field drawing."></i></th>
                             <td>{{ object.stratum_commentary }}</td>
                         </tr>
                         <tr>
@@ -104,11 +104,11 @@
                             <td>{% for x in object.paper_type.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>archaeological object <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Archaeological object ID contains: Abbreviation of site_area_square trench_description of archaeological object."></i></th>
+                            <th>archaeological object <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Archaeological object ID contains: Abbreviation of site_area_square trench_description of archaeological object (e.g.: TD_F-I_o19_Grab1, TD_F-I_o19_Opfergrube4)."></i></th>
                             <td>{% for x in object.archobject.all %} {{ x }} <br/> {% endfor %}</td>
                         </tr>
                         <tr>
-                            <th>excavation object <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Excavation object ID contains: Abbreviation of site_area_square trench_description of excavation object."></i></th>
+                            <th>excavation object <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Excavation object ID contains: Abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1, TD_F-I_o19_Westprofil)."></i></th>
                             <td>
                                 {% for x in object.exobject.all %}
                                     <a href="{% url 'archobs:exobject-detail' pk=x.id %}">{{ x }}</a> <br/> {% endfor %}</td>
