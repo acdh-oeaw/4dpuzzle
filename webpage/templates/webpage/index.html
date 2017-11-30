@@ -16,7 +16,8 @@
 <div class="container-welcome">
     <div class="container">
         <div class="text-center">
-            <h1>A Puzzle in 4D - Tell el-Daba</h1>
+            <div class="row"><h1 style="">A Puzzle in 4D - Tell el-Daba<sup><a data-toggle="modal" href="#myModal"><i class="fa fa-info-circle" style="font-size:20px"aria-hidden="true"></i></a></sup></h1>
+
             <hr style="border-color:#83C653; border-width: 2px" width="10%">
             <p>The project A Puzzle in 4D aims to provide digital long-term preservation for the rich archaeological resources of the Austrian excavation project at Tell el-Daba in Egypt.
             Since 1966, Austrian excavations took place at Tell el-Daba (TD) in Egypt, an archaeological site revealing evidence from a society with contacts to many parts of the eastern Mediterranean dating to the 12th to 18th dynasties (early second millennium BC). After 50 years of fieldwork campaigns, the TD archive at OREA (Austrian Academy of Sciences) contains a huge and heterogeneous resource of digital and non-digital photographs, plans, drawings and written documentation.
@@ -33,7 +34,6 @@
           <div class="col-md-6">
               <p>In the A Puzzle in 4D project we prepare the archaeological resources of the TD excavations for digital long-term preservation and advanced spatio-temporal analysis based on international standards. Large parts of the TD archive will be made available open access online for researchers and the interested public. The project is a case study for the development of a repository for archaeological data at the ÖAW ACDH (Austrian Academy of Sciences, Austrian Center for Digital Humanities).</p>
               <p>On this website you will find information about the work we carry out in the <a href="{% url 'webpage:staticpage' template='about' %}"><i>A Puzzle in 4D project</i></a>. In the <a href="{% url 'webpage:staticpage' template='archive' %}"><i>Tell el-Daba digital archive</i></a> section you will find information on the approach we take to the development of the archive, with regular updates on where we stand at the moment. You can see reconstructions of excavation results on the <a href="{% url 'webpage:staticpage' template='reconstruct' %}"><i>Tell el-Daba 4D</i></a> pages and see how a spatio-temporal analysis of the complex resources can be carried out in an Archaeological-Information system. And, last but not least, you can visit the <a href="{% url 'webpage:staticpage' template='site' %}"><i>archaeological site</i></a> Tell el-Daba, providing information about the excavation results and their interpretation.</p>
-              <br>
           </div>
         </div>
     </div>
@@ -82,5 +82,26 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Avaris</h4>
+      </div>
+      <div class="modal-body">
+        <p>The Arabic name of the ancient town of Avaris is Tell el-Dabca, the hill of the hyaena.</p>
+        <p>Since the name is transcribed from Arabic into Latin letters one can find several versions of the sites name in modern literature. The most common is Tell el-Dabca, one finds also Tell ed-Dabca, Tell el-Dab´a, Tell ed-Dab´a and the simple version, which was used here: <b>Tell el-Daba</b>.</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
