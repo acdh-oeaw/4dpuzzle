@@ -7,6 +7,7 @@ from vocabs.models import *
 from places.models import *
 from archiv.models import Fielddrawing, Foto
 from images.models import Scan
+from vocabs.models import SkosConcept
 # To do: django_filters.MethodFilter are commented because raising errors after version upgrade
 # test and remove if not needed anymore
 
@@ -67,7 +68,9 @@ class FielddrawingListFilter(django_filters.FilterSet):
 
 
 class FotoListFilter(django_filters.FilterSet):
-    #foto_type = django_filters.ModelMultipleChoiceFilter(queryset=FotoType.objects)
+    foto_type = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='foto-type')
+        )
     class Meta:
         model = Foto
         fields = [ 'film_number','photo_number','foto_type','year', 'document_id']
