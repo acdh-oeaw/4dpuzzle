@@ -1,0 +1,23 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block title %} Reconstruct TD {% endblock %}
+{% block content %}
+<div class="container-planning" style="padding-bottom:150px;">
+<div class="container">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Tell el-Daba 4D</li>
+    <li class="breadcrumb-item"><a href="{% url 'webpage:staticpage' template='movies' %}">Movies</a></li>
+    <li class="breadcrumb-item">Video TD</li>
+  </ol>
+  <h1>Virtual reconstructions of tombs and a cellar</h1>
+  <div>
+
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/kaG1Z_xNHoc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+  </div>
+</div>
+</div>
+  <br>
+{% endblock %}
