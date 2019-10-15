@@ -1,50 +1,27 @@
-[![DOI](https://zenodo.org/badge/95352230.svg)](https://zenodo.org/badge/latestdoi/95352230)
+# p4d app
 
-# Django Base Project
+djangobaseproject based app for A Puzzle in 4D
 
-## About
+## what to do
 
-As the name suggests, this is a basic Django project. The idea of this base project is mainly to bootstrap the web application development process through setting up such a Django Base Project which already provides a couple of Django apps providing quite generic functionalities needed for building web application bound to the Digital Humanities Domain.
+* download gsheet [p4d_datamodel](https://docs.google.com/spreadsheets/d/1YlB8YmSyw7Cv9ll_Wkbe-4b4z42kQPMZqP0DE8dwCdc/edit#gid=0)
+* save into data directory
+* run something like
 
-## Install
+```python
 
-1. Download or clone this repository.
-2. Rename the root folder of this project `p4d` and the `p4d` folder in your projects root folder to the name chosen for your new project (e.g. to `mynewproject`).
-3. In all files in the project directory, rename `p4d` to the name chosen for your new project. (Use `Find and Replace All` feature provided by your code editor.)
-4. Adapt the information in `webpage/metadata.py` according to your needs.
-5. Create and activate a virtual environment and run `pip install -r requirements.txt`.
+from webpage.appcreator import creator
 
-## First steps
+file = "data/p4d_datamodel.xlsx"
 
-This project uses modularized settings (to keep sensitive information out of version control or to be able to use the same code for development and production). Therefore you'll have to append a `--settings` parameter pointing to the settings file you'd like to run the code with to all `manage.py` commands.
+dicts = [x for x in creator.xlsx_to_classdicts(file)]
 
-For development just append `--settings={nameOfYouProject}.settings.dev` to the following commands, e.g. `python manage.py makemigrations --settings=p4d.settings.dev`.
+creator.serialize_data_model(dicts, app_name="archiv")
 
-6. Run `makemigrations`, `migrate`, and `runserver` and check [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
+```
 
-### Jupyter notebook
+* create an app called `archiv`:  `python manage.py startapp archiv`
 
-In case you want to use [Jupyter Notebook and Django-Extensions](https://andrewbrookins.com/python/using-ipython-notebook-with-django/) use the `requirements_dev.txt` for your virtual environment.
+copy the content of `output_model.py` (should be created by the script above) into `archiv.models.py`
 
-## Next steps
-
-Build your custom awesome Web App.
-
-## Tests
-
-Install required packages
-
-    pip install -r requirements_test.txt
-
-Run tests
-
-    python manage.py test --settings=p4d.settings.test
-
-After running the test a HTML coverage report will be available at cover/index.html
-
-
-# install packages
-
-`pip install acdh-django-sparql`
-
-see https://github.com/acdh-oeaw/acdh-django-sparql for further install instructions
+* do the same with the remaining function defined in `webpage.appcreator.creator` to create views, urls, tables, filters and forms

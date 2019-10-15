@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'reversion',
     'crispy_forms',
     'django_filters',
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     'browsing',
     'vocabs',
     'infos',
+    'archiv'
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
