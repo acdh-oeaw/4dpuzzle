@@ -4,32 +4,39 @@
 {% block title %}{{ object.name }}{% endblock %}
 {% block content %}
 <!-- <div class="container"> -->
-    <div class="card">
+
+<script type="text/javascript">
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+    <div class="card w-100">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-2">
                     {% if object.get_prev %}
                         <h2>
-                            <a href="{{ object.get_prev }}">
-                                <i data-feather="chevron-left" title="back to listview"></i>
+                            <a href="{{ object.get_prev }}" title="previous">
+                                <i data-feather="chevron-left"></i>
                             </a>
                         </h2>
                     {% endif %}
                 </div>
                 <div class="col-md-8">
                     <h2 style="text-align: center;">
-                        <small><a href="{{ object.get_listview_url }}"><i data-feather="chevron-up" title="back to listview"></i></a></small>
+                        <small><a href="{{ object.get_listview_url }}" title="back to listview"><i data-feather="corner-left-up"></i></a></small>
                         {{ object }}
                         {% if user.is_authenticated %}
                             <small>
-                                <a href="{{ object.get_edit_url }}">
-                                    <i class="feather-32" data-feather="edit" title="edit"></i>
+                                <a href="{{ object.get_edit_url }}" title="edit">
+                                    <i data-feather="edit-3"></i>
                                 </a>
                             </small>
                             |
                             <small>
-                                <a href="{{ object.get_delete_url }}">
-                                    <i class="feather-32" data-feather="trash" title="delete"></i>
+                                <a href="{{ object.get_delete_url }}" title="delete">
+                                    <i data-feather="trash-2"></i>
                                 </a>
                             </small>
                         {% endif %}
@@ -38,8 +45,8 @@
             <div class="col-md-2">
                 <h2>
                     {% if object.get_next %}
-                    <a href="{{ object.get_next }}" style="float:right">
-                        <i data-feather="chevron-right" title="next"></i>
+                    <a href="{{ object.get_next }}" style="float:right" title="next">
+                        <i data-feather="chevron-right"></i>
                     </a>
                 </h2>
                 {% endif %}
@@ -49,19 +56,43 @@
     <div class="card-body">
         {% block custom %}
             <legend>Basic Information</legend>
-            {{ object.field_dict }}
-
-                <table class="table table-bordered table-hover">
-                    {% for key, value in object.field_dict.items %}
+                <table class="table table-responsive table-hover">
+                    {% for x in object.field_dict %}
+                    {% if x.value %}
                         <tr>
                             <th>
-                                {{ key }}
+                                {% if x.help_text %}
+                                    <abbr title="{{ x.help_text }}">{{ x.verbose_name }}</abbr>
+                                {% else %}
+                                    {{ x.verbose_name }}
+                                {% endif %}
                             </th>
                             <td>
-                                {{ value }}
+                                {% if x.f_type == 'M2M' %}
+                                    {% for y in x.value %}
+                                        <li>
+                                            <a href="{{ y.get_absolute_url }}">{{ y.legacy_id }}</a>
+                                        </li>
+                                    {% endfor %}
+                                {% elif  x.f_type == 'FK' %}
+                                    <a href="{{ x.value.get_absolute_url }}">{{ x.value }}</a>
+                                {% elif  x.f_type == 'FK' %}
+                                    <a href="{{ x.value.get_absolute_url }}">{{ x.value }}</a>
+                                {% elif  x.f_type == 'REVRESE_RELATION' %}
+                                    {% for y in x.value %}
+                                        <li>
+                                            <a href="{{ y.get_absolute_url }}">{{ y.legacy_id }}</a>
+                                        </li>
+                                    {% endfor %}
+
+                                {% elif  x.f_type == 'SIMPLE' %}
+                                    {{ x.value }}
+                                {% endif %}
                             </td>
                         </tr>
+                    {% endif %}
                     {% endfor %}
+
                 </table>
             </div>
         {% endblock custom %}

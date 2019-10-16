@@ -33,7 +33,7 @@ class Actor(models.Model):
         verbose_name = "Actors"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -141,7 +141,7 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         verbose_name = "ArchaeologicalObject4DPuzzleID"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -242,7 +242,7 @@ class ArchaeologicalObjectID(models.Model):
         verbose_name = "ArchaeologicalObjectID"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -406,7 +406,7 @@ class ArchiveINF(models.Model):
         verbose_name = "Archive information"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -612,7 +612,7 @@ class AutoCAD(models.Model):
         verbose_name = "AutoCAD"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -671,7 +671,7 @@ class BoneInventoryNumber(models.Model):
         verbose_name = "BoneInventoryNumber"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -730,7 +730,7 @@ class ConvoluteInventoryNumber(models.Model):
         verbose_name = "ConvoluteInventoryNumber"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -954,7 +954,7 @@ class Convolutecards(models.Model):
         verbose_name = "Convolute cards"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1169,7 +1169,7 @@ class Datenbase(models.Model):
         verbose_name = "Database"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1278,7 +1278,7 @@ class Document4DPuzzleID(models.Model):
         verbose_name = "Document 4DPuzzle ID"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1351,7 +1351,7 @@ class DocumentTypes(models.Model):
         verbose_name = "Document types"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1483,7 +1483,7 @@ class ExcavationObjectID(models.Model):
         verbose_name = "Excavation Objects"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1565,7 +1565,7 @@ class ExcavationSeasons(models.Model):
         verbose_name = "Excavation Seasons"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1830,7 +1830,7 @@ class Fielddrawing(models.Model):
         verbose_name = "Fielddrawing"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2004,7 +2004,7 @@ class Film(models.Model):
         verbose_name = "Photographic Film"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2063,7 +2063,7 @@ class Filme(models.Model):
         verbose_name = "Filme"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2122,7 +2122,7 @@ class FindInventoryNumber(models.Model):
         verbose_name = "FindInventoryNumber"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2369,7 +2369,7 @@ class Finddrawing(models.Model):
         verbose_name = "Finddrawing"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2627,7 +2627,7 @@ class Findsheets(models.Model):
         verbose_name = "Findsheets"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2776,7 +2776,7 @@ class Fotoborndigital(models.Model):
         verbose_name = "Fotos born digital"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3047,7 +3047,7 @@ class Fotosgescannt(models.Model):
         verbose_name = "Fotos gescannt"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3170,7 +3170,7 @@ class Fundinventar4DPuzzleID(models.Model):
         verbose_name = "Fundinventar 4DPuzzle ID"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3300,7 +3300,7 @@ class FundinventarInventarnummern(models.Model):
         verbose_name = "Fundinventar Inventarnummern"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3396,7 +3396,7 @@ class FundinventarKonvolutnummern(models.Model):
         verbose_name = "Fundinventar Konvolutnummern"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3521,7 +3521,7 @@ class FundinventarMaterialproben(models.Model):
         verbose_name = "Fundinventar Materialproben"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3642,7 +3642,7 @@ class FundinventarSteininventar(models.Model):
         verbose_name = "FundinventarSteininventar"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3860,7 +3860,7 @@ class GIS(models.Model):
         verbose_name = "GIS"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4082,7 +4082,7 @@ class Geophysics(models.Model):
         verbose_name = "Geophysics"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4310,7 +4310,7 @@ class Inventorybooks(models.Model):
         verbose_name = "Inventory books"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4394,7 +4394,7 @@ class PhasenID(models.Model):
         verbose_name = "Phasen ID"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4630,7 +4630,7 @@ class Protocols(models.Model):
         verbose_name = "Protocols"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4714,7 +4714,7 @@ class StratenID(models.Model):
         verbose_name = "Straten ID"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4773,7 +4773,7 @@ class TDInv4DPuzzleNUMMER(models.Model):
         verbose_name = "TDInv4DPuzzleNUMMER"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4986,7 +4986,7 @@ class Tables(models.Model):
         verbose_name = "Tables"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5196,7 +5196,7 @@ class ThreeDimensionalModel(models.Model):
         verbose_name = "3D models"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5407,7 +5407,7 @@ class Videos(models.Model):
         verbose_name = "Videos"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5613,7 +5613,7 @@ class WallpaintingInventory(models.Model):
         verbose_name = "Freskeninventar"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
