@@ -253,7 +253,7 @@ def model_to_dict(instance):
         try:
             field_dict['extra_fields'] = x.extra
         except AttributeError:
-            field_dict['extra_fields'] = {}
+            field_dict['extra_fields'] = None
         if 'reverse_related' in f_type:
             values = getattr(instance, x.name, None)
             if values is not None:
