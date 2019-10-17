@@ -33,7 +33,32 @@ def xlsx_to_classdicts(file):
             field_name = org_field_name.replace('-', '_').replace('\n', '').replace(' ', '')
             if isinstance(field_name, str) and isinstance(row['field type'], str):
                 field = {}
-                field['field_name'] = field_name
+                # public yes / no
+                try:
+                    field_public = row['public (yes|no)']
+                except KeyError:
+                    field_public = "yes"
+                print(field_public)
+                if field_public is not None and isinstance(field_public, str):
+                    if 'yes' in field_public:
+                        field['field_public'] = True
+                    elif 'no' in field_public:
+                        field['field_public'] = False
+                    else:
+                        field['field_public'] = True
+                else:
+                    field['field_public'] = True
+
+                # public yes / no
+                try:
+                    value_from = row['value from']
+                except KeyError:
+                    value_from = None
+                if value_from is not None and isinstance(field_public, str):
+                    field['value_from'] = value_from
+                else:
+                    field['value_from'] = False
+
                 if ' ' in row['field type'].strip():
                     continue
                 if '|' in row['field type']:

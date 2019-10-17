@@ -9,11 +9,22 @@ from vocabs.models import SkosConcept
 from browsing.browsing_utils import model_to_dict
 
 
+def set_extra(self, **kwargs):
+    self.extra = kwargs
+    return self
+
+
+models.Field.set_extra = set_extra
+
+
 class Actor(models.Model):
     ### Person involved in TD excavations and/or A Puzzle in 4D project ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
-        verbose_name="Legacy ID"
+        verbose_name="Legacy ID",
+        ).set_extra(
+            is_public=True,
+            data_lookup="hasn/4ever/__aser.csv"
         )
     first_name = models.CharField(
         max_length=250,
