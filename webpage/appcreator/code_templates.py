@@ -254,6 +254,14 @@ from vocabs.models import SkosConcept
 
 from browsing.browsing_utils import model_to_dict
 
+
+def set_extra(self, **kwargs):
+    self.extra = kwargs
+    return self
+
+
+models.Field.set_extra = set_extra
+
 {% for x in data %}
 class {{ x.model_name }}(models.Model):
     {% if x.model_helptext %}### {{ x.model_helptext }} ###{% endif %}
@@ -302,6 +310,14 @@ class {{ x.model_name }}(models.Model):
         {%- endif %}
         verbose_name="{{ y.field_verbose_name }}",
         help_text="{{ y.field_helptext }}",
+    ).set_extra(
+        is_public={{ y.field_public }},
+        {%- if y.value_from %}
+        data_lookup="{{ y.value_from }}",
+        {%- endif %}
+        {%- if y.arche_prop %}
+        arche_prop="{{ y.arche_prop }}",
+        {%- endif %}
     )
     {%- endfor %}
 

@@ -33,12 +33,12 @@ def xlsx_to_classdicts(file):
             field_name = org_field_name.replace('-', '_').replace('\n', '').replace(' ', '')
             if isinstance(field_name, str) and isinstance(row['field type'], str):
                 field = {}
+                field['field_name'] = field_name
                 # public yes / no
                 try:
                     field_public = row['public (yes|no)']
                 except KeyError:
                     field_public = "yes"
-                print(field_public)
                 if field_public is not None and isinstance(field_public, str):
                     if 'yes' in field_public:
                         field['field_public'] = True
@@ -49,15 +49,25 @@ def xlsx_to_classdicts(file):
                 else:
                     field['field_public'] = True
 
-                # public yes / no
+                # value from lookup
                 try:
                     value_from = row['value from']
                 except KeyError:
                     value_from = None
-                if value_from is not None and isinstance(field_public, str):
-                    field['value_from'] = value_from
+                if value_from is not None and isinstance(value_from, str):
+                    field['value_from'] = value_from.replace('\n', '').replace(' ', '')
                 else:
                     field['value_from'] = False
+
+                # maps to arche
+                try:
+                    arche_prop = row['maps to ARCHE']
+                except KeyError:
+                    arche_prop = None
+                if arche_prop is not None and isinstance(arche_prop, str):
+                    field['arche_prop'] = arche_prop
+                else:
+                    field['arche_prop'] = False
 
                 if ' ' in row['field type'].strip():
                     continue

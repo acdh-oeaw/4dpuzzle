@@ -43,6 +43,23 @@ def get_help_text(instance, field_name):
         return "No helptext for '{}' provided".format(field_name)
 
 
+@register.simple_tag
+def get_extra_kwargs(instance, field_name):
+    """
+    Returns help_text for a field.
+    inspired by https://stackoverflow.com/questions/14496978/fields-verbose-name-in-templates
+    call in template like e.g.  get_help_text <classname> "<fieldname>"
+    """
+    try:
+        label = instance._meta.get_field(field_name).extra
+    except AttributeError:
+        label = None
+    if label:
+        return label
+    else:
+        return {}
+
+
 @register.inclusion_tag('webpage/tags/social_media.html', takes_context=True)
 def social_media(context):
     """ looks for a 'social_media' key in webpage.py and renders html-tags for each entry """
