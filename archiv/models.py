@@ -15,6 +15,42 @@ class Actor(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    first_name = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="First name",
+        help_text="helptext for first_name",
+    )
+    last_name = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Last name",
+        help_text="helptext for last_name",
+    )
+    drawer_monogram = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Drawer Monogram",
+        help_text="helptext for drawer_monogram",
+    )
+    excavation = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Excavation",
+        help_text="helptext for excavation",
+    )
+    xx_4dpuzzle = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="4DPuzzle",
+        help_text="helptext for xx_4dpuzzle",
+    )
+    year = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Year",
+        help_text="helptext for year",
+    )
     access = models.ForeignKey(
         SkosConcept,
         related_name='rvn_actor_access_skosconcept',
@@ -22,7 +58,7 @@ class Actor(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
 
     class Meta:
@@ -33,7 +69,7 @@ class Actor(models.Model):
         verbose_name = "Actors"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -90,7 +126,13 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
+    )
+    archaeological_object_4dpuzzle_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Archaeological object 4DPuzzle ID",
+        help_text="helptext for archaeological_object_4dpuzzle_id",
     )
     archaeological_object_type = models.ForeignKey(
         SkosConcept,
@@ -99,24 +141,24 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Archaeological object type",
-        help_text="",
+        help_text="helptext for archaeological_object_type",
     )
     archaeological_object_comment = models.TextField(
         blank=True,
         verbose_name="Archaeological object comment",
-        help_text="",
+        help_text="helptext for archaeological_object_comment",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_archaeologicalobject4dpuzzleid_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     position = models.TextField(
         blank=True,
         verbose_name="Position",
-        help_text="",
+        help_text="helptext for position",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -125,12 +167,12 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -141,7 +183,7 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         verbose_name = "ArchaeologicalObject4DPuzzleID"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -191,6 +233,12 @@ class ArchaeologicalObjectID(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    archaeological_object_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Archaeological object ID",
+        help_text="helptext for archaeological_object_id",
+    )
     archaeological_object_type = models.ForeignKey(
         SkosConcept,
         related_name='rvn_archaeologicalobjectid_archaeological_object_type_skosconcept',
@@ -198,26 +246,62 @@ class ArchaeologicalObjectID(models.Model):
         null=True,
         blank=True,
         verbose_name="Archaeological object type",
-        help_text="",
+        help_text="helptext for archaeological_object_type",
     )
     archaeological_object_comment = models.TextField(
         blank=True,
         verbose_name="Archaeological object comment",
-        help_text="",
+        help_text="helptext for archaeological_object_comment",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_archaeologicalobjectid_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
+    )
+    position = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Position",
+        help_text="helptext for position",
+    )
+    stratum_id_relative = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Stratum ID relative",
+        help_text="helptext for stratum_id_relative",
+    )
+    stratum_id_absolute_prepub = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Stratum ID absolute pre publication",
+        help_text="helptext for stratum_id_absolute_prepub",
+    )
+    stratum_comment = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Stratum comment",
+        help_text="helptext for stratum_comment",
+    )
+    phase_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Phase ID",
+        help_text="helptext for phase_id",
     )
     corresponding_to_archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
         related_name='rvn_archaeologicalobjectid_corresponding_to_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Corresponding to archaeological object ID",
-        help_text="",
+        help_text="helptext for corresponding_to_archaeological_object_id",
+    )
+    relatedto = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -226,12 +310,12 @@ class ArchaeologicalObjectID(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -242,7 +326,7 @@ class ArchaeologicalObjectID(models.Model):
         verbose_name = "ArchaeologicalObjectID"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -292,6 +376,24 @@ class ArchiveINF(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID ",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_archiveinf_document_type_documenttypes',
@@ -299,7 +401,7 @@ class ArchiveINF(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -308,7 +410,7 @@ class ArchiveINF(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     relatedto = models.ForeignKey(
         "DocumentTypes",
@@ -317,12 +419,18 @@ class ArchiveINF(models.Model):
         null=True,
         blank=True,
         verbose_name="File is related to other TD resources",
-        help_text="",
+        help_text="helptext for relatedto",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year original",
+        help_text="helptext for creation_year_original",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date archival object",
-        help_text="",
+        help_text="helptext for creation_date_archivalobject",
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
@@ -331,12 +439,12 @@ class ArchiveINF(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of archival object",
-        help_text="",
+        help_text="helptext for file_extension_archivalobject",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -345,7 +453,7 @@ class ArchiveINF(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -354,7 +462,7 @@ class ArchiveINF(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -363,7 +471,7 @@ class ArchiveINF(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -372,7 +480,7 @@ class ArchiveINF(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -381,7 +489,7 @@ class ArchiveINF(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -390,12 +498,12 @@ class ArchiveINF(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of archival object",
-        help_text="",
+        help_text="helptext for creator_archivalobject",
     )
     comment = models.TextField(
         blank=True,
         verbose_name="Comment",
-        help_text="",
+        help_text="helptext for comment",
     )
 
     class Meta:
@@ -406,7 +514,7 @@ class ArchiveINF(models.Model):
         verbose_name = "Archive information"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -456,6 +564,36 @@ class AutoCAD(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
+    path_filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in old TD archive",
+        help_text="helptext for path_filename_old",
+    )
+    path_filename_arche = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in ARCHE",
+        help_text="helptext for path_filename_arche",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_autocad_document_type_documenttypes',
@@ -463,7 +601,7 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -472,26 +610,32 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     document_subtype = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_autocad_document_subtype_documenttypes',
         blank=True,
         verbose_name="Doucment subtype",
-        help_text="",
+        help_text="helptext for document_subtype",
     )
     dst_abbr = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_autocad_dst_abbr_documenttypes',
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="",
+        help_text="helptext for dst_abbr",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year original",
+        help_text="helptext for creation_year_original",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
         verbose_name="Creation year archival object",
-        help_text="",
+        help_text="helptext for creation_date_archivalobject",
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
@@ -500,7 +644,7 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of original",
-        help_text="",
+        help_text="helptext for file_extension_original",
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
@@ -509,12 +653,12 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of archival object",
-        help_text="",
+        help_text="helptext for file_extension_archivalobject",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -523,7 +667,7 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -532,7 +676,7 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -541,7 +685,7 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -550,7 +694,7 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -559,7 +703,7 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -568,21 +712,27 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of archival object",
-        help_text="",
+        help_text="helptext for creator_archivalobject",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_autocad_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
         related_name='rvn_autocad_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
+    )
+    relatedto = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -591,17 +741,17 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)Whether it was created during excavation or after",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -612,7 +762,7 @@ class AutoCAD(models.Model):
         verbose_name = "AutoCAD"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -662,6 +812,12 @@ class BoneInventoryNumber(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    boneinventorynumber_f = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="BoneInventoryNumber_f",
+        help_text="helptext for boneinventorynumber_f",
+    )
 
     class Meta:
 
@@ -671,7 +827,7 @@ class BoneInventoryNumber(models.Model):
         verbose_name = "BoneInventoryNumber"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -721,6 +877,12 @@ class ConvoluteInventoryNumber(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    convoluteinventorynumber_f = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="ConvoluteInventoryNumber_f",
+        help_text="helptext for convoluteinventorynumber_f",
+    )
 
     class Meta:
 
@@ -730,7 +892,7 @@ class ConvoluteInventoryNumber(models.Model):
         verbose_name = "ConvoluteInventoryNumber"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -780,6 +942,30 @@ class Convolutecards(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename_document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename ",
+        help_text="helptext for filename_document_id",
+    )
+    convolute_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID ",
+        help_text="helptext for convolute_inventory_number",
+    )
+    convolute_subnumber = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Convolute subnumber",
+        help_text="helptext for convolute_subnumber",
+    )
+    filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename old",
+        help_text="helptext for filename_old",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_convolutecards_document_type_documenttypes',
@@ -787,7 +973,7 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -796,12 +982,12 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
-        help_text="",
+        help_text="helptext for creation_date_original",
     )
     creation_year_original = models.ForeignKey(
         "ExcavationSeasons",
@@ -810,12 +996,12 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Creation year of original document",
-        help_text="",
+        help_text="helptext for creation_year_original",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of scan",
-        help_text="",
+        help_text="helptext for creation_date_scan",
     )
     file_extension = models.ForeignKey(
         SkosConcept,
@@ -824,12 +1010,12 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension",
-        help_text="",
+        help_text="helptext for file_extension",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -838,7 +1024,7 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -847,7 +1033,7 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original document",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -856,7 +1042,7 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -865,7 +1051,13 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
+    )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage folder of original document",
+        help_text="helptext for storage_folder_original",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -874,7 +1066,7 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
@@ -883,7 +1075,7 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Equipment for scan",
-        help_text="",
+        help_text="helptext for equipment_scan",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
@@ -892,12 +1084,12 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Wheter source is a original or a copy",
-        help_text="",
+        help_text="helptext for source_original_copy_edited_copy",
     )
     resolution_scan_dpi = models.IntegerField(
         blank=True, null=True,
         verbose_name="Scan resolution",
-        help_text="",
+        help_text="helptext for resolution_scan_dpi",
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -906,7 +1098,7 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of scan",
-        help_text="",
+        help_text="helptext for creator_scan",
     )
     original_material = models.ForeignKey(
         SkosConcept,
@@ -915,7 +1107,7 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Material of original document",
-        help_text="",
+        help_text="helptext for original_material",
     )
     season = models.ForeignKey(
         "ExcavationSeasons",
@@ -924,7 +1116,31 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Season",
-        help_text="",
+        help_text="helptext for season",
+    )
+    month = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Month",
+        help_text="helptext for month",
+    )
+    position = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Position",
+        help_text="helptext for position",
+    )
+    lowest_height_meters_standard_elevation_zero = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="provide some",
+        help_text="helptext for lowest_height_meters_standard_elevation_zero",
+    )
+    maximum_height_meters_standard_elevation_zero = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="provide some",
+        help_text="helptext for maximum_height_meters_standard_elevation_zero",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -933,17 +1149,17 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -954,7 +1170,7 @@ class Convolutecards(models.Model):
         verbose_name = "Convolute cards"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1004,6 +1220,24 @@ class Datenbase(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_datenbase_document_type_documenttypes',
@@ -1011,7 +1245,7 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -1020,26 +1254,32 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     document_subtype = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_datenbase_document_subtype_documenttypes',
         blank=True,
         verbose_name="Doucment subtype",
-        help_text="",
+        help_text="helptext for document_subtype",
     )
     dst_abbr = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_datenbase_dst_abbr_documenttypes',
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="",
+        help_text="helptext for dst_abbr",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year original",
+        help_text="helptext for creation_year_original",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
         verbose_name="Creation year archival object",
-        help_text="",
+        help_text="helptext for creation_date_archivalobject",
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
@@ -1048,7 +1288,7 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of original",
-        help_text="",
+        help_text="helptext for file_extension_original",
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
@@ -1057,12 +1297,12 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of archival object",
-        help_text="",
+        help_text="helptext for file_extension_archivalobject",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -1071,7 +1311,7 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -1080,7 +1320,7 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -1089,7 +1329,7 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -1098,7 +1338,19 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
+    )
+    path_filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in old TD archive",
+        help_text="helptext for path_filename_old",
+    )
+    path_filename_arche = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in ARCHE",
+        help_text="helptext for path_filename_arche",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -1107,7 +1359,7 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -1116,21 +1368,27 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of archival object",
-        help_text="",
+        help_text="helptext for creator_archivalobject",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_datenbase_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
         related_name='rvn_datenbase_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
+    )
+    relatedto = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
     )
     find_material = models.ForeignKey(
         SkosConcept,
@@ -1139,7 +1397,7 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Find material",
-        help_text="",
+        help_text="helptext for find_material",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -1148,17 +1406,17 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)Whether it was created during excavation or after",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -1169,7 +1427,7 @@ class Datenbase(models.Model):
         verbose_name = "Database"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1219,6 +1477,24 @@ class Document4DPuzzleID(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename ",
+        help_text="helptext for document_id",
+    )
+    original_4dpuzzle_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID ",
+        help_text="helptext for original_4dpuzzle_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_document4dpuzzleid_document_type_documenttypes',
@@ -1226,7 +1502,7 @@ class Document4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -1235,7 +1511,7 @@ class Document4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     document_subtype = models.ForeignKey(
         "DocumentTypes",
@@ -1244,7 +1520,7 @@ class Document4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Document subtype",
-        help_text="",
+        help_text="helptext for document_subtype",
     )
     dst_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -1253,7 +1529,7 @@ class Document4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="",
+        help_text="helptext for dst_abbr",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -1262,12 +1538,18 @@ class Document4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
+    )
+    corresponding_to = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="corresponding_to",
+        help_text="helptext for corresponding_to",
     )
 
     class Meta:
@@ -1278,7 +1560,7 @@ class Document4DPuzzleID(models.Model):
         verbose_name = "Document 4DPuzzle ID"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1328,6 +1610,30 @@ class DocumentTypes(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    document_type = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document type",
+        help_text="Type of document.",
+    )
+    dt_abbr = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document type abbreviated",
+        help_text="Abbreviation of the document.",
+    )
+    document_subtype = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document Subtype",
+        help_text="Subtype of a document. ",
+    )
+    ds_abbr = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document subtype abbreviated",
+        help_text="Abbreviation of the document subtype.",
+    )
     analogue_borndigital = models.ForeignKey(
         SkosConcept,
         related_name='rvn_documenttypes_analogue_borndigital_skosconcept',
@@ -1351,7 +1657,7 @@ class DocumentTypes(models.Model):
         verbose_name = "Document types"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1401,6 +1707,12 @@ class ExcavationObjectID(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    excavation_object_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Identifier of Excavation Object",
+        help_text="Identifier of an excavation object (excavation objects are objects that were created during excavation). Consists of Site_area_square_TypeOfObject, for example TD_A-II_l17_Planum1.",
+    )
     excavation_object_type = models.ForeignKey(
         SkosConcept,
         related_name='rvn_excavationobjectid_excavation_object_type_skosconcept',
@@ -1446,6 +1758,12 @@ class ExcavationObjectID(models.Model):
         verbose_name="Planum",
         help_text="Excavations were carried out in spits and a �planum� is an excavation surface. ",
     )
+    profile_orientation = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Orientation of a profile",
+        help_text="The orientation of a profile.",
+    )
     year = models.ManyToManyField(
         "ExcavationSeasons",
         related_name='rvn_excavationobjectid_year_excavationseasons',
@@ -1483,7 +1801,7 @@ class ExcavationObjectID(models.Model):
         verbose_name = "Excavation Objects"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1533,10 +1851,16 @@ class ExcavationSeasons(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    grabungskampagnen = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Excavations Seasons",
+        help_text="helptext for grabungskampagnen",
+    )
     start_date_end_date = DateRangeField(
         blank=True, null=True,
         verbose_name="Start date - end date",
-        help_text="",
+        help_text="helptext for start_date_end_date",
     )
     season = models.ForeignKey(
         SkosConcept,
@@ -1545,7 +1869,13 @@ class ExcavationSeasons(models.Model):
         null=True,
         blank=True,
         verbose_name="Season",
-        help_text="",
+        help_text="helptext for season",
+    )
+    year = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Year",
+        help_text="helptext for year",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -1554,7 +1884,7 @@ class ExcavationSeasons(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
 
     class Meta:
@@ -1565,7 +1895,7 @@ class ExcavationSeasons(models.Model):
         verbose_name = "Excavation Seasons"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1615,6 +1945,24 @@ class Fielddrawing(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename",
+        help_text="Consists of document_ID and document_title, separated by two underscores. For example file name �TD_FZ_1234__TD_F-I_j21_Planum1� consists of the document_ID �TD_FZ_1234� which is separated by two underscores from the document title describing the contents of the document �TD(Tell el-Daba)_F/I(area)_j21(square)_ Planum 1�.",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID",
+        help_text="The project-specific unique identifier of the document which was scanned. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (FZ for Feldzeichnung) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234). For example document ID �TD_FZ_1234� means �Tell el-Daba_field drawing_inventory number 1234�).",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. For field drawings the document title consists of abbreviation for site_excavation area_square trench_content of field drawing (e.g.: TD_F-I_j21_Planum1).",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_fielddrawing_document_type_documenttypes',
@@ -1712,6 +2060,12 @@ class Fielddrawing(models.Model):
         verbose_name="Access",
         help_text="Access is either restricted or open to the public.",
     )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Title of the folder where the original fielddrawing is kept",
+        help_text="The text on the label of the folder in the analogue TD archive, where the original is held.",
+    )
     site_id = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fielddrawing_site_id_skosconcept',
@@ -1760,12 +2114,30 @@ class Fielddrawing(models.Model):
         verbose_name="Material of original document",
         help_text="Material of original (Millimetrepaper (Millimeterpapier), Transparentpapier (tracing paper), Kopierpapier (photocopy)).",
     )
+    original_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Inventory number of original",
+        help_text="Inventory number of the original. An inventory number was given to each field drawing during the excavations. The inventory number is part of the unique identifier of the field drawing. If a field drawing did not have an inventory number, or there was an error with the inventory number, then a new inventory number consisting of the project name �4DPuzzle� and a running number was created, e.g.: 4DPuzzle1234). The list of the new inventory numbers is kept in the Excel file �Metadaten.xlsl�, worksheet  �Resource_4DPuzzle_number�).",
+    )
+    find_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Inventory number of a find drawn on the fielddrawing",
+        help_text="Inventory number of a find which is shown on the fielddrawing.",
+    )
     amendment_drawn_by = models.ManyToManyField(
         "Actor",
         related_name='rvn_fielddrawing_amendment_drawn_by_actor',
         blank=True,
         verbose_name="Drawer of amendment to the fielddrawing",
         help_text="Person who made amendments to the field drawing.",
+    )
+    amendment_data = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Amendment date",
+        help_text="Date when the amendment was made.",
     )
     drawer_monogram = models.ManyToManyField(
         "Actor",
@@ -1788,6 +2160,18 @@ class Fielddrawing(models.Model):
         verbose_name="Archaeological object ID",
         help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
     )
+    stratum_id_relative = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Stratum (relative)",
+        help_text="Unique identifier of a relative stratum. Relative stratum is a group of stratigraphic units which are thought to belong to a chronological phase (the ID contains: abbreviation of site_excavation area_relative stratum e.g.: TD_F-I_a is the ID of stratum a in area F-I in Tell el-Daba).",
+    )
+    stratum_id_absolute_prepub = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Stratum (absolute)",
+        help_text="Unique identifier of an absolute stratum. An absolute stratum is a group of stratigraphic units which were confirmed to belong to a chronological phase during post-excavation analysis but before publication (the ID contains: abbreviation of site_excavation area_absolute stratum e.g.: TD_F-I_A is the ID of the absolute stratum A in area F-I in Tell el-Daba). ",
+    )
     stratum_comment = models.TextField(
         blank=True,
         verbose_name="Stratum (comment)",
@@ -1801,6 +2185,18 @@ class Fielddrawing(models.Model):
         blank=True,
         verbose_name="Fieldwork season",
         help_text="Fieldwork season when the field drawing was made (H = Herbst = autumn; F = Fr�hling = spring).",
+    )
+    month = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Fieldwork month",
+        help_text="Month when the field drawing was made.",
+    )
+    scale = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Scale of drawing",
+        help_text="Drawing scale of the field drawing.",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -1830,7 +2226,7 @@ class Fielddrawing(models.Model):
         verbose_name = "Fielddrawing"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1880,6 +2276,12 @@ class Film(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    film_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Film ID",
+        help_text="helptext for film_id",
+    )
     creation_year_original = models.ForeignKey(
         "ExcavationSeasons",
         related_name='rvn_film_creation_year_original_excavationseasons',
@@ -1887,12 +2289,18 @@ class Film(models.Model):
         null=True,
         blank=True,
         verbose_name="Creation year original",
-        help_text="",
+        help_text="helptext for creation_year_original",
     )
     film_number = models.IntegerField(
         blank=True, null=True,
         verbose_name="Film number",
-        help_text="",
+        help_text="helptext for film_number",
+    )
+    addition_film_identifier = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Addition film identifier",
+        help_text="helptext for addition_film_identifier",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -1901,7 +2309,7 @@ class Film(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -1910,7 +2318,7 @@ class Film(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     document_subtype = models.ForeignKey(
         "DocumentTypes",
@@ -1919,7 +2327,7 @@ class Film(models.Model):
         null=True,
         blank=True,
         verbose_name="Document subtype",
-        help_text="",
+        help_text="helptext for document_subtype",
     )
     dst_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -1928,12 +2336,12 @@ class Film(models.Model):
         null=True,
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="",
+        help_text="helptext for dst_abbr",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -1942,7 +2350,19 @@ class Film(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
+    )
+    contact_print_present = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Contact print present",
+        help_text="helptext for contact_print_present",
+    )
+    enlargements_present = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Enlargements presten",
+        help_text="helptext for enlargements_present",
     )
     film_format = models.ForeignKey(
         SkosConcept,
@@ -1951,7 +2371,7 @@ class Film(models.Model):
         null=True,
         blank=True,
         verbose_name="Film format",
-        help_text="",
+        help_text="helptext for film_format",
     )
     film_brand = models.ForeignKey(
         SkosConcept,
@@ -1960,7 +2380,7 @@ class Film(models.Model):
         null=True,
         blank=True,
         verbose_name="Film brand",
-        help_text="",
+        help_text="helptext for film_brand",
     )
     equipment_camera_brand = models.ForeignKey(
         SkosConcept,
@@ -1969,12 +2389,24 @@ class Film(models.Model):
         null=True,
         blank=True,
         verbose_name="Equipment camera brand",
-        help_text="",
+        help_text="helptext for equipment_camera_brand",
+    )
+    foto_numbers_missing = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Foto numbers missing",
+        help_text="helptext for foto_numbers_missing",
     )
     decomposition_phenomenon = models.TextField(
         blank=True,
         verbose_name="Decomposition phenomenon",
-        help_text="",
+        help_text="helptext for decomposition_phenomenon",
+    )
+    acetic_acid_smell = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Acetic acid smell",
+        help_text="helptext for acetic_acid_smell",
     )
     original_material = models.ForeignKey(
         SkosConcept,
@@ -1983,17 +2415,18 @@ class Film(models.Model):
         null=True,
         blank=True,
         verbose_name="Material of original document",
-        help_text="",
+        help_text="helptext for original_material",
+    )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage folder original",
+        help_text="helptext for storage_folder_original",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for original_comment",
     )
 
     class Meta:
@@ -2004,7 +2437,7 @@ class Film(models.Model):
         verbose_name = "Photographic Film"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2054,6 +2487,12 @@ class Filme(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filme_f = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filme_f",
+        help_text="helptext for filme_f",
+    )
 
     class Meta:
 
@@ -2063,7 +2502,7 @@ class Filme(models.Model):
         verbose_name = "Filme"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2113,6 +2552,12 @@ class FindInventoryNumber(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    findinventorynumber_f = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="FindInventoryNumber_f",
+        help_text="helptext for findinventorynumber_f",
+    )
 
     class Meta:
 
@@ -2122,7 +2567,7 @@ class FindInventoryNumber(models.Model):
         verbose_name = "FindInventoryNumber"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2172,6 +2617,30 @@ class Finddrawing(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename ",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID ",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
+    filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename old",
+        help_text="helptext for filename_old",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_finddrawing_document_type_documenttypes',
@@ -2179,7 +2648,7 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -2188,7 +2657,7 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     document_subtype = models.ForeignKey(
         "DocumentTypes",
@@ -2197,7 +2666,7 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Document subtype",
-        help_text="",
+        help_text="helptext for document_subtype",
     )
     dst_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -2206,17 +2675,23 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="",
+        help_text="helptext for dst_abbr",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
-        help_text="",
+        help_text="helptext for creation_date_original",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year of original document",
+        help_text="helptext for creation_year_original",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of scan",
-        help_text="",
+        help_text="helptext for creation_date_scan",
     )
     file_extension = models.ForeignKey(
         SkosConcept,
@@ -2225,12 +2700,12 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension ",
-        help_text="",
+        help_text="helptext for file_extension",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -2239,7 +2714,7 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -2248,7 +2723,7 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original document",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -2257,7 +2732,7 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -2266,7 +2741,13 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
+    )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage folder of original document",
+        help_text="helptext for storage_folder_original",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -2275,7 +2756,13 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
+    )
+    equipment = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Equiment",
+        help_text="helptext for equipment",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
@@ -2284,12 +2771,12 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Wheter source is a original or a copy",
-        help_text="",
+        help_text="helptext for source_original_copy_edited_copy",
     )
     resolution_scan_dpi = models.IntegerField(
         blank=True, null=True,
         verbose_name="Scan resolution",
-        help_text="",
+        help_text="helptext for resolution_scan_dpi",
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -2298,7 +2785,7 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of scan",
-        help_text="",
+        help_text="helptext for creator_scan",
     )
     original_material = models.ForeignKey(
         SkosConcept,
@@ -2307,7 +2794,7 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Material of original document",
-        help_text="",
+        help_text="helptext for original_material",
     )
     find_inventory_number = models.ForeignKey(
         "FindInventoryNumber",
@@ -2316,7 +2803,7 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Find inventory number",
-        help_text="",
+        help_text="helptext for find_inventory_number",
     )
     convolute_inventory_number = models.ForeignKey(
         "ConvoluteInventoryNumber",
@@ -2325,7 +2812,7 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Convolute inventory number",
-        help_text="",
+        help_text="helptext for convolute_inventory_number",
     )
     bone_stone_inventory_number = models.ForeignKey(
         "BoneInventoryNumber",
@@ -2334,12 +2821,18 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Bone or stone inventory number",
-        help_text="",
+        help_text="helptext for bone_stone_inventory_number",
     )
     find_date = models.DateField(
         blank=True, null=True,
         verbose_name="Find datum",
-        help_text="",
+        help_text="helptext for find_date",
+    )
+    rendered_in_ink = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Rendered in ink",
+        help_text="helptext for rendered_in_ink",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -2348,17 +2841,17 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -2369,7 +2862,7 @@ class Finddrawing(models.Model):
         verbose_name = "Finddrawing"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2419,6 +2912,30 @@ class Findsheets(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename ",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID ",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
+    filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename old",
+        help_text="helptext for filename_old",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_findsheets_document_type_documenttypes',
@@ -2426,7 +2943,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -2435,17 +2952,23 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
-        help_text="",
+        help_text="helptext for creation_date_original",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year of original document",
+        help_text="helptext for creation_year_original",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of scan",
-        help_text="",
+        help_text="helptext for creation_date_scan",
     )
     file_extension = models.ForeignKey(
         SkosConcept,
@@ -2454,12 +2977,12 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension ",
-        help_text="",
+        help_text="helptext for file_extension",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -2468,7 +2991,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -2477,7 +3000,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original document",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -2486,7 +3009,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -2495,7 +3018,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
     storage_original = models.ForeignKey(
         SkosConcept,
@@ -2504,7 +3027,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Storage of original document",
-        help_text="",
+        help_text="helptext for storage_original",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -2513,7 +3036,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
@@ -2522,7 +3045,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Equipment for scan",
-        help_text="",
+        help_text="helptext for equipment_scan",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
@@ -2531,12 +3054,12 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Wheter source is a original or a copy",
-        help_text="",
+        help_text="helptext for source_original_copy_edited_copy",
     )
     resolution_scan_dpi = models.IntegerField(
         blank=True, null=True,
         verbose_name="Scan resolution",
-        help_text="",
+        help_text="helptext for resolution_scan_dpi",
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -2545,7 +3068,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of scan",
-        help_text="",
+        help_text="helptext for creator_scan",
     )
     original_material = models.ForeignKey(
         SkosConcept,
@@ -2554,7 +3077,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Material of original document",
-        help_text="",
+        help_text="helptext for original_material",
     )
     find_inventory_number = models.ForeignKey(
         "FindInventoryNumber",
@@ -2563,7 +3086,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Find inventory number",
-        help_text="",
+        help_text="helptext for find_inventory_number",
     )
     convolute_inventory_number = models.ForeignKey(
         "ConvoluteInventoryNumber",
@@ -2572,7 +3095,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Convolute inventory number",
-        help_text="",
+        help_text="helptext for convolute_inventory_number",
     )
     bone_stone_inventory_number = models.ForeignKey(
         "BoneInventoryNumber",
@@ -2581,14 +3104,14 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Bone or stone inventory number",
-        help_text="",
+        help_text="helptext for bone_stone_inventory_number",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_findsheets_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ForeignKey(
         "ArchaeologicalObjectID",
@@ -2597,7 +3120,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -2606,17 +3129,17 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -2627,7 +3150,7 @@ class Findsheets(models.Model):
         verbose_name = "Findsheets"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2677,6 +3200,42 @@ class Fotoborndigital(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    folder_name = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Folder name",
+        help_text="helptext for folder_name",
+    )
+    folder_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Folder ID",
+        help_text="helptext for folder_id",
+    )
+    folder_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Folder title",
+        help_text="helptext for folder_title",
+    )
+    folder_name_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Old folder name",
+        help_text="helptext for folder_name_old",
+    )
+    path_filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in old TD archive",
+        help_text="helptext for path_filename_old",
+    )
+    path_filename_arche = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in ARCHE",
+        help_text="helptext for path_filename_arche",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_fotoborndigital_document_type_documenttypes',
@@ -2684,7 +3243,7 @@ class Fotoborndigital(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -2693,26 +3252,26 @@ class Fotoborndigital(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     document_subtype = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_fotoborndigital_document_subtype_documenttypes',
         blank=True,
         verbose_name="Document subtype",
-        help_text="",
+        help_text="helptext for document_subtype",
     )
     dst_abbr = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_fotoborndigital_dst_abbr_documenttypes',
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="",
+        help_text="helptext for dst_abbr",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -2721,7 +3280,7 @@ class Fotoborndigital(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -2730,7 +3289,7 @@ class Fotoborndigital(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -2739,7 +3298,7 @@ class Fotoborndigital(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -2748,24 +3307,36 @@ class Fotoborndigital(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
+    )
+    find_inventory_number_from_to = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Inventory number of a find ",
+        help_text="helptext for find_inventory_number_from_to",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_fotoborndigital_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year original",
+        help_text="helptext for creation_year_original",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -2776,7 +3347,7 @@ class Fotoborndigital(models.Model):
         verbose_name = "Fotos born digital"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2826,15 +3397,39 @@ class Fotosgescannt(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
+    filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename old ",
+        help_text="helptext for filename_old",
+    )
     film_number = models.IntegerField(
         blank=True, null=True,
         verbose_name="Film number",
-        help_text="",
+        help_text="helptext for film_number",
     )
     photo_number = models.IntegerField(
         blank=True, null=True,
         verbose_name="Photo number",
-        help_text="",
+        help_text="helptext for photo_number",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -2843,7 +3438,7 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -2852,31 +3447,37 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     document_subtype = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_fotosgescannt_document_subtype_documenttypes',
         blank=True,
         verbose_name="Document subtype",
-        help_text="",
+        help_text="helptext for document_subtype",
     )
     dst_abbreviation = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_fotosgescannt_dst_abbreviation_documenttypes',
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="",
+        help_text="helptext for dst_abbreviation",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
-        help_text="",
+        help_text="helptext for creation_date_original",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year of original document",
+        help_text="helptext for creation_year_original",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of scan",
-        help_text="",
+        help_text="helptext for creation_date_scan",
     )
     file_extension = models.ForeignKey(
         SkosConcept,
@@ -2885,12 +3486,12 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension",
-        help_text="",
+        help_text="helptext for file_extension",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -2899,7 +3500,7 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -2908,7 +3509,7 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -2917,7 +3518,7 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -2926,7 +3527,7 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -2935,7 +3536,7 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
@@ -2944,7 +3545,7 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Equipment for scan",
-        help_text="",
+        help_text="helptext for equipment_scan",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
@@ -2953,12 +3554,12 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Wheter source is a original or a copy",
-        help_text="",
+        help_text="helptext for source_original_copy_edited_copy",
     )
     resolution_scan_ppi = models.IntegerField(
         blank=True, null=True,
         verbose_name="Resolution of scan",
-        help_text="",
+        help_text="helptext for resolution_scan_ppi",
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -2967,7 +3568,13 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of scan",
-        help_text="",
+        help_text="helptext for creator_scan",
+    )
+    pixel_size = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Pixel size",
+        help_text="helptext for pixel_size",
     )
     film_id = models.ForeignKey(
         "Filme",
@@ -2976,21 +3583,27 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Film ID",
-        help_text="",
+        help_text="helptext for film_id",
+    )
+    find_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Find inventor number",
+        help_text="helptext for find_inventory_number",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_fotosgescannt_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
         related_name='rvn_fotosgescannt_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
     )
     archaeological_object_type = models.ForeignKey(
         SkosConcept,
@@ -2999,7 +3612,7 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Archeological object type",
-        help_text="",
+        help_text="helptext for archaeological_object_type",
     )
     find_type = models.ForeignKey(
         SkosConcept,
@@ -3008,7 +3621,7 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Find type",
-        help_text="",
+        help_text="helptext for find_type",
     )
     find_material = models.ForeignKey(
         SkosConcept,
@@ -3017,7 +3630,13 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Find material",
-        help_text="",
+        help_text="helptext for find_material",
+    )
+    season = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Season ",
+        help_text="helptext for season",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -3026,17 +3645,17 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)Whether it was created during excavation or after",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -3047,7 +3666,7 @@ class Fotosgescannt(models.Model):
         verbose_name = "Fotos gescannt"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3097,6 +3716,12 @@ class Fundinventar4DPuzzleID(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    find_inventory_4dpuzzle_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Find inventory 4DPuzzle number",
+        help_text="helptext for find_inventory_4dpuzzle_number",
+    )
     find_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventar4dpuzzleid_find_material_skosconcept',
@@ -3104,7 +3729,7 @@ class Fundinventar4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Find material",
-        help_text="",
+        help_text="helptext for find_material",
     )
     find_type = models.ForeignKey(
         SkosConcept,
@@ -3113,12 +3738,12 @@ class Fundinventar4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Find type",
-        help_text="",
+        help_text="helptext for find_type",
     )
     find_comment = models.TextField(
         blank=True,
         verbose_name="Find comment",
-        help_text="",
+        help_text="helptext for find_comment",
     )
     excavation_object_id = models.ForeignKey(
         "ExcavationObjectID",
@@ -3127,7 +3752,7 @@ class Fundinventar4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -3136,7 +3761,7 @@ class Fundinventar4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
     uncertainty_excavation_digitisation = models.ForeignKey(
         SkosConcept,
@@ -3145,7 +3770,7 @@ class Fundinventar4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or digital",
-        help_text="",
+        help_text="helptext for uncertainty_excavation_digitisation",
     )
     creator_metadata = models.ForeignKey(
         SkosConcept,
@@ -3154,12 +3779,12 @@ class Fundinventar4DPuzzleID(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -3170,7 +3795,7 @@ class Fundinventar4DPuzzleID(models.Model):
         verbose_name = "Fundinventar 4DPuzzle ID"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3220,6 +3845,24 @@ class FundinventarInventarnummern(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    find_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Find inventory number",
+        help_text="helptext for find_inventory_number",
+    )
+    find_local_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Find local number",
+        help_text="helptext for find_local_number",
+    )
+    convolute_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Convolute inventory number",
+        help_text="helptext for convolute_inventory_number",
+    )
     find_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarinventarnummern_find_material_skosconcept',
@@ -3227,7 +3870,7 @@ class FundinventarInventarnummern(models.Model):
         null=True,
         blank=True,
         verbose_name="Find material",
-        help_text="",
+        help_text="helptext for find_material",
     )
     find_type = models.ForeignKey(
         SkosConcept,
@@ -3236,19 +3879,19 @@ class FundinventarInventarnummern(models.Model):
         null=True,
         blank=True,
         verbose_name="Find type",
-        help_text="",
+        help_text="helptext for find_type",
     )
     find_comment = models.TextField(
         blank=True,
         verbose_name="Find comment",
-        help_text="",
+        help_text="helptext for find_comment",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_fundinventarinventarnummern_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ForeignKey(
         "ArchaeologicalObjectID",
@@ -3257,7 +3900,13 @@ class FundinventarInventarnummern(models.Model):
         null=True,
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
+    )
+    storage_find = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage of find",
+        help_text="helptext for storage_find",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -3266,7 +3915,7 @@ class FundinventarInventarnummern(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
     uncertainty_excavation_digitisation = models.ForeignKey(
         SkosConcept,
@@ -3275,7 +3924,7 @@ class FundinventarInventarnummern(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or digital",
-        help_text="",
+        help_text="helptext for uncertainty_excavation_digitisation",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -3284,12 +3933,12 @@ class FundinventarInventarnummern(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -3300,7 +3949,7 @@ class FundinventarInventarnummern(models.Model):
         verbose_name = "Fundinventar Inventarnummern"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3350,19 +3999,31 @@ class FundinventarKonvolutnummern(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    convolute_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Convolute inventory number",
+        help_text="helptext for convolute_inventory_number",
+    )
+    convolute_subnumber = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Convolute subnumber",
+        help_text="helptext for convolute_subnumber",
+    )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_fundinventarkonvolutnummern_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
         related_name='rvn_fundinventarkonvolutnummern_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -3371,7 +4032,13 @@ class FundinventarKonvolutnummern(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
+    )
+    relatedto = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
     )
     creator_metadata = models.ForeignKey(
         SkosConcept,
@@ -3380,12 +4047,12 @@ class FundinventarKonvolutnummern(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -3396,7 +4063,7 @@ class FundinventarKonvolutnummern(models.Model):
         verbose_name = "Fundinventar Konvolutnummern"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3446,6 +4113,12 @@ class FundinventarMaterialproben(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    material_sample_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Material sample inventory number",
+        help_text="helptext for material_sample_inventory_number",
+    )
     find_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarmaterialproben_find_material_skosconcept',
@@ -3453,7 +4126,7 @@ class FundinventarMaterialproben(models.Model):
         null=True,
         blank=True,
         verbose_name="Find material",
-        help_text="",
+        help_text="helptext for find_material",
     )
     find_type = models.ForeignKey(
         SkosConcept,
@@ -3462,14 +4135,14 @@ class FundinventarMaterialproben(models.Model):
         null=True,
         blank=True,
         verbose_name="Find type",
-        help_text="",
+        help_text="helptext for find_type",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_fundinventarmaterialproben_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ForeignKey(
         "ExcavationObjectID",
@@ -3478,7 +4151,7 @@ class FundinventarMaterialproben(models.Model):
         null=True,
         blank=True,
         verbose_name="Arachaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -3487,7 +4160,7 @@ class FundinventarMaterialproben(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
     relatedto = models.ForeignKey(
         "TDInv4DPuzzleNUMMER",
@@ -3496,7 +4169,7 @@ class FundinventarMaterialproben(models.Model):
         null=True,
         blank=True,
         verbose_name="File is related to other TD resources",
-        help_text="",
+        help_text="helptext for relatedto",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -3505,12 +4178,12 @@ class FundinventarMaterialproben(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -3521,7 +4194,7 @@ class FundinventarMaterialproben(models.Model):
         verbose_name = "Fundinventar Materialproben"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3571,6 +4244,12 @@ class FundinventarSteininventar(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    find_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Find inventory number",
+        help_text="helptext for find_inventory_number",
+    )
     find_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarsteininventar_find_material_skosconcept',
@@ -3578,7 +4257,7 @@ class FundinventarSteininventar(models.Model):
         null=True,
         blank=True,
         verbose_name="Find material",
-        help_text="",
+        help_text="helptext for find_material",
     )
     find_type = models.ForeignKey(
         SkosConcept,
@@ -3587,19 +4266,19 @@ class FundinventarSteininventar(models.Model):
         null=True,
         blank=True,
         verbose_name="Find type",
-        help_text="",
+        help_text="helptext for find_type",
     )
     find_comment = models.TextField(
         blank=True,
         verbose_name="Find comment",
-        help_text="",
+        help_text="helptext for find_comment",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_fundinventarsteininventar_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ForeignKey(
         "ExcavationObjectID",
@@ -3608,7 +4287,7 @@ class FundinventarSteininventar(models.Model):
         null=True,
         blank=True,
         verbose_name="Arachaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -3617,7 +4296,7 @@ class FundinventarSteininventar(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -3626,12 +4305,12 @@ class FundinventarSteininventar(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -3642,7 +4321,7 @@ class FundinventarSteininventar(models.Model):
         verbose_name = "FundinventarSteininventar"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3692,6 +4371,36 @@ class GIS(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename ",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID ",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
+    path_filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in old TD archive",
+        help_text="helptext for path_filename_old",
+    )
+    path_filename_arche = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in ARCHE",
+        help_text="helptext for path_filename_arche",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_gis_document_type_documenttypes',
@@ -3699,7 +4408,7 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -3708,31 +4417,37 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     document_subtype = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_gis_document_subtype_documenttypes',
         blank=True,
         verbose_name="Document subtype",
-        help_text="",
+        help_text="helptext for document_subtype",
     )
     dst_abbr = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_gis_dst_abbr_documenttypes',
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="",
+        help_text="helptext for dst_abbr",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
-        help_text="",
+        help_text="helptext for creation_date_original",
+    )
+    software_used = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Software used",
+        help_text="helptext for software_used",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of archival object",
-        help_text="",
+        help_text="helptext for creation_date_archivalobject",
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
@@ -3741,7 +4456,7 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of original document",
-        help_text="",
+        help_text="helptext for file_extension_original",
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
@@ -3750,12 +4465,12 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of archival object",
-        help_text="",
+        help_text="helptext for file_extension_archivalobject",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -3764,7 +4479,7 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -3773,7 +4488,7 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original document",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -3782,7 +4497,7 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -3791,7 +4506,7 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -3800,7 +4515,7 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -3809,28 +4524,28 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="creator of archival object",
-        help_text="",
+        help_text="helptext for creator_archivalobject",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_gis_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
         related_name='rvn_gis_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
     )
     relatedto = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_gis_relatedto_documenttypes',
         blank=True,
         verbose_name="File is related to other TD resources",
-        help_text="",
+        help_text="helptext for relatedto",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -3839,17 +4554,17 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -3860,7 +4575,7 @@ class GIS(models.Model):
         verbose_name = "GIS"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3910,6 +4625,30 @@ class Geophysics(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename ",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID ",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
+    filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename old",
+        help_text="helptext for filename_old",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_geophysics_document_type_documenttypes',
@@ -3917,7 +4656,7 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -3926,31 +4665,31 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     document_subtype = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_geophysics_document_subtype_documenttypes',
         blank=True,
         verbose_name="Document subtype",
-        help_text="",
+        help_text="helptext for document_subtype",
     )
     dst_abbr = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_geophysics_dst_abbr_documenttypes',
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="",
+        help_text="helptext for dst_abbr",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
-        help_text="",
+        help_text="helptext for creation_date_original",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of archival object",
-        help_text="",
+        help_text="helptext for creation_date_archivalobject",
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
@@ -3959,7 +4698,7 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of original document",
-        help_text="",
+        help_text="helptext for file_extension_original",
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
@@ -3968,7 +4707,7 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of archival object",
-        help_text="",
+        help_text="helptext for file_extension_archivalobject",
     )
     method = models.ForeignKey(
         SkosConcept,
@@ -3977,7 +4716,7 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Method",
-        help_text="",
+        help_text="helptext for method",
     )
     equipment = models.ForeignKey(
         SkosConcept,
@@ -3986,12 +4725,12 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Equipment",
-        help_text="",
+        help_text="helptext for equipment",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -4000,7 +4739,7 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -4009,7 +4748,7 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original document",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -4018,7 +4757,7 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -4027,7 +4766,13 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
+    )
+    path_filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in old TD archive",
+        help_text="helptext for path_filename_old",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -4036,7 +4781,7 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -4045,14 +4790,14 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of archival object",
-        help_text="",
+        help_text="helptext for creator_archivalobject",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_geophysics_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -4061,17 +4806,17 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)Whether it was created during excavation or after",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -4082,7 +4827,7 @@ class Geophysics(models.Model):
         verbose_name = "Geophysics"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4132,6 +4877,30 @@ class Inventorybooks(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename ",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID ",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
+    filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename old",
+        help_text="helptext for filename_old",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_inventorybooks_document_type_documenttypes',
@@ -4139,7 +4908,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -4148,17 +4917,23 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
-        help_text="",
+        help_text="helptext for creation_date_original",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year of original document",
+        help_text="helptext for creation_year_original",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of scan",
-        help_text="",
+        help_text="helptext for creation_date_scan",
     )
     file_extension = models.ForeignKey(
         SkosConcept,
@@ -4167,12 +4942,12 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension",
-        help_text="",
+        help_text="helptext for file_extension",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -4181,7 +4956,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -4190,7 +4965,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original document",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -4199,7 +4974,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -4208,7 +4983,13 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
+    )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage folder of original document",
+        help_text="helptext for storage_folder_original",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -4217,7 +4998,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
@@ -4226,7 +5007,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Equipment for scan",
-        help_text="",
+        help_text="helptext for equipment_scan",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
@@ -4235,12 +5016,12 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Wheter source is a original or a copy",
-        help_text="",
+        help_text="helptext for source_original_copy_edited_copy",
     )
     resolution_scan_dpi = models.IntegerField(
         blank=True, null=True,
         verbose_name="Scan resolution",
-        help_text="",
+        help_text="helptext for resolution_scan_dpi",
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -4249,7 +5030,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of scan",
-        help_text="",
+        help_text="helptext for creator_scan",
     )
     original_material = models.ForeignKey(
         SkosConcept,
@@ -4258,7 +5039,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Material of original document",
-        help_text="",
+        help_text="helptext for original_material",
     )
     find_inventory_number = models.ForeignKey(
         "FindInventoryNumber",
@@ -4267,7 +5048,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Find inventory number",
-        help_text="",
+        help_text="helptext for find_inventory_number",
     )
     convolute_inventory_number = models.ForeignKey(
         "ConvoluteInventoryNumber",
@@ -4276,7 +5057,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Convolute inventory number",
-        help_text="",
+        help_text="helptext for convolute_inventory_number",
     )
     bone_stone_inventory_number = models.ForeignKey(
         "BoneInventoryNumber",
@@ -4285,7 +5066,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Bone or stone inventory number",
-        help_text="",
+        help_text="helptext for bone_stone_inventory_number",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -4294,12 +5075,12 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
 
     class Meta:
@@ -4310,7 +5091,7 @@ class Inventorybooks(models.Model):
         verbose_name = "Inventory books"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4360,6 +5141,18 @@ class PhasenID(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    phase_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Phase ID",
+        help_text="helptext for phase_id",
+    )
+    phase_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Phase title",
+        help_text="helptext for phase_title",
+    )
     phase_type = models.ForeignKey(
         SkosConcept,
         related_name='rvn_phasenid_phase_type_skosconcept',
@@ -4367,7 +5160,7 @@ class PhasenID(models.Model):
         null=True,
         blank=True,
         verbose_name="Phase type",
-        help_text="",
+        help_text="helptext for phase_type",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -4376,14 +5169,14 @@ class PhasenID(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     area = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_phasenid_area_excavationobjectid',
         blank=True,
         verbose_name="Area",
-        help_text="",
+        help_text="helptext for area",
     )
 
     class Meta:
@@ -4394,7 +5187,7 @@ class PhasenID(models.Model):
         verbose_name = "Phasen ID"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4444,6 +5237,30 @@ class Protocols(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename ",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID ",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
+    filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename old",
+        help_text="helptext for filename_old",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_protocols_document_type_documenttypes',
@@ -4451,7 +5268,7 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -4460,17 +5277,23 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
-        help_text="",
+        help_text="helptext for creation_date_original",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year of original document",
+        help_text="helptext for creation_year_original",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of scan",
-        help_text="",
+        help_text="helptext for creation_date_scan",
     )
     file_extension = models.ForeignKey(
         SkosConcept,
@@ -4479,12 +5302,12 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension",
-        help_text="",
+        help_text="helptext for file_extension",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -4493,7 +5316,7 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -4502,7 +5325,7 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original document",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -4511,7 +5334,7 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -4520,7 +5343,13 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
+    )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage folder of original document",
+        help_text="helptext for storage_folder_original",
     )
     storage = models.ForeignKey(
         SkosConcept,
@@ -4529,7 +5358,7 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Storage folder of original document",
-        help_text="",
+        help_text="helptext for storage",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -4538,7 +5367,7 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
@@ -4547,7 +5376,7 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Equipment of scan",
-        help_text="",
+        help_text="helptext for equipment_scan",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
@@ -4556,12 +5385,12 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Wheter source is a original or a copy",
-        help_text="",
+        help_text="helptext for source_original_copy_edited_copy",
     )
     resolution_scan_dpi = models.IntegerField(
         blank=True, null=True,
         verbose_name="Scan resolution",
-        help_text="",
+        help_text="helptext for resolution_scan_dpi",
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -4570,7 +5399,7 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of scan",
-        help_text="",
+        help_text="helptext for creator_scan",
     )
     original_material = models.ForeignKey(
         SkosConcept,
@@ -4579,7 +5408,7 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Material of original document",
-        help_text="",
+        help_text="helptext for original_material",
     )
     excavation_object_id = models.ForeignKey(
         "ExcavationObjectID",
@@ -4588,19 +5417,19 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
         related_name='rvn_protocols_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
     )
     number_of_pages = models.IntegerField(
         blank=True, null=True,
         verbose_name="Number of pages",
-        help_text="",
+        help_text="helptext for number_of_pages",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -4609,17 +5438,17 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -4630,7 +5459,7 @@ class Protocols(models.Model):
         verbose_name = "Protocols"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4680,6 +5509,18 @@ class StratenID(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    stratum_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Stratum ID",
+        help_text="helptext for stratum_id",
+    )
+    stratum_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Stratum title",
+        help_text="helptext for stratum_title",
+    )
     stratum_type = models.ForeignKey(
         SkosConcept,
         related_name='rvn_stratenid_stratum_type_skosconcept',
@@ -4687,7 +5528,7 @@ class StratenID(models.Model):
         null=True,
         blank=True,
         verbose_name="Stratum type",
-        help_text="",
+        help_text="helptext for stratum_type",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -4696,14 +5537,14 @@ class StratenID(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     area = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_stratenid_area_excavationobjectid',
         blank=True,
         verbose_name="Area",
-        help_text="",
+        help_text="helptext for area",
     )
 
     class Meta:
@@ -4714,7 +5555,7 @@ class StratenID(models.Model):
         verbose_name = "Straten ID"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4764,6 +5605,12 @@ class TDInv4DPuzzleNUMMER(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    tdinv4dpuzzlenummer_f = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="TDInv4DPuzzleNUMMER_f",
+        help_text="helptext for tdinv4dpuzzlenummer_f",
+    )
 
     class Meta:
 
@@ -4773,7 +5620,7 @@ class TDInv4DPuzzleNUMMER(models.Model):
         verbose_name = "TDInv4DPuzzleNUMMER"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4823,6 +5670,30 @@ class Tables(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename ",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID ",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
+    path_filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in old TD archive",
+        help_text="helptext for path_filename_old",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_tables_document_type_documenttypes',
@@ -4830,7 +5701,7 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -4839,26 +5710,32 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     document_subtype = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_tables_document_subtype_documenttypes',
         blank=True,
         verbose_name="Document subtype",
-        help_text="",
+        help_text="helptext for document_subtype",
     )
     dst_abbr = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_tables_dst_abbr_documenttypes',
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="",
+        help_text="helptext for dst_abbr",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year of original document",
+        help_text="helptext for creation_year_original",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of archival object",
-        help_text="",
+        help_text="helptext for creation_date_archivalobject",
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
@@ -4867,7 +5744,7 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of original document",
-        help_text="",
+        help_text="helptext for file_extension_original",
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
@@ -4876,12 +5753,12 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of archival object",
-        help_text="",
+        help_text="helptext for file_extension_archivalobject",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -4890,7 +5767,7 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -4899,7 +5776,7 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original document",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -4908,7 +5785,7 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -4917,7 +5794,13 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
+    )
+    folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Folder original",
+        help_text="helptext for folder_original",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -4926,7 +5809,7 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -4935,28 +5818,28 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="creator of archival object",
-        help_text="",
+        help_text="helptext for creator_archivalobject",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_tables_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
         related_name='rvn_tables_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
     )
     relatedto = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_tables_relatedto_documenttypes',
         blank=True,
         verbose_name="File is related to other TD resources",
-        help_text="",
+        help_text="helptext for relatedto",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -4965,17 +5848,17 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -4986,7 +5869,7 @@ class Tables(models.Model):
         verbose_name = "Tables"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5036,6 +5919,30 @@ class ThreeDimensionalModel(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
+    path_filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in old TD archive",
+        help_text="helptext for path_filename_old",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_threedimensionalmodel_document_type_documenttypes',
@@ -5043,7 +5950,7 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -5052,7 +5959,7 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     document_subtype = models.ForeignKey(
         "DocumentTypes",
@@ -5061,7 +5968,7 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Document subtype",
-        help_text="",
+        help_text="helptext for document_subtype",
     )
     dst_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -5070,12 +5977,24 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="",
+        help_text="helptext for dst_abbr",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year original",
+        help_text="helptext for creation_year_original",
+    )
+    software_used = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Created by software",
+        help_text="helptext for software_used",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of archival object",
-        help_text="",
+        help_text="helptext for creation_date_archivalobject",
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
@@ -5084,7 +6003,7 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of original 3D model",
-        help_text="",
+        help_text="helptext for file_extension_original",
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
@@ -5093,12 +6012,12 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of archival data",
-        help_text="",
+        help_text="helptext for file_extension_archivalobject",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -5107,7 +6026,7 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -5116,7 +6035,7 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original ",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -5125,7 +6044,7 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -5134,7 +6053,7 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -5143,7 +6062,7 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -5152,21 +6071,27 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of archival object",
-        help_text="",
+        help_text="helptext for creator_archivalobject",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_threedimensionalmodel_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
         related_name='rvn_threedimensionalmodel_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
+    )
+    relatedto = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -5175,17 +6100,17 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)Whether it was created during excavation or after",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -5196,7 +6121,7 @@ class ThreeDimensionalModel(models.Model):
         verbose_name = "3D models"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5246,6 +6171,24 @@ class Videos(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename ",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID ",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_videos_document_type_documenttypes',
@@ -5253,7 +6196,7 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -5262,31 +6205,31 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     document_subtype = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_videos_document_subtype_documenttypes',
         blank=True,
         verbose_name="Document subtype",
-        help_text="",
+        help_text="helptext for document_subtype",
     )
     dst_abbr = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_videos_dst_abbr_documenttypes',
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="",
+        help_text="helptext for dst_abbr",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
-        help_text="",
+        help_text="helptext for creation_date_original",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of archival object",
-        help_text="",
+        help_text="helptext for creation_date_archivalobject",
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
@@ -5295,7 +6238,7 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of original document",
-        help_text="",
+        help_text="helptext for file_extension_original",
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
@@ -5304,12 +6247,12 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of archival object",
-        help_text="",
+        help_text="helptext for file_extension_archivalobject",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -5318,7 +6261,7 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -5327,7 +6270,7 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original document",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -5336,7 +6279,7 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="creator of archival object",
-        help_text="",
+        help_text="helptext for creator_archivalobject",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -5345,7 +6288,7 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -5354,7 +6297,19 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
+    )
+    path_filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in old TD archive",
+        help_text="helptext for path_filename_old",
+    )
+    path_filename_arche = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in ARCHE",
+        help_text="helptext for path_filename_arche",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -5363,7 +6318,7 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     find_inventory_number = models.ForeignKey(
         "FindInventoryNumber",
@@ -5372,31 +6327,31 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="Find inventory number",
-        help_text="",
+        help_text="helptext for find_inventory_number",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_videos_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="",
+        help_text="helptext for excavation_object_id",
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
         related_name='rvn_videos_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="",
+        help_text="helptext for archaeological_object_id",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -5407,7 +6362,7 @@ class Videos(models.Model):
         verbose_name = "Videos"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5457,6 +6412,30 @@ class WallpaintingInventory(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename",
+        help_text="helptext for filename",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID",
+        help_text="helptext for document_id",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="helptext for document_title",
+    )
+    filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename old",
+        help_text="helptext for filename_old",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_wallpaintinginventory_document_type_documenttypes',
@@ -5464,7 +6443,7 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="",
+        help_text="helptext for document_type",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -5473,17 +6452,23 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="",
+        help_text="helptext for dt_abbr",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
-        help_text="",
+        help_text="helptext for creation_date_original",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year of original document",
+        help_text="helptext for creation_year_original",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of scan",
-        help_text="",
+        help_text="helptext for creation_date_scan",
     )
     file_extension = models.ForeignKey(
         SkosConcept,
@@ -5492,12 +6477,12 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension ",
-        help_text="",
+        help_text="helptext for file_extension",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of metadata",
-        help_text="",
+        help_text="helptext for creation_date_metadata",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -5506,7 +6491,7 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of metadata",
-        help_text="",
+        help_text="helptext for creator_metadata",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -5515,7 +6500,7 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of original ",
-        help_text="",
+        help_text="helptext for creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -5524,7 +6509,7 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="",
+        help_text="helptext for copyright",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -5533,7 +6518,13 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="",
+        help_text="helptext for access",
+    )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage folder of original wallpainting",
+        help_text="helptext for storage_folder_original",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -5542,7 +6533,7 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="",
+        help_text="helptext for site_id",
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
@@ -5551,7 +6542,7 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Equipment for scan",
-        help_text="",
+        help_text="helptext for equipment_scan",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
@@ -5560,12 +6551,12 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Wheter source is a original or a copy",
-        help_text="",
+        help_text="helptext for source_original_copy_edited_copy",
     )
     resolution_scan_dpi = models.IntegerField(
         blank=True, null=True,
         verbose_name="Scan resolution",
-        help_text="",
+        help_text="helptext for resolution_scan_dpi",
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -5574,7 +6565,7 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of scan",
-        help_text="",
+        help_text="helptext for creator_scan",
     )
     original_material = models.ForeignKey(
         SkosConcept,
@@ -5583,7 +6574,13 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Material of original document",
-        help_text="",
+        help_text="helptext for original_material",
+    )
+    fresco_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Fresco inventory number",
+        help_text="helptext for fresco_inventory_number",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -5592,17 +6589,17 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)",
-        help_text="",
+        help_text="helptext for excavation_post_excavation",
     )
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="",
+        help_text="helptext for original_comment",
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="",
+        help_text="helptext for digitisation_comment",
     )
 
     class Meta:
@@ -5613,7 +6610,7 @@ class WallpaintingInventory(models.Model):
         verbose_name = "Freskeninventar"
 
     def __str__(self):
-        return "{}".format(self.legacy_id)
+        return "{}".format(self.id)
 
     def field_dict(self):
         return model_to_dict(self)

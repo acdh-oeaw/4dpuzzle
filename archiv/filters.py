@@ -43,16 +43,57 @@ from . models import (
 
 
 class ActorListFilter(django_filters.FilterSet):
+    first_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Actor._meta.get_field('first_name').help_text,
+        label=Actor._meta.get_field('first_name').verbose_name
+    )
+    last_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Actor._meta.get_field('last_name').help_text,
+        label=Actor._meta.get_field('last_name').verbose_name
+    )
+    drawer_monogram = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Actor._meta.get_field('drawer_monogram').help_text,
+        label=Actor._meta.get_field('drawer_monogram').verbose_name
+    )
+    excavation = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Actor._meta.get_field('excavation').help_text,
+        label=Actor._meta.get_field('excavation').verbose_name
+    )
+    xx_4dpuzzle = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Actor._meta.get_field('xx_4dpuzzle').help_text,
+        label=Actor._meta.get_field('xx_4dpuzzle').verbose_name
+    )
+    year = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Actor._meta.get_field('year').help_text,
+        label=Actor._meta.get_field('year').verbose_name
+    )
 
     class Meta:
         model = Actor
         fields = [
             'id',
+            'first_name',
+            'last_name',
+            'drawer_monogram',
+            'excavation',
+            'xx_4dpuzzle',
+            'year',
             'access',
             ]
 
 
 class ArchaeologicalObject4DPuzzleIDListFilter(django_filters.FilterSet):
+    archaeological_object_4dpuzzle_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('archaeological_object_4dpuzzle_id').help_text,
+        label=ArchaeologicalObject4DPuzzleID._meta.get_field('archaeological_object_4dpuzzle_id').verbose_name
+    )
     archaeological_object_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('archaeological_object_comment').help_text,
@@ -74,6 +115,7 @@ class ArchaeologicalObject4DPuzzleIDListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'archaeological_object_id',
+            'archaeological_object_4dpuzzle_id',
             'archaeological_object_type',
             'archaeological_object_comment',
             'excavation_object_id',
@@ -84,10 +126,45 @@ class ArchaeologicalObject4DPuzzleIDListFilter(django_filters.FilterSet):
 
 
 class ArchaeologicalObjectIDListFilter(django_filters.FilterSet):
+    archaeological_object_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('archaeological_object_id').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('archaeological_object_id').verbose_name
+    )
     archaeological_object_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ArchaeologicalObjectID._meta.get_field('archaeological_object_comment').help_text,
         label=ArchaeologicalObjectID._meta.get_field('archaeological_object_comment').verbose_name
+    )
+    position = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('position').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('position').verbose_name
+    )
+    stratum_id_relative = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('stratum_id_relative').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('stratum_id_relative').verbose_name
+    )
+    stratum_id_absolute_prepub = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('stratum_id_absolute_prepub').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('stratum_id_absolute_prepub').verbose_name
+    )
+    stratum_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('stratum_comment').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('stratum_comment').verbose_name
+    )
+    phase_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('phase_id').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('phase_id').verbose_name
+    )
+    relatedto = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('relatedto').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('relatedto').verbose_name
     )
     digitisation_comment = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -99,16 +176,43 @@ class ArchaeologicalObjectIDListFilter(django_filters.FilterSet):
         model = ArchaeologicalObjectID
         fields = [
             'id',
+            'archaeological_object_id',
             'archaeological_object_type',
             'archaeological_object_comment',
             'excavation_object_id',
+            'position',
+            'stratum_id_relative',
+            'stratum_id_absolute_prepub',
+            'stratum_comment',
+            'phase_id',
             'corresponding_to_archaeological_object_id',
+            'relatedto',
             'creator_metadata',
             'digitisation_comment',
             ]
 
 
 class ArchiveINFListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchiveINF._meta.get_field('filename').help_text,
+        label=ArchiveINF._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchiveINF._meta.get_field('document_id').help_text,
+        label=ArchiveINF._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchiveINF._meta.get_field('document_title').help_text,
+        label=ArchiveINF._meta.get_field('document_title').verbose_name
+    )
+    creation_year_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchiveINF._meta.get_field('creation_year_original').help_text,
+        label=ArchiveINF._meta.get_field('creation_year_original').verbose_name
+    )
     comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ArchiveINF._meta.get_field('comment').help_text,
@@ -119,9 +223,13 @@ class ArchiveINFListFilter(django_filters.FilterSet):
         model = ArchiveINF
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
             'document_type',
             'dt_abbr',
             'relatedto',
+            'creation_year_original',
             'creation_date_archivalobject',
             'file_extension_archivalobject',
             'creation_date_metadata',
@@ -136,6 +244,41 @@ class ArchiveINFListFilter(django_filters.FilterSet):
 
 
 class AutoCADListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('filename').help_text,
+        label=AutoCAD._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('document_id').help_text,
+        label=AutoCAD._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('document_title').help_text,
+        label=AutoCAD._meta.get_field('document_title').verbose_name
+    )
+    path_filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('path_filename_old').help_text,
+        label=AutoCAD._meta.get_field('path_filename_old').verbose_name
+    )
+    path_filename_arche = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('path_filename_arche').help_text,
+        label=AutoCAD._meta.get_field('path_filename_arche').verbose_name
+    )
+    creation_year_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('creation_year_original').help_text,
+        label=AutoCAD._meta.get_field('creation_year_original').verbose_name
+    )
+    relatedto = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('relatedto').help_text,
+        label=AutoCAD._meta.get_field('relatedto').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=AutoCAD._meta.get_field('original_comment').help_text,
@@ -151,10 +294,16 @@ class AutoCADListFilter(django_filters.FilterSet):
         model = AutoCAD
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
+            'path_filename_old',
+            'path_filename_arche',
             'document_type',
             'dt_abbr',
             'document_subtype',
             'dst_abbr',
+            'creation_year_original',
             'creation_date_archivalobject',
             'file_extension_original',
             'file_extension_archivalobject',
@@ -167,6 +316,7 @@ class AutoCADListFilter(django_filters.FilterSet):
             'creator_archivalobject',
             'excavation_object_id',
             'archaeological_object_id',
+            'relatedto',
             'excavation_post_excavation',
             'original_comment',
             'digitisation_comment',
@@ -174,24 +324,81 @@ class AutoCADListFilter(django_filters.FilterSet):
 
 
 class BoneInventoryNumberListFilter(django_filters.FilterSet):
+    boneinventorynumber_f = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=BoneInventoryNumber._meta.get_field('boneinventorynumber_f').help_text,
+        label=BoneInventoryNumber._meta.get_field('boneinventorynumber_f').verbose_name
+    )
 
     class Meta:
         model = BoneInventoryNumber
         fields = [
             'id',
+            'boneinventorynumber_f',
             ]
 
 
 class ConvoluteInventoryNumberListFilter(django_filters.FilterSet):
+    convoluteinventorynumber_f = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ConvoluteInventoryNumber._meta.get_field('convoluteinventorynumber_f').help_text,
+        label=ConvoluteInventoryNumber._meta.get_field('convoluteinventorynumber_f').verbose_name
+    )
 
     class Meta:
         model = ConvoluteInventoryNumber
         fields = [
             'id',
+            'convoluteinventorynumber_f',
             ]
 
 
 class ConvolutecardsListFilter(django_filters.FilterSet):
+    filename_document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('filename_document_id').help_text,
+        label=Convolutecards._meta.get_field('filename_document_id').verbose_name
+    )
+    convolute_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('convolute_inventory_number').help_text,
+        label=Convolutecards._meta.get_field('convolute_inventory_number').verbose_name
+    )
+    convolute_subnumber = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('convolute_subnumber').help_text,
+        label=Convolutecards._meta.get_field('convolute_subnumber').verbose_name
+    )
+    filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('filename_old').help_text,
+        label=Convolutecards._meta.get_field('filename_old').verbose_name
+    )
+    storage_folder_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('storage_folder_original').help_text,
+        label=Convolutecards._meta.get_field('storage_folder_original').verbose_name
+    )
+    month = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('month').help_text,
+        label=Convolutecards._meta.get_field('month').verbose_name
+    )
+    position = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('position').help_text,
+        label=Convolutecards._meta.get_field('position').verbose_name
+    )
+    lowest_height_meters_standard_elevation_zero = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('lowest_height_meters_standard_elevation_zero').help_text,
+        label=Convolutecards._meta.get_field('lowest_height_meters_standard_elevation_zero').verbose_name
+    )
+    maximum_height_meters_standard_elevation_zero = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('maximum_height_meters_standard_elevation_zero').help_text,
+        label=Convolutecards._meta.get_field('maximum_height_meters_standard_elevation_zero').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Convolutecards._meta.get_field('original_comment').help_text,
@@ -207,6 +414,10 @@ class ConvolutecardsListFilter(django_filters.FilterSet):
         model = Convolutecards
         fields = [
             'id',
+            'filename_document_id',
+            'convolute_inventory_number',
+            'convolute_subnumber',
+            'filename_old',
             'document_type',
             'dt_abbr',
             'creation_date_original',
@@ -218,6 +429,7 @@ class ConvolutecardsListFilter(django_filters.FilterSet):
             'creator_original',
             'copyright',
             'access',
+            'storage_folder_original',
             'site_id',
             'equipment_scan',
             'source_original_copy_edited_copy',
@@ -225,6 +437,10 @@ class ConvolutecardsListFilter(django_filters.FilterSet):
             'creator_scan',
             'original_material',
             'season',
+            'month',
+            'position',
+            'lowest_height_meters_standard_elevation_zero',
+            'maximum_height_meters_standard_elevation_zero',
             'excavation_post_excavation',
             'original_comment',
             'digitisation_comment',
@@ -232,6 +448,41 @@ class ConvolutecardsListFilter(django_filters.FilterSet):
 
 
 class DatenbaseListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('filename').help_text,
+        label=Datenbase._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('document_id').help_text,
+        label=Datenbase._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('document_title').help_text,
+        label=Datenbase._meta.get_field('document_title').verbose_name
+    )
+    creation_year_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('creation_year_original').help_text,
+        label=Datenbase._meta.get_field('creation_year_original').verbose_name
+    )
+    path_filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('path_filename_old').help_text,
+        label=Datenbase._meta.get_field('path_filename_old').verbose_name
+    )
+    path_filename_arche = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('path_filename_arche').help_text,
+        label=Datenbase._meta.get_field('path_filename_arche').verbose_name
+    )
+    relatedto = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('relatedto').help_text,
+        label=Datenbase._meta.get_field('relatedto').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Datenbase._meta.get_field('original_comment').help_text,
@@ -247,10 +498,14 @@ class DatenbaseListFilter(django_filters.FilterSet):
         model = Datenbase
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
             'document_type',
             'dt_abbr',
             'document_subtype',
             'dst_abbr',
+            'creation_year_original',
             'creation_date_archivalobject',
             'file_extension_original',
             'file_extension_archivalobject',
@@ -259,10 +514,13 @@ class DatenbaseListFilter(django_filters.FilterSet):
             'creator_original',
             'copyright',
             'access',
+            'path_filename_old',
+            'path_filename_arche',
             'site_id',
             'creator_archivalobject',
             'excavation_object_id',
             'archaeological_object_id',
+            'relatedto',
             'find_material',
             'excavation_post_excavation',
             'original_comment',
@@ -271,26 +529,70 @@ class DatenbaseListFilter(django_filters.FilterSet):
 
 
 class Document4DPuzzleIDListFilter(django_filters.FilterSet):
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Document4DPuzzleID._meta.get_field('document_id').help_text,
+        label=Document4DPuzzleID._meta.get_field('document_id').verbose_name
+    )
+    original_4dpuzzle_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Document4DPuzzleID._meta.get_field('original_4dpuzzle_id').help_text,
+        label=Document4DPuzzleID._meta.get_field('original_4dpuzzle_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Document4DPuzzleID._meta.get_field('document_title').help_text,
+        label=Document4DPuzzleID._meta.get_field('document_title').verbose_name
+    )
     digitisation_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Document4DPuzzleID._meta.get_field('digitisation_comment').help_text,
         label=Document4DPuzzleID._meta.get_field('digitisation_comment').verbose_name
+    )
+    corresponding_to = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Document4DPuzzleID._meta.get_field('corresponding_to').help_text,
+        label=Document4DPuzzleID._meta.get_field('corresponding_to').verbose_name
     )
 
     class Meta:
         model = Document4DPuzzleID
         fields = [
             'id',
+            'document_id',
+            'original_4dpuzzle_id',
+            'document_title',
             'document_type',
             'dt_abbr',
             'document_subtype',
             'dst_abbr',
             'creator_metadata',
             'digitisation_comment',
+            'corresponding_to',
             ]
 
 
 class DocumentTypesListFilter(django_filters.FilterSet):
+    document_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=DocumentTypes._meta.get_field('document_type').help_text,
+        label=DocumentTypes._meta.get_field('document_type').verbose_name
+    )
+    dt_abbr = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=DocumentTypes._meta.get_field('dt_abbr').help_text,
+        label=DocumentTypes._meta.get_field('dt_abbr').verbose_name
+    )
+    document_subtype = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=DocumentTypes._meta.get_field('document_subtype').help_text,
+        label=DocumentTypes._meta.get_field('document_subtype').verbose_name
+    )
+    ds_abbr = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=DocumentTypes._meta.get_field('ds_abbr').help_text,
+        label=DocumentTypes._meta.get_field('ds_abbr').verbose_name
+    )
     description = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=DocumentTypes._meta.get_field('description').help_text,
@@ -301,12 +603,26 @@ class DocumentTypesListFilter(django_filters.FilterSet):
         model = DocumentTypes
         fields = [
             'id',
+            'document_type',
+            'dt_abbr',
+            'document_subtype',
+            'ds_abbr',
             'analogue_borndigital',
             'description',
             ]
 
 
 class ExcavationObjectIDListFilter(django_filters.FilterSet):
+    excavation_object_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationObjectID._meta.get_field('excavation_object_id').help_text,
+        label=ExcavationObjectID._meta.get_field('excavation_object_id').verbose_name
+    )
+    profile_orientation = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationObjectID._meta.get_field('profile_orientation').help_text,
+        label=ExcavationObjectID._meta.get_field('profile_orientation').verbose_name
+    )
     digitisation_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ExcavationObjectID._meta.get_field('digitisation_comment').help_text,
@@ -317,11 +633,13 @@ class ExcavationObjectIDListFilter(django_filters.FilterSet):
         model = ExcavationObjectID
         fields = [
             'id',
+            'excavation_object_id',
             'excavation_object_type',
             'site_id',
             'area',
             'square_trench',
             'planum',
+            'profile_orientation',
             'year',
             'season',
             'creator_metadata',
@@ -330,22 +648,89 @@ class ExcavationObjectIDListFilter(django_filters.FilterSet):
 
 
 class ExcavationSeasonsListFilter(django_filters.FilterSet):
+    grabungskampagnen = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationSeasons._meta.get_field('grabungskampagnen').help_text,
+        label=ExcavationSeasons._meta.get_field('grabungskampagnen').verbose_name
+    )
+    year = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationSeasons._meta.get_field('year').help_text,
+        label=ExcavationSeasons._meta.get_field('year').verbose_name
+    )
 
     class Meta:
         model = ExcavationSeasons
         fields = [
             'id',
+            'grabungskampagnen',
 
             'season',
+            'year',
             'access',
             ]
 
 
 class FielddrawingListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('filename').help_text,
+        label=Fielddrawing._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('document_id').help_text,
+        label=Fielddrawing._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('document_title').help_text,
+        label=Fielddrawing._meta.get_field('document_title').verbose_name
+    )
+    storage_folder_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('storage_folder_original').help_text,
+        label=Fielddrawing._meta.get_field('storage_folder_original').verbose_name
+    )
+    original_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('original_inventory_number').help_text,
+        label=Fielddrawing._meta.get_field('original_inventory_number').verbose_name
+    )
+    find_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('find_inventory_number').help_text,
+        label=Fielddrawing._meta.get_field('find_inventory_number').verbose_name
+    )
+    amendment_data = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('amendment_data').help_text,
+        label=Fielddrawing._meta.get_field('amendment_data').verbose_name
+    )
+    stratum_id_relative = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('stratum_id_relative').help_text,
+        label=Fielddrawing._meta.get_field('stratum_id_relative').verbose_name
+    )
+    stratum_id_absolute_prepub = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('stratum_id_absolute_prepub').help_text,
+        label=Fielddrawing._meta.get_field('stratum_id_absolute_prepub').verbose_name
+    )
     stratum_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Fielddrawing._meta.get_field('stratum_comment').help_text,
         label=Fielddrawing._meta.get_field('stratum_comment').verbose_name
+    )
+    month = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('month').help_text,
+        label=Fielddrawing._meta.get_field('month').verbose_name
+    )
+    scale = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('scale').help_text,
+        label=Fielddrawing._meta.get_field('scale').verbose_name
     )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -362,6 +747,9 @@ class FielddrawingListFilter(django_filters.FilterSet):
         model = Fielddrawing
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
             'document_type',
             'dt_abbr',
             'document_subtype',
@@ -375,18 +763,26 @@ class FielddrawingListFilter(django_filters.FilterSet):
             'creator_original',
             'copyright',
             'access',
+            'storage_folder_original',
             'site_id',
             'equipment_scan',
             'source_original_copy_edited_copy',
             'resolution_scan_ppi',
             'creator_scan',
             'original_material',
+            'original_inventory_number',
+            'find_inventory_number',
             'amendment_drawn_by',
+            'amendment_data',
             'drawer_monogram',
             'excavation_object_id',
             'archaeological_object_id',
+            'stratum_id_relative',
+            'stratum_id_absolute_prepub',
             'stratum_comment',
             'season',
+            'month',
+            'scale',
             'excavation_post_excavation',
             'original_comment',
             'digitisation_comment',
@@ -394,63 +790,151 @@ class FielddrawingListFilter(django_filters.FilterSet):
 
 
 class FilmListFilter(django_filters.FilterSet):
+    film_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('film_id').help_text,
+        label=Film._meta.get_field('film_id').verbose_name
+    )
+    addition_film_identifier = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('addition_film_identifier').help_text,
+        label=Film._meta.get_field('addition_film_identifier').verbose_name
+    )
+    contact_print_present = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('contact_print_present').help_text,
+        label=Film._meta.get_field('contact_print_present').verbose_name
+    )
+    enlargements_present = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('enlargements_present').help_text,
+        label=Film._meta.get_field('enlargements_present').verbose_name
+    )
+    foto_numbers_missing = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('foto_numbers_missing').help_text,
+        label=Film._meta.get_field('foto_numbers_missing').verbose_name
+    )
     decomposition_phenomenon = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Film._meta.get_field('decomposition_phenomenon').help_text,
         label=Film._meta.get_field('decomposition_phenomenon').verbose_name
+    )
+    acetic_acid_smell = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('acetic_acid_smell').help_text,
+        label=Film._meta.get_field('acetic_acid_smell').verbose_name
+    )
+    storage_folder_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('storage_folder_original').help_text,
+        label=Film._meta.get_field('storage_folder_original').verbose_name
     )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Film._meta.get_field('original_comment').help_text,
         label=Film._meta.get_field('original_comment').verbose_name
     )
-    digitisation_comment = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=Film._meta.get_field('digitisation_comment').help_text,
-        label=Film._meta.get_field('digitisation_comment').verbose_name
-    )
 
     class Meta:
         model = Film
         fields = [
             'id',
+            'film_id',
             'creation_year_original',
             'film_number',
+            'addition_film_identifier',
             'document_type',
             'dt_abbr',
             'document_subtype',
             'dst_abbr',
             'creation_date_metadata',
             'creator_metadata',
+            'contact_print_present',
+            'enlargements_present',
             'film_format',
             'film_brand',
             'equipment_camera_brand',
+            'foto_numbers_missing',
             'decomposition_phenomenon',
+            'acetic_acid_smell',
             'original_material',
+            'storage_folder_original',
             'original_comment',
-            'digitisation_comment',
             ]
 
 
 class FilmeListFilter(django_filters.FilterSet):
+    filme_f = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Filme._meta.get_field('filme_f').help_text,
+        label=Filme._meta.get_field('filme_f').verbose_name
+    )
 
     class Meta:
         model = Filme
         fields = [
             'id',
+            'filme_f',
             ]
 
 
 class FindInventoryNumberListFilter(django_filters.FilterSet):
+    findinventorynumber_f = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FindInventoryNumber._meta.get_field('findinventorynumber_f').help_text,
+        label=FindInventoryNumber._meta.get_field('findinventorynumber_f').verbose_name
+    )
 
     class Meta:
         model = FindInventoryNumber
         fields = [
             'id',
+            'findinventorynumber_f',
             ]
 
 
 class FinddrawingListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('filename').help_text,
+        label=Finddrawing._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('document_id').help_text,
+        label=Finddrawing._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('document_title').help_text,
+        label=Finddrawing._meta.get_field('document_title').verbose_name
+    )
+    filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('filename_old').help_text,
+        label=Finddrawing._meta.get_field('filename_old').verbose_name
+    )
+    creation_year_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('creation_year_original').help_text,
+        label=Finddrawing._meta.get_field('creation_year_original').verbose_name
+    )
+    storage_folder_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('storage_folder_original').help_text,
+        label=Finddrawing._meta.get_field('storage_folder_original').verbose_name
+    )
+    equipment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('equipment').help_text,
+        label=Finddrawing._meta.get_field('equipment').verbose_name
+    )
+    rendered_in_ink = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('rendered_in_ink').help_text,
+        label=Finddrawing._meta.get_field('rendered_in_ink').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Finddrawing._meta.get_field('original_comment').help_text,
@@ -466,11 +950,16 @@ class FinddrawingListFilter(django_filters.FilterSet):
         model = Finddrawing
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
+            'filename_old',
             'document_type',
             'dt_abbr',
             'document_subtype',
             'dst_abbr',
             'creation_date_original',
+            'creation_year_original',
             'creation_date_scan',
             'file_extension',
             'creation_date_metadata',
@@ -478,7 +967,9 @@ class FinddrawingListFilter(django_filters.FilterSet):
             'creator_original',
             'copyright',
             'access',
+            'storage_folder_original',
             'site_id',
+            'equipment',
             'source_original_copy_edited_copy',
             'resolution_scan_dpi',
             'creator_scan',
@@ -487,6 +978,7 @@ class FinddrawingListFilter(django_filters.FilterSet):
             'convolute_inventory_number',
             'bone_stone_inventory_number',
             'find_date',
+            'rendered_in_ink',
             'excavation_post_excavation',
             'original_comment',
             'digitisation_comment',
@@ -494,6 +986,31 @@ class FinddrawingListFilter(django_filters.FilterSet):
 
 
 class FindsheetsListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Findsheets._meta.get_field('filename').help_text,
+        label=Findsheets._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Findsheets._meta.get_field('document_id').help_text,
+        label=Findsheets._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Findsheets._meta.get_field('document_title').help_text,
+        label=Findsheets._meta.get_field('document_title').verbose_name
+    )
+    filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Findsheets._meta.get_field('filename_old').help_text,
+        label=Findsheets._meta.get_field('filename_old').verbose_name
+    )
+    creation_year_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Findsheets._meta.get_field('creation_year_original').help_text,
+        label=Findsheets._meta.get_field('creation_year_original').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Findsheets._meta.get_field('original_comment').help_text,
@@ -509,9 +1026,14 @@ class FindsheetsListFilter(django_filters.FilterSet):
         model = Findsheets
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
+            'filename_old',
             'document_type',
             'dt_abbr',
             'creation_date_original',
+            'creation_year_original',
             'creation_date_scan',
             'file_extension',
             'creation_date_metadata',
@@ -538,6 +1060,46 @@ class FindsheetsListFilter(django_filters.FilterSet):
 
 
 class FotoborndigitalListFilter(django_filters.FilterSet):
+    folder_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('folder_name').help_text,
+        label=Fotoborndigital._meta.get_field('folder_name').verbose_name
+    )
+    folder_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('folder_id').help_text,
+        label=Fotoborndigital._meta.get_field('folder_id').verbose_name
+    )
+    folder_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('folder_title').help_text,
+        label=Fotoborndigital._meta.get_field('folder_title').verbose_name
+    )
+    folder_name_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('folder_name_old').help_text,
+        label=Fotoborndigital._meta.get_field('folder_name_old').verbose_name
+    )
+    path_filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('path_filename_old').help_text,
+        label=Fotoborndigital._meta.get_field('path_filename_old').verbose_name
+    )
+    path_filename_arche = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('path_filename_arche').help_text,
+        label=Fotoborndigital._meta.get_field('path_filename_arche').verbose_name
+    )
+    find_inventory_number_from_to = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('find_inventory_number_from_to').help_text,
+        label=Fotoborndigital._meta.get_field('find_inventory_number_from_to').verbose_name
+    )
+    creation_year_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('creation_year_original').help_text,
+        label=Fotoborndigital._meta.get_field('creation_year_original').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Fotoborndigital._meta.get_field('original_comment').help_text,
@@ -553,6 +1115,12 @@ class FotoborndigitalListFilter(django_filters.FilterSet):
         model = Fotoborndigital
         fields = [
             'id',
+            'folder_name',
+            'folder_id',
+            'folder_title',
+            'folder_name_old',
+            'path_filename_old',
+            'path_filename_arche',
             'document_type',
             'dt_abbr',
             'document_subtype',
@@ -562,13 +1130,55 @@ class FotoborndigitalListFilter(django_filters.FilterSet):
             'copyright',
             'access',
             'site_id',
+            'find_inventory_number_from_to',
             'excavation_object_id',
+            'creation_year_original',
             'original_comment',
             'digitisation_comment',
             ]
 
 
 class FotosgescanntListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('filename').help_text,
+        label=Fotosgescannt._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('document_id').help_text,
+        label=Fotosgescannt._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('document_title').help_text,
+        label=Fotosgescannt._meta.get_field('document_title').verbose_name
+    )
+    filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('filename_old').help_text,
+        label=Fotosgescannt._meta.get_field('filename_old').verbose_name
+    )
+    creation_year_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('creation_year_original').help_text,
+        label=Fotosgescannt._meta.get_field('creation_year_original').verbose_name
+    )
+    pixel_size = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('pixel_size').help_text,
+        label=Fotosgescannt._meta.get_field('pixel_size').verbose_name
+    )
+    find_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('find_inventory_number').help_text,
+        label=Fotosgescannt._meta.get_field('find_inventory_number').verbose_name
+    )
+    season = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('season').help_text,
+        label=Fotosgescannt._meta.get_field('season').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Fotosgescannt._meta.get_field('original_comment').help_text,
@@ -584,6 +1194,10 @@ class FotosgescanntListFilter(django_filters.FilterSet):
         model = Fotosgescannt
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
+            'filename_old',
             'film_number',
             'photo_number',
             'document_type',
@@ -591,6 +1205,7 @@ class FotosgescanntListFilter(django_filters.FilterSet):
             'document_subtype',
             'dst_abbreviation',
             'creation_date_original',
+            'creation_year_original',
             'creation_date_scan',
             'file_extension',
             'creation_date_metadata',
@@ -603,12 +1218,15 @@ class FotosgescanntListFilter(django_filters.FilterSet):
             'source_original_copy_edited_copy',
             'resolution_scan_ppi',
             'creator_scan',
+            'pixel_size',
             'film_id',
+            'find_inventory_number',
             'excavation_object_id',
             'archaeological_object_id',
             'archaeological_object_type',
             'find_type',
             'find_material',
+            'season',
             'excavation_post_excavation',
             'original_comment',
             'digitisation_comment',
@@ -616,6 +1234,11 @@ class FotosgescanntListFilter(django_filters.FilterSet):
 
 
 class Fundinventar4DPuzzleIDListFilter(django_filters.FilterSet):
+    find_inventory_4dpuzzle_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fundinventar4DPuzzleID._meta.get_field('find_inventory_4dpuzzle_number').help_text,
+        label=Fundinventar4DPuzzleID._meta.get_field('find_inventory_4dpuzzle_number').verbose_name
+    )
     find_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Fundinventar4DPuzzleID._meta.get_field('find_comment').help_text,
@@ -631,6 +1254,7 @@ class Fundinventar4DPuzzleIDListFilter(django_filters.FilterSet):
         model = Fundinventar4DPuzzleID
         fields = [
             'id',
+            'find_inventory_4dpuzzle_number',
             'find_material',
             'find_type',
             'find_comment',
@@ -643,10 +1267,30 @@ class Fundinventar4DPuzzleIDListFilter(django_filters.FilterSet):
 
 
 class FundinventarInventarnummernListFilter(django_filters.FilterSet):
+    find_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarInventarnummern._meta.get_field('find_inventory_number').help_text,
+        label=FundinventarInventarnummern._meta.get_field('find_inventory_number').verbose_name
+    )
+    find_local_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarInventarnummern._meta.get_field('find_local_number').help_text,
+        label=FundinventarInventarnummern._meta.get_field('find_local_number').verbose_name
+    )
+    convolute_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarInventarnummern._meta.get_field('convolute_inventory_number').help_text,
+        label=FundinventarInventarnummern._meta.get_field('convolute_inventory_number').verbose_name
+    )
     find_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=FundinventarInventarnummern._meta.get_field('find_comment').help_text,
         label=FundinventarInventarnummern._meta.get_field('find_comment').verbose_name
+    )
+    storage_find = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarInventarnummern._meta.get_field('storage_find').help_text,
+        label=FundinventarInventarnummern._meta.get_field('storage_find').verbose_name
     )
     digitisation_comment = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -658,11 +1302,15 @@ class FundinventarInventarnummernListFilter(django_filters.FilterSet):
         model = FundinventarInventarnummern
         fields = [
             'id',
+            'find_inventory_number',
+            'find_local_number',
+            'convolute_inventory_number',
             'find_material',
             'find_type',
             'find_comment',
             'excavation_object_id',
             'archaeological_object_id',
+            'storage_find',
             'access',
             'uncertainty_excavation_digitisation',
             'creator_metadata',
@@ -671,6 +1319,21 @@ class FundinventarInventarnummernListFilter(django_filters.FilterSet):
 
 
 class FundinventarKonvolutnummernListFilter(django_filters.FilterSet):
+    convolute_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('convolute_inventory_number').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('convolute_inventory_number').verbose_name
+    )
+    convolute_subnumber = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('convolute_subnumber').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('convolute_subnumber').verbose_name
+    )
+    relatedto = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('relatedto').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('relatedto').verbose_name
+    )
     digitisation_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=FundinventarKonvolutnummern._meta.get_field('digitisation_comment').help_text,
@@ -681,15 +1344,23 @@ class FundinventarKonvolutnummernListFilter(django_filters.FilterSet):
         model = FundinventarKonvolutnummern
         fields = [
             'id',
+            'convolute_inventory_number',
+            'convolute_subnumber',
             'excavation_object_id',
             'archaeological_object_id',
             'access',
+            'relatedto',
             'creator_metadata',
             'digitisation_comment',
             ]
 
 
 class FundinventarMaterialprobenListFilter(django_filters.FilterSet):
+    material_sample_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarMaterialproben._meta.get_field('material_sample_inventory_number').help_text,
+        label=FundinventarMaterialproben._meta.get_field('material_sample_inventory_number').verbose_name
+    )
     digitisation_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=FundinventarMaterialproben._meta.get_field('digitisation_comment').help_text,
@@ -700,6 +1371,7 @@ class FundinventarMaterialprobenListFilter(django_filters.FilterSet):
         model = FundinventarMaterialproben
         fields = [
             'id',
+            'material_sample_inventory_number',
             'find_material',
             'find_type',
             'excavation_object_id',
@@ -712,6 +1384,11 @@ class FundinventarMaterialprobenListFilter(django_filters.FilterSet):
 
 
 class FundinventarSteininventarListFilter(django_filters.FilterSet):
+    find_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarSteininventar._meta.get_field('find_inventory_number').help_text,
+        label=FundinventarSteininventar._meta.get_field('find_inventory_number').verbose_name
+    )
     find_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=FundinventarSteininventar._meta.get_field('find_comment').help_text,
@@ -727,6 +1404,7 @@ class FundinventarSteininventarListFilter(django_filters.FilterSet):
         model = FundinventarSteininventar
         fields = [
             'id',
+            'find_inventory_number',
             'find_material',
             'find_type',
             'find_comment',
@@ -739,6 +1417,36 @@ class FundinventarSteininventarListFilter(django_filters.FilterSet):
 
 
 class GISListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=GIS._meta.get_field('filename').help_text,
+        label=GIS._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=GIS._meta.get_field('document_id').help_text,
+        label=GIS._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=GIS._meta.get_field('document_title').help_text,
+        label=GIS._meta.get_field('document_title').verbose_name
+    )
+    path_filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=GIS._meta.get_field('path_filename_old').help_text,
+        label=GIS._meta.get_field('path_filename_old').verbose_name
+    )
+    path_filename_arche = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=GIS._meta.get_field('path_filename_arche').help_text,
+        label=GIS._meta.get_field('path_filename_arche').verbose_name
+    )
+    software_used = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=GIS._meta.get_field('software_used').help_text,
+        label=GIS._meta.get_field('software_used').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=GIS._meta.get_field('original_comment').help_text,
@@ -754,11 +1462,17 @@ class GISListFilter(django_filters.FilterSet):
         model = GIS
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
+            'path_filename_old',
+            'path_filename_arche',
             'document_type',
             'dt_abbr',
             'document_subtype',
             'dst_abbr',
             'creation_date_original',
+            'software_used',
             'creation_date_archivalobject',
             'file_extension_original',
             'file_extension_archivalobject',
@@ -779,6 +1493,31 @@ class GISListFilter(django_filters.FilterSet):
 
 
 class GeophysicsListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Geophysics._meta.get_field('filename').help_text,
+        label=Geophysics._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Geophysics._meta.get_field('document_id').help_text,
+        label=Geophysics._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Geophysics._meta.get_field('document_title').help_text,
+        label=Geophysics._meta.get_field('document_title').verbose_name
+    )
+    filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Geophysics._meta.get_field('filename_old').help_text,
+        label=Geophysics._meta.get_field('filename_old').verbose_name
+    )
+    path_filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Geophysics._meta.get_field('path_filename_old').help_text,
+        label=Geophysics._meta.get_field('path_filename_old').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Geophysics._meta.get_field('original_comment').help_text,
@@ -794,6 +1533,10 @@ class GeophysicsListFilter(django_filters.FilterSet):
         model = Geophysics
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
+            'filename_old',
             'document_type',
             'dt_abbr',
             'document_subtype',
@@ -809,6 +1552,7 @@ class GeophysicsListFilter(django_filters.FilterSet):
             'creator_original',
             'copyright',
             'access',
+            'path_filename_old',
             'site_id',
             'creator_archivalobject',
             'excavation_object_id',
@@ -819,6 +1563,36 @@ class GeophysicsListFilter(django_filters.FilterSet):
 
 
 class InventorybooksListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Inventorybooks._meta.get_field('filename').help_text,
+        label=Inventorybooks._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Inventorybooks._meta.get_field('document_id').help_text,
+        label=Inventorybooks._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Inventorybooks._meta.get_field('document_title').help_text,
+        label=Inventorybooks._meta.get_field('document_title').verbose_name
+    )
+    filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Inventorybooks._meta.get_field('filename_old').help_text,
+        label=Inventorybooks._meta.get_field('filename_old').verbose_name
+    )
+    creation_year_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Inventorybooks._meta.get_field('creation_year_original').help_text,
+        label=Inventorybooks._meta.get_field('creation_year_original').verbose_name
+    )
+    storage_folder_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Inventorybooks._meta.get_field('storage_folder_original').help_text,
+        label=Inventorybooks._meta.get_field('storage_folder_original').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Inventorybooks._meta.get_field('original_comment').help_text,
@@ -829,9 +1603,14 @@ class InventorybooksListFilter(django_filters.FilterSet):
         model = Inventorybooks
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
+            'filename_old',
             'document_type',
             'dt_abbr',
             'creation_date_original',
+            'creation_year_original',
             'creation_date_scan',
             'file_extension',
             'creation_date_metadata',
@@ -839,6 +1618,7 @@ class InventorybooksListFilter(django_filters.FilterSet):
             'creator_original',
             'copyright',
             'access',
+            'storage_folder_original',
             'site_id',
             'equipment_scan',
             'source_original_copy_edited_copy',
@@ -854,11 +1634,23 @@ class InventorybooksListFilter(django_filters.FilterSet):
 
 
 class PhasenIDListFilter(django_filters.FilterSet):
+    phase_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=PhasenID._meta.get_field('phase_id').help_text,
+        label=PhasenID._meta.get_field('phase_id').verbose_name
+    )
+    phase_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=PhasenID._meta.get_field('phase_title').help_text,
+        label=PhasenID._meta.get_field('phase_title').verbose_name
+    )
 
     class Meta:
         model = PhasenID
         fields = [
             'id',
+            'phase_id',
+            'phase_title',
             'phase_type',
             'site_id',
             'area',
@@ -866,6 +1658,36 @@ class PhasenIDListFilter(django_filters.FilterSet):
 
 
 class ProtocolsListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('filename').help_text,
+        label=Protocols._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('document_id').help_text,
+        label=Protocols._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('document_title').help_text,
+        label=Protocols._meta.get_field('document_title').verbose_name
+    )
+    filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('filename_old').help_text,
+        label=Protocols._meta.get_field('filename_old').verbose_name
+    )
+    creation_year_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('creation_year_original').help_text,
+        label=Protocols._meta.get_field('creation_year_original').verbose_name
+    )
+    storage_folder_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('storage_folder_original').help_text,
+        label=Protocols._meta.get_field('storage_folder_original').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Protocols._meta.get_field('original_comment').help_text,
@@ -881,9 +1703,14 @@ class ProtocolsListFilter(django_filters.FilterSet):
         model = Protocols
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
+            'filename_old',
             'document_type',
             'dt_abbr',
             'creation_date_original',
+            'creation_year_original',
             'creation_date_scan',
             'file_extension',
             'creation_date_metadata',
@@ -891,6 +1718,7 @@ class ProtocolsListFilter(django_filters.FilterSet):
             'creator_original',
             'copyright',
             'access',
+            'storage_folder_original',
             'storage',
             'site_id',
             'equipment_scan',
@@ -908,11 +1736,23 @@ class ProtocolsListFilter(django_filters.FilterSet):
 
 
 class StratenIDListFilter(django_filters.FilterSet):
+    stratum_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=StratenID._meta.get_field('stratum_id').help_text,
+        label=StratenID._meta.get_field('stratum_id').verbose_name
+    )
+    stratum_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=StratenID._meta.get_field('stratum_title').help_text,
+        label=StratenID._meta.get_field('stratum_title').verbose_name
+    )
 
     class Meta:
         model = StratenID
         fields = [
             'id',
+            'stratum_id',
+            'stratum_title',
             'stratum_type',
             'site_id',
             'area',
@@ -920,15 +1760,51 @@ class StratenIDListFilter(django_filters.FilterSet):
 
 
 class TDInv4DPuzzleNUMMERListFilter(django_filters.FilterSet):
+    tdinv4dpuzzlenummer_f = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=TDInv4DPuzzleNUMMER._meta.get_field('tdinv4dpuzzlenummer_f').help_text,
+        label=TDInv4DPuzzleNUMMER._meta.get_field('tdinv4dpuzzlenummer_f').verbose_name
+    )
 
     class Meta:
         model = TDInv4DPuzzleNUMMER
         fields = [
             'id',
+            'tdinv4dpuzzlenummer_f',
             ]
 
 
 class TablesListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Tables._meta.get_field('filename').help_text,
+        label=Tables._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Tables._meta.get_field('document_id').help_text,
+        label=Tables._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Tables._meta.get_field('document_title').help_text,
+        label=Tables._meta.get_field('document_title').verbose_name
+    )
+    path_filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Tables._meta.get_field('path_filename_old').help_text,
+        label=Tables._meta.get_field('path_filename_old').verbose_name
+    )
+    creation_year_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Tables._meta.get_field('creation_year_original').help_text,
+        label=Tables._meta.get_field('creation_year_original').verbose_name
+    )
+    folder_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Tables._meta.get_field('folder_original').help_text,
+        label=Tables._meta.get_field('folder_original').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Tables._meta.get_field('original_comment').help_text,
@@ -944,10 +1820,96 @@ class TablesListFilter(django_filters.FilterSet):
         model = Tables
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
+            'path_filename_old',
             'document_type',
             'dt_abbr',
             'document_subtype',
             'dst_abbr',
+            'creation_year_original',
+            'creation_date_archivalobject',
+            'file_extension_original',
+            'file_extension_archivalobject',
+            'creation_date_metadata',
+            'creator_metadata',
+            'creator_original',
+            'copyright',
+            'access',
+            'folder_original',
+            'site_id',
+            'creator_archivalobject',
+            'excavation_object_id',
+            'archaeological_object_id',
+            'relatedto',
+            'excavation_post_excavation',
+            'original_comment',
+            'digitisation_comment',
+            ]
+
+
+class ThreeDimensionalModelListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('filename').help_text,
+        label=ThreeDimensionalModel._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('document_id').help_text,
+        label=ThreeDimensionalModel._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('document_title').help_text,
+        label=ThreeDimensionalModel._meta.get_field('document_title').verbose_name
+    )
+    path_filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('path_filename_old').help_text,
+        label=ThreeDimensionalModel._meta.get_field('path_filename_old').verbose_name
+    )
+    creation_year_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('creation_year_original').help_text,
+        label=ThreeDimensionalModel._meta.get_field('creation_year_original').verbose_name
+    )
+    software_used = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('software_used').help_text,
+        label=ThreeDimensionalModel._meta.get_field('software_used').verbose_name
+    )
+    relatedto = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('relatedto').help_text,
+        label=ThreeDimensionalModel._meta.get_field('relatedto').verbose_name
+    )
+    original_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('original_comment').help_text,
+        label=ThreeDimensionalModel._meta.get_field('original_comment').verbose_name
+    )
+    digitisation_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('digitisation_comment').help_text,
+        label=ThreeDimensionalModel._meta.get_field('digitisation_comment').verbose_name
+    )
+
+    class Meta:
+        model = ThreeDimensionalModel
+        fields = [
+            'id',
+            'filename',
+            'document_id',
+            'document_title',
+            'path_filename_old',
+            'document_type',
+            'dt_abbr',
+            'document_subtype',
+            'dst_abbr',
+            'creation_year_original',
+            'software_used',
             'creation_date_archivalobject',
             'file_extension_original',
             'file_extension_archivalobject',
@@ -967,45 +1929,32 @@ class TablesListFilter(django_filters.FilterSet):
             ]
 
 
-class ThreeDimensionalModelListFilter(django_filters.FilterSet):
-    original_comment = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=ThreeDimensionalModel._meta.get_field('original_comment').help_text,
-        label=ThreeDimensionalModel._meta.get_field('original_comment').verbose_name
-    )
-    digitisation_comment = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=ThreeDimensionalModel._meta.get_field('digitisation_comment').help_text,
-        label=ThreeDimensionalModel._meta.get_field('digitisation_comment').verbose_name
-    )
-
-    class Meta:
-        model = ThreeDimensionalModel
-        fields = [
-            'id',
-            'document_type',
-            'dt_abbr',
-            'document_subtype',
-            'dst_abbr',
-            'creation_date_archivalobject',
-            'file_extension_original',
-            'file_extension_archivalobject',
-            'creation_date_metadata',
-            'creator_metadata',
-            'creator_original',
-            'copyright',
-            'access',
-            'site_id',
-            'creator_archivalobject',
-            'excavation_object_id',
-            'archaeological_object_id',
-            'excavation_post_excavation',
-            'original_comment',
-            'digitisation_comment',
-            ]
-
-
 class VideosListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Videos._meta.get_field('filename').help_text,
+        label=Videos._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Videos._meta.get_field('document_id').help_text,
+        label=Videos._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Videos._meta.get_field('document_title').help_text,
+        label=Videos._meta.get_field('document_title').verbose_name
+    )
+    path_filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Videos._meta.get_field('path_filename_old').help_text,
+        label=Videos._meta.get_field('path_filename_old').verbose_name
+    )
+    path_filename_arche = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Videos._meta.get_field('path_filename_arche').help_text,
+        label=Videos._meta.get_field('path_filename_arche').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Videos._meta.get_field('original_comment').help_text,
@@ -1021,6 +1970,9 @@ class VideosListFilter(django_filters.FilterSet):
         model = Videos
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
             'document_type',
             'dt_abbr',
             'document_subtype',
@@ -1035,6 +1987,8 @@ class VideosListFilter(django_filters.FilterSet):
             'creator_archivalobject',
             'copyright',
             'access',
+            'path_filename_old',
+            'path_filename_arche',
             'site_id',
             'find_inventory_number',
             'excavation_object_id',
@@ -1045,6 +1999,41 @@ class VideosListFilter(django_filters.FilterSet):
 
 
 class WallpaintingInventoryListFilter(django_filters.FilterSet):
+    filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('filename').help_text,
+        label=WallpaintingInventory._meta.get_field('filename').verbose_name
+    )
+    document_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('document_id').help_text,
+        label=WallpaintingInventory._meta.get_field('document_id').verbose_name
+    )
+    document_title = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('document_title').help_text,
+        label=WallpaintingInventory._meta.get_field('document_title').verbose_name
+    )
+    filename_old = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('filename_old').help_text,
+        label=WallpaintingInventory._meta.get_field('filename_old').verbose_name
+    )
+    creation_year_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('creation_year_original').help_text,
+        label=WallpaintingInventory._meta.get_field('creation_year_original').verbose_name
+    )
+    storage_folder_original = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('storage_folder_original').help_text,
+        label=WallpaintingInventory._meta.get_field('storage_folder_original').verbose_name
+    )
+    fresco_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('fresco_inventory_number').help_text,
+        label=WallpaintingInventory._meta.get_field('fresco_inventory_number').verbose_name
+    )
     original_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=WallpaintingInventory._meta.get_field('original_comment').help_text,
@@ -1060,9 +2049,14 @@ class WallpaintingInventoryListFilter(django_filters.FilterSet):
         model = WallpaintingInventory
         fields = [
             'id',
+            'filename',
+            'document_id',
+            'document_title',
+            'filename_old',
             'document_type',
             'dt_abbr',
             'creation_date_original',
+            'creation_year_original',
             'creation_date_scan',
             'file_extension',
             'creation_date_metadata',
@@ -1070,12 +2064,14 @@ class WallpaintingInventoryListFilter(django_filters.FilterSet):
             'creator_original',
             'copyright',
             'access',
+            'storage_folder_original',
             'site_id',
             'equipment_scan',
             'source_original_copy_edited_copy',
             'resolution_scan_dpi',
             'creator_scan',
             'original_material',
+            'fresco_inventory_number',
             'excavation_post_excavation',
             'original_comment',
             'digitisation_comment',

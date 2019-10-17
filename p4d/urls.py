@@ -29,14 +29,4 @@ urlpatterns = [
     url(r'^', include('webpage.urls', namespace='webpage')),
 ]
 
-if 'bib' in settings.INSTALLED_APPS:
-    urlpatterns.append(
-        url(r'^bib/', include('bib.urls', namespace='bib')),
-    )
-
-if 'sparql' in settings.INSTALLED_APPS:
-    urlpatterns.append(
-        url(r'^sparql/', include('sparql.urls', namespace='sparql')),
-    )
-
 handler404 = 'webpage.views.handler404'

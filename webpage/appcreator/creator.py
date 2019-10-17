@@ -61,6 +61,8 @@ def xlsx_to_classdicts(file):
                     field['field_type'] = "DateField"
                 elif row['field type'] == "Boolean":
                     field['field_type'] = "BooleanField"
+                elif row['field type'] == "CharField":
+                    field['field_type'] = "CharField"
                 elif row['field type'] == "ChoiceField":
                     if isinstance(row['choices'], str):
                         field['choices'] = ast.literal_eval(row['choices'])
@@ -69,8 +71,12 @@ def xlsx_to_classdicts(file):
                     continue
                 if isinstance(row['verbose field name'], str):
                     field['field_verbose_name'] = row['verbose field name']
+                else:
+                    field['field_verbose_name'] = field_name
                 if isinstance(row['helptext'], str):
                     field['field_helptext'] = row['helptext']
+                else:
+                    field['field_helptext'] = f"helptext for {field_name}"
 
                 class_dict['model_fields'].append(field)
         yield class_dict
