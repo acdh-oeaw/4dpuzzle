@@ -41,3 +41,6 @@ pg_local*
 
 
 output_*
+data/*
+
+prepare_lueckentexte.ipynb
