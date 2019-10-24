@@ -9,8 +9,14 @@ https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/
 
 import os
 
+import sys
+
+sys.path.append('/var/www/html')
+sys.path.append('/var/www/html/p4d/myenv/lib/python3.6/site-packages')
+
+
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "p4d.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "p4d.settings.server")
 
 application = get_wsgi_application()
