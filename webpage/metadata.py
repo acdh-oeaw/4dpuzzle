@@ -11,7 +11,7 @@ PROJECT_METADATA = {
     'purpose_de': 'Webapplikation',
     'purpose_en': 'Web App',
     'version': '0.0.1',
-    'matomo_id': '67',
+    'matomo_id': '160',
     'matomo_url': '//matomo.acdh.oeaw.ac.at/',
     'imprint': '/imprint',
     'social_media': [
