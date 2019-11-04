@@ -61,7 +61,7 @@ class ActorFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'first_name','last_name','drawer_monogram','excavation','xx_4dpuzzle','year','access',
+                    'name','drawer_monogram','excavation','xx_4dpuzzle','year','access',
                     css_id="more"
                     ),
                 )
@@ -490,7 +490,7 @@ class ExcavationObjectIDFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'excavation_object_id','excavation_object_type','site_id','area','square_trench','planum','profile_orientation','year','season','creator_metadata','digitisation_comment',
+                    'excavation_object_id','excavation_object_type','site_id','area','square_trench','planum','profile_orientation','year','season','part_of_excavation_object_id','creator_metadata','digitisation_comment',
                     css_id="more"
                     ),
                 )
@@ -607,7 +607,7 @@ class FilmFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'film_id','creation_year_original','film_number','addition_film_identifier','document_type','dt_abbr','document_subtype','dst_abbr','creation_date_metadata','creator_metadata','contact_print_present','enlargements_present','film_format','film_brand','equipment_camera_brand','foto_numbers_missing','decomposition_phenomenon','acetic_acid_smell','original_material','storage_folder_original','original_comment',
+                    'film_id','creation_year_original','film_number','addition_film_identifier','document_type','dt_abbr','document_subtype','dst_abbr','creation_date_metadata','creator_metadata','contact_print_present','enlargements_present','film_format','film_brand','equipment_camera_brand','foto_numbers_missing','decomposition_phenomenon','acetic_acid_smell','original_material','storage_folder_original','original_comment','digitisation_comment',
                     css_id="more"
                     ),
                 )
@@ -919,7 +919,7 @@ class FundinventarInventarnummernFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'find_inventory_number','find_local_number','convolute_inventory_number','find_material','find_type','find_comment','excavation_object_id','archaeological_object_id','storage_find','access','uncertainty_excavation_digitisation','creator_metadata','digitisation_comment',
+                    'find_inventory_number','find_local_number','convolute_inventory_number','corresponding_to_inventory_number','find_material','find_type','find_comment','excavation_object_id','archaeological_object_id','storage_find','access','uncertainty_excavation_digitisation','creator_metadata','digitisation_comment',
                     css_id="more"
                     ),
                 )
@@ -1231,7 +1231,7 @@ class ProtocolsFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'filename','document_id','document_title','filename_old','document_type','dt_abbr','creation_date_original','creation_year_original','creation_date_scan','file_extension','creation_date_metadata','creator_metadata','creator_original','copyright','access','storage_folder_original','storage','site_id','equipment_scan','source_original_copy_edited_copy','resolution_scan_dpi','creator_scan','original_material','excavation_object_id','archaeological_object_id','number_of_pages','excavation_post_excavation','original_comment','digitisation_comment',
+                    'filename','document_id','document_title','filename_old','document_type','dt_abbr','creation_date_original','creation_year_original','creation_date_scan','file_extension','creation_date_metadata','creator_metadata','creator_original','copyright','access','storage_folder_original','storage','site_id','equipment_scan','source_original_copy_edited_copy','resolution_scan_dpi','creator_scan','original_material','excavation_object_id','archaeological_object_id','number_of_pages','excavation_post_excavation','original_comment',
                     css_id="more"
                     ),
                 )

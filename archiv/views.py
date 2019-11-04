@@ -56,7 +56,7 @@ class ActorListView(GenericListView):
     formhelper_class = ActorFilterFormHelper
     table_class = ActorTable
     init_columns = [
-        'id',
+        'id', 'name',
     ]
 
 
@@ -103,7 +103,7 @@ class ArchaeologicalObject4DPuzzleIDListView(GenericListView):
     formhelper_class = ArchaeologicalObject4DPuzzleIDFilterFormHelper
     table_class = ArchaeologicalObject4DPuzzleIDTable
     init_columns = [
-        'id',
+        'id', 'archaeological_object_id',
     ]
 
 
@@ -150,7 +150,7 @@ class ArchaeologicalObjectIDListView(GenericListView):
     formhelper_class = ArchaeologicalObjectIDFilterFormHelper
     table_class = ArchaeologicalObjectIDTable
     init_columns = [
-        'id',
+        'id', 'archaeological_object_id',
     ]
 
 
@@ -197,7 +197,7 @@ class ArchiveINFListView(GenericListView):
     formhelper_class = ArchiveINFFilterFormHelper
     table_class = ArchiveINFTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -244,7 +244,7 @@ class AutoCADListView(GenericListView):
     formhelper_class = AutoCADFilterFormHelper
     table_class = AutoCADTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -385,7 +385,7 @@ class ConvolutecardsListView(GenericListView):
     formhelper_class = ConvolutecardsFilterFormHelper
     table_class = ConvolutecardsTable
     init_columns = [
-        'id',
+        'id', 'filename_document_id',
     ]
 
 
@@ -432,7 +432,7 @@ class DatenbaseListView(GenericListView):
     formhelper_class = DatenbaseFilterFormHelper
     table_class = DatenbaseTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -479,7 +479,7 @@ class Document4DPuzzleIDListView(GenericListView):
     formhelper_class = Document4DPuzzleIDFilterFormHelper
     table_class = Document4DPuzzleIDTable
     init_columns = [
-        'id',
+        'id', 'document_id',
     ]
 
 
@@ -526,7 +526,7 @@ class DocumentTypesListView(GenericListView):
     formhelper_class = DocumentTypesFilterFormHelper
     table_class = DocumentTypesTable
     init_columns = [
-        'id',
+        'id', 'document_type + document_subtype',
     ]
 
 
@@ -573,7 +573,7 @@ class ExcavationObjectIDListView(GenericListView):
     formhelper_class = ExcavationObjectIDFilterFormHelper
     table_class = ExcavationObjectIDTable
     init_columns = [
-        'id',
+        'id', 'excavation_object_id',
     ]
 
 
@@ -620,7 +620,7 @@ class ExcavationSeasonsListView(GenericListView):
     formhelper_class = ExcavationSeasonsFilterFormHelper
     table_class = ExcavationSeasonsTable
     init_columns = [
-        'id',
+        'id', 'grabungskampagnen',
     ]
 
 
@@ -667,7 +667,7 @@ class FielddrawingListView(GenericListView):
     formhelper_class = FielddrawingFilterFormHelper
     table_class = FielddrawingTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -714,7 +714,7 @@ class FilmListView(GenericListView):
     formhelper_class = FilmFilterFormHelper
     table_class = FilmTable
     init_columns = [
-        'id',
+        'id', 'film_id',
     ]
 
 
@@ -855,7 +855,7 @@ class FinddrawingListView(GenericListView):
     formhelper_class = FinddrawingFilterFormHelper
     table_class = FinddrawingTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -902,7 +902,7 @@ class FindsheetsListView(GenericListView):
     formhelper_class = FindsheetsFilterFormHelper
     table_class = FindsheetsTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -949,7 +949,7 @@ class FotoborndigitalListView(GenericListView):
     formhelper_class = FotoborndigitalFilterFormHelper
     table_class = FotoborndigitalTable
     init_columns = [
-        'id',
+        'id', 'folder_name',
     ]
 
 
@@ -996,7 +996,7 @@ class FotosgescanntListView(GenericListView):
     formhelper_class = FotosgescanntFilterFormHelper
     table_class = FotosgescanntTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -1043,7 +1043,7 @@ class Fundinventar4DPuzzleIDListView(GenericListView):
     formhelper_class = Fundinventar4DPuzzleIDFilterFormHelper
     table_class = Fundinventar4DPuzzleIDTable
     init_columns = [
-        'id',
+        'id', 'find_inventory_4dpuzzle_number',
     ]
 
 
@@ -1090,7 +1090,7 @@ class FundinventarInventarnummernListView(GenericListView):
     formhelper_class = FundinventarInventarnummernFilterFormHelper
     table_class = FundinventarInventarnummernTable
     init_columns = [
-        'id',
+        'id', 'find_inventory_number',
     ]
 
 
@@ -1137,7 +1137,7 @@ class FundinventarKonvolutnummernListView(GenericListView):
     formhelper_class = FundinventarKonvolutnummernFilterFormHelper
     table_class = FundinventarKonvolutnummernTable
     init_columns = [
-        'id',
+        'id', 'convolute_inventory_number',
     ]
 
 
@@ -1184,7 +1184,7 @@ class FundinventarMaterialprobenListView(GenericListView):
     formhelper_class = FundinventarMaterialprobenFilterFormHelper
     table_class = FundinventarMaterialprobenTable
     init_columns = [
-        'id',
+        'id', 'material_sample_inventory_number',
     ]
 
 
@@ -1231,7 +1231,7 @@ class FundinventarSteininventarListView(GenericListView):
     formhelper_class = FundinventarSteininventarFilterFormHelper
     table_class = FundinventarSteininventarTable
     init_columns = [
-        'id',
+        'id', 'find_inventory_number',
     ]
 
 
@@ -1278,7 +1278,7 @@ class GISListView(GenericListView):
     formhelper_class = GISFilterFormHelper
     table_class = GISTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -1325,7 +1325,7 @@ class GeophysicsListView(GenericListView):
     formhelper_class = GeophysicsFilterFormHelper
     table_class = GeophysicsTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -1372,7 +1372,7 @@ class InventorybooksListView(GenericListView):
     formhelper_class = InventorybooksFilterFormHelper
     table_class = InventorybooksTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -1466,7 +1466,7 @@ class ProtocolsListView(GenericListView):
     formhelper_class = ProtocolsFilterFormHelper
     table_class = ProtocolsTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -1607,7 +1607,7 @@ class TablesListView(GenericListView):
     formhelper_class = TablesFilterFormHelper
     table_class = TablesTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -1654,7 +1654,7 @@ class ThreeDimensionalModelListView(GenericListView):
     formhelper_class = ThreeDimensionalModelFilterFormHelper
     table_class = ThreeDimensionalModelTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -1701,7 +1701,7 @@ class VideosListView(GenericListView):
     formhelper_class = VideosFilterFormHelper
     table_class = VideosTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 
@@ -1748,7 +1748,7 @@ class WallpaintingInventoryListView(GenericListView):
     formhelper_class = WallpaintingInventoryFilterFormHelper
     table_class = WallpaintingInventoryTable
     init_columns = [
-        'id',
+        'id', 'filename',
     ]
 
 

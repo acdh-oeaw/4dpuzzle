@@ -168,6 +168,7 @@ class ExcavationObjectIDTable(tables.Table):
     id = tables.LinkColumn(verbose_name='ID')
     year = tables.columns.ManyToManyColumn()
     season = tables.columns.ManyToManyColumn()
+    part_of_excavation_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = ExcavationObjectID
@@ -237,6 +238,8 @@ class FindInventoryNumberTable(tables.Table):
 class FinddrawingTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
+    document_subtype = tables.columns.ManyToManyColumn()
+    dst_abbr = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Finddrawing
@@ -436,6 +439,8 @@ class TablesTable(tables.Table):
 class ThreeDimensionalModelTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
+    document_subtype = tables.columns.ManyToManyColumn()
+    dst_abbr = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 

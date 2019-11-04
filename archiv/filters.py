@@ -43,15 +43,10 @@ from . models import (
 
 
 class ActorListFilter(django_filters.FilterSet):
-    first_name = django_filters.CharFilter(
+    name = django_filters.CharFilter(
         lookup_expr='icontains',
-        help_text=Actor._meta.get_field('first_name').help_text,
-        label=Actor._meta.get_field('first_name').verbose_name
-    )
-    last_name = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=Actor._meta.get_field('last_name').help_text,
-        label=Actor._meta.get_field('last_name').verbose_name
+        help_text=Actor._meta.get_field('name').help_text,
+        label=Actor._meta.get_field('name').verbose_name
     )
     drawer_monogram = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -78,8 +73,7 @@ class ActorListFilter(django_filters.FilterSet):
         model = Actor
         fields = [
             'id',
-            'first_name',
-            'last_name',
+            'name',
             'drawer_monogram',
             'excavation',
             'xx_4dpuzzle',
@@ -642,6 +636,7 @@ class ExcavationObjectIDListFilter(django_filters.FilterSet):
             'profile_orientation',
             'year',
             'season',
+            'part_of_excavation_object_id',
             'creator_metadata',
             'digitisation_comment',
             ]
@@ -835,6 +830,11 @@ class FilmListFilter(django_filters.FilterSet):
         help_text=Film._meta.get_field('original_comment').help_text,
         label=Film._meta.get_field('original_comment').verbose_name
     )
+    digitisation_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('digitisation_comment').help_text,
+        label=Film._meta.get_field('digitisation_comment').verbose_name
+    )
 
     class Meta:
         model = Film
@@ -861,6 +861,7 @@ class FilmListFilter(django_filters.FilterSet):
             'original_material',
             'storage_folder_original',
             'original_comment',
+            'digitisation_comment',
             ]
 
 
@@ -1159,6 +1160,11 @@ class FotosgescanntListFilter(django_filters.FilterSet):
         help_text=Fotosgescannt._meta.get_field('filename_old').help_text,
         label=Fotosgescannt._meta.get_field('filename_old').verbose_name
     )
+    photo_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('photo_number').help_text,
+        label=Fotosgescannt._meta.get_field('photo_number').verbose_name
+    )
     creation_year_original = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Fotosgescannt._meta.get_field('creation_year_original').help_text,
@@ -1305,6 +1311,7 @@ class FundinventarInventarnummernListFilter(django_filters.FilterSet):
             'find_inventory_number',
             'find_local_number',
             'convolute_inventory_number',
+            'corresponding_to_inventory_number',
             'find_material',
             'find_type',
             'find_comment',
@@ -1693,11 +1700,6 @@ class ProtocolsListFilter(django_filters.FilterSet):
         help_text=Protocols._meta.get_field('original_comment').help_text,
         label=Protocols._meta.get_field('original_comment').verbose_name
     )
-    digitisation_comment = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=Protocols._meta.get_field('digitisation_comment').help_text,
-        label=Protocols._meta.get_field('digitisation_comment').verbose_name
-    )
 
     class Meta:
         model = Protocols
@@ -1731,7 +1733,6 @@ class ProtocolsListFilter(django_filters.FilterSet):
             'number_of_pages',
             'excavation_post_excavation',
             'original_comment',
-            'digitisation_comment',
             ]
 
 

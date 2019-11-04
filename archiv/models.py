@@ -18,30 +18,19 @@ models.Field.set_extra = set_extra
 
 
 class Actor(models.Model):
-    """ Person involved in TD excavations and/or A Puzzle in 4D project """
+    ### Person involved in TD excavations and/or A Puzzle in 4D project ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
-    first_name = models.CharField(
+    name = models.CharField(
         max_length=250,
         blank=True,
-        verbose_name="First name",
-        help_text="helptext for first_name",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv\archiv\4DP_Metadaten_Actors\Actors.csv__first_name",
-        arche_prop="acdh:hasFirstName",
-    )
-    last_name = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Last name",
-        help_text="helptext for last_name",
+        verbose_name="Name",
+        help_text="helptext for name",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv\archiv\4DP_Metadaten_Actors\Actors.csv__last_name",
-        arche_prop="acdh:hasLastName",
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Actors\Actors.csv__first_name",
     )
     drawer_monogram = models.CharField(
         max_length=250,
@@ -50,6 +39,7 @@ class Actor(models.Model):
         help_text="helptext for drawer_monogram",
     ).set_extra(
         is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Actors\Actors.csv__drawer_monogram",
     )
     excavation = models.CharField(
         max_length=250,
@@ -94,12 +84,12 @@ class Actor(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'name',
         ]
         verbose_name = "Actors"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.name)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -144,7 +134,7 @@ class Actor(models.Model):
 
 
 class ArchaeologicalObject4DPuzzleID(models.Model):
-    """ A 4DPuzzleID was created for archaeological objects that did not have an ID """
+    ### A 4DPuzzleID was created for archaeological objects that did not have an ID ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -232,12 +222,12 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'archaeological_object_id',
         ]
         verbose_name = "ArchaeologicalObject4DPuzzleID"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.archaeological_object_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -282,7 +272,7 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
 
 
 class ArchaeologicalObjectID(models.Model):
-    """ ID of archaeological object  """
+    ### ID of archaeological object  ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -414,12 +404,12 @@ class ArchaeologicalObjectID(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'archaeological_object_id',
         ]
         verbose_name = "ArchaeologicalObjectID"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.archaeological_object_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -464,7 +454,7 @@ class ArchaeologicalObjectID(models.Model):
 
 
 class ArchiveINF(models.Model):
-    """ Document with information about the Tell el-Daba documentation archive """
+    ### Document with information about the Tell el-Daba documentation archive ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -653,12 +643,12 @@ class ArchiveINF(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "Archive information"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -703,7 +693,7 @@ class ArchiveINF(models.Model):
 
 
 class AutoCAD(models.Model):
-    """ AutoCAD Files """
+    ### AutoCAD Files ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -979,12 +969,12 @@ class AutoCAD(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "AutoCAD"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1029,7 +1019,7 @@ class AutoCAD(models.Model):
 
 
 class BoneInventoryNumber(models.Model):
-    """ nan """
+    ### nan ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -1096,7 +1086,7 @@ class BoneInventoryNumber(models.Model):
 
 
 class ConvoluteInventoryNumber(models.Model):
-    """ nan """
+    ### nan ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -1163,7 +1153,7 @@ class ConvoluteInventoryNumber(models.Model):
 
 
 class Convolutecards(models.Model):
-    """ Digitised convolute cards """
+    ### Digitised convolute cards ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -1434,7 +1424,7 @@ class Convolutecards(models.Model):
     lowest_height_meters_standard_elevation_zero = models.CharField(
         max_length=250,
         blank=True,
-        verbose_name="provide some",
+        verbose_name="lowest_height_meters_standard_elevation_zero",
         help_text="helptext for lowest_height_meters_standard_elevation_zero",
     ).set_extra(
         is_public=True,
@@ -1443,7 +1433,7 @@ class Convolutecards(models.Model):
     maximum_height_meters_standard_elevation_zero = models.CharField(
         max_length=250,
         blank=True,
-        verbose_name="provide some",
+        verbose_name="maximum_height_meters_standard_elevation_zero",
         help_text="helptext for maximum_height_meters_standard_elevation_zero",
     ).set_extra(
         is_public=True,
@@ -1481,12 +1471,12 @@ class Convolutecards(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename_document_id',
         ]
         verbose_name = "Convolute cards"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename_document_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1531,7 +1521,7 @@ class Convolutecards(models.Model):
 
 
 class Datenbase(models.Model):
-    """ Database files """
+    ### Database files ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -1819,12 +1809,12 @@ class Datenbase(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "Database"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1869,7 +1859,7 @@ class Datenbase(models.Model):
 
 
 class Document4DPuzzleID(models.Model):
-    """ A 4DPuzzleID was created for documents that did not have an ID """
+    ### A 4DPuzzleID was created for documents that did not have an ID ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -1982,12 +1972,12 @@ class Document4DPuzzleID(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'document_id',
         ]
         verbose_name = "Document 4DPuzzle ID"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.document_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2032,7 +2022,7 @@ class Document4DPuzzleID(models.Model):
 
 
 class DocumentTypes(models.Model):
-    """ Types of documents  """
+    ### Types of documents  ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -2097,12 +2087,12 @@ class DocumentTypes(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'document_type',
         ]
         verbose_name = "Document types"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{} >> {}".format(self.document_type, self.document_subtype)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2147,7 +2137,7 @@ class DocumentTypes(models.Model):
 
 
 class ExcavationObjectID(models.Model):
-    """ ID of excavation object (area, square etc.) """
+    ### ID of excavation object (area, square etc.) ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -2250,6 +2240,16 @@ class ExcavationObjectID(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Metadaten\Excavation_object_ID.csv__Season",
     )
+    part_of_excavation_object_id = models.ManyToManyField(
+        "ExcavationObjectID",
+        related_name='rvn_excavationobjectid_part_of_excavation_object_id_excavationobjectid',
+        blank=True,
+        verbose_name="Part of another Excavation Object.",
+        help_text="An excavation object which was part of another excavation object.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Metadaten\Excavation_object_ID.csv__Part_of_excavation_object_ID",
+    )
     creator_metadata = models.ForeignKey(
         "Actor",
         related_name='rvn_excavationobjectid_creator_metadata_actor',
@@ -2274,12 +2274,12 @@ class ExcavationObjectID(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'excavation_object_id',
         ]
         verbose_name = "Excavation Objects"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.excavation_object_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2324,7 +2324,7 @@ class ExcavationObjectID(models.Model):
 
 
 class ExcavationSeasons(models.Model):
-    """ Excavation season """
+    ### Excavation season ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -2383,12 +2383,12 @@ class ExcavationSeasons(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'grabungskampagnen',
         ]
         verbose_name = "Excavation Seasons"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.grabungskampagnen)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2433,7 +2433,7 @@ class ExcavationSeasons(models.Model):
 
 
 class Fielddrawing(models.Model):
-    """ Digitised fielddrawing """
+    ### Digitised fielddrawing ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -2870,12 +2870,12 @@ class Fielddrawing(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "Fielddrawing"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2920,7 +2920,7 @@ class Fielddrawing(models.Model):
 
 
 class Film(models.Model):
-    """ Analogue photographic film negatives """
+    ### Analogue photographic film negatives ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -3140,16 +3140,24 @@ class Film(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Filme\Films.csv__Original_comment",
     )
+    digitisation_comment = models.TextField(
+        blank=True,
+        verbose_name="Comment from digitisation",
+        help_text="helptext for digitisation_comment",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Filme\Films.csv__Digitisation_comment",
+    )
 
     class Meta:
 
         ordering = [
-            'id',
+            'film_id',
         ]
         verbose_name = "Photographic Film"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.film_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3194,7 +3202,7 @@ class Film(models.Model):
 
 
 class Filme(models.Model):
-    """ nan """
+    ### nan ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -3261,7 +3269,7 @@ class Filme(models.Model):
 
 
 class FindInventoryNumber(models.Model):
-    """ nan """
+    ### nan ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -3328,7 +3336,7 @@ class FindInventoryNumber(models.Model):
 
 
 class Finddrawing(models.Model):
-    """ Finddrawing """
+    ### Finddrawing ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -3387,22 +3395,18 @@ class Finddrawing(models.Model):
     ).set_extra(
         is_public=True,
     )
-    document_subtype = models.ForeignKey(
+    document_subtype = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_finddrawing_document_subtype_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
         blank=True,
         verbose_name="Document subtype",
         help_text="helptext for document_subtype",
     ).set_extra(
         is_public=True,
     )
-    dst_abbr = models.ForeignKey(
+    dst_abbr = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_finddrawing_dst_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
         blank=True,
         verbose_name="Document subtype abbreviated",
         help_text="helptext for dst_abbr",
@@ -3561,8 +3565,8 @@ class Finddrawing(models.Model):
         is_public=True,
     )
     find_inventory_number = models.ForeignKey(
-        "FindInventoryNumber",
-        related_name='rvn_finddrawing_find_inventory_number_findinventorynumber',
+        "FundinventarInventarnummern",
+        related_name='rvn_finddrawing_find_inventory_number_fundinventarinventarnummern',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3572,8 +3576,8 @@ class Finddrawing(models.Model):
         is_public=True,
     )
     convolute_inventory_number = models.ForeignKey(
-        "ConvoluteInventoryNumber",
-        related_name='rvn_finddrawing_convolute_inventory_number_convoluteinventorynumber',
+        "FundinventarKonvolutnummern",
+        related_name='rvn_finddrawing_convolute_inventory_number_fundinventarkonvolutnummern',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3583,8 +3587,8 @@ class Finddrawing(models.Model):
         is_public=True,
     )
     bone_stone_inventory_number = models.ForeignKey(
-        "BoneInventoryNumber",
-        related_name='rvn_finddrawing_bone_stone_inventory_number_boneinventorynumber',
+        "FundinventarSteininventar",
+        related_name='rvn_finddrawing_bone_stone_inventory_number_fundinventarsteininventar',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3637,12 +3641,12 @@ class Finddrawing(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "Finddrawing"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3687,7 +3691,7 @@ class Finddrawing(models.Model):
 
 
 class Findsheets(models.Model):
-    """ Digitised find sheets """
+    ### Digitised find sheets ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -3926,8 +3930,8 @@ class Findsheets(models.Model):
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundzettel\Find_sheets.csv__Original_material",
     )
     find_inventory_number = models.ForeignKey(
-        "FindInventoryNumber",
-        related_name='rvn_findsheets_find_inventory_number_findinventorynumber',
+        "FundinventarInventarnummern",
+        related_name='rvn_findsheets_find_inventory_number_fundinventarinventarnummern',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3938,8 +3942,8 @@ class Findsheets(models.Model):
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundzettel\Find_sheets.csv__Find_inventory_number",
     )
     convolute_inventory_number = models.ForeignKey(
-        "ConvoluteInventoryNumber",
-        related_name='rvn_findsheets_convolute_inventory_number_convoluteinventorynumber',
+        "FundinventarKonvolutnummern",
+        related_name='rvn_findsheets_convolute_inventory_number_fundinventarkonvolutnummern',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3950,8 +3954,8 @@ class Findsheets(models.Model):
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundzettel\Find_sheets.csv__Convolute_inventory_number",
     )
     bone_stone_inventory_number = models.ForeignKey(
-        "BoneInventoryNumber",
-        related_name='rvn_findsheets_bone_stone_inventory_number_boneinventorynumber',
+        "FundinventarSteininventar",
+        related_name='rvn_findsheets_bone_stone_inventory_number_fundinventarsteininventar',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4015,12 +4019,12 @@ class Findsheets(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "Findsheets"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4065,7 +4069,7 @@ class Findsheets(models.Model):
 
 
 class Fotoborndigital(models.Model):
-    """ Folder with born-digital photos """
+    ### Folder with born-digital photos ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -4272,12 +4276,12 @@ class Fotoborndigital(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'folder_name',
         ]
         verbose_name = "Fotos born digital"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.folder_name)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4322,7 +4326,7 @@ class Fotoborndigital(models.Model):
 
 
 class Fotosgescannt(models.Model):
-    """ Digitised photos """
+    ### Digitised photos ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -4371,8 +4375,9 @@ class Fotosgescannt(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fotos_gescannt\Photos.csv__Film_number",
     )
-    photo_number = models.IntegerField(
-        blank=True, null=True,
+    photo_number = models.CharField(
+        max_length=250,
+        blank=True,
         verbose_name="Photo number",
         help_text="helptext for photo_number",
     ).set_extra(
@@ -4582,8 +4587,8 @@ class Fotosgescannt(models.Model):
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fotos_gescannt\Photos.csv__Pixel_size",
     )
     film_id = models.ForeignKey(
-        "Filme",
-        related_name='rvn_fotosgescannt_film_id_filme',
+        "Film",
+        related_name='rvn_fotosgescannt_film_id_film',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4699,12 +4704,12 @@ class Fotosgescannt(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "Fotos gescannt"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4749,7 +4754,7 @@ class Fotosgescannt(models.Model):
 
 
 class Fundinventar4DPuzzleID(models.Model):
-    """ A 4DPuzzleID was created for find inventories that did not have an ID """
+    ### A 4DPuzzleID was created for find inventories that did not have an ID ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -4855,12 +4860,12 @@ class Fundinventar4DPuzzleID(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'find_inventory_4dpuzzle_number',
         ]
         verbose_name = "Fundinventar 4DPuzzle ID"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.find_inventory_4dpuzzle_number)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4905,7 +4910,7 @@ class Fundinventar4DPuzzleID(models.Model):
 
 
 class FundinventarInventarnummern(models.Model):
-    """ Inventory numbers of find inventories """
+    ### Inventory numbers of find inventories ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -4936,6 +4941,18 @@ class FundinventarInventarnummern(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Inventarnummern\Find_inventory_number.csv__Convolute_inventory_number",
+    )
+    corresponding_to_inventory_number = models.ForeignKey(
+        "FundinventarInventarnummern",
+        related_name='rvn_fundinventarinventarnummern_corresponding_to_inventory_number_fundinventarinventarnummern',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Corresponding to inventory number",
+        help_text="helptext for corresponding_to_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Inventarnummern\Find_inventory_number.csv__Corresponding_to_inventory_number",
     )
     find_material = models.ForeignKey(
         SkosConcept,
@@ -5048,12 +5065,12 @@ class FundinventarInventarnummern(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'find_inventory_number',
         ]
         verbose_name = "Fundinventar Inventarnummern"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.find_inventory_number)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5098,7 +5115,7 @@ class FundinventarInventarnummern(models.Model):
 
 
 class FundinventarKonvolutnummern(models.Model):
-    """ Inventory of convolute numbers """
+    ### Inventory of convolute numbers ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -5186,12 +5203,12 @@ class FundinventarKonvolutnummern(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'convolute_inventory_number',
         ]
         verbose_name = "Fundinventar Konvolutnummern"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.convolute_inventory_number)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5236,7 +5253,7 @@ class FundinventarKonvolutnummern(models.Model):
 
 
 class FundinventarMaterialproben(models.Model):
-    """ Inventory of material samples """
+    ### Inventory of material samples ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -5309,8 +5326,8 @@ class FundinventarMaterialproben(models.Model):
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Access",
     )
     relatedto = models.ForeignKey(
-        "TDInv4DPuzzleNUMMER",
-        related_name='rvn_fundinventarmaterialproben_relatedto_tdinv4dpuzzlenummer',
+        "Fundinventar4DPuzzleID",
+        related_name='rvn_fundinventarmaterialproben_relatedto_fundinventar4dpuzzleid',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5344,12 +5361,12 @@ class FundinventarMaterialproben(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'material_sample_inventory_number',
         ]
         verbose_name = "Fundinventar Materialproben"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.material_sample_inventory_number)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5394,7 +5411,7 @@ class FundinventarMaterialproben(models.Model):
 
 
 class FundinventarSteininventar(models.Model):
-    """ Inventory of stones """
+    ### Inventory of stones ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -5498,12 +5515,12 @@ class FundinventarSteininventar(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'find_inventory_number',
         ]
         verbose_name = "FundinventarSteininventar"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.find_inventory_number)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5548,7 +5565,7 @@ class FundinventarSteininventar(models.Model):
 
 
 class GIS(models.Model):
-    """ Geographical information system """
+    ### Geographical information system ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -5833,12 +5850,12 @@ class GIS(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "GIS"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5883,7 +5900,7 @@ class GIS(models.Model):
 
 
 class Geophysics(models.Model):
-    """ Files from geophysical surveys """
+    ### Files from geophysical surveys ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -6163,12 +6180,12 @@ class Geophysics(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "Geophysics"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -6213,7 +6230,7 @@ class Geophysics(models.Model):
 
 
 class Inventorybooks(models.Model):
-    """ Digitised inventory books """
+    ### Digitised inventory books ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -6449,8 +6466,8 @@ class Inventorybooks(models.Model):
         data_lookup="excel2csv\archiv\4DP_Metadaten_Inventarbuecher\Find_inventory.csv__Original_material",
     )
     find_inventory_number = models.ForeignKey(
-        "FindInventoryNumber",
-        related_name='rvn_inventorybooks_find_inventory_number_findinventorynumber',
+        "FundinventarInventarnummern",
+        related_name='rvn_inventorybooks_find_inventory_number_fundinventarinventarnummern',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6461,8 +6478,8 @@ class Inventorybooks(models.Model):
         data_lookup="excel2csv\archiv\4DP_Metadaten_Inventarbuecher\Find_inventory.csv__Find_inventory_number",
     )
     convolute_inventory_number = models.ForeignKey(
-        "ConvoluteInventoryNumber",
-        related_name='rvn_inventorybooks_convolute_inventory_number_convoluteinventorynumber',
+        "FundinventarKonvolutnummern",
+        related_name='rvn_inventorybooks_convolute_inventory_number_fundinventarkonvolutnummern',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6473,8 +6490,8 @@ class Inventorybooks(models.Model):
         data_lookup="excel2csv\archiv\4DP_Metadaten_Inventarbuecher\Find_inventory.csv__Convolute_inventory_number",
     )
     bone_stone_inventory_number = models.ForeignKey(
-        "BoneInventoryNumber",
-        related_name='rvn_inventorybooks_bone_stone_inventory_number_boneinventorynumber',
+        "FundinventarSteininventar",
+        related_name='rvn_inventorybooks_bone_stone_inventory_number_fundinventarsteininventar',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6508,12 +6525,12 @@ class Inventorybooks(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "Inventory books"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -6558,7 +6575,7 @@ class Inventorybooks(models.Model):
 
 
 class PhasenID(models.Model):
-    """ Identifier of archaeological phases """
+    ### Identifier of archaeological phases ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -6664,7 +6681,7 @@ class PhasenID(models.Model):
 
 
 class Protocols(models.Model):
-    """ Digitised protocols """
+    ### Digitised protocols ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -6961,24 +6978,16 @@ class Protocols(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Protokolle\Protocol.csv__Original_comment",
     )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv\archiv\4DP_Metadaten_Protokolle\Protocol.csv__Digitisation_comment",
-    )
 
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "Protocols"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -7023,7 +7032,7 @@ class Protocols(models.Model):
 
 
 class StratenID(models.Model):
-    """ Identifier of archaeological strata """
+    ### Identifier of archaeological strata ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -7129,7 +7138,7 @@ class StratenID(models.Model):
 
 
 class TDInv4DPuzzleNUMMER(models.Model):
-    """ nan """
+    ### nan ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -7196,7 +7205,7 @@ class TDInv4DPuzzleNUMMER(models.Model):
 
 
 class Tables(models.Model):
-    """ Tables """
+    ### Tables ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -7473,12 +7482,12 @@ class Tables(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "Tables"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -7523,7 +7532,7 @@ class Tables(models.Model):
 
 
 class ThreeDimensionalModel(models.Model):
-    """ 3D models """
+    ### 3D models ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -7588,11 +7597,9 @@ class ThreeDimensionalModel(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_3D\3D_metadata.csv__DT_abbr",
     )
-    document_subtype = models.ForeignKey(
+    document_subtype = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_threedimensionalmodel_document_subtype_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
         blank=True,
         verbose_name="Document subtype",
         help_text="helptext for document_subtype",
@@ -7600,11 +7607,9 @@ class ThreeDimensionalModel(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_3D\3D_metadata.csv__Document_subtype",
     )
-    dst_abbr = models.ForeignKey(
+    dst_abbr = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_threedimensionalmodel_dst_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
         blank=True,
         verbose_name="Document subtype abbreviated",
         help_text="helptext for dst_abbr",
@@ -7803,12 +7808,12 @@ class ThreeDimensionalModel(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "3D models"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -7853,7 +7858,7 @@ class ThreeDimensionalModel(models.Model):
 
 
 class Videos(models.Model):
-    """ Videos """
+    ### Videos ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -8068,8 +8073,8 @@ class Videos(models.Model):
         data_lookup="excel2csv\archiv\4DP_Metadaten_Video\Video_metadata.csv__Site_ID",
     )
     find_inventory_number = models.ForeignKey(
-        "FindInventoryNumber",
-        related_name='rvn_videos_find_inventory_number_findinventorynumber',
+        "FundinventarInventarnummern",
+        related_name='rvn_videos_find_inventory_number_fundinventarinventarnummern',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8119,12 +8124,12 @@ class Videos(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "Videos"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -8169,7 +8174,7 @@ class Videos(models.Model):
 
 
 class WallpaintingInventory(models.Model):
-    """ Digitised inventory of wallpaintings """
+    ### Digitised inventory of wallpaintings ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -8445,12 +8450,12 @@ class WallpaintingInventory(models.Model):
     class Meta:
 
         ordering = [
-            'id',
+            'filename',
         ]
         verbose_name = "Freskeninventar"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.filename)
 
     def field_dict(self):
         return model_to_dict(self)
