@@ -30,7 +30,7 @@ class Actor(models.Model):
         help_text="helptext for name",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv\archiv\4DP_Metadaten_Actors\Actors.csv__first_name",
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Actor\Actor.csv__first_name",
     )
     drawer_monogram = models.CharField(
         max_length=250,
@@ -39,7 +39,7 @@ class Actor(models.Model):
         help_text="helptext for drawer_monogram",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv\archiv\4DP_Metadaten_Actors\Actors.csv__drawer_monogram",
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Actor\Actor.csv__drawer_monogram",
     )
     excavation = models.CharField(
         max_length=250,
@@ -48,7 +48,7 @@ class Actor(models.Model):
         help_text="helptext for excavation",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv\archiv\4DP_Metadaten_Actors\Actors.csv__Excavation",
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Actor\Actor.csv__Excavation",
     )
     xx_4dpuzzle = models.CharField(
         max_length=250,
@@ -57,7 +57,7 @@ class Actor(models.Model):
         help_text="helptext for xx_4dpuzzle",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv\archiv\4DP_Metadaten_Actors\Actors.csv__4DPuzzle",
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Actor\Actor.csv__4DPuzzle",
     )
     year = models.CharField(
         max_length=250,
@@ -66,7 +66,7 @@ class Actor(models.Model):
         help_text="helptext for year",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv\archiv\4DP_Metadaten_Actors\Actors.csv__year",
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Actor\Actor.csv__year",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -78,7 +78,7 @@ class Actor(models.Model):
         help_text="helptext for access",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv\archiv\4DP_Metadaten_Actors\Actors.csv__Access",
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Actor\Actor.csv__Access",
     )
 
     class Meta:
@@ -86,7 +86,7 @@ class Actor(models.Model):
         ordering = [
             'name',
         ]
-        verbose_name = "Actors"
+        verbose_name = "Actor"
 
     def __str__(self):
         return "{}".format(self.name)
