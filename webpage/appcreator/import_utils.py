@@ -48,8 +48,29 @@ def pop_char_field(temp_item, row, cur_attr, max_length=249):
     return temp_item
 
 
-def pop_fk_field(current_class, temp_item, row, cur_attr, cur_field):
+def pop_fk_field(current_class, temp_item, row, cur_attr):
     """ adds value to ForeignKey Field on the current temp_item
+        :param current_class: a model class
+        :param temp_item: a model class object
+        :param row: A pandas DataFrame row with column names matching the items field names
+        :param cur_attr: fieldname of the temp_item object
+        :param cur_field: the index number of the current collection
+        :return: The temp_item
+    """
+    fk = current_class._meta.get_field(cur_attr)
+    rel_model_name = fk.related_model._meta.model_name
+    temp_rel_obj, _ = fk.related_model.objects.get_or_create(legacy_id=row[cur_attr])
+    if rel_model_name == 'skosconcept':
+        temp_rel_obj.pref_label = row[cur_attr]
+        col, _ = SkosCollection.objects.get_or_create(name=f"{row[cur_attr]}")
+        temp_rel_obj.collection.add(col)
+        temp_rel_obj.save()
+    setattr(temp_item, cur_attr, temp_rel_obj)
+    return temp_item
+
+
+def pop_m2m_field(current_class, temp_item, row, cur_attr, sep='|'):
+    """ adds value to ManyToMany Field on the current temp_item
         :param current_class: a model class
         :param temp_item: a model class object
         :param row: A pandas DataFrame row with column names matching the items field names
@@ -57,15 +78,24 @@ def pop_fk_field(current_class, temp_item, row, cur_attr, cur_field):
         :param col_counter: the index number of the current collection
         :return: The temp_item
     """
-    fk = current_class._meta.get_field(cur_field)
+    fk = current_class._meta.get_field(cur_attr)
     rel_model_name = fk.related_model._meta.model_name
-    temp_rel_obj, _ = fk.related_model.objects.get_or_create(legacy_id=row[cur_attr])
     if rel_model_name == 'skosconcept':
-        temp_rel_obj.pref_label = row[cur_attr]
-        col, _ = SkosCollection.objects.get_or_create(name=f"{cur_field}")
-        temp_rel_obj.collection.add(col)
-        temp_rel_obj.save()
-    setattr(temp_item, cur_attr, temp_rel_obj)
+        col, _ = SkosCollection.objects.get_or_create(name=f"{row[cur_attr]}")
+        rel_things = []
+        for x in row[cur_attr].split(sep):
+            temp_rel_obj, _ = fk.related_model.objects.get_or_create(pref_label=x.strip())
+            temp_rel_obj.collection.add(col)
+            rel_things.append(temp_rel_obj)
+        m2m_attr = getattr(temp_item, cur_attr)
+        m2m_attr.set(rel_things)
+    else:
+        rel_things = []
+        for x in row[cur_attr].split(sep):
+            temp_rel_obj, _ = fk.related_model.objects.get_or_create(legacy_id=x.strip())
+            rel_things.append(temp_rel_obj)
+        m2m_attr = getattr(temp_item, cur_attr)
+        m2m_attr.set(rel_things)
     return temp_item
 
 
