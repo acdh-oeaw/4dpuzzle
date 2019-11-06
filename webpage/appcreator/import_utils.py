@@ -1,9 +1,10 @@
-import datetime
 import glob
+
 from django.apps import apps
-from dateutil.parser import parse
+from django.core.exceptions import FieldDoesNotExist
+
 from pandas import pandas as pd
-from vocabs.models import *
+from . populate_fields import *
 
 
 def fetch_models(app_name):
@@ -34,139 +35,83 @@ def create_file_class_map(app_name, format_string, glob_pattern):
     return file_class_map
 
 
-def pop_char_field(temp_item, row, cur_attr, max_length=249):
-    """ adds value to CharField on the current temp_item
-        :param temp_item: a model class object
-        :param row: A pandas DataFrame row with column names matching the items field names
-        :param cur_attr: field name of the temp_item object
-        :param max_length: The max_length of the current CharField of the object
-        :return: The temp_item
+def run_import(app_name, format_string, glob_pattern, m2m_sep="|", date_range_sep="/", limit=False):
+    """ runs data import from a collection of excel-files matching the model class of the
+        passed in applications
+        :param app_name: name of the application
+        :paramformat_string: a python format string 'someprefix{classname}somesuffix' used to map
+        class names to files names matching your glob pattern.
+        :param glob_pattern: a glob pattern matching the Excel files you'd like to immport
+        :param m2m_sep: Character used in your data to separate values in a cell, defaults to '|'
+        :param date_range_sep: Character used in your data to separate date ranges in a cell,
+        defaults to '|'
+        :param limit: The number of rows which should be imported, defaults to 'False', meaning all
+        rows of each spreadsheet will be imported.
+        :return: prints the name of the spraedsheet which is currently imported
+        the populated database
     """
-    try:
-        my_val = f"{(row[cur_attr])[:max_length]}"
-        setattr(temp_item, cur_attr, my_val)
-    except TypeError:
-        pass
-    return temp_item
-
-
-def pop_text_field(temp_item, row, cur_attr):
-    """ adds value to TextField on the current temp_item
-        :param temp_item: a model class object
-        :param row: A pandas DataFrame row with column names matching the items field names
-        :param cur_attr: field name of the temp_item object
-        :return: The temp_item
-    """
-    try:
-        my_val = f"{(row[cur_attr])}"
-        setattr(temp_item, cur_attr, my_val)
-    except TypeError:
-        pass
-    return temp_item
-
-
-def pop_fk_field(current_class, temp_item, row, cur_attr):
-    """ adds value to ForeignKey Field on the current temp_item
-        :param current_class: a model class
-        :param temp_item: a model class object
-        :param row: A pandas DataFrame row with column names matching the items field names
-        :param cur_attr: field name of the temp_item object
-        :param cur_field: the index number of the current collection
-        :return: The temp_item
-    """
-    fk = current_class._meta.get_field(cur_attr)
-    rel_model_name = fk.related_model._meta.model_name
-    temp_rel_obj, _ = fk.related_model.objects.get_or_create(legacy_id=row[cur_attr])
-    if rel_model_name == 'skosconcept':
-        temp_rel_obj.pref_label = row[cur_attr]
-        col, _ = SkosCollection.objects.get_or_create(name=f"{row[cur_attr]}")
-        temp_rel_obj.collection.add(col)
-        temp_rel_obj.save()
-    setattr(temp_item, cur_attr, temp_rel_obj)
-    return temp_item
-
-
-def pop_m2m_field(current_class, temp_item, row, cur_attr, sep='|'):
-    """ adds value to ManyToMany Field on the current temp_item
-        :param current_class: a model class
-        :param temp_item: a model class object
-        :param row: A pandas DataFrame row with column names matching the items field names
-        :param cur_attr: field name of the temp_item object
-        :param col_counter: the index number of the current collection
-        :return: The temp_item
-    """
-    fk = current_class._meta.get_field(cur_attr)
-    rel_model_name = fk.related_model._meta.model_name
-    if rel_model_name == 'skosconcept':
-        col, _ = SkosCollection.objects.get_or_create(name=f"{row[cur_attr]}")
-        rel_things = []
-        for x in row[cur_attr].split(sep):
-            temp_rel_obj, _ = fk.related_model.objects.get_or_create(pref_label=x.strip())
-            temp_rel_obj.collection.add(col)
-            rel_things.append(temp_rel_obj)
-        m2m_attr = getattr(temp_item, cur_attr)
-        m2m_attr.set(rel_things)
-    else:
-        rel_things = []
-        for x in row[cur_attr].split(sep):
-            temp_rel_obj, _ = fk.related_model.objects.get_or_create(legacy_id=x.strip())
-            rel_things.append(temp_rel_obj)
-        m2m_attr = getattr(temp_item, cur_attr)
-        m2m_attr.set(rel_things)
-    return temp_item
-
-
-def pop_date_field(temp_item, row, cur_attr):
-    """ adds value to DateField on the current temp_item
-        :param temp_item: a model class object
-        :param row: A pandas DataFrame row with column names matching the items field names
-        :param cur_attr: field name of the temp_item object
-        :return: The temp_item
-    """
-    if isinstance(row[cur_attr], float):
-        value = None
-    if isinstance(row[cur_attr], int):
-        value = parse(f"{row[cur_attr]}-01-01")
-    elif isinstance(row[cur_attr], datetime.date):
-        value = row[cur_attr]
-    elif isinstance(row[cur_attr], str):
+    file_class_map = create_file_class_map(app_name, format_string, glob_pattern)
+    for current_class in fetch_models('archiv'):
+        model_name = current_class.__name__
         try:
-            value = parse(row[cur_attr])
-        except Exception as e:
-            print(f"{row[cur_attr]} for field: {cur_attr} could not be parsed, due to Error: {e}")
-            value = None
-    elif pd.isnull(row[cur_attr]):
-        value = None
-    if value is not None:
-        setattr(temp_item, cur_attr, value)
-    return temp_item
+            source_file = file_class_map[current_class.__name__]
+        except KeyError:
+            continue
+        try:
+            df_data = pd.read_excel(source_file)
+            print(source_file)
+        except FileNotFoundError:
+            df_data = False
+            continue
+        if isinstance(df_data, pd.DataFrame):
+            df_data.columns = map(str.lower, df_data.columns)
+            df_keys = df_data.keys()
+            nr_cols = len(df_keys)
+            if limit:
+                df_data = df_data.head(limit)
+            for i, row in df_data.iterrows():
+                temp_item, _ = current_class.objects.get_or_create(legacy_id=row[0])
+                col_counter = 0
+                while col_counter < nr_cols:
+                    cur_attr = df_keys[col_counter]
+                    try:
+                        cur_attr_type = current_class._meta.get_field(
+                            df_keys[col_counter]
+                        ).get_internal_type()
+                    except FieldDoesNotExist:
+                        cur_attr_type = None
+                    if cur_attr_type is not None:
 
+                        if "{}".format(cur_attr_type) == "CharField":
+                            pop_char_field(temp_item, row, cur_attr, max_length=249)
 
-def pop_date_range_field(temp_item, row, cur_attr, sep="|"):
-    """ adds value to DateRangeField on the current temp_item
-        :param temp_item: a model class object
-        :param row: A pandas DataFrame row with column names matching the items field names
-        :param cur_attr: field name of the temp_item object
-        :param sep: The separator used between start and end date
-        :return: The temp_item
-    """
-    if pd.isnull(row[cur_attr]):
-        return temp_item
-    elif isinstance(row[cur_attr], str) and sep in row[cur_attr]:
-        if len(row[cur_attr].split(sep)) == 2:
-            start_date, end_date = row[cur_attr].split('/')
-            try:
-                valid_start = parse(start_date)
-                valid_end = parse(end_date)
-            except Exception as e:
-                print(f"could not parse {start_date} or {end_date} due to: {e}")
-                valid_end = None
-            if valid_end is not None:
-                setattr(temp_item, cur_attr, (start_date, end_date))
-                return temp_item
-        return temp_item
-    else:
-        return temp_item
+                        elif "{}".format(cur_attr_type) == "TextField" and isinstance(
+                            row[cur_attr], str
+                        ):
+                            pop_text_field(temp_item, row, cur_attr)
+
+                        elif "{}".format(cur_attr_type) == "ForeignKey" and isinstance(
+                            row[cur_attr], str
+                        ):
+                            pop_fk_field(current_class, temp_item, row, cur_attr)
+
+                        elif "{}".format(cur_attr_type) == "ManyToManyField" and isinstance(
+                            row[cur_attr], str
+                        ):
+                            pop_m2m_field(current_class, temp_item, row, cur_attr, sep=m2m_sep)
+
+                        elif "{}".format(cur_attr_type) == "DateField":
+                            pop_date_field(temp_item, row, cur_attr)
+
+                        elif "{}".format(cur_attr_type) == "DateRangeField":
+                            pop_date_range_field(temp_item, row, cur_attr, sep=date_range_sep)
+                        else:
+                            pass
+                    try:
+                        temp_item.save()
+                    except Exception as e:
+                        print(e)
+                    col_counter += 1
 
 
 def delete_all(app_name):
