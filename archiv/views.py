@@ -13,8 +13,6 @@ from . models import (
     ArchaeologicalObjectID,
     ArchiveINF,
     AutoCAD,
-    BoneInventoryNumber,
-    ConvoluteInventoryNumber,
     Convolutecards,
     Datenbase,
     Document4DPuzzleID,
@@ -23,8 +21,6 @@ from . models import (
     ExcavationSeasons,
     Fielddrawing,
     Film,
-    Filme,
-    FindInventoryNumber,
     Finddrawing,
     Findsheets,
     Fotoborndigital,
@@ -40,7 +36,6 @@ from . models import (
     PhasenID,
     Protocols,
     StratenID,
-    TDInv4DPuzzleNUMMER,
     Tables,
     ThreeDimensionalModel,
     Videos,
@@ -282,100 +277,6 @@ class AutoCADDelete(DeleteView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(AutoCADDelete, self).dispatch(*args, **kwargs)
-
-
-class BoneInventoryNumberListView(GenericListView):
-
-    model = BoneInventoryNumber
-    filter_class = BoneInventoryNumberListFilter
-    formhelper_class = BoneInventoryNumberFilterFormHelper
-    table_class = BoneInventoryNumberTable
-    init_columns = [
-        'id',
-    ]
-
-
-class BoneInventoryNumberDetailView(DetailView):
-
-    model = BoneInventoryNumber
-    template_name = 'browsing/generic_detail.html'
-
-
-class BoneInventoryNumberCreate(BaseCreateView):
-
-    model = BoneInventoryNumber
-    form_class = BoneInventoryNumberForm
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(BoneInventoryNumberCreate, self).dispatch(*args, **kwargs)
-
-
-class BoneInventoryNumberUpdate(BaseUpdateView):
-
-    model = BoneInventoryNumber
-    form_class = BoneInventoryNumberForm
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(BoneInventoryNumberUpdate, self).dispatch(*args, **kwargs)
-
-
-class BoneInventoryNumberDelete(DeleteView):
-    model = BoneInventoryNumber
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:boneinventorynumber_browse')
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(BoneInventoryNumberDelete, self).dispatch(*args, **kwargs)
-
-
-class ConvoluteInventoryNumberListView(GenericListView):
-
-    model = ConvoluteInventoryNumber
-    filter_class = ConvoluteInventoryNumberListFilter
-    formhelper_class = ConvoluteInventoryNumberFilterFormHelper
-    table_class = ConvoluteInventoryNumberTable
-    init_columns = [
-        'id',
-    ]
-
-
-class ConvoluteInventoryNumberDetailView(DetailView):
-
-    model = ConvoluteInventoryNumber
-    template_name = 'browsing/generic_detail.html'
-
-
-class ConvoluteInventoryNumberCreate(BaseCreateView):
-
-    model = ConvoluteInventoryNumber
-    form_class = ConvoluteInventoryNumberForm
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ConvoluteInventoryNumberCreate, self).dispatch(*args, **kwargs)
-
-
-class ConvoluteInventoryNumberUpdate(BaseUpdateView):
-
-    model = ConvoluteInventoryNumber
-    form_class = ConvoluteInventoryNumberForm
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ConvoluteInventoryNumberUpdate, self).dispatch(*args, **kwargs)
-
-
-class ConvoluteInventoryNumberDelete(DeleteView):
-    model = ConvoluteInventoryNumber
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:convoluteinventorynumber_browse')
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ConvoluteInventoryNumberDelete, self).dispatch(*args, **kwargs)
 
 
 class ConvolutecardsListView(GenericListView):
@@ -752,100 +653,6 @@ class FilmDelete(DeleteView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(FilmDelete, self).dispatch(*args, **kwargs)
-
-
-class FilmeListView(GenericListView):
-
-    model = Filme
-    filter_class = FilmeListFilter
-    formhelper_class = FilmeFilterFormHelper
-    table_class = FilmeTable
-    init_columns = [
-        'id',
-    ]
-
-
-class FilmeDetailView(DetailView):
-
-    model = Filme
-    template_name = 'browsing/generic_detail.html'
-
-
-class FilmeCreate(BaseCreateView):
-
-    model = Filme
-    form_class = FilmeForm
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(FilmeCreate, self).dispatch(*args, **kwargs)
-
-
-class FilmeUpdate(BaseUpdateView):
-
-    model = Filme
-    form_class = FilmeForm
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(FilmeUpdate, self).dispatch(*args, **kwargs)
-
-
-class FilmeDelete(DeleteView):
-    model = Filme
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:filme_browse')
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(FilmeDelete, self).dispatch(*args, **kwargs)
-
-
-class FindInventoryNumberListView(GenericListView):
-
-    model = FindInventoryNumber
-    filter_class = FindInventoryNumberListFilter
-    formhelper_class = FindInventoryNumberFilterFormHelper
-    table_class = FindInventoryNumberTable
-    init_columns = [
-        'id',
-    ]
-
-
-class FindInventoryNumberDetailView(DetailView):
-
-    model = FindInventoryNumber
-    template_name = 'browsing/generic_detail.html'
-
-
-class FindInventoryNumberCreate(BaseCreateView):
-
-    model = FindInventoryNumber
-    form_class = FindInventoryNumberForm
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(FindInventoryNumberCreate, self).dispatch(*args, **kwargs)
-
-
-class FindInventoryNumberUpdate(BaseUpdateView):
-
-    model = FindInventoryNumber
-    form_class = FindInventoryNumberForm
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(FindInventoryNumberUpdate, self).dispatch(*args, **kwargs)
-
-
-class FindInventoryNumberDelete(DeleteView):
-    model = FindInventoryNumber
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:findinventorynumber_browse')
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(FindInventoryNumberDelete, self).dispatch(*args, **kwargs)
 
 
 class FinddrawingListView(GenericListView):
@@ -1419,7 +1226,7 @@ class PhasenIDListView(GenericListView):
     formhelper_class = PhasenIDFilterFormHelper
     table_class = PhasenIDTable
     init_columns = [
-        'id',
+        'id', 'phase_id',
     ]
 
 
@@ -1513,7 +1320,7 @@ class StratenIDListView(GenericListView):
     formhelper_class = StratenIDFilterFormHelper
     table_class = StratenIDTable
     init_columns = [
-        'id',
+        'id', 'stratum_id',
     ]
 
 
@@ -1551,53 +1358,6 @@ class StratenIDDelete(DeleteView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(StratenIDDelete, self).dispatch(*args, **kwargs)
-
-
-class TDInv4DPuzzleNUMMERListView(GenericListView):
-
-    model = TDInv4DPuzzleNUMMER
-    filter_class = TDInv4DPuzzleNUMMERListFilter
-    formhelper_class = TDInv4DPuzzleNUMMERFilterFormHelper
-    table_class = TDInv4DPuzzleNUMMERTable
-    init_columns = [
-        'id',
-    ]
-
-
-class TDInv4DPuzzleNUMMERDetailView(DetailView):
-
-    model = TDInv4DPuzzleNUMMER
-    template_name = 'browsing/generic_detail.html'
-
-
-class TDInv4DPuzzleNUMMERCreate(BaseCreateView):
-
-    model = TDInv4DPuzzleNUMMER
-    form_class = TDInv4DPuzzleNUMMERForm
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(TDInv4DPuzzleNUMMERCreate, self).dispatch(*args, **kwargs)
-
-
-class TDInv4DPuzzleNUMMERUpdate(BaseUpdateView):
-
-    model = TDInv4DPuzzleNUMMER
-    form_class = TDInv4DPuzzleNUMMERForm
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(TDInv4DPuzzleNUMMERUpdate, self).dispatch(*args, **kwargs)
-
-
-class TDInv4DPuzzleNUMMERDelete(DeleteView):
-    model = TDInv4DPuzzleNUMMER
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:tdinv4dpuzzlenummer_browse')
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(TDInv4DPuzzleNUMMERDelete, self).dispatch(*args, **kwargs)
 
 
 class TablesListView(GenericListView):

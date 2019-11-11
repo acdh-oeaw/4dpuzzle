@@ -77,11 +77,11 @@ def xlsx_to_classdicts(file):
                         field['field_type'] = 'ForeignKey'
                     else:
                         field['field_type'] = 'ManyToManyField'
-                    field['related_class'] = row['field type'].split('|')[1].split(':')[0]
+                    field['related_class'] = row['field type'].split('|')[1].split(':')[0].strip()
                     temp_related_name = "rvn_{}_{}_{}".format(
                         x[0].lower(),
                         field_name,
-                        field['related_class'].lower()
+                        field['related_class'].lower().strip()
                     ).replace('__', '_')
                     field['related_name'] = temp_related_name
                 elif row['field type'] == "URI":

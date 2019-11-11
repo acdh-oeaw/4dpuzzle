@@ -7,8 +7,6 @@ from . models import (
     ArchaeologicalObjectID,
     ArchiveINF,
     AutoCAD,
-    BoneInventoryNumber,
-    ConvoluteInventoryNumber,
     Convolutecards,
     Datenbase,
     Document4DPuzzleID,
@@ -17,8 +15,6 @@ from . models import (
     ExcavationSeasons,
     Fielddrawing,
     Film,
-    Filme,
-    FindInventoryNumber,
     Finddrawing,
     Findsheets,
     Fotoborndigital,
@@ -34,7 +30,6 @@ from . models import (
     PhasenID,
     Protocols,
     StratenID,
-    TDInv4DPuzzleNUMMER,
     Tables,
     ThreeDimensionalModel,
     Videos,
@@ -95,26 +90,6 @@ class AutoCADTable(tables.Table):
 
     class Meta:
         model = AutoCAD
-        sequence = ('id',)
-        attrs = {"class": "table table-responsive table-hover"}
-
-
-class BoneInventoryNumberTable(tables.Table):
-
-    id = tables.LinkColumn(verbose_name='ID')
-
-    class Meta:
-        model = BoneInventoryNumber
-        sequence = ('id',)
-        attrs = {"class": "table table-responsive table-hover"}
-
-
-class ConvoluteInventoryNumberTable(tables.Table):
-
-    id = tables.LinkColumn(verbose_name='ID')
-
-    class Meta:
-        model = ConvoluteInventoryNumber
         sequence = ('id',)
         attrs = {"class": "table table-responsive table-hover"}
 
@@ -215,26 +190,6 @@ class FilmTable(tables.Table):
         attrs = {"class": "table table-responsive table-hover"}
 
 
-class FilmeTable(tables.Table):
-
-    id = tables.LinkColumn(verbose_name='ID')
-
-    class Meta:
-        model = Filme
-        sequence = ('id',)
-        attrs = {"class": "table table-responsive table-hover"}
-
-
-class FindInventoryNumberTable(tables.Table):
-
-    id = tables.LinkColumn(verbose_name='ID')
-
-    class Meta:
-        model = FindInventoryNumber
-        sequence = ('id',)
-        attrs = {"class": "table table-responsive table-hover"}
-
-
 class FinddrawingTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
@@ -288,6 +243,7 @@ class FotosgescanntTable(tables.Table):
 class Fundinventar4DPuzzleIDTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
+    relatedto = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Fundinventar4DPuzzleID
@@ -299,6 +255,7 @@ class FundinventarInventarnummernTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     excavation_object_id = tables.columns.ManyToManyColumn()
+    relatedto = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = FundinventarInventarnummern
@@ -309,6 +266,7 @@ class FundinventarInventarnummernTable(tables.Table):
 class FundinventarKonvolutnummernTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
+    find_material = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
@@ -333,6 +291,7 @@ class FundinventarSteininventarTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     excavation_object_id = tables.columns.ManyToManyColumn()
+    relatedto = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = FundinventarSteininventar
@@ -382,6 +341,7 @@ class PhasenIDTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     area = tables.columns.ManyToManyColumn()
+    containing_phase_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = PhasenID
@@ -404,19 +364,10 @@ class StratenIDTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     area = tables.columns.ManyToManyColumn()
+    containing_stratum_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = StratenID
-        sequence = ('id',)
-        attrs = {"class": "table table-responsive table-hover"}
-
-
-class TDInv4DPuzzleNUMMERTable(tables.Table):
-
-    id = tables.LinkColumn(verbose_name='ID')
-
-    class Meta:
-        model = TDInv4DPuzzleNUMMER
         sequence = ('id',)
         attrs = {"class": "table table-responsive table-hover"}
 

@@ -125,54 +125,6 @@ urlpatterns = [
         views.AutoCADDelete.as_view(),
         name='autocad_delete'),
     url(
-        r'^boneinventorynumber/$',
-        views.BoneInventoryNumberListView.as_view(),
-        name='boneinventorynumber_browse'
-    ),
-    url(
-        r'^boneinventorynumber/detail/(?P<pk>[0-9]+)$',
-        views.BoneInventoryNumberDetailView.as_view(),
-        name='boneinventorynumber_detail'
-    ),
-    url(
-        r'^boneinventorynumber/create/$',
-        views.BoneInventoryNumberCreate.as_view(),
-        name='boneinventorynumber_create'
-    ),
-    url(
-        r'^boneinventorynumber/edit/(?P<pk>[0-9]+)$',
-        views.BoneInventoryNumberUpdate.as_view(),
-        name='boneinventorynumber_edit'
-    ),
-    url(
-        r'^boneinventorynumber/delete/(?P<pk>[0-9]+)$',
-        views.BoneInventoryNumberDelete.as_view(),
-        name='boneinventorynumber_delete'),
-    url(
-        r'^convoluteinventorynumber/$',
-        views.ConvoluteInventoryNumberListView.as_view(),
-        name='convoluteinventorynumber_browse'
-    ),
-    url(
-        r'^convoluteinventorynumber/detail/(?P<pk>[0-9]+)$',
-        views.ConvoluteInventoryNumberDetailView.as_view(),
-        name='convoluteinventorynumber_detail'
-    ),
-    url(
-        r'^convoluteinventorynumber/create/$',
-        views.ConvoluteInventoryNumberCreate.as_view(),
-        name='convoluteinventorynumber_create'
-    ),
-    url(
-        r'^convoluteinventorynumber/edit/(?P<pk>[0-9]+)$',
-        views.ConvoluteInventoryNumberUpdate.as_view(),
-        name='convoluteinventorynumber_edit'
-    ),
-    url(
-        r'^convoluteinventorynumber/delete/(?P<pk>[0-9]+)$',
-        views.ConvoluteInventoryNumberDelete.as_view(),
-        name='convoluteinventorynumber_delete'),
-    url(
         r'^convolutecards/$',
         views.ConvolutecardsListView.as_view(),
         name='convolutecards_browse'
@@ -364,54 +316,6 @@ urlpatterns = [
         r'^film/delete/(?P<pk>[0-9]+)$',
         views.FilmDelete.as_view(),
         name='film_delete'),
-    url(
-        r'^filme/$',
-        views.FilmeListView.as_view(),
-        name='filme_browse'
-    ),
-    url(
-        r'^filme/detail/(?P<pk>[0-9]+)$',
-        views.FilmeDetailView.as_view(),
-        name='filme_detail'
-    ),
-    url(
-        r'^filme/create/$',
-        views.FilmeCreate.as_view(),
-        name='filme_create'
-    ),
-    url(
-        r'^filme/edit/(?P<pk>[0-9]+)$',
-        views.FilmeUpdate.as_view(),
-        name='filme_edit'
-    ),
-    url(
-        r'^filme/delete/(?P<pk>[0-9]+)$',
-        views.FilmeDelete.as_view(),
-        name='filme_delete'),
-    url(
-        r'^findinventorynumber/$',
-        views.FindInventoryNumberListView.as_view(),
-        name='findinventorynumber_browse'
-    ),
-    url(
-        r'^findinventorynumber/detail/(?P<pk>[0-9]+)$',
-        views.FindInventoryNumberDetailView.as_view(),
-        name='findinventorynumber_detail'
-    ),
-    url(
-        r'^findinventorynumber/create/$',
-        views.FindInventoryNumberCreate.as_view(),
-        name='findinventorynumber_create'
-    ),
-    url(
-        r'^findinventorynumber/edit/(?P<pk>[0-9]+)$',
-        views.FindInventoryNumberUpdate.as_view(),
-        name='findinventorynumber_edit'
-    ),
-    url(
-        r'^findinventorynumber/delete/(?P<pk>[0-9]+)$',
-        views.FindInventoryNumberDelete.as_view(),
-        name='findinventorynumber_delete'),
     url(
         r'^finddrawing/$',
         views.FinddrawingListView.as_view(),
@@ -772,30 +676,6 @@ urlpatterns = [
         r'^stratenid/delete/(?P<pk>[0-9]+)$',
         views.StratenIDDelete.as_view(),
         name='stratenid_delete'),
-    url(
-        r'^tdinv4dpuzzlenummer/$',
-        views.TDInv4DPuzzleNUMMERListView.as_view(),
-        name='tdinv4dpuzzlenummer_browse'
-    ),
-    url(
-        r'^tdinv4dpuzzlenummer/detail/(?P<pk>[0-9]+)$',
-        views.TDInv4DPuzzleNUMMERDetailView.as_view(),
-        name='tdinv4dpuzzlenummer_detail'
-    ),
-    url(
-        r'^tdinv4dpuzzlenummer/create/$',
-        views.TDInv4DPuzzleNUMMERCreate.as_view(),
-        name='tdinv4dpuzzlenummer_create'
-    ),
-    url(
-        r'^tdinv4dpuzzlenummer/edit/(?P<pk>[0-9]+)$',
-        views.TDInv4DPuzzleNUMMERUpdate.as_view(),
-        name='tdinv4dpuzzlenummer_edit'
-    ),
-    url(
-        r'^tdinv4dpuzzlenummer/delete/(?P<pk>[0-9]+)$',
-        views.TDInv4DPuzzleNUMMERDelete.as_view(),
-        name='tdinv4dpuzzlenummer_delete'),
     url(
         r'^tables/$',
         views.TablesListView.as_view(),

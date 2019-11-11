@@ -198,6 +198,50 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_ArchaeologicalObject4DPuzzleID\Archaeological_object_4DPuzzle.scv__Position",
     )
+    stratum_id_relative = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_archaeologicalobject4dpuzzleid_stratum_id_relative_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID relative",
+        help_text="helptext for stratum_id_relative",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_ArchaeologicalObject4DPuzzleID\Archaeological_object_4DPuzzle.scv__Stratum_ID_relative",
+    )
+    stratum_id_absolute_prepub = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_archaeologicalobject4dpuzzleid_stratum_id_absolute_prepub_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID absolute pre publication",
+        help_text="helptext for stratum_id_absolute_prepub",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_ArchaeologicalObject4DPuzzleID\Archaeological_object_4DPuzzle.scv__Stratum_ID_absolute_prepub",
+    )
+    stratum_comment = models.TextField(
+        blank=True,
+        verbose_name="Stratum Comment",
+        help_text="helptext for stratum_comment",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_ArchaeologicalObject4DPuzzleID\Archaeological_object_4DPuzzle.scv__Stratum_comment",
+    )
+    phase_id = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_archaeologicalobject4dpuzzleid_phase_id_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Phase ID",
+        help_text="helptext for phase_id",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_ArchaeologicalObject4DPuzzleID\Archaeological_object_4DPuzzle.scv__Phase_ID",
+    )
     creator_metadata = models.ForeignKey(
         "Actor",
         related_name='rvn_archaeologicalobject4dpuzzleid_creator_metadata_actor',
@@ -1013,140 +1057,6 @@ class AutoCAD(models.Model):
         if prev:
             return reverse(
                 'archiv:autocad_detail',
-                kwargs={'pk': prev.first().id}
-            )
-        return False
-
-
-class BoneInventoryNumber(models.Model):
-    ### nan ###
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
-    boneinventorynumber_f = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="BoneInventoryNumber_f",
-        help_text="helptext for boneinventorynumber_f",
-    ).set_extra(
-        is_public=True,
-    )
-
-    class Meta:
-
-        ordering = [
-            'id',
-        ]
-        verbose_name = "BoneInventoryNumber"
-
-    def __str__(self):
-        return "{}".format(self.id)
-
-    def field_dict(self):
-        return model_to_dict(self)
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('archiv:boneinventorynumber_browse')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:boneinventorynumber_create')
-
-    def get_absolute_url(self):
-        return reverse('archiv:boneinventorynumber_detail', kwargs={'pk': self.id})
-
-    def get_absolute_url(self):
-        return reverse('archiv:boneinventorynumber_detail', kwargs={'pk': self.id})
-
-    def get_delete_url(self):
-        return reverse('archiv:boneinventorynumber_delete', kwargs={'pk': self.id})
-
-    def get_edit_url(self):
-        return reverse('archiv:boneinventorynumber_edit', kwargs={'pk': self.id})
-
-    def get_next(self):
-        next = self.__class__.objects.filter(id__gt=self.id)
-        if next:
-            return reverse(
-                'archiv:boneinventorynumber_detail',
-                kwargs={'pk': next.first().id}
-            )
-        return False
-
-    def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return reverse(
-                'archiv:boneinventorynumber_detail',
-                kwargs={'pk': prev.first().id}
-            )
-        return False
-
-
-class ConvoluteInventoryNumber(models.Model):
-    ### nan ###
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
-    convoluteinventorynumber_f = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="ConvoluteInventoryNumber_f",
-        help_text="helptext for convoluteinventorynumber_f",
-    ).set_extra(
-        is_public=True,
-    )
-
-    class Meta:
-
-        ordering = [
-            'id',
-        ]
-        verbose_name = "ConvoluteInventoryNumber"
-
-    def __str__(self):
-        return "{}".format(self.id)
-
-    def field_dict(self):
-        return model_to_dict(self)
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('archiv:convoluteinventorynumber_browse')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:convoluteinventorynumber_create')
-
-    def get_absolute_url(self):
-        return reverse('archiv:convoluteinventorynumber_detail', kwargs={'pk': self.id})
-
-    def get_absolute_url(self):
-        return reverse('archiv:convoluteinventorynumber_detail', kwargs={'pk': self.id})
-
-    def get_delete_url(self):
-        return reverse('archiv:convoluteinventorynumber_delete', kwargs={'pk': self.id})
-
-    def get_edit_url(self):
-        return reverse('archiv:convoluteinventorynumber_edit', kwargs={'pk': self.id})
-
-    def get_next(self):
-        next = self.__class__.objects.filter(id__gt=self.id)
-        if next:
-            return reverse(
-                'archiv:convoluteinventorynumber_detail',
-                kwargs={'pk': next.first().id}
-            )
-        return False
-
-    def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return reverse(
-                'archiv:convoluteinventorynumber_detail',
                 kwargs={'pk': prev.first().id}
             )
         return False
@@ -2092,7 +2002,7 @@ class DocumentTypes(models.Model):
         verbose_name = "Document types"
 
     def __str__(self):
-        return "{} >> {}".format(self.document_type, self.document_subtype)
+        return "{}".format(self.document_type + document_subtype)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2170,7 +2080,7 @@ class ExcavationObjectID(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="Abbreviation of the name of the archaeological site, which is documented in the field drawing. �TD� stands for Tell el-Daba.",
+        help_text="Abbreviation of the name of the archaeological site, which is documented in the field drawing. ‘TD’ stands for Tell el-Daba.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Metadaten\Excavation_object_ID.csv__Site_ID",
@@ -2206,7 +2116,7 @@ class ExcavationObjectID(models.Model):
         null=True,
         blank=True,
         verbose_name="Planum",
-        help_text="Excavations were carried out in spits and a �planum� is an excavation surface. ",
+        help_text="Excavations were carried out in spits and a ‘planum’ is an excavation surface. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Metadaten\Excavation_object_ID.csv__Planum",
@@ -2442,7 +2352,7 @@ class Fielddrawing(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename",
-        help_text="Consists of document_ID and document_title, separated by two underscores. For example file name �TD_FZ_1234__TD_F-I_j21_Planum1� consists of the document_ID �TD_FZ_1234� which is separated by two underscores from the document title describing the contents of the document �TD(Tell el-Daba)_F/I(area)_j21(square)_ Planum 1�.",
+        help_text="Consists of document_ID and document_title, separated by two underscores. For example file name ‘TD_FZ_1234__TD_F-I_j21_Planum1’ consists of the document_ID ‘TD_FZ_1234’ which is separated by two underscores from the document title describing the contents of the document ‘TD(Tell el-Daba)_F/I(area)_j21(square)_ Planum 1’.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Filename",
@@ -2452,7 +2362,7 @@ class Fielddrawing(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID",
-        help_text="The project-specific unique identifier of the document which was scanned. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (FZ for Feldzeichnung) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234). For example document ID �TD_FZ_1234� means �Tell el-Daba_field drawing_inventory number 1234�).",
+        help_text="The project-specific unique identifier of the document which was scanned. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (FZ for Feldzeichnung) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234). For example document ID ‘TD_FZ_1234’ means ‘Tell el-Daba_field drawing_inventory number 1234’).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Document_ID",
@@ -2475,7 +2385,7 @@ class Fielddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="Type of document � for field drawing metadata this is always �Feldzeichnung� (Fielddrawing).",
+        help_text="Type of document – for field drawing metadata this is always ‘Feldzeichnung’ (Fielddrawing).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Document_type",
@@ -2488,7 +2398,7 @@ class Fielddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type abbreviated",
-        help_text="Abbreviation of the document type � for �field drawing� it is �FZ�.",
+        help_text="Abbreviation of the document type – for ‘field drawing’ it is ‘FZ’.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__DT_abbr",
@@ -2499,7 +2409,7 @@ class Fielddrawing(models.Model):
         related_name='rvn_fielddrawing_document_subtype_documenttypes',
         blank=True,
         verbose_name="Document subtype",
-        help_text="Type of field drawing. It is either �Planum� (field drawing of a level in a square, scale 1:50), �Profil� (field drawing of a section, scale 1:50), �Detail� (field drawing of an important part of the archaeological evidence, scale 1:20), �Sondage� (field drawing of a level in a test pit), �Skizze� (a sketch) or �Stratum�.",
+        help_text="Type of field drawing. It is either ‘Planum’ (field drawing of a level in a square, scale 1:50), ‘Profil’ (field drawing of a section, scale 1:50), ‘Detail’ (field drawing of an important part of the archaeological evidence, scale 1:20), ‘Sondage’ (field drawing of a level in a test pit), ‘Skizze’ (a sketch) or ‘Stratum’.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Document_subtype",
@@ -2510,7 +2420,7 @@ class Fielddrawing(models.Model):
         related_name='rvn_fielddrawing_dst_abbr_documenttypes',
         blank=True,
         verbose_name="Document subtype abbreviated",
-        help_text="Abbreviation of the document subtype: �Planum� (PL), �Profil� (PR), �Detail� (DZ), �Sondage� (SON), �Stratum� (ST) or �Skizze� (SK).",
+        help_text="Abbreviation of the document subtype: ‘Planum’ (PL), ‘Profil’ (PR), ‘Detail’ (DZ), ‘Sondage’ (SON), ‘Stratum’ (ST) or ‘Skizze’ (SK).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__DST_abbr",
@@ -2598,7 +2508,7 @@ class Fielddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="Copyright holder of the document. The copyright of the field drawings is held by the OEAI (�sterreichisches Arch�ologisches Institut/Austrian Archaeological Institute).",
+        help_text="Copyright holder of the document. The copyright of the field drawings is held by the OEAI (Österreichisches Archäologisches Institut/Austrian Archaeological Institute).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Copyright",
@@ -2634,7 +2544,7 @@ class Fielddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="Abbreviation of the name of the archaeological site, which is documented in the field drawing. �TD� stands for Tell el-Daba.",
+        help_text="Abbreviation of the name of the archaeological site, which is documented in the field drawing. ‘TD’ stands for Tell el-Daba.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Site_ID",
@@ -2703,7 +2613,7 @@ class Fielddrawing(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Inventory number of original",
-        help_text="Inventory number of the original. An inventory number was given to each field drawing during the excavations. The inventory number is part of the unique identifier of the field drawing. If a field drawing did not have an inventory number, or there was an error with the inventory number, then a new inventory number consisting of the project name �4DPuzzle� and a running number was created, e.g.: 4DPuzzle1234). The list of the new inventory numbers is kept in the Excel file �Metadaten.xlsl�, worksheet  �Resource_4DPuzzle_number�).",
+        help_text="Inventory number of the original. An inventory number was given to each field drawing during the excavations. The inventory number is part of the unique identifier of the field drawing. If a field drawing did not have an inventory number, or there was an error with the inventory number, then a new inventory number consisting of the project name ‘4DPuzzle’ and a running number was created, e.g.: 4DPuzzle1234). The list of the new inventory numbers is kept in the Excel file ‘Metadaten.xlsl’, worksheet  ‘Resource_4DPuzzle_number’).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Original_inventory_number",
@@ -2809,7 +2719,7 @@ class Fielddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Fieldwork season",
-        help_text="Fieldwork season when the field drawing was made (H = Herbst = autumn; F = Fr�hling = spring).",
+        help_text="Fieldwork season when the field drawing was made (H = Herbst = autumn; F = Frühling = spring).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Season",
@@ -2842,7 +2752,7 @@ class Fielddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Whether it was created during excavation or after (post-excavation)",
-        help_text="When the document was created. Field drawings were always created in the field, so the entry is always �excavation�.",
+        help_text="When the document was created. Field drawings were always created in the field, so the entry is always ‘excavation’.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Excavation__post_excavation",
@@ -3196,140 +3106,6 @@ class Film(models.Model):
         if prev:
             return reverse(
                 'archiv:film_detail',
-                kwargs={'pk': prev.first().id}
-            )
-        return False
-
-
-class Filme(models.Model):
-    ### nan ###
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
-    filme_f = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Filme_f",
-        help_text="helptext for filme_f",
-    ).set_extra(
-        is_public=True,
-    )
-
-    class Meta:
-
-        ordering = [
-            'id',
-        ]
-        verbose_name = "Filme"
-
-    def __str__(self):
-        return "{}".format(self.id)
-
-    def field_dict(self):
-        return model_to_dict(self)
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('archiv:filme_browse')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:filme_create')
-
-    def get_absolute_url(self):
-        return reverse('archiv:filme_detail', kwargs={'pk': self.id})
-
-    def get_absolute_url(self):
-        return reverse('archiv:filme_detail', kwargs={'pk': self.id})
-
-    def get_delete_url(self):
-        return reverse('archiv:filme_delete', kwargs={'pk': self.id})
-
-    def get_edit_url(self):
-        return reverse('archiv:filme_edit', kwargs={'pk': self.id})
-
-    def get_next(self):
-        next = self.__class__.objects.filter(id__gt=self.id)
-        if next:
-            return reverse(
-                'archiv:filme_detail',
-                kwargs={'pk': next.first().id}
-            )
-        return False
-
-    def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return reverse(
-                'archiv:filme_detail',
-                kwargs={'pk': prev.first().id}
-            )
-        return False
-
-
-class FindInventoryNumber(models.Model):
-    ### nan ###
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
-    findinventorynumber_f = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="FindInventoryNumber_f",
-        help_text="helptext for findinventorynumber_f",
-    ).set_extra(
-        is_public=True,
-    )
-
-    class Meta:
-
-        ordering = [
-            'id',
-        ]
-        verbose_name = "FindInventoryNumber"
-
-    def __str__(self):
-        return "{}".format(self.id)
-
-    def field_dict(self):
-        return model_to_dict(self)
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('archiv:findinventorynumber_browse')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:findinventorynumber_create')
-
-    def get_absolute_url(self):
-        return reverse('archiv:findinventorynumber_detail', kwargs={'pk': self.id})
-
-    def get_absolute_url(self):
-        return reverse('archiv:findinventorynumber_detail', kwargs={'pk': self.id})
-
-    def get_delete_url(self):
-        return reverse('archiv:findinventorynumber_delete', kwargs={'pk': self.id})
-
-    def get_edit_url(self):
-        return reverse('archiv:findinventorynumber_edit', kwargs={'pk': self.id})
-
-    def get_next(self):
-        next = self.__class__.objects.filter(id__gt=self.id)
-        if next:
-            return reverse(
-                'archiv:findinventorynumber_detail',
-                kwargs={'pk': next.first().id}
-            )
-        return False
-
-    def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return reverse(
-                'archiv:findinventorynumber_detail',
                 kwargs={'pk': prev.first().id}
             )
         return False
@@ -4768,6 +4544,33 @@ class Fundinventar4DPuzzleID(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Find_inventory_4DPuzzle_number",
     )
+    find_local_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Find local number",
+        help_text="helptext for find_local_number",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Find_local_number",
+    )
+    convolute_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Convolute inventory number",
+        help_text="helptext for convolute_inventory_number",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Convolute_inventory_number",
+    )
+    corresponding_to_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Corresponding to inventory number",
+        help_text="helptext for corresponding_to_inventory_number",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Corresponding_to_inventory_number",
+    )
     find_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventar4dpuzzleid_find_material_skosconcept',
@@ -4812,6 +4615,79 @@ class Fundinventar4DPuzzleID(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Excavation_object_ID",
     )
+    archaeological_object_id = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventar4dpuzzleid_archaeological_object_id_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Archaeological object ID",
+        help_text="helptext for archaeological_object_id",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Archaeological_object_ID",
+    )
+    stratum_id_relative = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventar4dpuzzleid_stratum_id_relative_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID relative",
+        help_text="helptext for stratum_id_relative",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Stratum_ID_relative",
+    )
+    stratum_id_absolute_prepub = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventar4dpuzzleid_stratum_id_absolute_prepub_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID absolute pre publication",
+        help_text="helptext for stratum_id_absolute_prepub",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Stratum_ID_absolute_prepub",
+    )
+    stratum_comment = models.TextField(
+        blank=True,
+        verbose_name="Stratum Comment",
+        help_text="helptext for stratum_comment",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Stratum_comment",
+    )
+    phase_id = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventar4dpuzzleid_phase_id_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Phase ID",
+        help_text="helptext for phase_id",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Phase_ID",
+    )
+    find_date = models.DateField(
+        blank=True, null=True,
+        verbose_name="Find date",
+        help_text="helptext for find_date",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Find_date",
+    )
+    storage_find = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage of find",
+        help_text="helptext for storage_find",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Storage_find",
+    )
     access = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventar4dpuzzleid_access_skosconcept',
@@ -4835,6 +4711,16 @@ class Fundinventar4DPuzzleID(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__Uncertainty__excavation_digitisation",
+    )
+    relatedto = models.ManyToManyField(
+        SkosConcept,
+        related_name='rvn_fundinventar4dpuzzleid_relatedto_skosconcept',
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_4DPuzzleID\Find_inventory_4DPuzzle_number.csv__RelatedTo",
     )
     creator_metadata = models.ForeignKey(
         SkosConcept,
@@ -5008,6 +4894,58 @@ class FundinventarInventarnummern(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Inventarnummern\Find_inventory_number.csv__Archaeological_object_ID",
     )
+    stratum_id_relative = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarinventarnummern_stratum_id_relative_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID relative",
+        help_text="helptext for stratum_id_relative",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Inventarnummern\Find_inventory_number.csv__Stratum_ID_relative",
+    )
+    stratum_id_absolute_prepub = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarinventarnummern_stratum_id_absolute_prepub_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID absolute pre publication",
+        help_text="helptext for stratum_id_absolute_prepub",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Inventarnummern\Find_inventory_number.csv__Stratum_ID_absolute_prepub",
+    )
+    stratum_comment = models.TextField(
+        blank=True,
+        verbose_name="Stratum Comment",
+        help_text="helptext for stratum_comment",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Inventarnummern\Find_inventory_number.csv__Stratum_comment",
+    )
+    phase_id = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarinventarnummern_phase_id_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Phase ID",
+        help_text="helptext for phase_id",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Inventarnummern\Find_inventory_number.csv__Phase_ID",
+    )
+    find_date = models.DateField(
+        blank=True, null=True,
+        verbose_name="Find date",
+        help_text="helptext for find_date",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Inventarnummern\Find_inventory_number.csv__Find_date",
+    )
     storage_find = models.CharField(
         max_length=250,
         blank=True,
@@ -5040,6 +4978,16 @@ class FundinventarInventarnummern(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Inventarnummern\Find_inventory_number.csv__Uncertainty__excavation_digitisation",
+    )
+    relatedto = models.ManyToManyField(
+        SkosConcept,
+        related_name='rvn_fundinventarinventarnummern_relatedto_skosconcept',
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Inventarnummern\Find_inventory_number.csv__RelatedTo",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -5138,6 +5086,54 @@ class FundinventarKonvolutnummern(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Convolute_subnumber",
     )
+    find_local_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Find local number",
+        help_text="helptext for find_local_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Find_local_number",
+    )
+    corresponding_to_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Corresponding to inventory number",
+        help_text="helptext for corresponding_to_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Corresponding_to_inventory_number",
+    )
+    find_material = models.ManyToManyField(
+        SkosConcept,
+        related_name='rvn_fundinventarkonvolutnummern_find_material_skosconcept',
+        blank=True,
+        verbose_name="Find material",
+        help_text="helptext for find_material",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Find_material",
+    )
+    find_type = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarkonvolutnummern_find_type_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Find type",
+        help_text="helptext for find_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Find_type",
+    )
+    find_comment = models.TextField(
+        blank=True,
+        verbose_name="Find comment",
+        help_text="helptext for find_comment",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Find_comment",
+    )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_fundinventarkonvolutnummern_excavation_object_id_excavationobjectid',
@@ -5158,6 +5154,70 @@ class FundinventarKonvolutnummern(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Archaeological_object_ID",
     )
+    stratum_id_relative = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarkonvolutnummern_stratum_id_relative_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID relative",
+        help_text="helptext for stratum_id_relative",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Stratum_ID_relative",
+    )
+    stratum_id_absolute_prepub = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarkonvolutnummern_stratum_id_absolute_prepub_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID absolute pre publication",
+        help_text="helptext for stratum_id_absolute_prepub",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Stratum_ID_absolute_prepub",
+    )
+    stratum_comment = models.TextField(
+        blank=True,
+        verbose_name="Stratum Comment",
+        help_text="helptext for stratum_comment",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Stratum_comment",
+    )
+    phase_id = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarkonvolutnummern_phase_id_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Phase ID",
+        help_text="helptext for phase_id",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Phase_ID",
+    )
+    find_date = models.DateField(
+        blank=True, null=True,
+        verbose_name="Find date",
+        help_text="helptext for find_date",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Find_date",
+    )
+    storage_find = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarkonvolutnummern_storage_find_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Storage of find",
+        help_text="helptext for storage_find",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Storage_find",
+    )
     access = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarkonvolutnummern_access_skosconcept',
@@ -5169,6 +5229,18 @@ class FundinventarKonvolutnummern(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Access",
+    )
+    uncertainty_excavation_digitisation = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarkonvolutnummern_uncertainty_excavation_digitisation_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Whether it was created during excavation or digital",
+        help_text="helptext for uncertainty_excavation_digitisation",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Konvolutnummern\Convolute_inventory_number.csv__Uncertainty__excavation_digitisation",
     )
     relatedto = models.CharField(
         max_length=250,
@@ -5267,6 +5339,33 @@ class FundinventarMaterialproben(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Material_sample_inventory_number",
     )
+    find_local_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Find local number",
+        help_text="helptext for find_local_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Find_local_number",
+    )
+    convolute_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Convolute inventory number",
+        help_text="helptext for convolute_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Convolute_inventory_number",
+    )
+    corresponding_to_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Corresponding to inventory number",
+        help_text="helptext for corresponding_to_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Corresponding_to_inventory_number",
+    )
     find_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarmaterialproben_find_material_skosconcept',
@@ -5291,6 +5390,14 @@ class FundinventarMaterialproben(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Find_type",
     )
+    find_comment = models.TextField(
+        blank=True,
+        verbose_name="Find comment",
+        help_text="helptext for find_comment",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Find_comment",
+    )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_fundinventarmaterialproben_excavation_object_id_excavationobjectid',
@@ -5313,6 +5420,70 @@ class FundinventarMaterialproben(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Archaeological_object_ID",
     )
+    stratum_id_relative = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarmaterialproben_stratum_id_relative_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID relative",
+        help_text="helptext for stratum_id_relative",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Stratum_ID_relative",
+    )
+    stratum_id_absolute_prepub = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarmaterialproben_stratum_id_absolute_prepub_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID absolute pre publication",
+        help_text="helptext for stratum_id_absolute_prepub",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Stratum_ID_absolute_prepub",
+    )
+    stratum_comment = models.TextField(
+        blank=True,
+        verbose_name="Stratum Comment",
+        help_text="helptext for stratum_comment",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Stratum_comment",
+    )
+    phase_id = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarmaterialproben_phase_id_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Phase ID",
+        help_text="helptext for phase_id",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Phase_ID",
+    )
+    find_year = models.DateField(
+        blank=True, null=True,
+        verbose_name="Find year",
+        help_text="helptext for find_year",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Find_year",
+    )
+    storage_find = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarmaterialproben_storage_find_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Storage find",
+        help_text="helptext for storage_find",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Storage_find",
+    )
     access = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarmaterialproben_access_skosconcept',
@@ -5324,6 +5495,18 @@ class FundinventarMaterialproben(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Access",
+    )
+    uncertainty_excavation_digitisation = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarmaterialproben_uncertainty_excavation_digitisation_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Whether it was created during excavation or digital",
+        help_text="helptext for uncertainty_excavation_digitisation",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Materialproben\Material_sample_inventory_no.csv__Uncertainty__excavation_digitisation",
     )
     relatedto = models.ForeignKey(
         "Fundinventar4DPuzzleID",
@@ -5425,6 +5608,33 @@ class FundinventarSteininventar(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Find_inventory_number",
     )
+    find_local_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Find local number",
+        help_text="helptext for find_local_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Find_local_number",
+    )
+    convolute_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Convolute inventory number",
+        help_text="helptext for convolute_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Convolute_inventory_number",
+    )
+    corresponding_to_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Corresponding to inventory number",
+        help_text="helptext for corresponding_to_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Corresponding_to_inventory_number",
+    )
     find_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarsteininventar_find_material_skosconcept',
@@ -5479,6 +5689,58 @@ class FundinventarSteininventar(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Archaeological_object_ID",
     )
+    stratum_id_relative = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarsteininventar_stratum_id_relative_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID relative",
+        help_text="helptext for stratum_id_relative",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Stratum_ID_relative",
+    )
+    stratum_id_absolute_prepub = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarsteininventar_stratum_id_absolute_prepub_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID absolute pre publication",
+        help_text="helptext for stratum_id_absolute_prepub",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Stratum_ID_absolute_prepub",
+    )
+    stratum_comment = models.TextField(
+        blank=True,
+        verbose_name="Stratum Comment",
+        help_text="helptext for stratum_comment",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Stratum_comment",
+    )
+    phase_id = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarsteininventar_phase_id_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Phase ID",
+        help_text="helptext for phase_id",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Phase_ID",
+    )
+    find_date = models.DateField(
+        blank=True, null=True,
+        verbose_name="Find date",
+        help_text="helptext for find_date",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Find_date",
+    )
     access = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarsteininventar_access_skosconcept',
@@ -5490,6 +5752,40 @@ class FundinventarSteininventar(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Access",
+    )
+    storage_find = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarsteininventar_storage_find_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Storage of find",
+        help_text="helptext for storage_find",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Storage_find",
+    )
+    uncertainty_excavation_digitisation = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarsteininventar_uncertainty_excavation_digitisation_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Whether it was created during excavation or digital",
+        help_text="helptext for uncertainty_excavation_digitisation",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__Uncertainty__excavation_digitisation",
+    )
+    relatedto = models.ManyToManyField(
+        SkosConcept,
+        related_name='rvn_fundinventarsteininventar_relatedto_skosconcept',
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Fundinventar_Steininventar\Bone_Stone_inventory_number.csv__RelatedTo",
     )
     creator_metadata = models.ForeignKey(
         "Actor",
@@ -6627,16 +6923,25 @@ class PhasenID(models.Model):
     ).set_extra(
         is_public=False,
     )
+    containing_phase_id = models.ManyToManyField(
+        SkosConcept,
+        related_name='rvn_phasenid_containing_phase_id_skosconcept',
+        blank=True,
+        verbose_name="Containing phase ID",
+        help_text="helptext for containing_phase_id",
+    ).set_extra(
+        is_public=False,
+    )
 
     class Meta:
 
         ordering = [
-            'id',
+            'phase_id',
         ]
         verbose_name = "Phasen ID"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.phase_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -6978,6 +7283,14 @@ class Protocols(models.Model):
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Protokolle\Protocol.csv__Original_comment",
     )
+    digitisation_comment = models.TextField(
+        blank=True,
+        verbose_name="Comment from digitisation",
+        help_text="helptext for digitisation_comment",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv\archiv\4DP_Metadaten_Protokolle\Protocol.csv__Digitisation_comment",
+    )
 
     class Meta:
 
@@ -7084,16 +7397,25 @@ class StratenID(models.Model):
     ).set_extra(
         is_public=False,
     )
+    containing_stratum_id = models.ManyToManyField(
+        SkosConcept,
+        related_name='rvn_stratenid_containing_stratum_id_skosconcept',
+        blank=True,
+        verbose_name="Containing stratum ID",
+        help_text="helptext for containing_stratum_id",
+    ).set_extra(
+        is_public=False,
+    )
 
     class Meta:
 
         ordering = [
-            'id',
+            'stratum_id',
         ]
         verbose_name = "Straten ID"
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.stratum_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -7132,73 +7454,6 @@ class StratenID(models.Model):
         if prev:
             return reverse(
                 'archiv:stratenid_detail',
-                kwargs={'pk': prev.first().id}
-            )
-        return False
-
-
-class TDInv4DPuzzleNUMMER(models.Model):
-    ### nan ###
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
-    tdinv4dpuzzlenummer_f = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="TDInv4DPuzzleNUMMER_f",
-        help_text="helptext for tdinv4dpuzzlenummer_f",
-    ).set_extra(
-        is_public=True,
-    )
-
-    class Meta:
-
-        ordering = [
-            'id',
-        ]
-        verbose_name = "TDInv4DPuzzleNUMMER"
-
-    def __str__(self):
-        return "{}".format(self.id)
-
-    def field_dict(self):
-        return model_to_dict(self)
-
-    @classmethod
-    def get_listview_url(self):
-        return reverse('archiv:tdinv4dpuzzlenummer_browse')
-
-    @classmethod
-    def get_createview_url(self):
-        return reverse('archiv:tdinv4dpuzzlenummer_create')
-
-    def get_absolute_url(self):
-        return reverse('archiv:tdinv4dpuzzlenummer_detail', kwargs={'pk': self.id})
-
-    def get_absolute_url(self):
-        return reverse('archiv:tdinv4dpuzzlenummer_detail', kwargs={'pk': self.id})
-
-    def get_delete_url(self):
-        return reverse('archiv:tdinv4dpuzzlenummer_delete', kwargs={'pk': self.id})
-
-    def get_edit_url(self):
-        return reverse('archiv:tdinv4dpuzzlenummer_edit', kwargs={'pk': self.id})
-
-    def get_next(self):
-        next = self.__class__.objects.filter(id__gt=self.id)
-        if next:
-            return reverse(
-                'archiv:tdinv4dpuzzlenummer_detail',
-                kwargs={'pk': next.first().id}
-            )
-        return False
-
-    def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
-        if prev:
-            return reverse(
-                'archiv:tdinv4dpuzzlenummer_detail',
                 kwargs={'pk': prev.first().id}
             )
         return False

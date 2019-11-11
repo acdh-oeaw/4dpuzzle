@@ -9,8 +9,6 @@ from . models import (
     ArchaeologicalObjectID,
     ArchiveINF,
     AutoCAD,
-    BoneInventoryNumber,
-    ConvoluteInventoryNumber,
     Convolutecards,
     Datenbase,
     Document4DPuzzleID,
@@ -19,8 +17,6 @@ from . models import (
     ExcavationSeasons,
     Fielddrawing,
     Film,
-    Filme,
-    FindInventoryNumber,
     Finddrawing,
     Findsheets,
     Fotoborndigital,
@@ -36,7 +32,6 @@ from . models import (
     PhasenID,
     Protocols,
     StratenID,
-    TDInv4DPuzzleNUMMER,
     Tables,
     ThreeDimensionalModel,
     Videos,
@@ -100,7 +95,7 @@ class ArchaeologicalObject4DPuzzleIDFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'archaeological_object_id','archaeological_object_4dpuzzle_id','archaeological_object_type','archaeological_object_comment','excavation_object_id','position','creator_metadata','digitisation_comment',
+                    'archaeological_object_id','archaeological_object_4dpuzzle_id','archaeological_object_type','archaeological_object_comment','excavation_object_id','position','stratum_id_relative','stratum_id_absolute_prepub','stratum_comment','phase_id','creator_metadata','digitisation_comment',
                     css_id="more"
                     ),
                 )
@@ -231,84 +226,6 @@ class AutoCADForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(AutoCADForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'save'),)
-
-
-class BoneInventoryNumberFilterFormHelper(FormHelper):
-    def __init__(self, *args, **kwargs):
-        super(BoneInventoryNumberFilterFormHelper, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.form_class = 'genericFilterForm'
-        self.form_method = 'GET'
-        self.helper.form_tag = False
-        self.add_input(Submit('Filter', 'Search'))
-        self.layout = Layout(
-            Fieldset(
-                'Basic search options',
-                'id',
-                css_id="basic_search_fields"
-                ),
-            Accordion(
-                AccordionGroup(
-                    'Advanced search',
-                    'boneinventorynumber_f',
-                    css_id="more"
-                    ),
-                )
-            )
-
-
-class BoneInventoryNumberForm(forms.ModelForm):
-    class Meta:
-        model = BoneInventoryNumber
-        fields = "__all__"
-
-    def __init__(self, *args, **kwargs):
-        super(BoneInventoryNumberForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'save'),)
-
-
-class ConvoluteInventoryNumberFilterFormHelper(FormHelper):
-    def __init__(self, *args, **kwargs):
-        super(ConvoluteInventoryNumberFilterFormHelper, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.form_class = 'genericFilterForm'
-        self.form_method = 'GET'
-        self.helper.form_tag = False
-        self.add_input(Submit('Filter', 'Search'))
-        self.layout = Layout(
-            Fieldset(
-                'Basic search options',
-                'id',
-                css_id="basic_search_fields"
-                ),
-            Accordion(
-                AccordionGroup(
-                    'Advanced search',
-                    'convoluteinventorynumber_f',
-                    css_id="more"
-                    ),
-                )
-            )
-
-
-class ConvoluteInventoryNumberForm(forms.ModelForm):
-    class Meta:
-        model = ConvoluteInventoryNumber
-        fields = "__all__"
-
-    def __init__(self, *args, **kwargs):
-        super(ConvoluteInventoryNumberForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'
@@ -629,84 +546,6 @@ class FilmForm(forms.ModelForm):
         self.helper.add_input(Submit('submit', 'save'),)
 
 
-class FilmeFilterFormHelper(FormHelper):
-    def __init__(self, *args, **kwargs):
-        super(FilmeFilterFormHelper, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.form_class = 'genericFilterForm'
-        self.form_method = 'GET'
-        self.helper.form_tag = False
-        self.add_input(Submit('Filter', 'Search'))
-        self.layout = Layout(
-            Fieldset(
-                'Basic search options',
-                'id',
-                css_id="basic_search_fields"
-                ),
-            Accordion(
-                AccordionGroup(
-                    'Advanced search',
-                    'filme_f',
-                    css_id="more"
-                    ),
-                )
-            )
-
-
-class FilmeForm(forms.ModelForm):
-    class Meta:
-        model = Filme
-        fields = "__all__"
-
-    def __init__(self, *args, **kwargs):
-        super(FilmeForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'save'),)
-
-
-class FindInventoryNumberFilterFormHelper(FormHelper):
-    def __init__(self, *args, **kwargs):
-        super(FindInventoryNumberFilterFormHelper, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.form_class = 'genericFilterForm'
-        self.form_method = 'GET'
-        self.helper.form_tag = False
-        self.add_input(Submit('Filter', 'Search'))
-        self.layout = Layout(
-            Fieldset(
-                'Basic search options',
-                'id',
-                css_id="basic_search_fields"
-                ),
-            Accordion(
-                AccordionGroup(
-                    'Advanced search',
-                    'findinventorynumber_f',
-                    css_id="more"
-                    ),
-                )
-            )
-
-
-class FindInventoryNumberForm(forms.ModelForm):
-    class Meta:
-        model = FindInventoryNumber
-        fields = "__all__"
-
-    def __init__(self, *args, **kwargs):
-        super(FindInventoryNumberForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'save'),)
-
-
 class FinddrawingFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
         super(FinddrawingFilterFormHelper, self).__init__(*args, **kwargs)
@@ -880,7 +719,7 @@ class Fundinventar4DPuzzleIDFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'find_inventory_4dpuzzle_number','find_material','find_type','find_comment','excavation_object_id','access','uncertainty_excavation_digitisation','creator_metadata','digitisation_comment',
+                    'find_inventory_4dpuzzle_number','find_local_number','convolute_inventory_number','corresponding_to_inventory_number','find_material','find_type','find_comment','excavation_object_id','archaeological_object_id','stratum_id_relative','stratum_id_absolute_prepub','stratum_comment','phase_id','find_date','storage_find','access','uncertainty_excavation_digitisation','relatedto','creator_metadata','digitisation_comment',
                     css_id="more"
                     ),
                 )
@@ -919,7 +758,7 @@ class FundinventarInventarnummernFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'find_inventory_number','find_local_number','convolute_inventory_number','corresponding_to_inventory_number','find_material','find_type','find_comment','excavation_object_id','archaeological_object_id','storage_find','access','uncertainty_excavation_digitisation','creator_metadata','digitisation_comment',
+                    'find_inventory_number','find_local_number','convolute_inventory_number','corresponding_to_inventory_number','find_material','find_type','find_comment','excavation_object_id','archaeological_object_id','stratum_id_relative','stratum_id_absolute_prepub','stratum_comment','phase_id','find_date','storage_find','access','uncertainty_excavation_digitisation','relatedto','creator_metadata','digitisation_comment',
                     css_id="more"
                     ),
                 )
@@ -958,7 +797,7 @@ class FundinventarKonvolutnummernFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'convolute_inventory_number','convolute_subnumber','excavation_object_id','archaeological_object_id','access','relatedto','creator_metadata','digitisation_comment',
+                    'convolute_inventory_number','convolute_subnumber','find_local_number','corresponding_to_inventory_number','find_material','find_type','find_comment','excavation_object_id','archaeological_object_id','stratum_id_relative','stratum_id_absolute_prepub','stratum_comment','phase_id','find_date','storage_find','access','uncertainty_excavation_digitisation','relatedto','creator_metadata','digitisation_comment',
                     css_id="more"
                     ),
                 )
@@ -997,7 +836,7 @@ class FundinventarMaterialprobenFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'material_sample_inventory_number','find_material','find_type','excavation_object_id','archaeological_object_id','access','relatedto','creator_metadata','digitisation_comment',
+                    'material_sample_inventory_number','find_local_number','convolute_inventory_number','corresponding_to_inventory_number','find_material','find_type','find_comment','excavation_object_id','archaeological_object_id','stratum_id_relative','stratum_id_absolute_prepub','stratum_comment','phase_id','find_year','storage_find','access','uncertainty_excavation_digitisation','relatedto','creator_metadata','digitisation_comment',
                     css_id="more"
                     ),
                 )
@@ -1036,7 +875,7 @@ class FundinventarSteininventarFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'find_inventory_number','find_material','find_type','find_comment','excavation_object_id','archaeological_object_id','access','creator_metadata','digitisation_comment',
+                    'find_inventory_number','find_local_number','convolute_inventory_number','corresponding_to_inventory_number','find_material','find_type','find_comment','excavation_object_id','archaeological_object_id','stratum_id_relative','stratum_id_absolute_prepub','stratum_comment','phase_id','find_date','access','storage_find','uncertainty_excavation_digitisation','relatedto','creator_metadata','digitisation_comment',
                     css_id="more"
                     ),
                 )
@@ -1192,7 +1031,7 @@ class PhasenIDFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'phase_id','phase_title','phase_type','site_id','area',
+                    'phase_id','phase_title','phase_type','site_id','area','containing_phase_id',
                     css_id="more"
                     ),
                 )
@@ -1231,7 +1070,7 @@ class ProtocolsFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'filename','document_id','document_title','filename_old','document_type','dt_abbr','creation_date_original','creation_year_original','creation_date_scan','file_extension','creation_date_metadata','creator_metadata','creator_original','copyright','access','storage_folder_original','storage','site_id','equipment_scan','source_original_copy_edited_copy','resolution_scan_dpi','creator_scan','original_material','excavation_object_id','archaeological_object_id','number_of_pages','excavation_post_excavation','original_comment',
+                    'filename','document_id','document_title','filename_old','document_type','dt_abbr','creation_date_original','creation_year_original','creation_date_scan','file_extension','creation_date_metadata','creator_metadata','creator_original','copyright','access','storage_folder_original','storage','site_id','equipment_scan','source_original_copy_edited_copy','resolution_scan_dpi','creator_scan','original_material','excavation_object_id','archaeological_object_id','number_of_pages','excavation_post_excavation','original_comment','digitisation_comment',
                     css_id="more"
                     ),
                 )
@@ -1270,7 +1109,7 @@ class StratenIDFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'stratum_id','stratum_title','stratum_type','site_id','area',
+                    'stratum_id','stratum_title','stratum_type','site_id','area','containing_stratum_id',
                     css_id="more"
                     ),
                 )
@@ -1284,45 +1123,6 @@ class StratenIDForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(StratenIDForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'save'),)
-
-
-class TDInv4DPuzzleNUMMERFilterFormHelper(FormHelper):
-    def __init__(self, *args, **kwargs):
-        super(TDInv4DPuzzleNUMMERFilterFormHelper, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.form_class = 'genericFilterForm'
-        self.form_method = 'GET'
-        self.helper.form_tag = False
-        self.add_input(Submit('Filter', 'Search'))
-        self.layout = Layout(
-            Fieldset(
-                'Basic search options',
-                'id',
-                css_id="basic_search_fields"
-                ),
-            Accordion(
-                AccordionGroup(
-                    'Advanced search',
-                    'tdinv4dpuzzlenummer_f',
-                    css_id="more"
-                    ),
-                )
-            )
-
-
-class TDInv4DPuzzleNUMMERForm(forms.ModelForm):
-    class Meta:
-        model = TDInv4DPuzzleNUMMER
-        fields = "__all__"
-
-    def __init__(self, *args, **kwargs):
-        super(TDInv4DPuzzleNUMMERForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'

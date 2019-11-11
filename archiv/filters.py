@@ -7,8 +7,6 @@ from . models import (
     ArchaeologicalObjectID,
     ArchiveINF,
     AutoCAD,
-    BoneInventoryNumber,
-    ConvoluteInventoryNumber,
     Convolutecards,
     Datenbase,
     Document4DPuzzleID,
@@ -17,8 +15,6 @@ from . models import (
     ExcavationSeasons,
     Fielddrawing,
     Film,
-    Filme,
-    FindInventoryNumber,
     Finddrawing,
     Findsheets,
     Fotoborndigital,
@@ -34,7 +30,6 @@ from . models import (
     PhasenID,
     Protocols,
     StratenID,
-    TDInv4DPuzzleNUMMER,
     Tables,
     ThreeDimensionalModel,
     Videos,
@@ -98,6 +93,11 @@ class ArchaeologicalObject4DPuzzleIDListFilter(django_filters.FilterSet):
         help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('position').help_text,
         label=ArchaeologicalObject4DPuzzleID._meta.get_field('position').verbose_name
     )
+    stratum_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('stratum_comment').help_text,
+        label=ArchaeologicalObject4DPuzzleID._meta.get_field('stratum_comment').verbose_name
+    )
     digitisation_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('digitisation_comment').help_text,
@@ -114,6 +114,10 @@ class ArchaeologicalObject4DPuzzleIDListFilter(django_filters.FilterSet):
             'archaeological_object_comment',
             'excavation_object_id',
             'position',
+            'stratum_id_relative',
+            'stratum_id_absolute_prepub',
+            'stratum_comment',
+            'phase_id',
             'creator_metadata',
             'digitisation_comment',
             ]
@@ -314,36 +318,6 @@ class AutoCADListFilter(django_filters.FilterSet):
             'excavation_post_excavation',
             'original_comment',
             'digitisation_comment',
-            ]
-
-
-class BoneInventoryNumberListFilter(django_filters.FilterSet):
-    boneinventorynumber_f = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=BoneInventoryNumber._meta.get_field('boneinventorynumber_f').help_text,
-        label=BoneInventoryNumber._meta.get_field('boneinventorynumber_f').verbose_name
-    )
-
-    class Meta:
-        model = BoneInventoryNumber
-        fields = [
-            'id',
-            'boneinventorynumber_f',
-            ]
-
-
-class ConvoluteInventoryNumberListFilter(django_filters.FilterSet):
-    convoluteinventorynumber_f = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=ConvoluteInventoryNumber._meta.get_field('convoluteinventorynumber_f').help_text,
-        label=ConvoluteInventoryNumber._meta.get_field('convoluteinventorynumber_f').verbose_name
-    )
-
-    class Meta:
-        model = ConvoluteInventoryNumber
-        fields = [
-            'id',
-            'convoluteinventorynumber_f',
             ]
 
 
@@ -865,36 +839,6 @@ class FilmListFilter(django_filters.FilterSet):
             ]
 
 
-class FilmeListFilter(django_filters.FilterSet):
-    filme_f = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=Filme._meta.get_field('filme_f').help_text,
-        label=Filme._meta.get_field('filme_f').verbose_name
-    )
-
-    class Meta:
-        model = Filme
-        fields = [
-            'id',
-            'filme_f',
-            ]
-
-
-class FindInventoryNumberListFilter(django_filters.FilterSet):
-    findinventorynumber_f = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=FindInventoryNumber._meta.get_field('findinventorynumber_f').help_text,
-        label=FindInventoryNumber._meta.get_field('findinventorynumber_f').verbose_name
-    )
-
-    class Meta:
-        model = FindInventoryNumber
-        fields = [
-            'id',
-            'findinventorynumber_f',
-            ]
-
-
 class FinddrawingListFilter(django_filters.FilterSet):
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1245,10 +1189,35 @@ class Fundinventar4DPuzzleIDListFilter(django_filters.FilterSet):
         help_text=Fundinventar4DPuzzleID._meta.get_field('find_inventory_4dpuzzle_number').help_text,
         label=Fundinventar4DPuzzleID._meta.get_field('find_inventory_4dpuzzle_number').verbose_name
     )
+    find_local_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fundinventar4DPuzzleID._meta.get_field('find_local_number').help_text,
+        label=Fundinventar4DPuzzleID._meta.get_field('find_local_number').verbose_name
+    )
+    convolute_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fundinventar4DPuzzleID._meta.get_field('convolute_inventory_number').help_text,
+        label=Fundinventar4DPuzzleID._meta.get_field('convolute_inventory_number').verbose_name
+    )
+    corresponding_to_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fundinventar4DPuzzleID._meta.get_field('corresponding_to_inventory_number').help_text,
+        label=Fundinventar4DPuzzleID._meta.get_field('corresponding_to_inventory_number').verbose_name
+    )
     find_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Fundinventar4DPuzzleID._meta.get_field('find_comment').help_text,
         label=Fundinventar4DPuzzleID._meta.get_field('find_comment').verbose_name
+    )
+    stratum_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fundinventar4DPuzzleID._meta.get_field('stratum_comment').help_text,
+        label=Fundinventar4DPuzzleID._meta.get_field('stratum_comment').verbose_name
+    )
+    storage_find = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fundinventar4DPuzzleID._meta.get_field('storage_find').help_text,
+        label=Fundinventar4DPuzzleID._meta.get_field('storage_find').verbose_name
     )
     digitisation_comment = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1261,12 +1230,23 @@ class Fundinventar4DPuzzleIDListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'find_inventory_4dpuzzle_number',
+            'find_local_number',
+            'convolute_inventory_number',
+            'corresponding_to_inventory_number',
             'find_material',
             'find_type',
             'find_comment',
             'excavation_object_id',
+            'archaeological_object_id',
+            'stratum_id_relative',
+            'stratum_id_absolute_prepub',
+            'stratum_comment',
+            'phase_id',
+            'find_date',
+            'storage_find',
             'access',
             'uncertainty_excavation_digitisation',
+            'relatedto',
             'creator_metadata',
             'digitisation_comment',
             ]
@@ -1293,6 +1273,11 @@ class FundinventarInventarnummernListFilter(django_filters.FilterSet):
         help_text=FundinventarInventarnummern._meta.get_field('find_comment').help_text,
         label=FundinventarInventarnummern._meta.get_field('find_comment').verbose_name
     )
+    stratum_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarInventarnummern._meta.get_field('stratum_comment').help_text,
+        label=FundinventarInventarnummern._meta.get_field('stratum_comment').verbose_name
+    )
     storage_find = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=FundinventarInventarnummern._meta.get_field('storage_find').help_text,
@@ -1317,9 +1302,15 @@ class FundinventarInventarnummernListFilter(django_filters.FilterSet):
             'find_comment',
             'excavation_object_id',
             'archaeological_object_id',
+            'stratum_id_relative',
+            'stratum_id_absolute_prepub',
+            'stratum_comment',
+            'phase_id',
+            'find_date',
             'storage_find',
             'access',
             'uncertainty_excavation_digitisation',
+            'relatedto',
             'creator_metadata',
             'digitisation_comment',
             ]
@@ -1335,6 +1326,26 @@ class FundinventarKonvolutnummernListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=FundinventarKonvolutnummern._meta.get_field('convolute_subnumber').help_text,
         label=FundinventarKonvolutnummern._meta.get_field('convolute_subnumber').verbose_name
+    )
+    find_local_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('find_local_number').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('find_local_number').verbose_name
+    )
+    corresponding_to_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('corresponding_to_inventory_number').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('corresponding_to_inventory_number').verbose_name
+    )
+    find_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('find_comment').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('find_comment').verbose_name
+    )
+    stratum_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('stratum_comment').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('stratum_comment').verbose_name
     )
     relatedto = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1353,9 +1364,21 @@ class FundinventarKonvolutnummernListFilter(django_filters.FilterSet):
             'id',
             'convolute_inventory_number',
             'convolute_subnumber',
+            'find_local_number',
+            'corresponding_to_inventory_number',
+            'find_material',
+            'find_type',
+            'find_comment',
             'excavation_object_id',
             'archaeological_object_id',
+            'stratum_id_relative',
+            'stratum_id_absolute_prepub',
+            'stratum_comment',
+            'phase_id',
+            'find_date',
+            'storage_find',
             'access',
+            'uncertainty_excavation_digitisation',
             'relatedto',
             'creator_metadata',
             'digitisation_comment',
@@ -1368,6 +1391,31 @@ class FundinventarMaterialprobenListFilter(django_filters.FilterSet):
         help_text=FundinventarMaterialproben._meta.get_field('material_sample_inventory_number').help_text,
         label=FundinventarMaterialproben._meta.get_field('material_sample_inventory_number').verbose_name
     )
+    find_local_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarMaterialproben._meta.get_field('find_local_number').help_text,
+        label=FundinventarMaterialproben._meta.get_field('find_local_number').verbose_name
+    )
+    convolute_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarMaterialproben._meta.get_field('convolute_inventory_number').help_text,
+        label=FundinventarMaterialproben._meta.get_field('convolute_inventory_number').verbose_name
+    )
+    corresponding_to_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarMaterialproben._meta.get_field('corresponding_to_inventory_number').help_text,
+        label=FundinventarMaterialproben._meta.get_field('corresponding_to_inventory_number').verbose_name
+    )
+    find_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarMaterialproben._meta.get_field('find_comment').help_text,
+        label=FundinventarMaterialproben._meta.get_field('find_comment').verbose_name
+    )
+    stratum_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarMaterialproben._meta.get_field('stratum_comment').help_text,
+        label=FundinventarMaterialproben._meta.get_field('stratum_comment').verbose_name
+    )
     digitisation_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=FundinventarMaterialproben._meta.get_field('digitisation_comment').help_text,
@@ -1379,11 +1427,22 @@ class FundinventarMaterialprobenListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'material_sample_inventory_number',
+            'find_local_number',
+            'convolute_inventory_number',
+            'corresponding_to_inventory_number',
             'find_material',
             'find_type',
+            'find_comment',
             'excavation_object_id',
             'archaeological_object_id',
+            'stratum_id_relative',
+            'stratum_id_absolute_prepub',
+            'stratum_comment',
+            'phase_id',
+            'find_year',
+            'storage_find',
             'access',
+            'uncertainty_excavation_digitisation',
             'relatedto',
             'creator_metadata',
             'digitisation_comment',
@@ -1396,10 +1455,30 @@ class FundinventarSteininventarListFilter(django_filters.FilterSet):
         help_text=FundinventarSteininventar._meta.get_field('find_inventory_number').help_text,
         label=FundinventarSteininventar._meta.get_field('find_inventory_number').verbose_name
     )
+    find_local_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarSteininventar._meta.get_field('find_local_number').help_text,
+        label=FundinventarSteininventar._meta.get_field('find_local_number').verbose_name
+    )
+    convolute_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarSteininventar._meta.get_field('convolute_inventory_number').help_text,
+        label=FundinventarSteininventar._meta.get_field('convolute_inventory_number').verbose_name
+    )
+    corresponding_to_inventory_number = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarSteininventar._meta.get_field('corresponding_to_inventory_number').help_text,
+        label=FundinventarSteininventar._meta.get_field('corresponding_to_inventory_number').verbose_name
+    )
     find_comment = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=FundinventarSteininventar._meta.get_field('find_comment').help_text,
         label=FundinventarSteininventar._meta.get_field('find_comment').verbose_name
+    )
+    stratum_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarSteininventar._meta.get_field('stratum_comment').help_text,
+        label=FundinventarSteininventar._meta.get_field('stratum_comment').verbose_name
     )
     digitisation_comment = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1412,12 +1491,23 @@ class FundinventarSteininventarListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'find_inventory_number',
+            'find_local_number',
+            'convolute_inventory_number',
+            'corresponding_to_inventory_number',
             'find_material',
             'find_type',
             'find_comment',
             'excavation_object_id',
             'archaeological_object_id',
+            'stratum_id_relative',
+            'stratum_id_absolute_prepub',
+            'stratum_comment',
+            'phase_id',
+            'find_date',
             'access',
+            'storage_find',
+            'uncertainty_excavation_digitisation',
+            'relatedto',
             'creator_metadata',
             'digitisation_comment',
             ]
@@ -1661,6 +1751,7 @@ class PhasenIDListFilter(django_filters.FilterSet):
             'phase_type',
             'site_id',
             'area',
+            'containing_phase_id',
             ]
 
 
@@ -1700,6 +1791,11 @@ class ProtocolsListFilter(django_filters.FilterSet):
         help_text=Protocols._meta.get_field('original_comment').help_text,
         label=Protocols._meta.get_field('original_comment').verbose_name
     )
+    digitisation_comment = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('digitisation_comment').help_text,
+        label=Protocols._meta.get_field('digitisation_comment').verbose_name
+    )
 
     class Meta:
         model = Protocols
@@ -1733,6 +1829,7 @@ class ProtocolsListFilter(django_filters.FilterSet):
             'number_of_pages',
             'excavation_post_excavation',
             'original_comment',
+            'digitisation_comment',
             ]
 
 
@@ -1757,21 +1854,7 @@ class StratenIDListFilter(django_filters.FilterSet):
             'stratum_type',
             'site_id',
             'area',
-            ]
-
-
-class TDInv4DPuzzleNUMMERListFilter(django_filters.FilterSet):
-    tdinv4dpuzzlenummer_f = django_filters.CharFilter(
-        lookup_expr='icontains',
-        help_text=TDInv4DPuzzleNUMMER._meta.get_field('tdinv4dpuzzlenummer_f').help_text,
-        label=TDInv4DPuzzleNUMMER._meta.get_field('tdinv4dpuzzlenummer_f').verbose_name
-    )
-
-    class Meta:
-        model = TDInv4DPuzzleNUMMER
-        fields = [
-            'id',
-            'tdinv4dpuzzlenummer_f',
+            'containing_stratum_id',
             ]
 
 
