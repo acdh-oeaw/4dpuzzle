@@ -2002,7 +2002,7 @@ class DocumentTypes(models.Model):
         verbose_name = "Document types"
 
     def __str__(self):
-        return "{}".format(self.document_type + document_subtype)
+        return "{}".format(self.document_type + self.document_subtype)
 
     def field_dict(self):
         return model_to_dict(self)
