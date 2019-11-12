@@ -41,7 +41,9 @@ from . models import (
     Videos,
     WallpaintingInventory
 )
-from browsing.browsing_utils import GenericListView, BaseCreateView, BaseUpdateView
+from browsing.browsing_utils import (
+    GenericListView, BaseCreateView, BaseUpdateView, BaseDetailView
+)
 
 
 class ActorListView(GenericListView):
@@ -55,7 +57,7 @@ class ActorListView(GenericListView):
     ]
 
 
-class ActorDetailView(DetailView):
+class ActorDetailView(BaseDetailView):
 
     model = Actor
     template_name = 'browsing/generic_detail.html'
@@ -102,7 +104,7 @@ class ArchaeologicalObject4DPuzzleIDListView(GenericListView):
     ]
 
 
-class ArchaeologicalObject4DPuzzleIDDetailView(DetailView):
+class ArchaeologicalObject4DPuzzleIDDetailView(BaseDetailView):
 
     model = ArchaeologicalObject4DPuzzleID
     template_name = 'browsing/generic_detail.html'
@@ -149,7 +151,7 @@ class ArchaeologicalObjectIDListView(GenericListView):
     ]
 
 
-class ArchaeologicalObjectIDDetailView(DetailView):
+class ArchaeologicalObjectIDDetailView(BaseDetailView):
 
     model = ArchaeologicalObjectID
     template_name = 'browsing/generic_detail.html'
@@ -196,7 +198,7 @@ class ArchiveINFListView(GenericListView):
     ]
 
 
-class ArchiveINFDetailView(DetailView):
+class ArchiveINFDetailView(BaseDetailView):
 
     model = ArchiveINF
     template_name = 'browsing/generic_detail.html'
@@ -243,7 +245,7 @@ class AutoCADListView(GenericListView):
     ]
 
 
-class AutoCADDetailView(DetailView):
+class AutoCADDetailView(BaseDetailView):
 
     model = AutoCAD
     template_name = 'browsing/generic_detail.html'
@@ -290,7 +292,7 @@ class ConvolutecardsListView(GenericListView):
     ]
 
 
-class ConvolutecardsDetailView(DetailView):
+class ConvolutecardsDetailView(BaseDetailView):
 
     model = Convolutecards
     template_name = 'browsing/generic_detail.html'
@@ -337,7 +339,7 @@ class DatenbaseListView(GenericListView):
     ]
 
 
-class DatenbaseDetailView(DetailView):
+class DatenbaseDetailView(BaseDetailView):
 
     model = Datenbase
     template_name = 'browsing/generic_detail.html'
@@ -384,7 +386,7 @@ class Document4DPuzzleIDListView(GenericListView):
     ]
 
 
-class Document4DPuzzleIDDetailView(DetailView):
+class Document4DPuzzleIDDetailView(BaseDetailView):
 
     model = Document4DPuzzleID
     template_name = 'browsing/generic_detail.html'
@@ -431,7 +433,7 @@ class DocumentTypesListView(GenericListView):
     ]
 
 
-class DocumentTypesDetailView(DetailView):
+class DocumentTypesDetailView(BaseDetailView):
 
     model = DocumentTypes
     template_name = 'browsing/generic_detail.html'
@@ -478,7 +480,7 @@ class ExcavationObjectIDListView(GenericListView):
     ]
 
 
-class ExcavationObjectIDDetailView(DetailView):
+class ExcavationObjectIDDetailView(BaseDetailView):
 
     model = ExcavationObjectID
     template_name = 'browsing/generic_detail.html'
@@ -525,7 +527,7 @@ class ExcavationSeasonsListView(GenericListView):
     ]
 
 
-class ExcavationSeasonsDetailView(DetailView):
+class ExcavationSeasonsDetailView(BaseDetailView):
 
     model = ExcavationSeasons
     template_name = 'browsing/generic_detail.html'
@@ -572,7 +574,7 @@ class FielddrawingListView(GenericListView):
     ]
 
 
-class FielddrawingDetailView(DetailView):
+class FielddrawingDetailView(BaseDetailView):
 
     model = Fielddrawing
     template_name = 'browsing/generic_detail.html'
@@ -619,7 +621,7 @@ class FilmListView(GenericListView):
     ]
 
 
-class FilmDetailView(DetailView):
+class FilmDetailView(BaseDetailView):
 
     model = Film
     template_name = 'browsing/generic_detail.html'
@@ -666,7 +668,7 @@ class FinddrawingListView(GenericListView):
     ]
 
 
-class FinddrawingDetailView(DetailView):
+class FinddrawingDetailView(BaseDetailView):
 
     model = Finddrawing
     template_name = 'browsing/generic_detail.html'
@@ -713,7 +715,7 @@ class FindsheetsListView(GenericListView):
     ]
 
 
-class FindsheetsDetailView(DetailView):
+class FindsheetsDetailView(BaseDetailView):
 
     model = Findsheets
     template_name = 'browsing/generic_detail.html'
@@ -760,7 +762,7 @@ class FotoborndigitalListView(GenericListView):
     ]
 
 
-class FotoborndigitalDetailView(DetailView):
+class FotoborndigitalDetailView(BaseDetailView):
 
     model = Fotoborndigital
     template_name = 'browsing/generic_detail.html'
@@ -807,7 +809,7 @@ class FotosgescanntListView(GenericListView):
     ]
 
 
-class FotosgescanntDetailView(DetailView):
+class FotosgescanntDetailView(BaseDetailView):
 
     model = Fotosgescannt
     template_name = 'browsing/generic_detail.html'
@@ -854,7 +856,7 @@ class Fundinventar4DPuzzleIDListView(GenericListView):
     ]
 
 
-class Fundinventar4DPuzzleIDDetailView(DetailView):
+class Fundinventar4DPuzzleIDDetailView(BaseDetailView):
 
     model = Fundinventar4DPuzzleID
     template_name = 'browsing/generic_detail.html'
@@ -901,7 +903,7 @@ class FundinventarInventarnummernListView(GenericListView):
     ]
 
 
-class FundinventarInventarnummernDetailView(DetailView):
+class FundinventarInventarnummernDetailView(BaseDetailView):
 
     model = FundinventarInventarnummern
     template_name = 'browsing/generic_detail.html'
@@ -948,7 +950,7 @@ class FundinventarKonvolutnummernListView(GenericListView):
     ]
 
 
-class FundinventarKonvolutnummernDetailView(DetailView):
+class FundinventarKonvolutnummernDetailView(BaseDetailView):
 
     model = FundinventarKonvolutnummern
     template_name = 'browsing/generic_detail.html'
@@ -995,7 +997,7 @@ class FundinventarMaterialprobenListView(GenericListView):
     ]
 
 
-class FundinventarMaterialprobenDetailView(DetailView):
+class FundinventarMaterialprobenDetailView(BaseDetailView):
 
     model = FundinventarMaterialproben
     template_name = 'browsing/generic_detail.html'
@@ -1042,7 +1044,7 @@ class FundinventarSteininventarListView(GenericListView):
     ]
 
 
-class FundinventarSteininventarDetailView(DetailView):
+class FundinventarSteininventarDetailView(BaseDetailView):
 
     model = FundinventarSteininventar
     template_name = 'browsing/generic_detail.html'
@@ -1089,7 +1091,7 @@ class GISListView(GenericListView):
     ]
 
 
-class GISDetailView(DetailView):
+class GISDetailView(BaseDetailView):
 
     model = GIS
     template_name = 'browsing/generic_detail.html'
@@ -1136,7 +1138,7 @@ class GeophysicsListView(GenericListView):
     ]
 
 
-class GeophysicsDetailView(DetailView):
+class GeophysicsDetailView(BaseDetailView):
 
     model = Geophysics
     template_name = 'browsing/generic_detail.html'
@@ -1183,7 +1185,7 @@ class InventorybooksListView(GenericListView):
     ]
 
 
-class InventorybooksDetailView(DetailView):
+class InventorybooksDetailView(BaseDetailView):
 
     model = Inventorybooks
     template_name = 'browsing/generic_detail.html'
@@ -1230,7 +1232,7 @@ class PhasenIDListView(GenericListView):
     ]
 
 
-class PhasenIDDetailView(DetailView):
+class PhasenIDDetailView(BaseDetailView):
 
     model = PhasenID
     template_name = 'browsing/generic_detail.html'
@@ -1277,7 +1279,7 @@ class ProtocolsListView(GenericListView):
     ]
 
 
-class ProtocolsDetailView(DetailView):
+class ProtocolsDetailView(BaseDetailView):
 
     model = Protocols
     template_name = 'browsing/generic_detail.html'
@@ -1324,7 +1326,7 @@ class StratenIDListView(GenericListView):
     ]
 
 
-class StratenIDDetailView(DetailView):
+class StratenIDDetailView(BaseDetailView):
 
     model = StratenID
     template_name = 'browsing/generic_detail.html'
@@ -1371,7 +1373,7 @@ class TablesListView(GenericListView):
     ]
 
 
-class TablesDetailView(DetailView):
+class TablesDetailView(BaseDetailView):
 
     model = Tables
     template_name = 'browsing/generic_detail.html'
@@ -1418,7 +1420,7 @@ class ThreeDimensionalModelListView(GenericListView):
     ]
 
 
-class ThreeDimensionalModelDetailView(DetailView):
+class ThreeDimensionalModelDetailView(BaseDetailView):
 
     model = ThreeDimensionalModel
     template_name = 'browsing/generic_detail.html'
@@ -1465,7 +1467,7 @@ class VideosListView(GenericListView):
     ]
 
 
-class VideosDetailView(DetailView):
+class VideosDetailView(BaseDetailView):
 
     model = Videos
     template_name = 'browsing/generic_detail.html'
@@ -1512,7 +1514,7 @@ class WallpaintingInventoryListView(GenericListView):
     ]
 
 
-class WallpaintingInventoryDetailView(DetailView):
+class WallpaintingInventoryDetailView(BaseDetailView):
 
     model = WallpaintingInventory
     template_name = 'browsing/generic_detail.html'

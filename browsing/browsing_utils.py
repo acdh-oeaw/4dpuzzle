@@ -9,6 +9,7 @@ from django.conf import settings
 from django.db.models.fields.related import ManyToManyField
 from django.http import HttpResponse
 from django.utils.safestring import mark_safe
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML
@@ -208,6 +209,17 @@ class GenericListView(django_tables2.SingleTableView):
         else:
             response = super(GenericListView, self).render_to_response(context)
             return response
+
+
+class BaseDetailView(DetailView):
+    model = None
+    template_name = 'browsing/generic_create.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['docstring'] = "{}".format(self.model.__doc__)
+        context['class_name'] = "{}".format(self.model.__name__)
+        return context
 
 
 class BaseCreateView(CreateView):

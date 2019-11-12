@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'browsing',
     'vocabs',
     'infos',
-    'archiv'
+    'archiv',
+    'netvis',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -130,3 +131,8 @@ VOCABS_SETTINGS = {
     'default_ns': "http://www.vocabs/{}/".format(VOCABS_DEFAULT_PEFIX),
     'default_lang': "en"
 }
+
+
+# from archeutils.utils import get_prop_types
+#
+# ARCHE_PROPS_LOOKUP = get_prop_types()
