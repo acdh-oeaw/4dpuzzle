@@ -45,3 +45,4 @@ data/*
 
 prepare_lueckentexte.ipynb
 myenv
+staticfiles

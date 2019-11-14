@@ -8,6 +8,7 @@
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/three@latest/build/three.min.js"></script>
 <script crossorigin src="https://unpkg.com/@acdh/network-visualization@latest/lib/network-visualization.umd.js"></script>
+<script src="{% static 'netvis/js/netvis.js' %}"></script>
 {% endblock %}
 {% block content %}
 <!-- <div class="container"> -->
@@ -133,45 +134,7 @@
         <div class="col-md-6">
             <div id="visualization" style="position: relative; height: 700px; background: #fafafa;"></div>
             <script type="text/javascript">
-              const visCard = document.getElementById('visualization')
-              var spinner = new Spinner().spin();
-
-              const render = graph => {
-                ReactDOM.render(
-                  React.createElement(NetworkVisualization.Visualization, {
-                    graph,
-                    dimensions: 2,
-                    children: props => React.createElement(NetworkVisualization.ExportButton, props),
-                    onNodeClick: ({
-                      node
-                    }) => {
-                      console.log(node)
-                      if (!node) {
-                        console.error('No node found')
-                        return
-                      }
-                      const url = node.as_graph
-                      if (!url) {
-                        console.error('No URL found')
-                        return
-                      }
-                      fetch(url).then(response => response.json()).then(render).catch(error => console.error(error))
-                    }
-
-                  }),
-                  document.getElementById('visualization')
-                )
-              }
-
-              visCard.appendChild(spinner.el);
-              fetch("{% url 'netvis:graph' app_name='archiv' model_name=class_name|lower pk=object.id %}")
-                .then(response => response.json())
-                .then(render)
-                .catch((error) => {
-                  // handle your errors here
-                  console.error(error)
-                })
-              // const graph = JSON.parse(document.getElementById('netviz-data').textContent);
+              showGraph("{% url 'netvis:graph' app_name='archiv' model_name=class_name|lower pk=object.id %}", "visualization")
             </script>
         </div>
     </div>
