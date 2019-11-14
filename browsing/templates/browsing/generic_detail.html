@@ -11,134 +11,173 @@
 {% endblock %}
 {% block content %}
 <!-- <div class="container"> -->
-    <div class="card w-100">
-        <div class="card-header">
-            <div class="row">
-                <div class="col-md-2">
-                    {% if object.get_prev %}
-                        <h2>
-                            <a href="{{ object.get_prev }}" title="previous">
-                                <i data-feather="chevron-left"></i>
-                            </a>
-                        </h2>
-                    {% endif %}
-                </div>
-                <div class="col-md-8">
-                    <h2 style="text-align: center;">
-                        <small><a href="{{ object.get_listview_url }}" title="back to listview"><i data-feather="corner-left-up"></i></a></small>
-                        {{ object }}
-                        {% if user.is_authenticated %}
-                            <small>
-                                <a href="{{ object.get_edit_url }}" title="edit">
-                                    <i data-feather="edit-3"></i>
-                                </a>
-                            </small>
-                            |
-                            <small>
-                                <a href="{{ object.get_delete_url }}" title="delete">
-                                    <i data-feather="trash-2"></i>
-                                </a>
-                            </small>
-                        {% endif %}
-                    </h2>
-                </div>
-            <div class="col-md-2">
-                <h2>
-                    {% if object.get_next %}
-                    <a href="{{ object.get_next }}" style="float:right" title="next">
-                        <i data-feather="chevron-right"></i>
-                    </a>
-                </h2>
-                {% endif %}
-            </div>
-        </div>
+<div class="card w-100">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-2">
+        {% if object.get_prev %}
+        <h2>
+          <a href="{{ object.get_prev }}" title="previous">
+            <i data-feather="chevron-left"></i>
+          </a>
+        </h2>
+        {% endif %}
+      </div>
+      <div class="col-md-8">
+        <h2 style="text-align: center;">
+          <small><a href="{{ object.get_listview_url }}" title="back to listview"><i data-feather="corner-left-up"></i></a></small>
+          {{ object }}
+          {% if user.is_authenticated %}
+          <small>
+            <a href="{{ object.get_edit_url }}" title="edit">
+              <i data-feather="edit-3"></i>
+            </a>
+          </small>
+          |
+          <small>
+            <a href="{{ object.get_delete_url }}" title="delete">
+              <i data-feather="trash-2"></i>
+            </a>
+          </small>
+          {% endif %}
+        </h2>
+      </div>
+      <div class="col-md-2">
+        <h2>
+          {% if object.get_next %}
+          <a href="{{ object.get_next }}" style="float:right" title="next">
+            <i data-feather="chevron-right"></i>
+          </a>
+        </h2>
+        {% endif %}
+      </div>
     </div>
-    <div class="card-body">
-        {% block custom %}
-            <legend>Basic Information</legend>
-                <table class="table table-responsive table-hover">
-                    {% for x in object.field_dict %}
-                    {% if x.value %}
-                        <tr>
-                            <th>
-                                {% if x.help_text %}
-                                    <abbr title="{{ x.help_text }}">{{ x.verbose_name }}</abbr>
-                                {% else %}
-                                    {{ x.verbose_name }}
-                                {% endif %}
-                            </th>
-                            <td>
-                                {% if x.f_type == 'M2M' %}
-                                    {% for y in x.value %}
-                                        <li>
-                                            <a href="{{ y.get_absolute_url }}">{{ y.legacy_id }}</a>
-                                        </li>
-                                    {% endfor %}
-                                {% elif  x.f_type == 'FK' %}
-                                    <a href="{{ x.value.get_absolute_url }}">{{ x.value }}</a>
-                                {% elif  x.f_type == 'FK' %}
-                                    <a href="{{ x.value.get_absolute_url }}">{{ x.value }}</a>
-                                {% elif  x.f_type == 'REVRESE_RELATION' %}
-                                    {% for y in x.value %}
-                                        <li>
-                                            <a href="{{ y.get_absolute_url }}">{{ y.legacy_id }}</a>
-                                        </li>
-                                    {% endfor %}
+  </div>
+  <div class="card-body">
+    {% block custom %}
+    <legend>Basic Information</legend>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-responsive table-hover">
+              {% for x in object.field_dict %}
+              {% if x.value %}
+              {% if user.is_authenticated %}
+              <tr>
+                <th>
+                  {% if x.help_text %}
+                  <abbr title="{{ x.help_text }}">{{ x.verbose_name }}</abbr>
+                  {% else %}
+                  {{ x.verbose_name }}
+                  {% endif %}
+                </th>
+                <td>
+                  {% if x.f_type == 'M2M' %}
+                  {% for y in x.value %}
+                  <li>
+                    <a href="{{ y.get_absolute_url }}">{{ y.legacy_id }}</a>
+                  </li>
+                  {% endfor %}
+                  {% elif  x.f_type == 'FK' %}
+                  <a href="{{ x.value.get_absolute_url }}">{{ x.value }}</a>
+                  {% elif  x.f_type == 'FK' %}
+                  <a href="{{ x.value.get_absolute_url }}">{{ x.value }}</a>
+                  {% elif  x.f_type == 'REVRESE_RELATION' %}
+                  {% for y in x.value %}
+                  <li>
+                    <a href="{{ y.get_absolute_url }}">{{ y.legacy_id }}</a>
+                  </li>
+                  {% endfor %}
 
-                                {% elif  x.f_type == 'SIMPLE' %}
-                                    {{ x.value }}
-                                {% endif %}
-                            </td>
-                            <td>
-                                {{ x.extra_fields }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% endfor %}
+                  {% elif  x.f_type == 'SIMPLE' %}
+                  {{ x.value }}
+                  {% endif %}
+                </td>
+              </tr>
+              {% elif not x.extra_fields or x.extra_fields.is_public %}
+              <tr>
+                <th>
+                  {% if x.help_text %}
+                  <abbr title="{{ x.help_text }}">{{ x.verbose_name }}</abbr>
+                  {% else %}
+                  {{ x.verbose_name }}
+                  {% endif %}
+                </th>
+                <td>
+                  {% if x.f_type == 'M2M' %}
+                  {% for y in x.value %}
+                  <li>
+                    <a href="{{ y.get_absolute_url }}">{{ y.legacy_id }}</a>
+                  </li>
+                  {% endfor %}
+                  {% elif  x.f_type == 'FK' %}
+                  <a href="{{ x.value.get_absolute_url }}">{{ x.value }}</a>
+                  {% elif  x.f_type == 'FK' %}
+                  <a href="{{ x.value.get_absolute_url }}">{{ x.value }}</a>
+                  {% elif  x.f_type == 'REVRESE_RELATION' %}
+                  {% for y in x.value %}
+                  <li>
+                    <a href="{{ y.get_absolute_url }}">{{ y.legacy_id }}</a>
+                  </li>
+                  {% endfor %}
 
-                </table>
-                <div id="visualization" style="position: relative; height: 400px; background: #fafafa;"></div>
-                <script type="text/javascript">
-                    const visCard = document.getElementById('visualization')
-                    var spinner = new Spinner().spin();
+                  {% elif  x.f_type == 'SIMPLE' %}
+                  {{ x.value }}
+                  {% endif %}
+                </td>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {% endfor %}
+            </table>
+        </div>
+        <div class="col-md-6">
+            <div id="visualization" style="position: relative; height: 700px; background: #fafafa;"></div>
+            <script type="text/javascript">
+              const visCard = document.getElementById('visualization')
+              var spinner = new Spinner().spin();
 
-                    const render = graph => {
-                        ReactDOM.render(
-                            React.createElement(NetworkVisualization.Visualization, {
-                                graph,
-                                dimensions: 2,
-                                children: props => React.createElement(NetworkVisualization.ExportButton, props),
-                                onNodeClick: ({node}) => {
-                                    console.log(node)
-                                    if (!node) {
-                                        console.error('No node found')
-                                        return
-                                    }
-                                    const url = node.as_graph
-                                    if (!url) {
-                                        console.error('No URL found')
-                                        return
-                                    }
-                                    fetch(url).then(response => response.json()).then(render).catch(error => console.error(error))
-                                }
-
-                            }),
-                            document.getElementById('visualization')
-                        )
+              const render = graph => {
+                ReactDOM.render(
+                  React.createElement(NetworkVisualization.Visualization, {
+                    graph,
+                    dimensions: 2,
+                    children: props => React.createElement(NetworkVisualization.ExportButton, props),
+                    onNodeClick: ({
+                      node
+                    }) => {
+                      console.log(node)
+                      if (!node) {
+                        console.error('No node found')
+                        return
+                      }
+                      const url = node.as_graph
+                      if (!url) {
+                        console.error('No URL found')
+                        return
+                      }
+                      fetch(url).then(response => response.json()).then(render).catch(error => console.error(error))
                     }
 
-                    visCard.appendChild(spinner.el);
-                    fetch("{% url 'netvis:graph' app_name='archiv' model_name=class_name|lower pk=object.id %}")
-                      .then(response => response.json())
-                      .then(render)
-                      .catch((error) => {
-                        // handle your errors here
-                        console.error(error)
-                      })
-                    // const graph = JSON.parse(document.getElementById('netviz-data').textContent);
+                  }),
+                  document.getElementById('visualization')
+                )
+              }
 
-                </script>
-            </div>
-            </div>
-        {% endblock custom %}
+              visCard.appendChild(spinner.el);
+              fetch("{% url 'netvis:graph' app_name='archiv' model_name=class_name|lower pk=object.id %}")
+                .then(response => response.json())
+                .then(render)
+                .catch((error) => {
+                  // handle your errors here
+                  console.error(error)
+                })
+              // const graph = JSON.parse(document.getElementById('netviz-data').textContent);
+            </script>
+        </div>
+    </div>
+
+
+  </div>
+</div>
+{% endblock custom %}
 {% endblock %}
