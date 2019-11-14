@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist, FieldDoesNotExist
+from django.db.models.query import QuerySet
 
-from rdflib import Graph, Namespace
+from rdflib import Graph, Namespace, URIRef, Literal
 from rdflib.namespace import RDF
 
 
@@ -45,41 +46,33 @@ def get_arche_id(res, id_prop="pk", arche_uri="https://id.acdh.oeaw.ac.at"):
     )
 
 
-def get_arche_fields(res):
+def get_arche_fields(
+    res, extra_fields_name='extra_fields', arche_prop_name='arche_prop'
+):
     vals = [x for x in model_to_dict(res) if x.get('value') != '']
     vals = [x for x in vals if x.get('value') != 'None']
-    vals = [x for x in vals if x.get('extra_fields')]
-    vals = [x for x in vals if x.get('extra_fields').get('arche_prop')]
+    vals = [x for x in vals if x.get(extra_fields_name)]
+    vals = [x for x in vals if x.get(extra_fields_name).get(arche_prop_name)]
     return vals
 
 
-def get_field_extra(obj, field_name, extra='arche_prop'):
-    try:
-        my_field = obj._meta.get_field(field_name)
-    except FieldDoesNotExist:
-        return False
-    try:
-        extra_dict = my_field.extra
-    except AttributeError:
-        return False
-    return extra_dict.get(extra, 'False')
+def as_arche_res(res, res_type='Resource'):
+    g = Graph()
+    sub = URIRef(get_arche_id(res))
+    g.add( (sub, RDF.type, acdh_ns[res_type]))
 
-
-g = Graph()
-sub = URIRef(get_arche_id(res))
-g.add( (sub, RDF.type, acdh_ns.Resource))
-
-for x in get_arche_fields(res):
-    cur_val = x['value']
-    arche_prop = x['extra_fields']['arche_prop'].strip()
-    arche_prop_domain = ARCHE_PROPS_LOOKUP.get(arche_prop,'No Match')
-    if arche_prop_domain == 'string':
-        g.add( (sub, acdh_ns[arche_prop], Literal(cur_val)) )
-    elif arche_prop_domain == 'date':
-        g.add( (sub, acdh_ns[arche_prop], Literal(cur_val)) )
-    else:
-        if isinstance(cur_val, QuerySet):
-            for obj in cur_val:
-                g.add( (sub, acdh_ns[arche_prop], URIRef(get_arche_id(obj))) )
+    for x in get_arche_fields(res):
+        cur_val = x['value']
+        arche_prop = x['extra_fields']['arche_prop'].strip()
+        arche_prop_domain = ARCHE_PROPS_LOOKUP.get(arche_prop,'No Match')
+        if arche_prop_domain == 'string':
+            g.add( (sub, acdh_ns[arche_prop], Literal(cur_val)) )
+        elif arche_prop_domain == 'date':
+            g.add( (sub, acdh_ns[arche_prop], Literal(cur_val)) )
         else:
-            g.add( (sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))) )
+            if isinstance(cur_val, QuerySet):
+                for obj in cur_val:
+                    g.add( (sub, acdh_ns[arche_prop], URIRef(get_arche_id(obj))) )
+            else:
+                g.add( (sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))) )
+    return g
