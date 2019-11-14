@@ -2376,7 +2376,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Document_title",
-        arche_prop="-",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -2389,7 +2388,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Document_type",
-        arche_prop="-",
     )
     dt_abbr = models.ForeignKey(
         "DocumentTypes",
@@ -2402,7 +2400,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__DT_abbr",
-        arche_prop="-",
     )
     document_subtype = models.ManyToManyField(
         "DocumentTypes",
@@ -2413,7 +2410,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Document_subtype",
-        arche_prop="-",
     )
     dst_abbr = models.ManyToManyField(
         "DocumentTypes",
@@ -2424,7 +2420,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__DST_abbr",
-        arche_prop="-",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
@@ -2433,7 +2428,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Creation_date_original",
-        arche_prop="-",
     )
     creation_year_original = models.ForeignKey(
         "ExcavationSeasons",
@@ -2446,7 +2440,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Creation_year_original",
-        arche_prop="-",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
@@ -2468,7 +2461,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__File_extension",
-        arche_prop="-",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -2477,7 +2469,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Creation_date_metadata",
-        arche_prop="-",
     )
     creator_metadata = models.ManyToManyField(
         "Actor",
@@ -2499,7 +2490,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Creator_original",
-        arche_prop="-",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -2535,7 +2525,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Storage_folder_original",
-        arche_prop="-",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -2548,7 +2537,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Site_ID",
-        arche_prop="-",
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
@@ -2574,7 +2562,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Source__original_copy_edited_copy",
-        arche_prop="-",
     )
     resolution_scan_ppi = models.IntegerField(
         blank=True, null=True,
@@ -2607,7 +2594,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Original_material",
-        arche_prop="-",
     )
     original_inventory_number = models.CharField(
         max_length=250,
@@ -2638,7 +2624,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Amendment_drawn_by",
-        arche_prop="-",
     )
     amendment_data = models.CharField(
         max_length=250,
@@ -2648,7 +2633,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Amendment_date",
-        arche_prop="-",
     )
     drawer_monogram = models.ManyToManyField(
         "Actor",
@@ -2659,7 +2643,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Drawer_monogram",
-        arche_prop="-",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
@@ -2670,7 +2653,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Excavation_object_ID",
-        arche_prop="-",
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
@@ -2681,7 +2663,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Archaeological_object_ID",
-        arche_prop="-",
     )
     stratum_id_relative = models.CharField(
         max_length=250,
@@ -2691,7 +2672,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Stratum_ID_relative",
-        arche_prop="-",
     )
     stratum_id_absolute_prepub = models.CharField(
         max_length=250,
@@ -2701,7 +2681,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Stratum_ID_absolute_prepub",
-        arche_prop="-",
     )
     stratum_comment = models.TextField(
         blank=True,
@@ -2710,7 +2689,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Stratum_comment",
-        arche_prop="-",
     )
     season = models.ForeignKey(
         "ExcavationSeasons",
@@ -2723,7 +2701,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Season",
-        arche_prop="-",
     )
     month = models.CharField(
         max_length=250,
@@ -2733,7 +2710,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Month",
-        arche_prop="-",
     )
     scale = models.CharField(
         max_length=250,
@@ -2756,7 +2732,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Excavation__post_excavation",
-        arche_prop="-",
     )
     original_comment = models.TextField(
         blank=True,
@@ -2765,7 +2740,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Original_comment",
-        arche_prop="-",
     )
     digitisation_comment = models.TextField(
         blank=True,
@@ -2774,7 +2748,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv\archiv\4DP_Metadaten_Feldzeichnungen_F-I\Fielddrawings.csv__Digitisation_comment",
-        arche_prop="-",
     )
 
     class Meta:
