@@ -76,3 +76,13 @@ def as_arche_res(res, res_type='Resource'):
             else:
                 g.add( (sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))) )
     return g
+
+
+def qs_as_arche_res(qs, res_type='Resource'):
+    maingraph = Graph()
+    for res in qs:
+        try:
+            maingraph += as_arche_res(res, res_type=res_type)
+        except Exception as e:
+            print(res, e)
+    return maingraph

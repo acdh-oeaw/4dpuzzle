@@ -29,18 +29,18 @@
           <small><a href="{{ object.get_listview_url }}" title="back to listview"><i data-feather="corner-left-up"></i></a></small>
           {{ object }}
           {% if user.is_authenticated %}
-          <small>
             <a href="{{ object.get_edit_url }}" title="edit">
               <i data-feather="edit-3"></i>
             </a>
-          </small>
-          |
-          <small>
             <a href="{{ object.get_delete_url }}" title="delete">
               <i data-feather="trash-2"></i>
             </a>
-          </small>
           {% endif %}
+          {% if 'archeutils' in APPS %}
+          <a href="{% url 'archeutils:res_as_arche_graph' app_name=app_name model_name=class_name|lower pk=object.id %}" title="As ARCHE-RDF">
+            <i data-feather="download"></i>
+          </a>
+          {% endif%}
         </h2>
       </div>
       <div class="col-md-2">
@@ -134,7 +134,7 @@
         <div class="col-md-6">
             <div id="visualization" style="position: relative; height: 700px; background: #fafafa;"></div>
             <script type="text/javascript">
-              showGraph("{% url 'netvis:graph' app_name='archiv' model_name=class_name|lower pk=object.id %}", "visualization")
+              showGraph("{% url 'netvis:graph' app_name=app_name model_name=class_name|lower pk=object.id %}", "visualization")
             </script>
         </div>
     </div>

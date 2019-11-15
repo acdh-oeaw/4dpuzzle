@@ -219,6 +219,7 @@ class BaseDetailView(DetailView):
         context = super().get_context_data()
         context['docstring'] = "{}".format(self.model.__doc__)
         context['class_name'] = "{}".format(self.model.__name__)
+        context['app_name'] = "{}".format(self.model._meta.app_label)
         return context
 
 
