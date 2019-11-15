@@ -13,7 +13,7 @@ ARCHE_BASE_URI = getattr(settings, 'ARCHE_BASE_URI', 'https://id.acdh.oeaw.ac.at
 
 
 repo_schema = "https://raw.githubusercontent.com/acdh-oeaw/repo-schema/master/acdh-schema.owl"
-acdh_ns = Namespace("https://vocabs.acdh.oeaw.ac.at/acdh#")
+acdh_ns = Namespace("https://vocabs.acdh.oeaw.ac.at/schema#")
 owl_ns = Namespace("http://www.w3.org/2002/07/owl#")
 rdfs_ns = Namespace("http://www.w3.org/2000/01/rdf-schema#")
 

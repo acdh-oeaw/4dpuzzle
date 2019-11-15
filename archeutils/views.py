@@ -19,7 +19,7 @@ def res_as_arche_graph(request, app_name, model_name, pk):
         raise Http404(f"No model: {model_name} with id: {pk} found")
     res = ct.model_class().objects.get(id=int_pk)
     g = as_arche_res(res)
-    return HttpResponse(g.serialize(encoding='utf-8'), content_type='text/xml')
+    return HttpResponse(g.serialize(encoding='utf-8'), content_type='application/xml')
 
 
 def qs_as_arche_graph(request, app_name, model_name):
@@ -31,4 +31,4 @@ def qs_as_arche_graph(request, app_name, model_name):
         raise Http404(f"No model: {model_name} in app: {app_name} defined")
     qs = ct.model_class().objects.all()
     maingraph = qs_as_arche_res(qs[start:page_size])
-    return HttpResponse(maingraph.serialize(encoding='utf-8'), content_type='text/xml')
+    return HttpResponse(maingraph.serialize(encoding='utf-8'), content_type='application/xml')
