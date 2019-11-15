@@ -72,9 +72,11 @@ def as_arche_res(res, res_type='Resource'):
         else:
             if isinstance(cur_val, QuerySet):
                 for obj in cur_val:
-                    g.add( (sub, acdh_ns[arche_prop], URIRef(get_arche_id(obj))) )
+                    if obj is not None:
+                        g.add( (sub, acdh_ns[arche_prop], URIRef(get_arche_id(obj))) )
             else:
-                g.add( (sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))) )
+                if cur_val is not None:
+                    g.add( (sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))) )
     return g
 
 
