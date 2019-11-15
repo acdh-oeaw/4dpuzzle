@@ -2,7 +2,7 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist, FieldDoesNotExist
 from django.db.models.query import QuerySet
 
-from rdflib import Graph, Namespace, URIRef, Literal
+from rdflib import Graph, Namespace, URIRef, Literal, XSD
 from rdflib.namespace import RDF
 
 
@@ -51,6 +51,7 @@ def get_arche_fields(
 ):
     vals = [x for x in model_to_dict(res) if x.get('value') != '']
     vals = [x for x in vals if x.get('value') != 'None']
+    vals = [x for x in vals if x.get('value') is not None]
     vals = [x for x in vals if x.get(extra_fields_name)]
     vals = [x for x in vals if x.get(extra_fields_name).get(arche_prop_name)]
     return vals
@@ -68,7 +69,7 @@ def as_arche_res(res, res_type='Resource'):
         if arche_prop_domain == 'string':
             g.add( (sub, acdh_ns[arche_prop], Literal(cur_val)) )
         elif arche_prop_domain == 'date':
-            g.add( (sub, acdh_ns[arche_prop], Literal(cur_val)) )
+            g.add( (sub, acdh_ns[arche_prop], Literal(cur_val, datatype=XSD.date)) )
         else:
             if isinstance(cur_val, QuerySet):
                 for obj in cur_val:
