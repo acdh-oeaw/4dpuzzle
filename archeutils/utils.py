@@ -15,7 +15,7 @@ from browsing.browsing_utils import model_to_dict
 
 
 ARCHE_BASE_URI = getattr(settings, 'ARCHE_BASE_URI', 'https://id.acdh.oeaw.ac.at/MYPROJECT')
-pickle_file = os.path.join('archeutils', 'arche_descriptions.pickle')
+pickle_file = os.path.join(settings.BASE_DIR, 'archeutils', 'arche_descriptions.pickle')
 
 ARCHE_RE_PATTERN = re.compile(r'{(.*?)}', re.IGNORECASE)
 # regex = re.compile(ARCHE_RE_PATTERN, re.IGNORECASE)
