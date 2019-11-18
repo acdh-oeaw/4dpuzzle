@@ -51,12 +51,12 @@ def get_arche_desc(res):
     if desc_dict is not None:
         lookup_dict = {}
         for x in set(re.findall(ARCHE_RE_PATTERN, desc_dict)):
-            value = str(getattr(res, x, 'no value provided'))
+            value = str(getattr(res, x, f"no property {x} defined"))
             if value == 'None' or value.endswith('None'):
-                value = 'no value provided'
+                value = f"no value provided for property {x}"
             else:
                 pass
-            lookup_dict[x] = value
+            lookup_dict[x] = f"**{value}**"
         desc = desc_dict.format(**lookup_dict)
         return desc
     else:
