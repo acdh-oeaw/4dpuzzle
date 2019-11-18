@@ -17,6 +17,7 @@ acdh_ns = Namespace("https://vocabs.acdh.oeaw.ac.at/schema#")
 owl_ns = Namespace("http://www.w3.org/2002/07/owl#")
 rdfs_ns = Namespace("http://www.w3.org/2000/01/rdf-schema#")
 
+
 def get_prop_types(repo_schema_url=repo_schema):
     g = Graph()
     g.parse(repo_schema, format='xml')
@@ -27,6 +28,7 @@ def get_prop_types(repo_schema_url=repo_schema):
             for range_prop in g.objects(s, rdfs_ns.range):
                 prop_types[prop_name] = range_prop.split('#')[-1]
     return prop_types
+
 
 ARCHE_PROPS_LOOKUP = get_prop_types()
 
@@ -60,24 +62,24 @@ def get_arche_fields(
 def as_arche_res(res, res_type='Resource'):
     g = Graph()
     sub = URIRef(get_arche_id(res))
-    g.add( (sub, RDF.type, acdh_ns[res_type]))
+    g.add((sub, RDF.type, acdh_ns[res_type]))
 
     for x in get_arche_fields(res):
         cur_val = x['value']
         arche_prop = x['extra_fields']['arche_prop'].strip()
-        arche_prop_domain = ARCHE_PROPS_LOOKUP.get(arche_prop,'No Match')
+        arche_prop_domain = ARCHE_PROPS_LOOKUP.get(arche_prop, 'No Match')
         if arche_prop_domain == 'string':
-            g.add( (sub, acdh_ns[arche_prop], Literal(cur_val)) )
+            g.add((sub, acdh_ns[arche_prop], Literal(cur_val)))
         elif arche_prop_domain == 'date':
-            g.add( (sub, acdh_ns[arche_prop], Literal(cur_val, datatype=XSD.date)) )
+            g.add((sub, acdh_ns[arche_prop], Literal(cur_val, datatype=XSD.date)))
         else:
             if isinstance(cur_val, QuerySet):
                 for obj in cur_val:
                     if obj is not None:
-                        g.add( (sub, acdh_ns[arche_prop], URIRef(get_arche_id(obj))) )
+                        g.add((sub, acdh_ns[arche_prop], URIRef(get_arche_id(obj))))
             else:
                 if cur_val is not None:
-                    g.add( (sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))) )
+                    g.add((sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))))
     return g
 
 
