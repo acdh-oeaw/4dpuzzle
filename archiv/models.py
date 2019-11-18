@@ -2763,6 +2763,9 @@ class Fielddrawing(models.Model):
     def field_dict(self):
         return model_to_dict(self)
 
+    def get_arche_desc(self):
+        return f"{self.filename} is the scan of a fielddrawing ({self.document_type} ({self.dt_abbr})) drawn in scale {self.scale} documenting a {self.document_subtype} showing {self.document_title} and {self.archaeological_object} and {self.find_inventory_number}. It was drawn on {self.creation_date_original}/drawn in {self.creation_year_original} by {self.creator_original} ({self.drawer_monogram}) with an amendment drawn by {self.amendment_drawn_by } on{self.amendmet_date}. The scan was made from the {self.source_original_copy_edited-copy} fielddrawing which was drawn on {self.original_material}. It has the inventory number {self.original_inventory_number} and is kept in the OREA archive in a folder titled ‘{self.storage_folder_original}’. The comment on the fielddrawing was ‘{self.original_comment}’.The scan ({self.file_extension} File) was made with a resolution of {self.resolution_scan_ppi} ppi with a {self.equipment_scan} on {self.creation_date_scan} by {self.creator_scan}. Metadata was created on {self.creation_date_metadata} by {self.creator_metadata}. The comment was ‘{self.digital_comment}’.self.copyright is held by {self.copyright} and access to the file is {self.access}."
+
     @classmethod
     def get_listview_url(self):
         return reverse('archiv:fielddrawing_browse')

@@ -1,3 +1,8 @@
+import pickle
+import os
+import re
+
+
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist, FieldDoesNotExist
 from django.db.models.query import QuerySet
@@ -10,6 +15,13 @@ from browsing.browsing_utils import model_to_dict
 
 
 ARCHE_BASE_URI = getattr(settings, 'ARCHE_BASE_URI', 'https://id.acdh.oeaw.ac.at/MYPROJECT')
+pickle_file = os.path.join('archeutils', 'arche_descriptions.pickle')
+
+ARCHE_RE_PATTERN = re.compile(r'{(.*?)}', re.IGNORECASE)
+# regex = re.compile(ARCHE_RE_PATTERN, re.IGNORECASE)
+
+with open(pickle_file, "rb") as input_file:
+    ARCHE_DESC_DICT = pickle.load(input_file)
 
 
 repo_schema = "https://raw.githubusercontent.com/acdh-oeaw/repo-schema/master/acdh-schema.owl"
@@ -31,6 +43,24 @@ def get_prop_types(repo_schema_url=repo_schema):
 
 
 ARCHE_PROPS_LOOKUP = get_prop_types()
+
+
+def get_arche_desc(res):
+    class_name = res.__class__.__name__.lower()
+    desc_dict = ARCHE_DESC_DICT.get(class_name, None)
+    if desc_dict is not None:
+        lookup_dict = {}
+        for x in set(re.findall(ARCHE_RE_PATTERN, desc_dict)):
+            value = str(getattr(res, x, 'no value provided'))
+            if value == 'None' or value.endswith('None'):
+                value = 'no value provided'
+            else:
+                pass
+            lookup_dict[x] = value
+        desc = desc_dict.format(**lookup_dict)
+        return desc
+    else:
+        "No description template found"
 
 
 def get_arche_id(res, id_prop="pk", arche_uri="https://id.acdh.oeaw.ac.at"):
@@ -63,7 +93,9 @@ def as_arche_res(res, res_type='Resource'):
     g = Graph()
     sub = URIRef(get_arche_id(res))
     g.add((sub, RDF.type, acdh_ns[res_type]))
-
+    g.add((
+        sub, acdh_ns.hasDescription, Literal(get_arche_desc(res))
+    ))
     for x in get_arche_fields(res):
         cur_val = x['value']
         arche_prop = x['extra_fields']['arche_prop'].strip()
