@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'archiv',
     'archeutils',
     'netvis',
+    'charts',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
