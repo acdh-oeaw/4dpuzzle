@@ -192,7 +192,9 @@ from . models import (
     {{ x.model_name }}{{ "," if not loop.last }}
 {%- endfor %}
 )
-from browsing.browsing_utils import GenericListView, BaseCreateView, BaseUpdateView
+from browsing.browsing_utils import (
+    GenericListView, BaseCreateView, BaseUpdateView, BaseDetailView
+)
 
 {% for x in data %}
 class {{ x.model_name }}ListView(GenericListView):
@@ -206,7 +208,7 @@ class {{ x.model_name }}ListView(GenericListView):
     ]
 
 
-class {{ x.model_name }}DetailView(DetailView):
+class {{ x.model_name }}DetailView(BaseDetailView):
 
     model = {{ x.model_name }}
     template_name = 'browsing/generic_detail.html'

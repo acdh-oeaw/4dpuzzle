@@ -65,7 +65,7 @@ def xlsx_to_classdicts(file):
                 except KeyError:
                     arche_prop = None
                 if arche_prop is not None and isinstance(arche_prop, str):
-                    field['arche_prop'] = arche_prop
+                    field['arche_prop'] = arche_prop.replace('\n', '').replace(' ', '')
                 else:
                     field['arche_prop'] = False
 

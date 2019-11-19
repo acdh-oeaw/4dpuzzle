@@ -330,6 +330,7 @@ class GeophysicsTable(tables.Table):
 class InventorybooksTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
+    find_inventory_number = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Inventorybooks
