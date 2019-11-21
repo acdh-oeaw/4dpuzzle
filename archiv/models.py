@@ -18,7 +18,7 @@ models.Field.set_extra = set_extra
 
 
 class Actor(models.Model):
-    ### Person involved in TD excavations and/or A Puzzle in 4D project ###
+    """ Person involved in TD excavations and/or A Puzzle in 4D project """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -134,7 +134,7 @@ class Actor(models.Model):
 
 
 class ArchaeologicalObject4DPuzzleID(models.Model):
-    ### A 4DPuzzleID was created for archaeological objects that did not have an ID ###
+    """ A 4DPuzzleID was created for archaeological objects that did not have an ID """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -316,7 +316,7 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
 
 
 class ArchaeologicalObjectID(models.Model):
-    ### ID of archaeological object  ###
+    """ ID of archaeological object  """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -498,7 +498,7 @@ class ArchaeologicalObjectID(models.Model):
 
 
 class ArchiveINF(models.Model):
-    ### Document with information about the Tell el-Daba documentation archive ###
+    """ Document with information about the Tell el-Daba documentation archive """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -745,7 +745,7 @@ class ArchiveINF(models.Model):
 
 
 class AutoCAD(models.Model):
-    ### AutoCAD Files ###
+    """ AutoCAD Files """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -1081,7 +1081,7 @@ class AutoCAD(models.Model):
 
 
 class Convolutecards(models.Model):
-    ### Digitised convolute cards ###
+    """ Digitised convolute cards """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -1461,7 +1461,7 @@ class Convolutecards(models.Model):
 
 
 class Datenbase(models.Model):
-    ### Database files ###
+    """ Database files """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -1809,7 +1809,7 @@ class Datenbase(models.Model):
 
 
 class Document4DPuzzleID(models.Model):
-    ### A 4DPuzzleID was created for documents that did not have an ID ###
+    """ A 4DPuzzleID was created for documents that did not have an ID """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -1972,7 +1972,7 @@ class Document4DPuzzleID(models.Model):
 
 
 class DocumentTypes(models.Model):
-    ### Types of documents  ###
+    """ Types of documents  """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -2042,7 +2042,7 @@ class DocumentTypes(models.Model):
         verbose_name = "Document types"
 
     def __str__(self):
-        return f"{self.document_type} >> {document_subtype}"
+        return f"{self.document_type} >> {self.document_subtype}"
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2087,7 +2087,7 @@ class DocumentTypes(models.Model):
 
 
 class ExcavationObjectID(models.Model):
-    ### ID of excavation object (area, square etc.) ###
+    """ ID of excavation object (area, square etc.) """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -2274,7 +2274,7 @@ class ExcavationObjectID(models.Model):
 
 
 class ExcavationSeasons(models.Model):
-    ### Excavation season ###
+    """ Excavation season """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -2383,7 +2383,7 @@ class ExcavationSeasons(models.Model):
 
 
 class Fielddrawing(models.Model):
-    ### Digitised fielddrawing ###
+    """ Digitised fielddrawing """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -2845,7 +2845,7 @@ class Fielddrawing(models.Model):
 
 
 class Film(models.Model):
-    ### Analogue photographic film negatives ###
+    """ Analogue photographic film negatives """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -3132,7 +3132,7 @@ class Film(models.Model):
 
 
 class Finddrawing(models.Model):
-    ### Finddrawing ###
+    """ Finddrawing """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -3501,7 +3501,7 @@ class Finddrawing(models.Model):
 
 
 class Findsheets(models.Model):
-    ### Digitised find sheets ###
+    """ Digitised find sheets """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -3893,7 +3893,7 @@ class Findsheets(models.Model):
 
 
 class Fotoborndigital(models.Model):
-    ### Folder with born-digital photos ###
+    """ Folder with born-digital photos """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -4158,7 +4158,7 @@ class Fotoborndigital(models.Model):
 
 
 class Fotosgescannt(models.Model):
-    ### Digitised photos ###
+    """ Digitised photos """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -4601,7 +4601,7 @@ class Fotosgescannt(models.Model):
 
 
 class Fundinventar4DPuzzleID(models.Model):
-    ### A 4DPuzzleID was created for find inventories that did not have an ID ###
+    """ A 4DPuzzleID was created for find inventories that did not have an ID """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -4867,7 +4867,7 @@ class Fundinventar4DPuzzleID(models.Model):
 
 
 class FundinventarInventarnummern(models.Model):
-    ### Inventory numbers of find inventories ###
+    """ Inventory numbers of find inventories """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -5134,7 +5134,7 @@ class FundinventarInventarnummern(models.Model):
 
 
 class FundinventarKonvolutnummern(models.Model):
-    ### Inventory of convolute numbers ###
+    """ Inventory of convolute numbers """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -5396,7 +5396,7 @@ class FundinventarKonvolutnummern(models.Model):
 
 
 class FundinventarMaterialproben(models.Model):
-    ### Inventory of material samples ###
+    """ Inventory of material samples """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -5665,7 +5665,7 @@ class FundinventarMaterialproben(models.Model):
 
 
 class FundinventarSteininventar(models.Model):
-    ### Inventory of stones ###
+    """ Inventory of stones """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -5932,7 +5932,7 @@ class FundinventarSteininventar(models.Model):
 
 
 class GIS(models.Model):
-    ### Geographical information system ###
+    """ Geographical information system """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -6278,7 +6278,7 @@ class GIS(models.Model):
 
 
 class Geophysics(models.Model):
-    ### Files from geophysical surveys ###
+    """ Files from geophysical surveys """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -6618,7 +6618,7 @@ class Geophysics(models.Model):
 
 
 class Inventorybooks(models.Model):
-    ### Digitised inventory books ###
+    """ Digitised inventory books """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -6975,7 +6975,7 @@ class Inventorybooks(models.Model):
 
 
 class PhasenID(models.Model):
-    ### Identifier of archaeological phases ###
+    """ Identifier of archaeological phases """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -7090,7 +7090,7 @@ class PhasenID(models.Model):
 
 
 class Protocols(models.Model):
-    ### Digitised protocols ###
+    """ Digitised protocols """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -7460,7 +7460,7 @@ class Protocols(models.Model):
 
 
 class StratenID(models.Model):
-    ### Identifier of archaeological strata ###
+    """ Identifier of archaeological strata """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -7575,7 +7575,7 @@ class StratenID(models.Model):
 
 
 class Tables(models.Model):
-    ### Tables ###
+    """ Tables """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -7911,7 +7911,7 @@ class Tables(models.Model):
 
 
 class ThreeDimensionalModel(models.Model):
-    ### 3D models ###
+    """ 3D models """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -8248,7 +8248,7 @@ class ThreeDimensionalModel(models.Model):
 
 
 class Videos(models.Model):
-    ### Videos ###
+    """ Videos """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -8575,7 +8575,7 @@ class Videos(models.Model):
 
 
 class WallpaintingInventory(models.Model):
-    ### Digitised inventory of wallpaintings ###
+    """ Digitised inventory of wallpaintings """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"

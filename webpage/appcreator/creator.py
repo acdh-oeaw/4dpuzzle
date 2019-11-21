@@ -16,8 +16,8 @@ def xlsx_to_classdicts(file):
         local_df = x[1]
         class_dict = {}
         class_dict['model_name'] = x[0]
-        class_dict['model_helptext'] = x[1]['class name helptext'].iloc[0]
-        class_dict['model_verbose_name'] = x[1]['class name verbose_name'].iloc[0]
+        class_dict['model_helptext'] = x[1]['class name helptext'].iloc[0].replace('\n', '')
+        class_dict['model_verbose_name'] = x[1]['class name verbose_name'].iloc[0].replace('\n', '')
         class_dict['model_representation'] = "{}".format(
             x[1]['class self representation'].iloc[0]
         ).lower()
@@ -55,7 +55,7 @@ def xlsx_to_classdicts(file):
                 except KeyError:
                     value_from = None
                 if value_from is not None and isinstance(value_from, str):
-                    field['value_from'] = value_from.replace('\n', '').replace(' ', '')
+                    field['value_from'] = value_from.replace('\n', '').replace(' ', '').replace('\\', '/')
                 else:
                     field['value_from'] = False
 
@@ -105,11 +105,11 @@ def xlsx_to_classdicts(file):
                 else:
                     continue
                 if isinstance(row['verbose field name'], str):
-                    field['field_verbose_name'] = row['verbose field name']
+                    field['field_verbose_name'] = row['verbose field name'].replace('\n', '')
                 else:
                     field['field_verbose_name'] = field_name
                 if isinstance(row['helptext'], str):
-                    field['field_helptext'] = row['helptext']
+                    field['field_helptext'] = row['helptext'].replace('\n', '')
                 else:
                     field['field_helptext'] = f"helptext for {field_name}"
 
