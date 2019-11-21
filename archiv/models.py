@@ -507,7 +507,7 @@ class ArchiveINF(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Filename",
@@ -517,7 +517,7 @@ class ArchiveINF(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID ",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. DR for Digital Resource) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Document_ID",
@@ -527,7 +527,7 @@ class ArchiveINF(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Document_title",
@@ -651,7 +651,7 @@ class ArchiveINF(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Access",
@@ -664,7 +664,7 @@ class ArchiveINF(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Site_ID",
@@ -754,7 +754,7 @@ class AutoCAD(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Filename",
@@ -764,7 +764,7 @@ class AutoCAD(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. DR for Digital Resource) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Document_ID",
@@ -774,7 +774,7 @@ class AutoCAD(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Document_title",
@@ -826,7 +826,7 @@ class AutoCAD(models.Model):
         "DocumentTypes",
         related_name='rvn_autocad_document_subtype_documenttypes',
         blank=True,
-        verbose_name="Doucment subtype",
+        verbose_name="Docment subtype",
         help_text="helptext for document_subtype",
     ).set_extra(
         is_public=True,
@@ -938,7 +938,7 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Access",
@@ -951,7 +951,7 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Site_ID",
@@ -963,7 +963,7 @@ class AutoCAD(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of archival object",
-        help_text="helptext for creator_archivalobject",
+        help_text="Person who processed resource for digital long-term archiving.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__creator_archivalObject",
@@ -974,7 +974,7 @@ class AutoCAD(models.Model):
         related_name='rvn_autocad_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Excavation_object_ID",
@@ -984,7 +984,7 @@ class AutoCAD(models.Model):
         related_name='rvn_autocad_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archeological object ID",
-        help_text="helptext for archaeological_object_id",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Archaeological_object_ID",
@@ -1004,7 +1004,7 @@ class AutoCAD(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Whether it was created during excavation or after (post-excavation)Whether it was created during excavation or after",
+        verbose_name="Whether it was created during excavation or after (post-excavation)",
         help_text="helptext for excavation_post_excavation",
     ).set_extra(
         is_public=True,
@@ -1013,7 +1013,7 @@ class AutoCAD(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Original_comment",
@@ -1021,7 +1021,7 @@ class AutoCAD(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Digitisation_comment",
@@ -1090,7 +1090,7 @@ class Convolutecards(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename ",
-        help_text="helptext for filename_document_id",
+        help_text="The filename of convolute cards consists of the document_ID (unique identifier). The document ID is a project-specific unique identifier which consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. KK for Konvolutkarte) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Filename_Document_ID",
@@ -1099,7 +1099,7 @@ class Convolutecards(models.Model):
     convolute_inventory_number = models.CharField(
         max_length=250,
         blank=True,
-        verbose_name="Document ID ",
+        verbose_name="Inventory number of the convolute",
         help_text="helptext for convolute_inventory_number",
     ).set_extra(
         is_public=True,
@@ -1244,7 +1244,7 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Access",
@@ -1266,7 +1266,7 @@ class Convolutecards(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Site_ID",
@@ -1277,7 +1277,7 @@ class Convolutecards(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Equipment for scan",
+        verbose_name="Equipment used for scanning",
         help_text="helptext for equipment_scan",
     ).set_extra(
         is_public=True,
@@ -1393,7 +1393,7 @@ class Convolutecards(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Original_comment",
@@ -1401,7 +1401,7 @@ class Convolutecards(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Digitisation_comment",
@@ -1470,7 +1470,7 @@ class Datenbase(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Filename",
@@ -1480,7 +1480,7 @@ class Datenbase(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. DR for Digital Resource) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Document_ID",
@@ -1490,7 +1490,7 @@ class Datenbase(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Document_title",
@@ -1635,7 +1635,7 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Access",
@@ -1667,7 +1667,7 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Site_ID",
@@ -1679,7 +1679,7 @@ class Datenbase(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of archival object",
-        help_text="helptext for creator_archivalobject",
+        help_text="Person who processed resource for digital long-term archiving.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__creator_archivalObject",
@@ -1690,7 +1690,7 @@ class Datenbase(models.Model):
         related_name='rvn_datenbase_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Excavation_object_ID",
@@ -1700,7 +1700,7 @@ class Datenbase(models.Model):
         related_name='rvn_datenbase_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="helptext for archaeological_object_id",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Archaeological_object_ID",
@@ -1732,7 +1732,7 @@ class Datenbase(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Whether it was created during excavation or after (post-excavation)Whether it was created during excavation or after",
+        verbose_name="Whether it was created during excavation or after (post-excavation)",
         help_text="helptext for excavation_post_excavation",
     ).set_extra(
         is_public=True,
@@ -1741,7 +1741,7 @@ class Datenbase(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Original_comment",
@@ -1749,7 +1749,7 @@ class Datenbase(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Digitisation_comment",
@@ -2042,7 +2042,7 @@ class DocumentTypes(models.Model):
         verbose_name = "Document types"
 
     def __str__(self):
-        return f"{self.document_type} >> {self.document_subtype}"
+        return f"{self.document_type} >> {document_subtype}"
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2497,7 +2497,7 @@ class Fielddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension",
-        help_text="File extension of the document (e.g. .jpg, .tif).",
+        help_text="File extension of the scan.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__File_extension",
@@ -2539,7 +2539,7 @@ class Fielddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Copyright",
-        help_text="Copyright holder of the document. The copyright of the field drawings is held by the OEAI (Österreichisches Archäologisches Institut/Austrian Archaeological Institute).",
+        help_text="Copyright holder of the document. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Copyright",
@@ -2552,7 +2552,7 @@ class Fielddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="Access is either restricted or open to the public.",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Access",
@@ -2574,7 +2574,7 @@ class Fielddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="Abbreviation of the name of the archaeological site, which is documented in the field drawing. ‘TD’ stands for Tell el-Daba.",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Site_ID",
@@ -2607,7 +2607,7 @@ class Fielddrawing(models.Model):
     resolution_scan_ppi = models.IntegerField(
         blank=True, null=True,
         verbose_name="Scan resolution",
-        help_text="Scan resolution settings. Our standard for scanning field drawings is 600 ppi.",
+        help_text="Scan resolution settings. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Resolution_scan_dpi",
@@ -2620,7 +2620,7 @@ class Fielddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of scan",
-        help_text="Organisation where the scanning was done.",
+        help_text="Organisation who carried out the scanning.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-II/Fielddrawings.csv__Creator_scan",
@@ -2640,7 +2640,7 @@ class Fielddrawing(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Inventory number of original",
-        help_text="Inventory number of the original. An inventory number was given to each field drawing during the excavations. The inventory number is part of the unique identifier of the field drawing. If a field drawing did not have an inventory number, or there was an error with the inventory number, then a new inventory number consisting of the project name ‘4DPuzzle’ and a running number was created, e.g.: 4DPuzzle1234). The list of the new inventory numbers is kept in the Excel file ‘Metadaten.xlsl’, worksheet  ‘Resource_4DPuzzle_number’).",
+        help_text="Inventory number of the original fielddrawing. An inventory number was given to each field drawing during the excavations. The inventory number is part of the unique identifier of the field drawing. If a field drawing did not have an inventory number, or there was an error with the inventory number, then a new inventory number consisting of the project name ‘4DPuzzle’ and a running number was created, e.g.: 4DPuzzle1234). The list of the new inventory numbers is kept in the Excel file ‘Metadaten.xlsl’, worksheet  ‘Resource_4DPuzzle_number’).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Original_inventory_number",
@@ -2785,7 +2785,7 @@ class Fielddrawing(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="Comments of the creator of the scan (e.g. noticing of measurement errors, etc.) ",
+        help_text="Comments from creation of the scan (e.g. noticing of measurement errors, etc.) ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Digitisation_comment",
@@ -2854,7 +2854,7 @@ class Film(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Film ID",
-        help_text="helptext for film_id",
+        help_text="The film ID is a project-specific unique identifier. The film IDs consist of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. SWnegfilm for black &white negative film, FDfilm for colour slide film, FDdig for colour slide film digitised ) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Film_ID",
@@ -2964,7 +2964,7 @@ class Film(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Contact print present",
-        help_text="helptext for contact_print_present",
+        help_text="If a contact print of the film was present with the film",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Contact_print_present",
@@ -2972,7 +2972,7 @@ class Film(models.Model):
     enlargements_present = models.CharField(
         max_length=250,
         blank=True,
-        verbose_name="Enlargements presten",
+        verbose_name="Enlargements present",
         help_text="helptext for enlargements_present",
     ).set_extra(
         is_public=True,
@@ -3026,7 +3026,7 @@ class Film(models.Model):
     decomposition_phenomenon = models.TextField(
         blank=True,
         verbose_name="Decomposition phenomenon",
-        help_text="helptext for decomposition_phenomenon",
+        help_text="The films were visually examined if they show signs of damage and decomposition. This field contains a description of the results.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Decomposition_phenomenon",
@@ -3035,7 +3035,7 @@ class Film(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Acetic acid smell",
-        help_text="helptext for acetic_acid_smell",
+        help_text="If acidic smell could be identified it is noted here.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Acetic_acid_smell",
@@ -3047,7 +3047,7 @@ class Film(models.Model):
         null=True,
         blank=True,
         verbose_name="Material of original document",
-        help_text="helptext for original_material",
+        help_text="",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Original_material",
@@ -3056,7 +3056,7 @@ class Film(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Storage folder original",
-        help_text="helptext for storage_folder_original",
+        help_text="Inscription visible on the label on the folder where the film is kept.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Storage_folder_original",
@@ -3064,7 +3064,7 @@ class Film(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Original_comment",
@@ -3072,7 +3072,7 @@ class Film(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Digitisation_comment",
@@ -3141,7 +3141,7 @@ class Finddrawing(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename ",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         arche_prop="hasTitle",
@@ -3150,7 +3150,7 @@ class Finddrawing(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID ",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. DR for Digital Resource) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         arche_prop="hasNonLinkedIdentifier",
@@ -3159,7 +3159,7 @@ class Finddrawing(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
     )
@@ -3295,7 +3295,7 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         arche_prop="hasAccessRestriction",
@@ -3315,7 +3315,7 @@ class Finddrawing(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
     )
@@ -3435,14 +3435,14 @@ class Finddrawing(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
     )
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         arche_prop="hasNote",
@@ -3510,7 +3510,7 @@ class Findsheets(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename ",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Filename",
@@ -3520,7 +3520,7 @@ class Findsheets(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID ",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. DR for Digital Resource) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Document_ID",
@@ -3530,7 +3530,7 @@ class Findsheets(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Document_title",
@@ -3660,7 +3660,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Access",
@@ -3685,7 +3685,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Site_ID",
@@ -3793,7 +3793,7 @@ class Findsheets(models.Model):
         related_name='rvn_findsheets_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Excavation_object_ID",
@@ -3805,7 +3805,7 @@ class Findsheets(models.Model):
         null=True,
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="helptext for archaeological_object_id",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Archaeological_object_ID",
@@ -3825,7 +3825,7 @@ class Findsheets(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Original_comment",
@@ -3833,7 +3833,7 @@ class Findsheets(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Digitisation_comment",
@@ -3902,7 +3902,7 @@ class Fotoborndigital(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Folder name",
-        help_text="helptext for folder_name",
+        help_text="Folder name is composed like the filenames: it consists of a folder ID and a folder title, separated by two underscores. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Folder_name",
@@ -3912,7 +3912,7 @@ class Fotoborndigital(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Folder ID",
-        help_text="helptext for folder_id",
+        help_text="The project-specific unique identifier of the folder. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (DF for digital photo) and a 4DPuzzle inventory number.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Folder_ID",
@@ -3922,7 +3922,7 @@ class Fotoborndigital(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Folder title",
-        help_text="helptext for folder_title",
+        help_text="A description of the content of the folder.  It allows information about the contents of the file to be understood by a human being without opening it. It contains information about inventory numbers, excavation objects, find types etc.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Folder_title",
@@ -3984,7 +3984,7 @@ class Fotoborndigital(models.Model):
         related_name='rvn_fotoborndigital_document_subtype_documenttypes',
         blank=True,
         verbose_name="Document subtype",
-        help_text="helptext for document_subtype",
+        help_text="Digital photo subtypes are according to content of the photos: findphotos, excavation photos, working photo, etc",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Document_subtype",
@@ -4040,7 +4040,7 @@ class Fotoborndigital(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Access",
@@ -4053,7 +4053,7 @@ class Fotoborndigital(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Site_ID",
@@ -4073,7 +4073,7 @@ class Fotoborndigital(models.Model):
         related_name='rvn_fotoborndigital_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Excavation_object_ID",
@@ -4090,7 +4090,7 @@ class Fotoborndigital(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Original_comment",
@@ -4098,7 +4098,7 @@ class Fotoborndigital(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Digitisation_comment",
@@ -4167,7 +4167,7 @@ class Fotosgescannt(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Filename",
@@ -4177,7 +4177,7 @@ class Fotosgescannt(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. DR for Digital Resource) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Document_ID",
@@ -4187,7 +4187,7 @@ class Fotosgescannt(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Document_title",
@@ -4227,7 +4227,7 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Document type",
-        help_text="helptext for document_type",
+        help_text="Digitised photo",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Document_type",
@@ -4249,7 +4249,7 @@ class Fotosgescannt(models.Model):
         related_name='rvn_fotosgescannt_document_subtype_documenttypes',
         blank=True,
         verbose_name="Document subtype",
-        help_text="helptext for document_subtype",
+        help_text="Subtypes are according to the content of the photos: findphotos, excavation photos, working photo, etc",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Document_subtype",
@@ -4266,7 +4266,7 @@ class Fotosgescannt(models.Model):
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
-        verbose_name="Creation date of original document",
+        verbose_name="Creation date of analogue photo",
         help_text="helptext for creation_date_original",
     ).set_extra(
         is_public=True,
@@ -4275,7 +4275,7 @@ class Fotosgescannt(models.Model):
     creation_year_original = models.CharField(
         max_length=250,
         blank=True,
-        verbose_name="Creation year of original document",
+        verbose_name="Creation year of analogue photo",
         help_text="helptext for creation_year_original",
     ).set_extra(
         is_public=True,
@@ -4296,7 +4296,7 @@ class Fotosgescannt(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="File extension",
+        verbose_name="File extension of scan",
         help_text="helptext for file_extension",
     ).set_extra(
         is_public=True,
@@ -4330,7 +4330,7 @@ class Fotosgescannt(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Creator of original",
+        verbose_name="Creator of original photo",
         help_text="helptext for creator_original",
     ).set_extra(
         is_public=True,
@@ -4356,7 +4356,7 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Access",
@@ -4369,7 +4369,7 @@ class Fotosgescannt(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Site_ID",
@@ -4380,7 +4380,7 @@ class Fotosgescannt(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Equipment for scan",
+        verbose_name="Equipment used for scanning",
         help_text="helptext for equipment_scan",
     ).set_extra(
         is_public=True,
@@ -4458,7 +4458,7 @@ class Fotosgescannt(models.Model):
         related_name='rvn_fotosgescannt_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Excavation_object_ID",
@@ -4468,7 +4468,7 @@ class Fotosgescannt(models.Model):
         related_name='rvn_fotosgescannt_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="helptext for archaeological_object_id",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Archaeological_object_ID",
@@ -4524,7 +4524,7 @@ class Fotosgescannt(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Whether it was created during excavation or after (post-excavation)Whether it was created during excavation or after",
+        verbose_name="Whether it was created during excavation or after (post-excavation)",
         help_text="helptext for excavation_post_excavation",
     ).set_extra(
         is_public=True,
@@ -4533,7 +4533,7 @@ class Fotosgescannt(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Original_comment",
@@ -4541,7 +4541,7 @@ class Fotosgescannt(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Digitisation_comment",
@@ -5941,7 +5941,7 @@ class GIS(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename ",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Filename",
@@ -5951,7 +5951,7 @@ class GIS(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID ",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. DR for Digital Resource) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Document_ID",
@@ -5961,7 +5961,7 @@ class GIS(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Document_title",
@@ -6134,7 +6134,7 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Access",
@@ -6147,7 +6147,7 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Site_ID",
@@ -6159,7 +6159,7 @@ class GIS(models.Model):
         null=True,
         blank=True,
         verbose_name="creator of archival object",
-        help_text="helptext for creator_archivalobject",
+        help_text="Person who processed resource for digital long-term archiving.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__creator_archivalObject",
@@ -6170,7 +6170,7 @@ class GIS(models.Model):
         related_name='rvn_gis_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Excavation_object_ID",
@@ -6180,7 +6180,7 @@ class GIS(models.Model):
         related_name='rvn_gis_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="helptext for archaeological_object_id",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Archaeological_object_ID",
@@ -6210,7 +6210,7 @@ class GIS(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Original_comment",
@@ -6218,7 +6218,7 @@ class GIS(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Digitisation_comment",
@@ -6287,7 +6287,7 @@ class Geophysics(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename ",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Filename",
@@ -6297,7 +6297,7 @@ class Geophysics(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID ",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. DR for Digital Resource) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Document_ID",
@@ -6307,7 +6307,7 @@ class Geophysics(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Document_title",
@@ -6485,7 +6485,7 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Access",
@@ -6507,7 +6507,7 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Site_ID",
@@ -6519,7 +6519,7 @@ class Geophysics(models.Model):
         null=True,
         blank=True,
         verbose_name="Creator of archival object",
-        help_text="helptext for creator_archivalobject",
+        help_text="Person who processed resource for digital long-term archiving.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creator_archivalObject",
@@ -6530,7 +6530,7 @@ class Geophysics(models.Model):
         related_name='rvn_geophysics_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Excavation_object_ID",
@@ -6541,7 +6541,7 @@ class Geophysics(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Whether it was created during excavation or after (post-excavation)Whether it was created during excavation or after",
+        verbose_name="Whether it was created during excavation or after (post-excavation)",
         help_text="helptext for excavation_post_excavation",
     ).set_extra(
         is_public=True,
@@ -6550,7 +6550,7 @@ class Geophysics(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Original_comment",
@@ -6558,7 +6558,7 @@ class Geophysics(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Digitisation_comment",
@@ -6627,7 +6627,7 @@ class Inventorybooks(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename ",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Filename",
@@ -6637,7 +6637,7 @@ class Inventorybooks(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID ",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. DR for Digital Resource) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Document_ID",
@@ -6647,7 +6647,7 @@ class Inventorybooks(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Document_title",
@@ -6777,7 +6777,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Access",
@@ -6799,7 +6799,7 @@ class Inventorybooks(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Site_ID",
@@ -6810,7 +6810,7 @@ class Inventorybooks(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Equipment for scan",
+        verbose_name="Equipment used for scanning",
         help_text="helptext for equipment_scan",
     ).set_extra(
         is_public=True,
@@ -6915,7 +6915,7 @@ class Inventorybooks(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Original_comment",
@@ -7099,7 +7099,7 @@ class Protocols(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename ",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Filename",
@@ -7109,7 +7109,7 @@ class Protocols(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID ",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. P for Protocol) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Document_ID",
@@ -7119,7 +7119,7 @@ class Protocols(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Document_title",
@@ -7249,7 +7249,7 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Access",
@@ -7283,7 +7283,7 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Site_ID",
@@ -7294,7 +7294,7 @@ class Protocols(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Equipment of scan",
+        verbose_name="Equipment used for scanning",
         help_text="helptext for equipment_scan",
     ).set_extra(
         is_public=True,
@@ -7354,7 +7354,7 @@ class Protocols(models.Model):
         null=True,
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Excavation_object_ID",
@@ -7364,7 +7364,7 @@ class Protocols(models.Model):
         related_name='rvn_protocols_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="helptext for archaeological_object_id",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Archaeological_object_ID",
@@ -7392,7 +7392,7 @@ class Protocols(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Original_comment",
@@ -7400,7 +7400,7 @@ class Protocols(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Digitisation_comment",
@@ -7584,7 +7584,7 @@ class Tables(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename ",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Filename",
@@ -7594,7 +7594,7 @@ class Tables(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID ",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. P for Protocol) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Document_ID",
@@ -7604,7 +7604,7 @@ class Tables(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Document_title",
@@ -7758,7 +7758,7 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Access",
@@ -7780,7 +7780,7 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Site_ID",
@@ -7792,7 +7792,7 @@ class Tables(models.Model):
         null=True,
         blank=True,
         verbose_name="creator of archival object",
-        help_text="helptext for creator_archivalobject",
+        help_text="Person who processed resource for digital long-term archiving.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__creator_archivalObject",
@@ -7803,7 +7803,7 @@ class Tables(models.Model):
         related_name='rvn_tables_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Excavation_object_ID",
@@ -7813,7 +7813,7 @@ class Tables(models.Model):
         related_name='rvn_tables_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="helptext for archaeological_object_id",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Archaeological_object_ID",
@@ -7843,7 +7843,7 @@ class Tables(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Original_comment",
@@ -7851,7 +7851,7 @@ class Tables(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Digitisation_comment",
@@ -7920,7 +7920,7 @@ class ThreeDimensionalModel(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Filename",
@@ -7930,7 +7930,7 @@ class ThreeDimensionalModel(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. DR for Digital Resource) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Document_ID",
@@ -7940,16 +7940,16 @@ class ThreeDimensionalModel(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Document_title",
+        data_lookup="Thefilenameofconvolutecardsconsistsofthedocument_ID(uniqueidentifier).ThedocumentIDisaproject-specificuniqueidentifierwhichconsistsoftheabbreviationforthesite(TDforTellel-Daba),theabbreviationforthedocumenttype(e.g.KKforKonvolutkarte)andtheconvoluteinventorynumber(or,iftherewasnoinventorynumber,anIDwiththeprefix4DPuzzlewascreated,e.g.4DPuzzle1234).",
     )
     path_filename_old = models.CharField(
         max_length=250,
         blank=True,
         verbose_name="Data path in old TD archive",
-        help_text="helptext for path_filename_old",
+        help_text="Data path in the old TD archive.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Path_filename_old",
@@ -8010,7 +8010,7 @@ class ThreeDimensionalModel(models.Model):
     software_used = models.CharField(
         max_length=250,
         blank=True,
-        verbose_name="Created by software",
+        verbose_name="Software which was used to create original",
         help_text="helptext for software_used",
     ).set_extra(
         is_public=True,
@@ -8020,7 +8020,7 @@ class ThreeDimensionalModel(models.Model):
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of archival object",
-        help_text="helptext for creation_date_archivalobject",
+        help_text="Date when the resource was prepared for long-term archiving.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Creation_date_archivalObject",
@@ -8033,7 +8033,7 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="File extension of original 3D model",
-        help_text="helptext for file_extension_original",
+        help_text="",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__File_extension_original",
@@ -8105,7 +8105,7 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Access",
@@ -8118,7 +8118,7 @@ class ThreeDimensionalModel(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Site_ID",
@@ -8141,7 +8141,7 @@ class ThreeDimensionalModel(models.Model):
         related_name='rvn_threedimensionalmodel_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Excavation_object_ID",
@@ -8151,7 +8151,7 @@ class ThreeDimensionalModel(models.Model):
         related_name='rvn_threedimensionalmodel_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="helptext for archaeological_object_id",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Archaeological_object_ID",
@@ -8171,7 +8171,7 @@ class ThreeDimensionalModel(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Whether it was created during excavation or after (post-excavation)Whether it was created during excavation or after",
+        verbose_name="The document ID is a project-specific unique identifier which consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. SWnegfilm for black &white negative film, FDfilm for colour slide film, FDdig for colour slide film digitised ) and the inventory numbers (from_to).",
         help_text="helptext for excavation_post_excavation",
     ).set_extra(
         is_public=True,
@@ -8180,7 +8180,7 @@ class ThreeDimensionalModel(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Original_comment",
@@ -8188,7 +8188,7 @@ class ThreeDimensionalModel(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Digitisation_comment",
@@ -8257,7 +8257,7 @@ class Videos(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename ",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Filename",
@@ -8267,7 +8267,7 @@ class Videos(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID ",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. P for Protocol) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Document_ID",
@@ -8277,7 +8277,7 @@ class Videos(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Document_title",
@@ -8408,7 +8408,7 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="creator of archival object",
-        help_text="helptext for creator_archivalobject",
+        help_text="Person who processed resource for digital long-term archiving.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__creator_archivalObject",
@@ -8434,7 +8434,7 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Access",
@@ -8466,7 +8466,7 @@ class Videos(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Site_ID",
@@ -8489,7 +8489,7 @@ class Videos(models.Model):
         related_name='rvn_videos_excavation_object_id_excavationobjectid',
         blank=True,
         verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Excavation_object_ID",
@@ -8499,7 +8499,7 @@ class Videos(models.Model):
         related_name='rvn_videos_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="helptext for archaeological_object_id",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Archaeological_object_ID",
@@ -8507,7 +8507,7 @@ class Videos(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Original_comment",
@@ -8515,7 +8515,7 @@ class Videos(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Digitisation_comment",
@@ -8584,7 +8584,7 @@ class WallpaintingInventory(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Filename",
-        help_text="helptext for filename",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Filename",
@@ -8594,7 +8594,7 @@ class WallpaintingInventory(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document ID",
-        help_text="helptext for document_id",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. DR for Digital Resource) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Document_ID",
@@ -8604,7 +8604,7 @@ class WallpaintingInventory(models.Model):
         max_length=250,
         blank=True,
         verbose_name="Document title",
-        help_text="helptext for document_title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Document_title",
@@ -8734,7 +8734,7 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Access",
-        help_text="helptext for access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Access",
@@ -8756,7 +8756,7 @@ class WallpaintingInventory(models.Model):
         null=True,
         blank=True,
         verbose_name="Site ID",
-        help_text="helptext for site_id",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Site_ID",
@@ -8845,7 +8845,7 @@ class WallpaintingInventory(models.Model):
     original_comment = models.TextField(
         blank=True,
         verbose_name="Comment on the original document",
-        help_text="helptext for original_comment",
+        help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Original_comment",
@@ -8853,7 +8853,7 @@ class WallpaintingInventory(models.Model):
     digitisation_comment = models.TextField(
         blank=True,
         verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
+        help_text="Comments from digitisation.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Digitisation_comment",
