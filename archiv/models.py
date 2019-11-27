@@ -2666,7 +2666,7 @@ class Fielddrawing(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Amendment_drawn_by",
     )
-    amendment_data = models.CharField(
+    amendment_date = models.CharField(
         max_length=250,
         blank=True,
         verbose_name="Amendment date",
@@ -3132,7 +3132,7 @@ class Film(models.Model):
 
 
 class Finddrawing(models.Model):
-    """ Finddrawing """
+    """ Digitised finddrawing """
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"

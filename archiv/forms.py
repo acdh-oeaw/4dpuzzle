@@ -485,7 +485,7 @@ class FielddrawingFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'filename','document_id','document_title','document_type','dt_abbr','document_subtype','dst_abbr','creation_date_original','creation_year_original','creation_date_scan','file_extension','creation_date_metadata','creator_metadata','creator_original','copyright','access','storage_folder_original','site_id','equipment_scan','source_original_copy_edited_copy','resolution_scan_ppi','creator_scan','original_material','original_inventory_number','find_inventory_number','amendment_drawn_by','amendment_data','drawer_monogram','excavation_object_id','archaeological_object_id','stratum_id_relative','stratum_id_absolute_prepub','stratum_comment','season','month','scale','excavation_post_excavation','original_comment','digitisation_comment',
+                    'filename','document_id','document_title','document_type','dt_abbr','document_subtype','dst_abbr','creation_date_original','creation_year_original','creation_date_scan','file_extension','creation_date_metadata','creator_metadata','creator_original','copyright','access','storage_folder_original','site_id','equipment_scan','source_original_copy_edited_copy','resolution_scan_ppi','creator_scan','original_material','original_inventory_number','find_inventory_number','amendment_drawn_by','amendment_date','drawer_monogram','excavation_object_id','archaeological_object_id','stratum_id_relative','stratum_id_absolute_prepub','stratum_comment','season','month','scale','excavation_post_excavation','original_comment','digitisation_comment',
                     css_id="more"
                     ),
                 )

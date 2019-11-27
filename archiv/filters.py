@@ -671,10 +671,10 @@ class FielddrawingListFilter(django_filters.FilterSet):
         help_text=Fielddrawing._meta.get_field('find_inventory_number').help_text,
         label=Fielddrawing._meta.get_field('find_inventory_number').verbose_name
     )
-    amendment_data = django_filters.CharFilter(
+    amendment_date = django_filters.CharFilter(
         lookup_expr='icontains',
-        help_text=Fielddrawing._meta.get_field('amendment_data').help_text,
-        label=Fielddrawing._meta.get_field('amendment_data').verbose_name
+        help_text=Fielddrawing._meta.get_field('amendment_date').help_text,
+        label=Fielddrawing._meta.get_field('amendment_date').verbose_name
     )
     stratum_id_relative = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -742,7 +742,7 @@ class FielddrawingListFilter(django_filters.FilterSet):
             'original_inventory_number',
             'find_inventory_number',
             'amendment_drawn_by',
-            'amendment_data',
+            'amendment_date',
             'drawer_monogram',
             'excavation_object_id',
             'archaeological_object_id',
