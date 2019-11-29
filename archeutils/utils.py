@@ -13,6 +13,8 @@ from rdflib.namespace import RDF
 
 from browsing.browsing_utils import model_to_dict
 
+ARCHE_CONST_MAPPINGS = getattr(settings, 'ARCHE_CONST_MAPPINGS', False)
+
 
 ARCHE_BASE_URI = getattr(settings, 'ARCHE_BASE_URI', 'https://id.acdh.oeaw.ac.at/MYPROJECT')
 pickle_file = os.path.join(settings.BASE_DIR, 'archeutils', 'arche_descriptions.pickle')
@@ -112,6 +114,8 @@ def as_arche_res(res, res_type='Resource'):
             else:
                 if cur_val is not None:
                     g.add((sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))))
+        for key, value in ARCHE_CONST_MAPPINGS.items():
+            g.add((sub, acdh_ns[key], URIRef(value)))
     return g
 
 
