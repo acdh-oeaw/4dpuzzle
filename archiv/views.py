@@ -55,6 +55,7 @@ class ActorListView(GenericListView):
     init_columns = [
         'id', 'name',
     ]
+    enable_merge = True
 
 
 class ActorDetailView(BaseDetailView):
@@ -102,6 +103,7 @@ class ArchaeologicalObject4DPuzzleIDListView(GenericListView):
     init_columns = [
         'id', 'archaeological_object_id',
     ]
+    enable_merge = True
 
 
 class ArchaeologicalObject4DPuzzleIDDetailView(BaseDetailView):
@@ -149,6 +151,7 @@ class ArchaeologicalObjectIDListView(GenericListView):
     init_columns = [
         'id', 'archaeological_object_id',
     ]
+    enable_merge = True
 
 
 class ArchaeologicalObjectIDDetailView(BaseDetailView):
@@ -196,6 +199,7 @@ class ArchiveINFListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class ArchiveINFDetailView(BaseDetailView):
@@ -243,6 +247,7 @@ class AutoCADListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class AutoCADDetailView(BaseDetailView):
@@ -290,6 +295,7 @@ class ConvolutecardsListView(GenericListView):
     init_columns = [
         'id', 'filename_document_id',
     ]
+    enable_merge = True
 
 
 class ConvolutecardsDetailView(BaseDetailView):
@@ -337,6 +343,7 @@ class DatenbaseListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class DatenbaseDetailView(BaseDetailView):
@@ -384,6 +391,7 @@ class Document4DPuzzleIDListView(GenericListView):
     init_columns = [
         'id', 'document_id',
     ]
+    enable_merge = True
 
 
 class Document4DPuzzleIDDetailView(BaseDetailView):
@@ -431,6 +439,7 @@ class DocumentTypesListView(GenericListView):
     init_columns = [
         'id', 'document_type + document_subtype',
     ]
+    enable_merge = True
 
 
 class DocumentTypesDetailView(BaseDetailView):
@@ -478,6 +487,7 @@ class ExcavationObjectIDListView(GenericListView):
     init_columns = [
         'id', 'excavation_object_id',
     ]
+    enable_merge = True
 
 
 class ExcavationObjectIDDetailView(BaseDetailView):
@@ -525,6 +535,7 @@ class ExcavationSeasonsListView(GenericListView):
     init_columns = [
         'id', 'grabungskampagnen',
     ]
+    enable_merge = True
 
 
 class ExcavationSeasonsDetailView(BaseDetailView):
@@ -572,6 +583,7 @@ class FielddrawingListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class FielddrawingDetailView(BaseDetailView):
@@ -619,6 +631,7 @@ class FilmListView(GenericListView):
     init_columns = [
         'id', 'film_id',
     ]
+    enable_merge = True
 
 
 class FilmDetailView(BaseDetailView):
@@ -666,6 +679,7 @@ class FinddrawingListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class FinddrawingDetailView(BaseDetailView):
@@ -713,6 +727,7 @@ class FindsheetsListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class FindsheetsDetailView(BaseDetailView):
@@ -760,6 +775,7 @@ class FotoborndigitalListView(GenericListView):
     init_columns = [
         'id', 'folder_name',
     ]
+    enable_merge = True
 
 
 class FotoborndigitalDetailView(BaseDetailView):
@@ -807,6 +823,7 @@ class FotosgescanntListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class FotosgescanntDetailView(BaseDetailView):
@@ -854,6 +871,7 @@ class Fundinventar4DPuzzleIDListView(GenericListView):
     init_columns = [
         'id', 'find_inventory_4dpuzzle_number',
     ]
+    enable_merge = True
 
 
 class Fundinventar4DPuzzleIDDetailView(BaseDetailView):
@@ -901,6 +919,7 @@ class FundinventarInventarnummernListView(GenericListView):
     init_columns = [
         'id', 'find_inventory_number',
     ]
+    enable_merge = True
 
 
 class FundinventarInventarnummernDetailView(BaseDetailView):
@@ -948,6 +967,7 @@ class FundinventarKonvolutnummernListView(GenericListView):
     init_columns = [
         'id', 'convolute_inventory_number',
     ]
+    enable_merge = True
 
 
 class FundinventarKonvolutnummernDetailView(BaseDetailView):
@@ -995,6 +1015,7 @@ class FundinventarMaterialprobenListView(GenericListView):
     init_columns = [
         'id', 'material_sample_inventory_number',
     ]
+    enable_merge = True
 
 
 class FundinventarMaterialprobenDetailView(BaseDetailView):
@@ -1042,6 +1063,7 @@ class FundinventarSteininventarListView(GenericListView):
     init_columns = [
         'id', 'find_inventory_number',
     ]
+    enable_merge = True
 
 
 class FundinventarSteininventarDetailView(BaseDetailView):
@@ -1089,6 +1111,7 @@ class GISListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class GISDetailView(BaseDetailView):
@@ -1136,6 +1159,7 @@ class GeophysicsListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class GeophysicsDetailView(BaseDetailView):
@@ -1183,6 +1207,7 @@ class InventorybooksListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class InventorybooksDetailView(BaseDetailView):
@@ -1230,6 +1255,7 @@ class PhasenIDListView(GenericListView):
     init_columns = [
         'id', 'phase_id',
     ]
+    enable_merge = True
 
 
 class PhasenIDDetailView(BaseDetailView):
@@ -1277,6 +1303,7 @@ class ProtocolsListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class ProtocolsDetailView(BaseDetailView):
@@ -1324,6 +1351,7 @@ class StratenIDListView(GenericListView):
     init_columns = [
         'id', 'stratum_id',
     ]
+    enable_merge = True
 
 
 class StratenIDDetailView(BaseDetailView):
@@ -1371,6 +1399,7 @@ class TablesListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class TablesDetailView(BaseDetailView):
@@ -1418,6 +1447,7 @@ class ThreeDimensionalModelListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class ThreeDimensionalModelDetailView(BaseDetailView):
@@ -1465,6 +1495,7 @@ class VideosListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class VideosDetailView(BaseDetailView):
@@ -1512,6 +1543,7 @@ class WallpaintingInventoryListView(GenericListView):
     init_columns = [
         'id', 'filename',
     ]
+    enable_merge = True
 
 
 class WallpaintingInventoryDetailView(BaseDetailView):

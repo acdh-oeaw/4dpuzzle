@@ -167,6 +167,7 @@ class SkosConceptListView(GenericListView):
         'pref_label',
         'broader_concept',
     ]
+    enable_merge = True
 
 
 class SkosConceptDetailView(DetailView):

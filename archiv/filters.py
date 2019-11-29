@@ -38,6 +38,11 @@ from . models import (
 
 
 class ActorListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Actor._meta.get_field('legacy_id').help_text,
+        label=Actor._meta.get_field('legacy_id').verbose_name
+    )
     name = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Actor._meta.get_field('name').help_text,
@@ -68,6 +73,7 @@ class ActorListFilter(django_filters.FilterSet):
         model = Actor
         fields = [
             'id',
+            'legacy_id',
             'name',
             'drawer_monogram',
             'excavation',
@@ -78,6 +84,11 @@ class ActorListFilter(django_filters.FilterSet):
 
 
 class ArchaeologicalObject4DPuzzleIDListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('legacy_id').help_text,
+        label=ArchaeologicalObject4DPuzzleID._meta.get_field('legacy_id').verbose_name
+    )
     archaeological_object_4dpuzzle_id = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('archaeological_object_4dpuzzle_id').help_text,
@@ -108,6 +119,7 @@ class ArchaeologicalObject4DPuzzleIDListFilter(django_filters.FilterSet):
         model = ArchaeologicalObject4DPuzzleID
         fields = [
             'id',
+            'legacy_id',
             'archaeological_object_id',
             'archaeological_object_4dpuzzle_id',
             'archaeological_object_type',
@@ -124,6 +136,11 @@ class ArchaeologicalObject4DPuzzleIDListFilter(django_filters.FilterSet):
 
 
 class ArchaeologicalObjectIDListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('legacy_id').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('legacy_id').verbose_name
+    )
     archaeological_object_id = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ArchaeologicalObjectID._meta.get_field('archaeological_object_id').help_text,
@@ -174,6 +191,7 @@ class ArchaeologicalObjectIDListFilter(django_filters.FilterSet):
         model = ArchaeologicalObjectID
         fields = [
             'id',
+            'legacy_id',
             'archaeological_object_id',
             'archaeological_object_type',
             'archaeological_object_comment',
@@ -191,6 +209,11 @@ class ArchaeologicalObjectIDListFilter(django_filters.FilterSet):
 
 
 class ArchiveINFListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchiveINF._meta.get_field('legacy_id').help_text,
+        label=ArchiveINF._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ArchiveINF._meta.get_field('filename').help_text,
@@ -221,6 +244,7 @@ class ArchiveINFListFilter(django_filters.FilterSet):
         model = ArchiveINF
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -242,6 +266,11 @@ class ArchiveINFListFilter(django_filters.FilterSet):
 
 
 class AutoCADListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('legacy_id').help_text,
+        label=AutoCAD._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=AutoCAD._meta.get_field('filename').help_text,
@@ -292,6 +321,7 @@ class AutoCADListFilter(django_filters.FilterSet):
         model = AutoCAD
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -322,6 +352,11 @@ class AutoCADListFilter(django_filters.FilterSet):
 
 
 class ConvolutecardsListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('legacy_id').help_text,
+        label=Convolutecards._meta.get_field('legacy_id').verbose_name
+    )
     filename_document_id = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Convolutecards._meta.get_field('filename_document_id').help_text,
@@ -382,6 +417,7 @@ class ConvolutecardsListFilter(django_filters.FilterSet):
         model = Convolutecards
         fields = [
             'id',
+            'legacy_id',
             'filename_document_id',
             'convolute_inventory_number',
             'convolute_subnumber',
@@ -416,6 +452,11 @@ class ConvolutecardsListFilter(django_filters.FilterSet):
 
 
 class DatenbaseListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('legacy_id').help_text,
+        label=Datenbase._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Datenbase._meta.get_field('filename').help_text,
@@ -466,6 +507,7 @@ class DatenbaseListFilter(django_filters.FilterSet):
         model = Datenbase
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -497,6 +539,11 @@ class DatenbaseListFilter(django_filters.FilterSet):
 
 
 class Document4DPuzzleIDListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Document4DPuzzleID._meta.get_field('legacy_id').help_text,
+        label=Document4DPuzzleID._meta.get_field('legacy_id').verbose_name
+    )
     document_id = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Document4DPuzzleID._meta.get_field('document_id').help_text,
@@ -527,6 +574,7 @@ class Document4DPuzzleIDListFilter(django_filters.FilterSet):
         model = Document4DPuzzleID
         fields = [
             'id',
+            'legacy_id',
             'document_id',
             'original_4dpuzzle_id',
             'document_title',
@@ -541,6 +589,11 @@ class Document4DPuzzleIDListFilter(django_filters.FilterSet):
 
 
 class DocumentTypesListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=DocumentTypes._meta.get_field('legacy_id').help_text,
+        label=DocumentTypes._meta.get_field('legacy_id').verbose_name
+    )
     document_type = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=DocumentTypes._meta.get_field('document_type').help_text,
@@ -571,6 +624,7 @@ class DocumentTypesListFilter(django_filters.FilterSet):
         model = DocumentTypes
         fields = [
             'id',
+            'legacy_id',
             'document_type',
             'dt_abbr',
             'document_subtype',
@@ -581,6 +635,11 @@ class DocumentTypesListFilter(django_filters.FilterSet):
 
 
 class ExcavationObjectIDListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationObjectID._meta.get_field('legacy_id').help_text,
+        label=ExcavationObjectID._meta.get_field('legacy_id').verbose_name
+    )
     excavation_object_id = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ExcavationObjectID._meta.get_field('excavation_object_id').help_text,
@@ -601,6 +660,7 @@ class ExcavationObjectIDListFilter(django_filters.FilterSet):
         model = ExcavationObjectID
         fields = [
             'id',
+            'legacy_id',
             'excavation_object_id',
             'excavation_object_type',
             'site_id',
@@ -617,6 +677,11 @@ class ExcavationObjectIDListFilter(django_filters.FilterSet):
 
 
 class ExcavationSeasonsListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationSeasons._meta.get_field('legacy_id').help_text,
+        label=ExcavationSeasons._meta.get_field('legacy_id').verbose_name
+    )
     grabungskampagnen = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ExcavationSeasons._meta.get_field('grabungskampagnen').help_text,
@@ -632,6 +697,7 @@ class ExcavationSeasonsListFilter(django_filters.FilterSet):
         model = ExcavationSeasons
         fields = [
             'id',
+            'legacy_id',
             'grabungskampagnen',
 
             'season',
@@ -641,6 +707,11 @@ class ExcavationSeasonsListFilter(django_filters.FilterSet):
 
 
 class FielddrawingListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('legacy_id').help_text,
+        label=Fielddrawing._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Fielddrawing._meta.get_field('filename').help_text,
@@ -716,6 +787,7 @@ class FielddrawingListFilter(django_filters.FilterSet):
         model = Fielddrawing
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -759,6 +831,11 @@ class FielddrawingListFilter(django_filters.FilterSet):
 
 
 class FilmListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('legacy_id').help_text,
+        label=Film._meta.get_field('legacy_id').verbose_name
+    )
     film_id = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Film._meta.get_field('film_id').help_text,
@@ -814,6 +891,7 @@ class FilmListFilter(django_filters.FilterSet):
         model = Film
         fields = [
             'id',
+            'legacy_id',
             'film_id',
             'creation_year_original',
             'film_number',
@@ -840,6 +918,11 @@ class FilmListFilter(django_filters.FilterSet):
 
 
 class FinddrawingListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('legacy_id').help_text,
+        label=Finddrawing._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Finddrawing._meta.get_field('filename').help_text,
@@ -895,6 +978,7 @@ class FinddrawingListFilter(django_filters.FilterSet):
         model = Finddrawing
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -931,6 +1015,11 @@ class FinddrawingListFilter(django_filters.FilterSet):
 
 
 class FindsheetsListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Findsheets._meta.get_field('legacy_id').help_text,
+        label=Findsheets._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Findsheets._meta.get_field('filename').help_text,
@@ -971,6 +1060,7 @@ class FindsheetsListFilter(django_filters.FilterSet):
         model = Findsheets
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -1005,6 +1095,11 @@ class FindsheetsListFilter(django_filters.FilterSet):
 
 
 class FotoborndigitalListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('legacy_id').help_text,
+        label=Fotoborndigital._meta.get_field('legacy_id').verbose_name
+    )
     folder_name = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Fotoborndigital._meta.get_field('folder_name').help_text,
@@ -1060,6 +1155,7 @@ class FotoborndigitalListFilter(django_filters.FilterSet):
         model = Fotoborndigital
         fields = [
             'id',
+            'legacy_id',
             'folder_name',
             'folder_id',
             'folder_title',
@@ -1084,6 +1180,11 @@ class FotoborndigitalListFilter(django_filters.FilterSet):
 
 
 class FotosgescanntListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('legacy_id').help_text,
+        label=Fotosgescannt._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Fotosgescannt._meta.get_field('filename').help_text,
@@ -1144,6 +1245,7 @@ class FotosgescanntListFilter(django_filters.FilterSet):
         model = Fotosgescannt
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -1184,6 +1286,11 @@ class FotosgescanntListFilter(django_filters.FilterSet):
 
 
 class Fundinventar4DPuzzleIDListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fundinventar4DPuzzleID._meta.get_field('legacy_id').help_text,
+        label=Fundinventar4DPuzzleID._meta.get_field('legacy_id').verbose_name
+    )
     find_inventory_4dpuzzle_number = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Fundinventar4DPuzzleID._meta.get_field('find_inventory_4dpuzzle_number').help_text,
@@ -1229,6 +1336,7 @@ class Fundinventar4DPuzzleIDListFilter(django_filters.FilterSet):
         model = Fundinventar4DPuzzleID
         fields = [
             'id',
+            'legacy_id',
             'find_inventory_4dpuzzle_number',
             'find_local_number',
             'convolute_inventory_number',
@@ -1253,6 +1361,11 @@ class Fundinventar4DPuzzleIDListFilter(django_filters.FilterSet):
 
 
 class FundinventarInventarnummernListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarInventarnummern._meta.get_field('legacy_id').help_text,
+        label=FundinventarInventarnummern._meta.get_field('legacy_id').verbose_name
+    )
     find_inventory_number = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=FundinventarInventarnummern._meta.get_field('find_inventory_number').help_text,
@@ -1293,6 +1406,7 @@ class FundinventarInventarnummernListFilter(django_filters.FilterSet):
         model = FundinventarInventarnummern
         fields = [
             'id',
+            'legacy_id',
             'find_inventory_number',
             'find_local_number',
             'convolute_inventory_number',
@@ -1317,6 +1431,11 @@ class FundinventarInventarnummernListFilter(django_filters.FilterSet):
 
 
 class FundinventarKonvolutnummernListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('legacy_id').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('legacy_id').verbose_name
+    )
     convolute_inventory_number = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=FundinventarKonvolutnummern._meta.get_field('convolute_inventory_number').help_text,
@@ -1362,6 +1481,7 @@ class FundinventarKonvolutnummernListFilter(django_filters.FilterSet):
         model = FundinventarKonvolutnummern
         fields = [
             'id',
+            'legacy_id',
             'convolute_inventory_number',
             'convolute_subnumber',
             'find_local_number',
@@ -1386,6 +1506,11 @@ class FundinventarKonvolutnummernListFilter(django_filters.FilterSet):
 
 
 class FundinventarMaterialprobenListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarMaterialproben._meta.get_field('legacy_id').help_text,
+        label=FundinventarMaterialproben._meta.get_field('legacy_id').verbose_name
+    )
     material_sample_inventory_number = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=FundinventarMaterialproben._meta.get_field('material_sample_inventory_number').help_text,
@@ -1426,6 +1551,7 @@ class FundinventarMaterialprobenListFilter(django_filters.FilterSet):
         model = FundinventarMaterialproben
         fields = [
             'id',
+            'legacy_id',
             'material_sample_inventory_number',
             'find_local_number',
             'convolute_inventory_number',
@@ -1450,6 +1576,11 @@ class FundinventarMaterialprobenListFilter(django_filters.FilterSet):
 
 
 class FundinventarSteininventarListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarSteininventar._meta.get_field('legacy_id').help_text,
+        label=FundinventarSteininventar._meta.get_field('legacy_id').verbose_name
+    )
     find_inventory_number = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=FundinventarSteininventar._meta.get_field('find_inventory_number').help_text,
@@ -1490,6 +1621,7 @@ class FundinventarSteininventarListFilter(django_filters.FilterSet):
         model = FundinventarSteininventar
         fields = [
             'id',
+            'legacy_id',
             'find_inventory_number',
             'find_local_number',
             'convolute_inventory_number',
@@ -1514,6 +1646,11 @@ class FundinventarSteininventarListFilter(django_filters.FilterSet):
 
 
 class GISListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=GIS._meta.get_field('legacy_id').help_text,
+        label=GIS._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=GIS._meta.get_field('filename').help_text,
@@ -1559,6 +1696,7 @@ class GISListFilter(django_filters.FilterSet):
         model = GIS
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -1590,6 +1728,11 @@ class GISListFilter(django_filters.FilterSet):
 
 
 class GeophysicsListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Geophysics._meta.get_field('legacy_id').help_text,
+        label=Geophysics._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Geophysics._meta.get_field('filename').help_text,
@@ -1630,6 +1773,7 @@ class GeophysicsListFilter(django_filters.FilterSet):
         model = Geophysics
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -1660,6 +1804,11 @@ class GeophysicsListFilter(django_filters.FilterSet):
 
 
 class InventorybooksListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Inventorybooks._meta.get_field('legacy_id').help_text,
+        label=Inventorybooks._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Inventorybooks._meta.get_field('filename').help_text,
@@ -1700,6 +1849,7 @@ class InventorybooksListFilter(django_filters.FilterSet):
         model = Inventorybooks
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -1731,6 +1881,11 @@ class InventorybooksListFilter(django_filters.FilterSet):
 
 
 class PhasenIDListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=PhasenID._meta.get_field('legacy_id').help_text,
+        label=PhasenID._meta.get_field('legacy_id').verbose_name
+    )
     phase_id = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=PhasenID._meta.get_field('phase_id').help_text,
@@ -1746,6 +1901,7 @@ class PhasenIDListFilter(django_filters.FilterSet):
         model = PhasenID
         fields = [
             'id',
+            'legacy_id',
             'phase_id',
             'phase_title',
             'phase_type',
@@ -1756,6 +1912,11 @@ class PhasenIDListFilter(django_filters.FilterSet):
 
 
 class ProtocolsListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('legacy_id').help_text,
+        label=Protocols._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Protocols._meta.get_field('filename').help_text,
@@ -1801,6 +1962,7 @@ class ProtocolsListFilter(django_filters.FilterSet):
         model = Protocols
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -1834,6 +1996,11 @@ class ProtocolsListFilter(django_filters.FilterSet):
 
 
 class StratenIDListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=StratenID._meta.get_field('legacy_id').help_text,
+        label=StratenID._meta.get_field('legacy_id').verbose_name
+    )
     stratum_id = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=StratenID._meta.get_field('stratum_id').help_text,
@@ -1849,6 +2016,7 @@ class StratenIDListFilter(django_filters.FilterSet):
         model = StratenID
         fields = [
             'id',
+            'legacy_id',
             'stratum_id',
             'stratum_title',
             'stratum_type',
@@ -1859,6 +2027,11 @@ class StratenIDListFilter(django_filters.FilterSet):
 
 
 class TablesListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Tables._meta.get_field('legacy_id').help_text,
+        label=Tables._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Tables._meta.get_field('filename').help_text,
@@ -1904,6 +2077,7 @@ class TablesListFilter(django_filters.FilterSet):
         model = Tables
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -1934,6 +2108,11 @@ class TablesListFilter(django_filters.FilterSet):
 
 
 class ThreeDimensionalModelListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('legacy_id').help_text,
+        label=ThreeDimensionalModel._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ThreeDimensionalModel._meta.get_field('filename').help_text,
@@ -1984,6 +2163,7 @@ class ThreeDimensionalModelListFilter(django_filters.FilterSet):
         model = ThreeDimensionalModel
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -2014,6 +2194,11 @@ class ThreeDimensionalModelListFilter(django_filters.FilterSet):
 
 
 class VideosListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Videos._meta.get_field('legacy_id').help_text,
+        label=Videos._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Videos._meta.get_field('filename').help_text,
@@ -2054,6 +2239,7 @@ class VideosListFilter(django_filters.FilterSet):
         model = Videos
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',
@@ -2083,6 +2269,11 @@ class VideosListFilter(django_filters.FilterSet):
 
 
 class WallpaintingInventoryListFilter(django_filters.FilterSet):
+    legacy_id = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('legacy_id').help_text,
+        label=WallpaintingInventory._meta.get_field('legacy_id').verbose_name
+    )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=WallpaintingInventory._meta.get_field('filename').help_text,
@@ -2133,6 +2324,7 @@ class WallpaintingInventoryListFilter(django_filters.FilterSet):
         model = WallpaintingInventory
         fields = [
             'id',
+            'legacy_id',
             'filename',
             'document_id',
             'document_title',

@@ -1,10 +1,13 @@
 import django_tables2 as tables
 from django_tables2.utils import A
+
+from browsing.browsing_utils import MergeColumn
 from vocabs.models import *
 
 
 class SkosLabelTable(tables.Table):
     name = tables.LinkColumn('vocabs:skoslabel_detail', args=[A('pk')])
+    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
 
     class Meta:
         model = SkosLabel
@@ -14,6 +17,7 @@ class SkosLabelTable(tables.Table):
 
 class SkosConceptSchemeTable(tables.Table):
     dc_title = tables.LinkColumn('vocabs:skosconceptscheme_detail', args=[A('pk')])
+    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
 
     class Meta:
         model = SkosConceptScheme
@@ -23,6 +27,7 @@ class SkosConceptSchemeTable(tables.Table):
 
 class SkosCollectionTable(tables.Table):
     name = tables.LinkColumn('vocabs:skoscollection_detail', args=[A('pk')])
+    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
 
     class Meta:
         model = SkosCollection
@@ -34,6 +39,7 @@ class SkosConceptTable(tables.Table):
     broader_concept = tables.Column(verbose_name='Broader Term')
     pref_label = tables.LinkColumn('vocabs:skosconcept_detail', args=[A('pk')])
     all_schemes = tables.Column(verbose_name='in SkosScheme', orderable=False)
+    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
 
     class Meta:
         model = SkosConcept
