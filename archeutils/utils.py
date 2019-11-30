@@ -65,7 +65,7 @@ def get_arche_desc(res):
         "No description template found"
 
 
-def get_arche_id(res, id_prop="pk", arche_uri="https://id.acdh.oeaw.ac.at"):
+def get_arche_id(res, id_prop="pk", arche_uri=ARCHE_BASE_URI):
     """ function to generate generic ARCHE-IDs
         :param res: A model object
         :param id_prop: The object's primary key property
@@ -91,6 +91,22 @@ def get_arche_fields(
     return vals
 
 
+def col_id_from_res(res, arche_uri=ARCHE_BASE_URI):
+    col_name = res.__class__.__name__.lower()
+    return "/".join([arche_uri, col_name])
+
+
+def col_from_res(res, arche_uri=ARCHE_BASE_URI):
+    g = Graph()
+    sub = URIRef(col_id_from_res(res))
+    g.add((sub, RDF.type, acdh_ns.Collection))
+    g.add((sub, acdh_ns.hasDescription, Literal(res.__class__.__doc__)))
+    g.add((sub, acdh_ns.hasIdentifier, URIRef(col_id_from_res(res))))
+    for const in ARCHE_CONST_MAPPINGS:
+        g.add((sub, acdh_ns[const[0]], URIRef(const[1])))
+    return g
+
+
 def as_arche_res(res, res_type='Resource'):
     g = Graph()
     sub = URIRef(get_arche_id(res))
@@ -98,6 +114,9 @@ def as_arche_res(res, res_type='Resource'):
     g.add((
         sub, acdh_ns.hasDescription, Literal(get_arche_desc(res))
     ))
+    col_graph = col_from_res(res)
+    g = g + col_graph
+    g.add((sub, acdh_ns.isPartOf, URIRef(col_id_from_res(res))))
     for x in get_arche_fields(res):
         cur_val = x['value']
         arche_prop = x['extra_fields']['arche_prop'].strip()
@@ -114,8 +133,8 @@ def as_arche_res(res, res_type='Resource'):
             else:
                 if cur_val is not None:
                     g.add((sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))))
-        for key, value in ARCHE_CONST_MAPPINGS.items():
-            g.add((sub, acdh_ns[key], URIRef(value)))
+        for const in ARCHE_CONST_MAPPINGS:
+            g.add((sub, acdh_ns[const[0]], URIRef(const[1])))
     return g
 
 

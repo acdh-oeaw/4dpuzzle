@@ -127,13 +127,13 @@ VOCABS_SETTINGS = {
     'default_lang': "en"
 }
 ARCHE_BASE_URI = "https://id.acdh.oeaw.ac.at/Puzzle4D-django"
-ARCHE_CONST_MAPPINGS = {
-    'hasOwner': "https://id.acdh.oeaw.ac.at/OREA",
-    'hasOwner': "https://id.acdh.oeaw.ac.at/OAI",
-    'hasRightsHolder': "https://id.acdh.oeaw.ac.at/OREA",
-    'hasRightsHolder': "https://id.acdh.oeaw.ac.at/OAI",
-    'hasLicensor': 'https://id.acdh.oeaw.ac.at/OREA',
-    'hasLicensor': 'https://id.acdh.oeaw.ac.at/OAI',
-    'hasLicense': 'https://vocabs.acdh.oeaw.ac.at/license/cc-by-40',
-    'hasCategory': 'https://vocabs.acdh.oeaw.ac.at/archecategory/dataset'
-}
+ARCHE_CONST_MAPPINGS = [
+    ('hasOwner', "https://id.acdh.oeaw.ac.at/OREA",),
+    ('hasOwner', "https://id.acdh.oeaw.ac.at/OAI",),
+    ('hasRightsHolder', "https://id.acdh.oeaw.ac.at/OREA",),
+    ('hasRightsHolder', "https://id.acdh.oeaw.ac.at/OAI",),
+    ('hasLicensor', 'https://id.acdh.oeaw.ac.at/OREA',),
+    ('hasLicensor', 'https://id.acdh.oeaw.ac.at/OAI',),
+    ('hasLicense', 'https://vocabs.acdh.oeaw.ac.at/license/cc-by-40',),
+    ('hasCategory', 'https://vocabs.acdh.oeaw.ac.at/archecategory/dataset',)
+]
