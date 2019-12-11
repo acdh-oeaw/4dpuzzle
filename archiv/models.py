@@ -18,7 +18,7 @@ models.Field.set_extra = set_extra
 
 
 class Actor(models.Model):
-    """ Person involved in TD excavations and/or A Puzzle in 4D project """
+    ### Person involved in TD excavations and/or A Puzzle in 4D project ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -80,6 +80,10 @@ class Actor(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Actor/Actor.csv__Access",
     )
+    orig_data_csv = models.TextField(
+        blank=True,
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -134,11 +138,23 @@ class Actor(models.Model):
 
 
 class ArchaeologicalObject4DPuzzleID(models.Model):
-    """ A 4DPuzzleID was created for archaeological objects that did not have an ID """
+    ### A 4DPuzzleID was created for archaeological objects that did not have an ID ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_archaeologicalobject4dpuzzleid_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Creator_metadata",
+    )
     archaeological_object_id = models.ForeignKey(
         "ArchaeologicalObjectID",
         related_name='rvn_archaeologicalobject4dpuzzleid_archaeological_object_id_archaeologicalobjectid',
@@ -160,20 +176,8 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Archaeological_object_4DPuzzle_ID",
     )
-    archaeological_object_type = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_archaeologicalobject4dpuzzleid_archaeological_object_type_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Archaeological object type",
-        help_text="helptext for archaeological_object_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Archaeological_object_type",
-    )
     archaeological_object_comment = models.TextField(
-        blank=True,
+        blank=True, null=True,
         verbose_name="Archaeological object comment",
         help_text="helptext for archaeological_object_comment",
     ).set_extra(
@@ -191,12 +195,40 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Excavation_object_ID",
     )
     position = models.TextField(
-        blank=True,
+        blank=True, null=True,
         verbose_name="Position",
         help_text="helptext for position",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Position",
+    )
+    stratum_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Stratum Comment",
+        help_text="helptext for stratum_comment",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Stratum_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="helptext for digitisation_comment",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Digitisation_comment",
+    )
+    archaeological_object_type = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_archaeologicalobject4dpuzzleid_archaeological_object_type_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Archaeological object type",
+        help_text="helptext for archaeological_object_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Archaeological_object_type",
     )
     stratum_id_relative = models.ForeignKey(
         SkosConcept,
@@ -222,14 +254,6 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Stratum_ID_absolute_prepub",
     )
-    stratum_comment = models.TextField(
-        blank=True,
-        verbose_name="Stratum Comment",
-        help_text="helptext for stratum_comment",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Stratum_comment",
-    )
     phase_id = models.ForeignKey(
         SkosConcept,
         related_name='rvn_archaeologicalobject4dpuzzleid_phase_id_skosconcept',
@@ -242,26 +266,10 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Phase_ID",
     )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_archaeologicalobject4dpuzzleid_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Creator_metadata",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Digitisation_comment",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -316,11 +324,23 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
 
 
 class ArchaeologicalObjectID(models.Model):
-    """ ID of archaeological object  """
+    ### ID of archaeological object  ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_archaeologicalobjectid_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObjectID/Archaeological_object_ID.csv__Creator_metadata",
+    )
     archaeological_object_id = models.CharField(
         max_length=250,
         blank=True,
@@ -330,20 +350,8 @@ class ArchaeologicalObjectID(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObjectID/Archaeological_object_ID.csv__Archaeological_object_ID",
     )
-    archaeological_object_type = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_archaeologicalobjectid_archaeological_object_type_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Archaeological object type",
-        help_text="helptext for archaeological_object_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObjectID/Archaeological_object_ID.csv__Archaeological_object_type",
-    )
     archaeological_object_comment = models.TextField(
-        blank=True,
+        blank=True, null=True,
         verbose_name="Archaeological object comment",
         help_text="helptext for archaeological_object_comment",
     ).set_extra(
@@ -424,26 +432,30 @@ class ArchaeologicalObjectID(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObjectID/Archaeological_object_ID.csv__RelatedTo",
     )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_archaeologicalobjectid_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObjectID/Archaeological_object_ID.csv__Creator_metadata",
-    )
     digitisation_comment = models.TextField(
-        blank=True,
+        blank=True, null=True,
         verbose_name="Comment from digitisation",
         help_text="helptext for digitisation_comment",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObjectID/Archaeological_object_ID.csv__Digitisation_comment",
     )
+    archaeological_object_type = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_archaeologicalobjectid_archaeological_object_type_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Archaeological object type",
+        help_text="helptext for archaeological_object_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObjectID/Archaeological_object_ID.csv__Archaeological_object_type",
+    )
+    orig_data_csv = models.TextField(
+        blank=True,
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -498,11 +510,49 @@ class ArchaeologicalObjectID(models.Model):
 
 
 class ArchiveINF(models.Model):
-    """ Document with information about the Tell el-Daba documentation archive """
+    ### Document with information about the Tell el-Daba documentation archive ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_archiveinf_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_archiveinf_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creator_original",
+    )
+    creator_archivalobject = models.ForeignKey(
+        "Actor",
+        related_name='rvn_archiveinf_creator_archivalobject_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of archival object",
+        help_text="helptext for creator_archivalobject",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__creator_archivalObject",
+        arche_prop="hasContributor",
+    )
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -532,42 +582,6 @@ class ArchiveINF(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Document_title",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_archiveinf_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_archiveinf_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__DT_abbr",
-    )
-    relatedto = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_archiveinf_relatedto_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="File is related to other TD resources",
-        help_text="helptext for relatedto",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__RelatedTo",
-    )
     creation_year_original = models.CharField(
         max_length=250,
         blank=True,
@@ -585,6 +599,47 @@ class ArchiveINF(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creation_date_archivalObject",
     )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creation_date_metadata",
+    )
+    comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment",
+        help_text="helptext for comment",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Comment",
+        arche_prop="hasNote",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_archiveinf_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Document_type",
+    )
+    relatedto = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_archiveinf_relatedto_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__RelatedTo",
+    )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
         related_name='rvn_archiveinf_file_extension_archivalobject_skosconcept',
@@ -597,39 +652,6 @@ class ArchiveINF(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__File_extension_archivalObject",
         arche_prop="hasTechnicalInfo",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_archiveinf_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_archiveinf_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -669,28 +691,10 @@ class ArchiveINF(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Site_ID",
     )
-    creator_archivalobject = models.ForeignKey(
-        "Actor",
-        related_name='rvn_archiveinf_creator_archivalobject_actor',
-        on_delete=models.SET_NULL,
-        null=True,
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Creator of archival object",
-        help_text="helptext for creator_archivalobject",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__creator_archivalObject",
-        arche_prop="hasContributor",
-    )
-    comment = models.TextField(
-        blank=True,
-        verbose_name="Comment",
-        help_text="helptext for comment",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -745,11 +749,49 @@ class ArchiveINF(models.Model):
 
 
 class AutoCAD(models.Model):
-    """ AutoCAD Files """
+    ### AutoCAD Files ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_autocad_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creator_metadata",
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_autocad_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creator_original",
+    )
+    creator_archivalobject = models.ForeignKey(
+        "Actor",
+        related_name='rvn_autocad_creator_archivalobject_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of archival object",
+        help_text="Person who processed resource for digital long-term archiving.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__creator_archivalObject",
+        arche_prop="hasContributor",
+    )
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -798,50 +840,6 @@ class AutoCAD(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Path_filename_ARCHE",
         arche_prop="hasLocationPath",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_autocad_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_autocad_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__DT_abbr",
-    )
-    document_subtype = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_autocad_document_subtype_documenttypes',
-        blank=True,
-        verbose_name="Docment subtype",
-        help_text="helptext for document_subtype",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Document_subtype",
-    )
-    dst_abbr = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_autocad_dst_abbr_documenttypes',
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="helptext for dst_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__DST_abbr",
-    )
     creation_year_original = models.CharField(
         max_length=250,
         blank=True,
@@ -859,6 +857,72 @@ class AutoCAD(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creation_date_archivalObject",
         arche_prop="hasCreatedDate",
+    )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creation_date_metadata",
+    )
+    excavation_object_id = models.ManyToManyField(
+        "ExcavationObjectID",
+        related_name='rvn_autocad_excavation_object_id_excavationobjectid',
+        blank=True,
+        verbose_name="Excavation object ID",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Excavation_object_ID",
+    )
+    archaeological_object_id = models.ManyToManyField(
+        "ArchaeologicalObjectID",
+        related_name='rvn_autocad_archaeological_object_id_archaeologicalobjectid',
+        blank=True,
+        verbose_name="Archeological object ID",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Archaeological_object_ID",
+    )
+    relatedto = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__RelatedTo",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Digitisation_comment",
+        arche_prop="hasNote",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_autocad_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Document_type",
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
@@ -884,39 +948,6 @@ class AutoCAD(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__File_extension_archivalObject",
         arche_prop="hasTechnicalInfo",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_autocad_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_autocad_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -956,48 +987,6 @@ class AutoCAD(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Site_ID",
     )
-    creator_archivalobject = models.ForeignKey(
-        "Actor",
-        related_name='rvn_autocad_creator_archivalobject_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of archival object",
-        help_text="Person who processed resource for digital long-term archiving.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__creator_archivalObject",
-        arche_prop="hasContributor",
-    )
-    excavation_object_id = models.ManyToManyField(
-        "ExcavationObjectID",
-        related_name='rvn_autocad_excavation_object_id_excavationobjectid',
-        blank=True,
-        verbose_name="Excavation object ID",
-        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Excavation_object_ID",
-    )
-    archaeological_object_id = models.ManyToManyField(
-        "ArchaeologicalObjectID",
-        related_name='rvn_autocad_archaeological_object_id_archaeologicalobjectid',
-        blank=True,
-        verbose_name="Archeological object ID",
-        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Archaeological_object_ID",
-    )
-    relatedto = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="File is related to other TD resources",
-        help_text="helptext for relatedto",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__RelatedTo",
-    )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
         related_name='rvn_autocad_excavation_post_excavation_skosconcept',
@@ -1010,23 +999,10 @@ class AutoCAD(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Excavation__post_excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -1081,11 +1057,87 @@ class AutoCAD(models.Model):
 
 
 class Convolutecards(models.Model):
-    """ Digitised convolute cards """
+    ### Digitised convolute cards ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_convolutecards_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_convolutecards_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original document",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_original",
+    )
+    creator_scan = models.ForeignKey(
+        "Actor",
+        related_name='rvn_convolutecards_creator_scan_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of scan",
+        help_text="helptext for creator_scan",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_scan",
+        arche_prop="hasContributor",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_convolutecards_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Document_type",
+    )
+    excavation_id = models.ManyToManyField(
+        "ExcavationSeasons",
+        related_name='rvn_convolutecards_excavation_id_excavationseasons',
+        blank=True,
+        verbose_name="Excavation Season",
+        help_text="helptext for excavation_id",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Excavation_id",
+    )
+    creation_year_original = models.TextField(
+        blank=True, null=True,
+        verbose_name="Creation year of original document",
+        help_text="helptext for creation_year_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creation_year_original",
+    )
+    season = models.TextField(
+        blank=True, null=True,
+        verbose_name="Season",
+        help_text="helptext for season",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Season",
+    )
     filename_document_id = models.CharField(
         max_length=250,
         blank=True,
@@ -1125,30 +1177,6 @@ class Convolutecards(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Filename_old",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_convolutecards_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_convolutecards_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__DT_abbr",
-    )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
@@ -1156,18 +1184,6 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creation_date_original",
-    )
-    creation_year_original = models.ForeignKey(
-        "ExcavationSeasons",
-        related_name='rvn_convolutecards_creation_year_original_excavationseasons',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creation year of original document",
-        help_text="helptext for creation_year_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creation_year_original",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
@@ -1177,6 +1193,85 @@ class Convolutecards(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creation_date_scan",
         arche_prop="hasCreatedDate",
+    )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date of metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creation_date_metadata",
+    )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage folder of original document",
+        help_text="helptext for storage_folder_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Storage_folder_original",
+    )
+    resolution_scan_dpi = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Scan resolution",
+        help_text="helptext for resolution_scan_dpi",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Resolution_scan_dpi",
+        arche_prop="hasTechnicalInfo",
+    )
+    month = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Month",
+        help_text="helptext for month",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Month",
+    )
+    position = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Position",
+        help_text="helptext for position",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Position",
+    )
+    lowest_height_meters_standard_elevation_zero = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="lowest_height_meters_standard_elevation_zero",
+        help_text="helptext for lowest_height_meters_standard_elevation_zero",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Lowest_height_meters_standard_elevation_zero",
+    )
+    maximum_height_meters_standard_elevation_zero = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="maximum_height_meters_standard_elevation_zero",
+        help_text="helptext for maximum_height_meters_standard_elevation_zero",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Maximum_height_meters_standard_elevation_zero",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Digitisation_comment",
+        arche_prop="hasNote",
     )
     file_extension = models.ForeignKey(
         SkosConcept,
@@ -1190,39 +1285,6 @@ class Convolutecards(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__File_extension",
         arche_prop="hasTechnicalInfo",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date of metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_convolutecards_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_convolutecards_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original document",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -1249,15 +1311,6 @@ class Convolutecards(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Access",
         arche_prop="hasAccessRestriction",
-    )
-    storage_folder_original = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Storage folder of original document",
-        help_text="helptext for storage_folder_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Storage_folder_original",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -1296,28 +1349,6 @@ class Convolutecards(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Source__original_copy_edited-copy",
     )
-    resolution_scan_dpi = models.IntegerField(
-        blank=True, null=True,
-        verbose_name="Scan resolution",
-        help_text="helptext for resolution_scan_dpi",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Resolution_scan_dpi",
-        arche_prop="hasTechnicalInfo",
-    )
-    creator_scan = models.ForeignKey(
-        "Actor",
-        related_name='rvn_convolutecards_creator_scan_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of scan",
-        help_text="helptext for creator_scan",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_scan",
-        arche_prop="hasContributor",
-    )
     original_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_convolutecards_original_material_skosconcept',
@@ -1329,54 +1360,6 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Original_material",
-    )
-    season = models.ForeignKey(
-        "ExcavationSeasons",
-        related_name='rvn_convolutecards_season_excavationseasons',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Season",
-        help_text="helptext for season",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Season",
-    )
-    month = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Month",
-        help_text="helptext for month",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Month",
-    )
-    position = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Position",
-        help_text="helptext for position",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Position",
-    )
-    lowest_height_meters_standard_elevation_zero = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="lowest_height_meters_standard_elevation_zero",
-        help_text="helptext for lowest_height_meters_standard_elevation_zero",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Lowest_height_meters_standard_elevation_zero",
-    )
-    maximum_height_meters_standard_elevation_zero = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="maximum_height_meters_standard_elevation_zero",
-        help_text="helptext for maximum_height_meters_standard_elevation_zero",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Maximum_height_meters_standard_elevation_zero",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -1390,23 +1373,10 @@ class Convolutecards(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Excavation__post_excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -1461,11 +1431,49 @@ class Convolutecards(models.Model):
 
 
 class Datenbase(models.Model):
-    """ Database files """
+    ### Database files ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_datenbase_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Creator_metadata",
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_datenbase_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Creator_original",
+    )
+    creator_archivalobject = models.ForeignKey(
+        "Actor",
+        related_name='rvn_datenbase_creator_archivalobject_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of archival object",
+        help_text="Person who processed resource for digital long-term archiving.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__creator_archivalObject",
+        arche_prop="hasContributor",
+    )
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -1495,50 +1503,6 @@ class Datenbase(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Document_title",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_datenbase_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_datenbase_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__DT_abbr",
-    )
-    document_subtype = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_datenbase_document_subtype_documenttypes',
-        blank=True,
-        verbose_name="Doucment subtype",
-        help_text="helptext for document_subtype",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Document_subtype",
-    )
-    dst_abbr = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_datenbase_dst_abbr_documenttypes',
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="helptext for dst_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__DST_abbr",
-    )
     creation_year_original = models.CharField(
         max_length=250,
         blank=True,
@@ -1557,31 +1521,6 @@ class Datenbase(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Creation_date_archivalObject",
         arche_prop="hasCreatedDate",
     )
-    file_extension_original = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_datenbase_file_extension_original_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="File extension of original",
-        help_text="helptext for file_extension_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__File_extension_original",
-    )
-    file_extension_archivalobject = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_datenbase_file_extension_archivalobject_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="File extension of archival object",
-        help_text="helptext for file_extension_archivalobject",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__File_extension_archivalObject",
-        arche_prop="hasTechnicalInfo",
-    )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date metadata",
@@ -1589,57 +1528,6 @@ class Datenbase(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_datenbase_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_datenbase_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Creator_original",
-    )
-    copyright = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_datenbase_copyright_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Copyright",
-        help_text="helptext for copyright",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Copyright",
-        arche_prop="hasOwner",
-    )
-    access = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_datenbase_access_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Access",
-        help_text="Whether access to the resource is restricted or if it is open to the public.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Access",
-        arche_prop="hasAccessRestriction",
     )
     path_filename_old = models.CharField(
         max_length=250,
@@ -1659,31 +1547,6 @@ class Datenbase(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Path_filename_ARCHE",
         arche_prop="hasLocationPath",
-    )
-    site_id = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_datenbase_site_id_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Site ID",
-        help_text="Abbreviation of Tell el-Daba is 'TD'.",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Site_ID",
-    )
-    creator_archivalobject = models.ForeignKey(
-        "Actor",
-        related_name='rvn_datenbase_creator_archivalobject_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of archival object",
-        help_text="Person who processed resource for digital long-term archiving.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__creator_archivalObject",
-        arche_prop="hasContributor",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
@@ -1714,6 +1577,98 @@ class Datenbase(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__RelatedTo",
     )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Digitisation_comment",
+        arche_prop="hasNote",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_datenbase_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Document_type",
+    )
+    file_extension_original = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_datenbase_file_extension_original_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="File extension of original",
+        help_text="helptext for file_extension_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__File_extension_original",
+    )
+    file_extension_archivalobject = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_datenbase_file_extension_archivalobject_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="File extension of archival object",
+        help_text="helptext for file_extension_archivalobject",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__File_extension_archivalObject",
+        arche_prop="hasTechnicalInfo",
+    )
+    copyright = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_datenbase_copyright_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Copyright",
+        help_text="helptext for copyright",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Copyright",
+        arche_prop="hasOwner",
+    )
+    access = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_datenbase_access_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Access",
+        arche_prop="hasAccessRestriction",
+    )
+    site_id = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_datenbase_site_id_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Site ID",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Site_ID",
+    )
     find_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_datenbase_find_material_skosconcept',
@@ -1738,23 +1693,10 @@ class Datenbase(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Excavation__post_excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -1809,11 +1751,35 @@ class Datenbase(models.Model):
 
 
 class Document4DPuzzleID(models.Model):
-    """ A 4DPuzzleID was created for documents that did not have an ID """
+    ### A 4DPuzzleID was created for documents that did not have an ID ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_document4dpuzzleid_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Document_4DPuzzleID/Document_4DPuzzleID.csv__Creator_metadata",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_document4dpuzzleid_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Document_4DPuzzleID/Document_4DPuzzleID.csv__Document_type",
+    )
     document_id = models.CharField(
         max_length=250,
         blank=True,
@@ -1841,68 +1807,8 @@ class Document4DPuzzleID(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Document_4DPuzzleID/Document_4DPuzzleID.csv__Document_title",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_document4dpuzzleid_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Document_4DPuzzleID/Document_4DPuzzleID.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_document4dpuzzleid_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Document_4DPuzzleID/Document_4DPuzzleID.csv__DT_abbr",
-    )
-    document_subtype = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_document4dpuzzleid_document_subtype_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document subtype",
-        help_text="helptext for document_subtype",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Document_4DPuzzleID/Document_4DPuzzleID.csv__Document_subtype",
-    )
-    dst_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_document4dpuzzleid_dst_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="helptext for dst_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Document_4DPuzzleID/Document_4DPuzzleID.csv__DST_abbr",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_document4dpuzzleid_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Document_4DPuzzleID/Document_4DPuzzleID.csv__Creator_metadata",
-    )
     digitisation_comment = models.TextField(
-        blank=True,
+        blank=True, null=True,
         verbose_name="Comment from digitisation",
         help_text="helptext for digitisation_comment",
     ).set_extra(
@@ -1918,6 +1824,10 @@ class Document4DPuzzleID(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Document_4DPuzzleID/Document_4DPuzzleID.csv__Corresponding_to",
     )
+    orig_data_csv = models.TextField(
+        blank=True,
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -1972,7 +1882,7 @@ class Document4DPuzzleID(models.Model):
 
 
 class DocumentTypes(models.Model):
-    """ Types of documents  """
+    ### Types of documents ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -1984,7 +1894,16 @@ class DocumentTypes(models.Model):
         help_text="Type of document.",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Document_type",
+        data_lookup="excel2csv/archiv/4DP_Metadaten_DocumentTypes/Tabelle1.csv__Document_type",
+    )
+    document_maintype = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document type",
+        help_text="Type of document.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_DocumentTypes/Tabelle1.csv__Document_maintype",
     )
     dt_abbr = models.CharField(
         max_length=250,
@@ -1993,7 +1912,7 @@ class DocumentTypes(models.Model):
         help_text="Abbreviation of the document.",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__DT_abbr",
+        data_lookup="excel2csv/archiv/4DP_Metadaten_DocumentTypes/Tabelle1.csv__DT_abbr",
     )
     document_subtype = models.CharField(
         max_length=250,
@@ -2002,7 +1921,7 @@ class DocumentTypes(models.Model):
         help_text="Subtype of a document. ",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Document_subtype",
+        data_lookup="excel2csv/archiv/4DP_Metadaten_DocumentTypes/Tabelle1.csv__Document_subtype",
     )
     ds_abbr = models.CharField(
         max_length=250,
@@ -2011,7 +1930,15 @@ class DocumentTypes(models.Model):
         help_text="Abbreviation of the document subtype.",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__DS_abbr",
+        data_lookup="excel2csv/archiv/4DP_Metadaten_DocumentTypes/Tabelle1.csv__DS_abbr",
+    )
+    description = models.TextField(
+        blank=True, null=True,
+        verbose_name="Description",
+        help_text="Description of document type.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_DocumentTypes/Tabelle1.csv__Description",
     )
     analogue_borndigital = models.ForeignKey(
         SkosConcept,
@@ -2023,16 +1950,12 @@ class DocumentTypes(models.Model):
         help_text="Whether the original document was analogue (and digitised during A Puzzle in 4D project) or born-digital (and converted into durable file format during A Puzzle in 4D project).",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Analogue_bornDigital",
+        data_lookup="excel2csv/archiv/4DP_Metadaten_DocumentTypes/Tabelle1.csv__Analog_bornDigital",
     )
-    description = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Description",
-        help_text="Description of document type.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Description",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -2042,7 +1965,7 @@ class DocumentTypes(models.Model):
         verbose_name = "Document types"
 
     def __str__(self):
-        return f"{self.document_type} >> {self.document_subtype}"
+        return "{}".format(self.document_type)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2087,11 +2010,23 @@ class DocumentTypes(models.Model):
 
 
 class ExcavationObjectID(models.Model):
-    """ ID of excavation object (area, square etc.) """
+    ### ID of excavation object (area, square etc.) ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_excavationobjectid_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="creator_metadata",
+        help_text="Person who created the metadata or organization where metadata creation was carried out.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Creator_metadata",
+    )
     excavation_object_id = models.CharField(
         max_length=250,
         blank=True,
@@ -2100,6 +2035,59 @@ class ExcavationObjectID(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Excavation_object_ID",
+    )
+    profile_orientation = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Orientation of a profile",
+        help_text="The orientation of a profile.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Profile_orientation",
+    )
+    excavation_id = models.ManyToManyField(
+        "ExcavationSeasons",
+        related_name='rvn_excavationobjectid_excavation_id_excavationseasons',
+        blank=True,
+        verbose_name="Excavation Season",
+        help_text="Years during work at an excavation object has been carried out.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Excavation_id",
+    )
+    year = models.TextField(
+        blank=True, null=True,
+        verbose_name="Year",
+        help_text="Years during work at an excavation object has been carried out.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Year",
+    )
+    season = models.TextField(
+        blank=True, null=True,
+        verbose_name="Season",
+        help_text="Season during work at an excavation object has been carried out.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Season",
+    )
+    part_of_excavation_object_id = models.ManyToManyField(
+        "ExcavationObjectID",
+        related_name='rvn_excavationobjectid_part_of_excavation_object_id_excavationobjectid',
+        blank=True,
+        verbose_name="Part of another Excavation Object.",
+        help_text="An excavation object which was part of another excavation object.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Part_of_excavation_object_ID",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments of the metadata creator (e.g. noticing errors, etc.).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Digitisation_comment",
     )
     excavation_object_type = models.ForeignKey(
         SkosConcept,
@@ -2161,65 +2149,10 @@ class ExcavationObjectID(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Planum",
     )
-    profile_orientation = models.CharField(
-        max_length=250,
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Orientation of a profile",
-        help_text="The orientation of a profile.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Profile_orientation",
-    )
-    year = models.ManyToManyField(
-        "ExcavationSeasons",
-        related_name='rvn_excavationobjectid_year_excavationseasons',
-        blank=True,
-        verbose_name="Year",
-        help_text="Years during work at an excavation object has been carried out.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Year",
-    )
-    season = models.ManyToManyField(
-        "ExcavationSeasons",
-        related_name='rvn_excavationobjectid_season_excavationseasons',
-        blank=True,
-        verbose_name="Season",
-        help_text="Season during work at an excavation object has been carried out.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Season",
-    )
-    part_of_excavation_object_id = models.ManyToManyField(
-        "ExcavationObjectID",
-        related_name='rvn_excavationobjectid_part_of_excavation_object_id_excavationobjectid',
-        blank=True,
-        verbose_name="Part of another Excavation Object.",
-        help_text="An excavation object which was part of another excavation object.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Part_of_excavation_object_ID",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_excavationobjectid_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="creator_metadata",
-        help_text="Person who created the metadata or organization where metadata creation was carried out.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Creator_metadata",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments of the metadata creator (e.g. noticing errors, etc.).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Digitisation_comment",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -2274,11 +2207,20 @@ class ExcavationObjectID(models.Model):
 
 
 class ExcavationSeasons(models.Model):
-    """ Excavation season """
+    ### Excavation season ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    excavation_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Ecxcavation ID",
+        help_text="helptext for excavation_id",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ExcavationSeasons/ExcavationSeasons.csv__Excavation_id",
+    )
     grabungskampagnen = models.CharField(
         max_length=250,
         blank=True,
@@ -2296,6 +2238,15 @@ class ExcavationSeasons(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ExcavationSeasons/ExcavationSeasons.csv__start-date/end-date",
     )
+    year = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Year",
+        help_text="helptext for year",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_ExcavationSeasons/ExcavationSeasons.csv__Year",
+    )
     season = models.ForeignKey(
         SkosConcept,
         related_name='rvn_excavationseasons_season_skosconcept',
@@ -2307,15 +2258,6 @@ class ExcavationSeasons(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ExcavationSeasons/ExcavationSeasons.csv__Season",
-    )
-    year = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Year",
-        help_text="helptext for year",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_ExcavationSeasons/ExcavationSeasons.csv__Year",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -2329,6 +2271,10 @@ class ExcavationSeasons(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ExcavationSeasons/ExcavationSeasons.csv__Access",
     )
+    orig_data_csv = models.TextField(
+        blank=True,
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -2383,7 +2329,7 @@ class ExcavationSeasons(models.Model):
 
 
 class Fielddrawing(models.Model):
-    """ Digitised fielddrawing """
+    ### Digitised fielddrawing ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -2417,49 +2363,15 @@ class Fielddrawing(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Document_title",
     )
-    document_type = models.ForeignKey(
+    document_type = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_fielddrawing_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
         blank=True,
         verbose_name="Document type",
         help_text="Type of document – for field drawing metadata this is always ‘Feldzeichnung’ (Fielddrawing).",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_fielddrawing_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="Abbreviation of the document type – for ‘field drawing’ it is ‘FZ’.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__DT_abbr",
-    )
-    document_subtype = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_fielddrawing_document_subtype_documenttypes',
-        blank=True,
-        verbose_name="Document subtype",
-        help_text="Type of field drawing. It is either ‘Planum’ (field drawing of a level in a square, scale 1:50), ‘Profil’ (field drawing of a section, scale 1:50), ‘Detail’ (field drawing of an important part of the archaeological evidence, scale 1:20), ‘Sondage’ (field drawing of a level in a test pit), ‘Skizze’ (a sketch) or ‘Stratum’.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Document_subtype",
-    )
-    dst_abbr = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_fielddrawing_dst_abbr_documenttypes',
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="Abbreviation of the document subtype: ‘Planum’ (PL), ‘Profil’ (PR), ‘Detail’ (DZ), ‘Sondage’ (SON), ‘Stratum’ (ST) or ‘Skizze’ (SK).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__DST_abbr",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
@@ -2469,18 +2381,6 @@ class Fielddrawing(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Creation_date_original",
     )
-    creation_year_original = models.ForeignKey(
-        "ExcavationSeasons",
-        related_name='rvn_fielddrawing_creation_year_original_excavationseasons',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creation year of original document",
-        help_text="Year when the field drawing was made.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Creation_year_original",
-    )
     creation_date_scan = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date scan",
@@ -2489,19 +2389,6 @@ class Fielddrawing(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Creation_date_scan",
         arche_prop="hasCreatedDate",
-    )
-    file_extension = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fielddrawing_file_extension_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="File extension",
-        help_text="File extension of the scan.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__File_extension",
-        arche_prop="hasTechnicalInfo",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -2532,32 +2419,6 @@ class Fielddrawing(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Creator_original",
     )
-    copyright = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fielddrawing_copyright_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Copyright",
-        help_text="Copyright holder of the document. ",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Copyright",
-        arche_prop="hasLicensor",
-    )
-    access = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fielddrawing_access_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Access",
-        help_text="Whether access to the resource is restricted or if it is open to the public.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Access",
-        arche_prop="hasAccessRestriction",
-    )
     storage_folder_original = models.CharField(
         max_length=250,
         blank=True,
@@ -2567,43 +2428,6 @@ class Fielddrawing(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Storage_folder_original",
     )
-    site_id = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fielddrawing_site_id_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Site ID",
-        help_text="Abbreviation of Tell el-Daba is 'TD'.",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Site_ID",
-    )
-    equipment_scan = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fielddrawing_equipment_scan_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Scanner",
-        help_text="The scanner which was used (brand, product name and number).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Equipment_scan",
-        arche_prop="hasUsedHardware",
-    )
-    source_original_copy_edited_copy = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fielddrawing_source_original_copy_edited_copy_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Scan was either made from an original fielddrawing, a copy of a fielddrawing or copy of a fielddrawing that was edited",
-        help_text="The original document was either a original field drawing, a photocopy of a field drawing or an edited photocopy of a field drawing (with handwritten comments).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Source__original_copy_edited_copy",
-    )
     resolution_scan_ppi = models.IntegerField(
         blank=True, null=True,
         verbose_name="Scan resolution",
@@ -2612,19 +2436,6 @@ class Fielddrawing(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Resolution_scan_dpi",
         arche_prop="hasTechnicalInfo",
-    )
-    creator_scan = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fielddrawing_creator_scan_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of scan",
-        help_text="Organisation who carried out the scanning.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-II/Fielddrawings.csv__Creator_scan",
-        arche_prop="hasContributor",
     )
     original_material = models.ManyToManyField(
         SkosConcept,
@@ -2700,7 +2511,7 @@ class Fielddrawing(models.Model):
         related_name='rvn_fielddrawing_archaeological_object_id_archaeologicalobjectid',
         blank=True,
         verbose_name="Archaeological object ID",
-        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
+        help_text=" ",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Archaeological_object_ID",
@@ -2724,24 +2535,12 @@ class Fielddrawing(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Stratum_ID_absolute_prepub",
     )
     stratum_comment = models.TextField(
-        blank=True,
+        blank=True, null=True,
         verbose_name="Stratum (comment)",
         help_text="Transcript of the handwritten comments and notes on the stratum written on the field drawing. ",
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Stratum_comment",
-    )
-    season = models.ForeignKey(
-        "ExcavationSeasons",
-        related_name='rvn_fielddrawing_season_excavationseasons',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Fieldwork season",
-        help_text="Fieldwork season when the field drawing was made (H = Herbst = autumn; F = Frühling = spring).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Season",
     )
     month = models.CharField(
         max_length=250,
@@ -2762,6 +2561,138 @@ class Fielddrawing(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Scale",
         arche_prop="hasTechnicalInfo",
     )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Transcript of additional information found on the field drawing.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from creation of the scan (e.g. noticing of measurement errors, etc.) ",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Digitisation_comment",
+        arche_prop="hasNote",
+    )
+    excavation_id = models.ManyToManyField(
+        "ExcavationSeasons",
+        related_name='rvn_fielddrawing_excavation_id_excavationseasons',
+        blank=True,
+        verbose_name="Excavation Season",
+        help_text="helptext for excavation_id",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Excavation_id",
+    )
+    creation_year_original = models.TextField(
+        blank=True, null=True,
+        verbose_name="Creation year of original document",
+        help_text="Year when the field drawing was made.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Creation_year_original",
+    )
+    season = models.TextField(
+        blank=True, null=True,
+        verbose_name="Fieldwork season",
+        help_text="Fieldwork season when the field drawing was made (H = Herbst = autumn; F = Frühling = spring).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Season",
+    )
+    file_extension = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fielddrawing_file_extension_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="File extension",
+        help_text="File extension of the scan.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__File_extension",
+        arche_prop="hasTechnicalInfo",
+    )
+    copyright = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fielddrawing_copyright_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Copyright",
+        help_text="Copyright holder of the document. ",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Copyright",
+        arche_prop="hasLicensor",
+    )
+    access = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fielddrawing_access_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Access",
+        arche_prop="hasAccessRestriction",
+    )
+    site_id = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fielddrawing_site_id_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Site ID",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Site_ID",
+    )
+    equipment_scan = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fielddrawing_equipment_scan_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Scanner",
+        help_text="The scanner which was used (brand, product name and number).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Equipment_scan",
+        arche_prop="hasUsedHardware",
+    )
+    source_original_copy_edited_copy = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fielddrawing_source_original_copy_edited_copy_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Scan was either made from an original fielddrawing, a copy of a fielddrawing or copy of a fielddrawing that was edited",
+        help_text="The original document was either a original field drawing, a photocopy of a field drawing or an edited photocopy of a field drawing (with handwritten comments).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Source__original_copy_edited_copy",
+    )
+    creator_scan = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fielddrawing_creator_scan_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of scan",
+        help_text="Organisation who carried out the scanning.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-II/Fielddrawings.csv__Creator_scan",
+        arche_prop="hasContributor",
+    )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fielddrawing_excavation_post_excavation_skosconcept',
@@ -2774,23 +2705,10 @@ class Fielddrawing(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Excavation__post_excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Transcript of additional information found on the field drawing.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from creation of the scan (e.g. noticing of measurement errors, etc.) ",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -2845,7 +2763,7 @@ class Fielddrawing(models.Model):
 
 
 class Film(models.Model):
-    """ Analogue photographic film negatives """
+    ### Analogue photographic film negatives ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -2859,18 +2777,6 @@ class Film(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Film_ID",
         arche_prop="hasTitle",
-    )
-    creation_year_original = models.ForeignKey(
-        "ExcavationSeasons",
-        related_name='rvn_film_creation_year_original_excavationseasons',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creation year original",
-        help_text="helptext for creation_year_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Creation_year_original",
     )
     film_number = models.IntegerField(
         blank=True, null=True,
@@ -2891,6 +2797,58 @@ class Film(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Addition_film_identifier",
         arche_prop="hasNonLinkedIdentifier",
     )
+    foto_numbers_missing = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Foto numbers missing",
+        help_text="helptext for foto_numbers_missing",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Foto_numbers_missing",
+    )
+    decomposition_phenomenon = models.TextField(
+        blank=True, null=True,
+        verbose_name="Decomposition phenomenon",
+        help_text="The films were visually examined if they show signs of damage and decomposition. This field contains a description of the results.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Decomposition_phenomenon",
+    )
+    acetic_acid_smell = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Acetic acid smell",
+        help_text="If acidic smell could be identified it is noted here.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Acetic_acid_smell",
+    )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage folder original",
+        help_text="Inscription visible on the label on the folder where the film is kept.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Storage_folder_original",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Digitisation_comment",
+        arche_prop="hasNote",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_film_document_type_documenttypes',
@@ -2903,80 +2861,23 @@ class Film(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Document_type",
     )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_film_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
+    excavation_id = models.ManyToManyField(
+        "ExcavationSeasons",
+        related_name='rvn_film_excavation_id_excavationseasons',
         blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
+        verbose_name="Excavation Season",
+        help_text="helptext for excavation_id",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__DT_abbr",
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Excavation_id",
     )
-    document_subtype = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_film_document_subtype_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document subtype",
-        help_text="helptext for document_subtype",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Document_subtype",
-    )
-    dst_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_film_dst_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="helptext for dst_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__DST_abbr",
-    )
-    creation_date_metadata = models.DateField(
+    creation_year_original = models.TextField(
         blank=True, null=True,
-        verbose_name="Creation date metadata",
-        help_text="helptext for creation_date_metadata",
+        verbose_name="Creation year original",
+        help_text="helptext for creation_year_original",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_film_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    contact_print_present = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Contact print present",
-        help_text="If a contact print of the film was present with the film",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Contact_print_present",
-    )
-    enlargements_present = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Enlargements present",
-        help_text="helptext for enlargements_present",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Enlargements_present",
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Creation_year_original",
     )
     film_format = models.ForeignKey(
         SkosConcept,
@@ -3014,32 +2915,6 @@ class Film(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Equipment_camera_brand",
     )
-    foto_numbers_missing = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Foto numbers missing",
-        help_text="helptext for foto_numbers_missing",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Foto_numbers_missing",
-    )
-    decomposition_phenomenon = models.TextField(
-        blank=True,
-        verbose_name="Decomposition phenomenon",
-        help_text="The films were visually examined if they show signs of damage and decomposition. This field contains a description of the results.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Decomposition_phenomenon",
-    )
-    acetic_acid_smell = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Acetic acid smell",
-        help_text="If acidic smell could be identified it is noted here.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Acetic_acid_smell",
-    )
     original_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_film_original_material_skosconcept',
@@ -3052,32 +2927,10 @@ class Film(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Original_material",
     )
-    storage_folder_original = models.CharField(
-        max_length=250,
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Storage folder original",
-        help_text="Inscription visible on the label on the folder where the film is kept.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Storage_folder_original",
-    )
-    original_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -3132,11 +2985,69 @@ class Film(models.Model):
 
 
 class Finddrawing(models.Model):
-    """ Digitised finddrawing """
+    ### Digitised finddrawing ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_finddrawing_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_finddrawing_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original document",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+    )
+    creator_scan = models.ForeignKey(
+        "Actor",
+        related_name='rvn_finddrawing_creator_scan_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of scan",
+        help_text="helptext for creator_scan",
+    ).set_extra(
+        is_public=True,
+        arche_prop="hasContributor",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_finddrawing_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+    )
+    find_inventory_number = models.ForeignKey(
+        "FundinventarInventarnummern",
+        related_name='rvn_finddrawing_find_inventory_number_fundinventarinventarnummern',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Find inventory number",
+        help_text="helptext for find_inventory_number",
+    ).set_extra(
+        is_public=True,
+        arche_prop="hasNonLinkedIdentifier",
+    )
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -3171,46 +3082,6 @@ class Finddrawing(models.Model):
     ).set_extra(
         is_public=False,
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_finddrawing_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_finddrawing_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-    )
-    document_subtype = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_finddrawing_document_subtype_documenttypes',
-        blank=True,
-        verbose_name="Document subtype",
-        help_text="helptext for document_subtype",
-    ).set_extra(
-        is_public=True,
-    )
-    dst_abbr = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_finddrawing_dst_abbr_documenttypes',
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="helptext for dst_abbr",
-    ).set_extra(
-        is_public=True,
-    )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
@@ -3234,6 +3105,92 @@ class Finddrawing(models.Model):
         is_public=True,
         arche_prop="hasCreatedDate",
     )
+    convolute_inventory_number = models.ForeignKey(
+        "FundinventarKonvolutnummern",
+        related_name='rvn_finddrawing_convolute_inventory_number_fundinventarkonvolutnummern',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Convolute inventory number",
+        help_text="helptext for convolute_inventory_number",
+    ).set_extra(
+        is_public=True,
+        arche_prop="hasNonLinkedIdentifier",
+    )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date of metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+    )
+    bone_stone_inventory_number = models.ForeignKey(
+        "FundinventarSteininventar",
+        related_name='rvn_finddrawing_bone_stone_inventory_number_fundinventarsteininventar',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Bone or stone inventory number",
+        help_text="helptext for bone_stone_inventory_number",
+    ).set_extra(
+        is_public=True,
+        arche_prop="hasNonLinkedIdentifier",
+    )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage folder of original document",
+        help_text="helptext for storage_folder_original",
+    ).set_extra(
+        is_public=True,
+    )
+    equipment = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Equiment",
+        help_text="helptext for equipment",
+    ).set_extra(
+        is_public=True,
+        arche_prop="hasUsedHardware",
+    )
+    resolution_scan_dpi = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Scan resolution",
+        help_text="helptext for resolution_scan_dpi",
+    ).set_extra(
+        is_public=True,
+        arche_prop="hasTechnicalInfo",
+    )
+    find_date = models.DateField(
+        blank=True, null=True,
+        verbose_name="Find datum",
+        help_text="helptext for find_date",
+    ).set_extra(
+        is_public=True,
+    )
+    rendered_in_ink = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Rendered in ink",
+        help_text="helptext for rendered_in_ink",
+    ).set_extra(
+        is_public=True,
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        arche_prop="hasNote",
+    )
     file_extension = models.ForeignKey(
         SkosConcept,
         related_name='rvn_finddrawing_file_extension_skosconcept',
@@ -3245,36 +3202,6 @@ class Finddrawing(models.Model):
     ).set_extra(
         is_public=True,
         arche_prop="hasTechnicalInfo",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date of metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_finddrawing_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_finddrawing_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original document",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -3300,14 +3227,6 @@ class Finddrawing(models.Model):
         is_public=True,
         arche_prop="hasAccessRestriction",
     )
-    storage_folder_original = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Storage folder of original document",
-        help_text="helptext for storage_folder_original",
-    ).set_extra(
-        is_public=True,
-    )
     site_id = models.ForeignKey(
         SkosConcept,
         related_name='rvn_finddrawing_site_id_skosconcept',
@@ -3318,15 +3237,6 @@ class Finddrawing(models.Model):
         help_text="Abbreviation of Tell el-Daba is 'TD'.",
     ).set_extra(
         is_public=False,
-    )
-    equipment = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Equiment",
-        help_text="helptext for equipment",
-    ).set_extra(
-        is_public=True,
-        arche_prop="hasUsedHardware",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
@@ -3339,26 +3249,6 @@ class Finddrawing(models.Model):
     ).set_extra(
         is_public=True,
     )
-    resolution_scan_dpi = models.IntegerField(
-        blank=True, null=True,
-        verbose_name="Scan resolution",
-        help_text="helptext for resolution_scan_dpi",
-    ).set_extra(
-        is_public=True,
-        arche_prop="hasTechnicalInfo",
-    )
-    creator_scan = models.ForeignKey(
-        "Actor",
-        related_name='rvn_finddrawing_creator_scan_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of scan",
-        help_text="helptext for creator_scan",
-    ).set_extra(
-        is_public=True,
-        arche_prop="hasContributor",
-    )
     original_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_finddrawing_original_material_skosconcept',
@@ -3367,57 +3257,6 @@ class Finddrawing(models.Model):
         blank=True,
         verbose_name="Material of original document",
         help_text="helptext for original_material",
-    ).set_extra(
-        is_public=True,
-    )
-    find_inventory_number = models.ForeignKey(
-        "FundinventarInventarnummern",
-        related_name='rvn_finddrawing_find_inventory_number_fundinventarinventarnummern',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Find inventory number",
-        help_text="helptext for find_inventory_number",
-    ).set_extra(
-        is_public=True,
-        arche_prop="hasNonLinkedIdentifier",
-    )
-    convolute_inventory_number = models.ForeignKey(
-        "FundinventarKonvolutnummern",
-        related_name='rvn_finddrawing_convolute_inventory_number_fundinventarkonvolutnummern',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Convolute inventory number",
-        help_text="helptext for convolute_inventory_number",
-    ).set_extra(
-        is_public=True,
-        arche_prop="hasNonLinkedIdentifier",
-    )
-    bone_stone_inventory_number = models.ForeignKey(
-        "FundinventarSteininventar",
-        related_name='rvn_finddrawing_bone_stone_inventory_number_fundinventarsteininventar',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Bone or stone inventory number",
-        help_text="helptext for bone_stone_inventory_number",
-    ).set_extra(
-        is_public=True,
-        arche_prop="hasNonLinkedIdentifier",
-    )
-    find_date = models.DateField(
-        blank=True, null=True,
-        verbose_name="Find datum",
-        help_text="helptext for find_date",
-    ).set_extra(
-        is_public=True,
-    )
-    rendered_in_ink = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Rendered in ink",
-        help_text="helptext for rendered_in_ink",
     ).set_extra(
         is_public=True,
     )
@@ -3432,21 +3271,10 @@ class Finddrawing(models.Model):
     ).set_extra(
         is_public=True,
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -3501,11 +3329,112 @@ class Finddrawing(models.Model):
 
 
 class Findsheets(models.Model):
-    """ Digitised find sheets """
+    ### Digitised find sheets ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_findsheets_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_findsheets_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original document",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creator_original",
+    )
+    creator_scan = models.ForeignKey(
+        "Actor",
+        related_name='rvn_findsheets_creator_scan_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of scan",
+        help_text="helptext for creator_scan",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creator_scan",
+        arche_prop="hasContributor",
+    )
+    archaeological_object_id = models.ForeignKey(
+        "ArchaeologicalObjectID",
+        related_name='rvn_findsheets_archaeological_object_id_archaeologicalobjectid',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Archaeological object ID",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Archaeological_object_ID",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_findsheets_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Document_type",
+    )
+    find_inventory_number = models.ForeignKey(
+        "FundinventarInventarnummern",
+        related_name='rvn_findsheets_find_inventory_number_fundinventarinventarnummern',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Find inventory number",
+        help_text="helptext for find_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Find_inventory_number",
+        arche_prop="hasNonLinkedIdentifier",
+    )
+    convolute_inventory_number = models.ForeignKey(
+        "FundinventarKonvolutnummern",
+        related_name='rvn_findsheets_convolute_inventory_number_fundinventarkonvolutnummern',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Convolute inventory number",
+        help_text="helptext for convolute_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Convolute_inventory_number",
+        arche_prop="hasNonLinkedIdentifier",
+    )
+    bone_stone_inventory_number = models.ForeignKey(
+        "FundinventarSteininventar",
+        related_name='rvn_findsheets_bone_stone_inventory_number_fundinventarsteininventar',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Bone or stone inventory number",
+        help_text="helptext for bone_stone_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Bone_stone_inventory_number",
+        arche_prop="hasNonLinkedIdentifier",
+    )
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -3544,30 +3473,6 @@ class Findsheets(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Filename_old",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_findsheets_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_findsheets_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__DT_abbr",
-    )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
@@ -3594,6 +3499,50 @@ class Findsheets(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creation_date_scan",
         arche_prop="hasCreatedDate",
     )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date of metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creation_date_metadata",
+    )
+    resolution_scan_dpi = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Scan resolution",
+        help_text="helptext for resolution_scan_dpi",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Resolution_scan_dpi",
+        arche_prop="hasTechnicalInfo",
+    )
+    excavation_object_id = models.ManyToManyField(
+        "ExcavationObjectID",
+        related_name='rvn_findsheets_excavation_object_id_excavationobjectid',
+        blank=True,
+        verbose_name="Excavation object ID",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Excavation_object_ID",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Digitisation_comment",
+        arche_prop="hasNote",
+    )
     file_extension = models.ForeignKey(
         SkosConcept,
         related_name='rvn_findsheets_file_extension_skosconcept',
@@ -3606,39 +3555,6 @@ class Findsheets(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__File_extension",
         arche_prop="hasTechnicalInfo",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date of metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_findsheets_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_findsheets_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original document",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -3715,28 +3631,6 @@ class Findsheets(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Source__original_copy_edited-copy",
     )
-    resolution_scan_dpi = models.IntegerField(
-        blank=True, null=True,
-        verbose_name="Scan resolution",
-        help_text="helptext for resolution_scan_dpi",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Resolution_scan_dpi",
-        arche_prop="hasTechnicalInfo",
-    )
-    creator_scan = models.ForeignKey(
-        "Actor",
-        related_name='rvn_findsheets_creator_scan_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of scan",
-        help_text="helptext for creator_scan",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creator_scan",
-        arche_prop="hasContributor",
-    )
     original_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_findsheets_original_material_skosconcept',
@@ -3748,67 +3642,6 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Original_material",
-    )
-    find_inventory_number = models.ForeignKey(
-        "FundinventarInventarnummern",
-        related_name='rvn_findsheets_find_inventory_number_fundinventarinventarnummern',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Find inventory number",
-        help_text="helptext for find_inventory_number",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Find_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
-    )
-    convolute_inventory_number = models.ForeignKey(
-        "FundinventarKonvolutnummern",
-        related_name='rvn_findsheets_convolute_inventory_number_fundinventarkonvolutnummern',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Convolute inventory number",
-        help_text="helptext for convolute_inventory_number",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Convolute_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
-    )
-    bone_stone_inventory_number = models.ForeignKey(
-        "FundinventarSteininventar",
-        related_name='rvn_findsheets_bone_stone_inventory_number_fundinventarsteininventar',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Bone or stone inventory number",
-        help_text="helptext for bone_stone_inventory_number",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Bone_stone_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
-    )
-    excavation_object_id = models.ManyToManyField(
-        "ExcavationObjectID",
-        related_name='rvn_findsheets_excavation_object_id_excavationobjectid',
-        blank=True,
-        verbose_name="Excavation object ID",
-        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Excavation_object_ID",
-    )
-    archaeological_object_id = models.ForeignKey(
-        "ArchaeologicalObjectID",
-        related_name='rvn_findsheets_archaeological_object_id_archaeologicalobjectid',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Archaeological object ID",
-        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Archaeological_object_ID",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -3822,23 +3655,10 @@ class Findsheets(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Excavation__post_excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -3893,11 +3713,24 @@ class Findsheets(models.Model):
 
 
 class Fotoborndigital(models.Model):
-    """ Folder with born-digital photos """
+    ### Folder with born-digital photos ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_fotoborndigital_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator",
+    )
     folder_name = models.CharField(
         max_length=250,
         blank=True,
@@ -3955,6 +3788,60 @@ class Fotoborndigital(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Path_filename_ARCHE",
         arche_prop="hasLocationPath",
     )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Creation_date_metadata",
+    )
+    find_inventory_number_from_to = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Inventory number of a find ",
+        help_text="helptext for find_inventory_number_from_to",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Find_inventory_number|from/to",
+        arche_prop="hasNonLinkedIdentifier",
+    )
+    excavation_object_id = models.ManyToManyField(
+        "ExcavationObjectID",
+        related_name='rvn_fotoborndigital_excavation_object_id_excavationobjectid',
+        blank=True,
+        verbose_name="Excavation object ID",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Excavation_object_ID",
+    )
+    creation_year_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Creation year original",
+        help_text="helptext for creation_year_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Creation_year_original",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Digitisation_comment",
+        arche_prop="hasNote",
+    )
     document_type = models.ForeignKey(
         "DocumentTypes",
         related_name='rvn_fotoborndigital_document_type_documenttypes',
@@ -3966,59 +3853,6 @@ class Fotoborndigital(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_fotoborndigital_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__DT_abbr",
-    )
-    document_subtype = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_fotoborndigital_document_subtype_documenttypes',
-        blank=True,
-        verbose_name="Document subtype",
-        help_text="Digital photo subtypes are according to content of the photos: findphotos, excavation photos, working photo, etc",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Document_subtype",
-    )
-    dst_abbr = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_fotoborndigital_dst_abbr_documenttypes',
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="helptext for dst_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__DST_abbr",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_fotoborndigital_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -4058,52 +3892,10 @@ class Fotoborndigital(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Site_ID",
     )
-    find_inventory_number_from_to = models.CharField(
-        max_length=250,
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Inventory number of a find ",
-        help_text="helptext for find_inventory_number_from_to",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Find_inventory_number|from/to",
-        arche_prop="hasNonLinkedIdentifier",
-    )
-    excavation_object_id = models.ManyToManyField(
-        "ExcavationObjectID",
-        related_name='rvn_fotoborndigital_excavation_object_id_excavationobjectid',
-        blank=True,
-        verbose_name="Excavation object ID",
-        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Excavation_object_ID",
-    )
-    creation_year_original = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Creation year original",
-        help_text="helptext for creation_year_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Creation_year_original",
-    )
-    original_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -4158,11 +3950,49 @@ class Fotoborndigital(models.Model):
 
 
 class Fotosgescannt(models.Model):
-    """ Digitised photos """
+    ### Digitised photos ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_fotosgescannt_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_fotosgescannt_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original photo",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creator_original",
+    )
+    creator_scan = models.ForeignKey(
+        "Actor",
+        related_name='rvn_fotosgescannt_creator_scan_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of scan",
+        help_text="helptext for creator_scan",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creator_scan",
+        arche_prop="hasContributor",
+    )
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -4220,50 +4050,6 @@ class Fotosgescannt(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Photo_number",
         arche_prop="hasNonLinkedIdentifier",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_fotosgescannt_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="Digitised photo",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_fotosgescannt_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__DT_abbr",
-    )
-    document_subtype = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_fotosgescannt_document_subtype_documenttypes',
-        blank=True,
-        verbose_name="Document subtype",
-        help_text="Subtypes are according to the content of the photos: findphotos, excavation photos, working photo, etc",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Document_subtype",
-    )
-    dst_abbreviation = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_fotosgescannt_dst_abbreviation_documenttypes',
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="helptext for dst_abbreviation",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__DST_abbreviation",
-    )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of analogue photo",
@@ -4271,6 +4057,16 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creation_date_original",
+    )
+    excavation_id = models.ManyToManyField(
+        "ExcavationSeasons",
+        related_name='rvn_fotosgescannt_excavation_id_excavationseasons',
+        blank=True,
+        verbose_name="Excavation Season",
+        help_text="helptext for excavation_id",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Excavation_id",
     )
     creation_year_original = models.CharField(
         max_length=250,
@@ -4290,6 +4086,113 @@ class Fotosgescannt(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creation_date_scan",
         arche_prop="hasCreatedDate",
     )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date of metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creation_date_metadata",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_fotosgescannt_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="Digitised photo",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Document_type",
+    )
+    resolution_scan_ppi = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Resolution of scan",
+        help_text="helptext for resolution_scan_ppi",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Resolution_scan_ppi",
+        arche_prop="hasTechnicalInfo",
+    )
+    pixel_size = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Pixel size",
+        help_text="helptext for pixel_size",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Pixel_size",
+        arche_prop="hasTechnicalInfo",
+    )
+    find_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Find inventor number",
+        help_text="helptext for find_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Find_inventory_number",
+    )
+    excavation_object_id = models.ManyToManyField(
+        "ExcavationObjectID",
+        related_name='rvn_fotosgescannt_excavation_object_id_excavationobjectid',
+        blank=True,
+        verbose_name="Excavation object ID",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Excavation_object_ID",
+    )
+    archaeological_object_id = models.ManyToManyField(
+        "ArchaeologicalObjectID",
+        related_name='rvn_fotosgescannt_archaeological_object_id_archaeologicalobjectid',
+        blank=True,
+        verbose_name="Archaeological object ID",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Archaeological_object_ID",
+    )
+    season = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Season ",
+        help_text="helptext for season",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Season",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Digitisation_comment",
+        arche_prop="hasNote",
+    )
+    film_id = models.ForeignKey(
+        "Film",
+        related_name='rvn_fotosgescannt_film_id_film',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Film ID",
+        help_text="helptext for film_id",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Film_ID",
+        arche_prop="hasNonLinkedIdentifier",
+    )
     file_extension = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fotosgescannt_file_extension_skosconcept',
@@ -4302,39 +4205,6 @@ class Fotosgescannt(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__File_extension",
         arche_prop="hasTechnicalInfo",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date of metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_fotosgescannt_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_fotosgescannt_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original photo",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -4399,80 +4269,6 @@ class Fotosgescannt(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Source__original_copy_edited-copy",
     )
-    resolution_scan_ppi = models.IntegerField(
-        blank=True, null=True,
-        verbose_name="Resolution of scan",
-        help_text="helptext for resolution_scan_ppi",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Resolution_scan_ppi",
-        arche_prop="hasTechnicalInfo",
-    )
-    creator_scan = models.ForeignKey(
-        "Actor",
-        related_name='rvn_fotosgescannt_creator_scan_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of scan",
-        help_text="helptext for creator_scan",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creator_scan",
-        arche_prop="hasContributor",
-    )
-    pixel_size = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Pixel size",
-        help_text="helptext for pixel_size",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Pixel_size",
-        arche_prop="hasTechnicalInfo",
-    )
-    film_id = models.ForeignKey(
-        "Film",
-        related_name='rvn_fotosgescannt_film_id_film',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Film ID",
-        help_text="helptext for film_id",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Film_ID",
-        arche_prop="hasNonLinkedIdentifier",
-    )
-    find_inventory_number = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Find inventor number",
-        help_text="helptext for find_inventory_number",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Find_inventory_number",
-    )
-    excavation_object_id = models.ManyToManyField(
-        "ExcavationObjectID",
-        related_name='rvn_fotosgescannt_excavation_object_id_excavationobjectid',
-        blank=True,
-        verbose_name="Excavation object ID",
-        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Excavation_object_ID",
-    )
-    archaeological_object_id = models.ManyToManyField(
-        "ArchaeologicalObjectID",
-        related_name='rvn_fotosgescannt_archaeological_object_id_archaeologicalobjectid',
-        blank=True,
-        verbose_name="Archaeological object ID",
-        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Archaeological_object_ID",
-    )
     archaeological_object_type = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fotosgescannt_archaeological_object_type_skosconcept',
@@ -4509,15 +4305,6 @@ class Fotosgescannt(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Find_material",
     )
-    season = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Season ",
-        help_text="helptext for season",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Season",
-    )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fotosgescannt_excavation_post_excavation_skosconcept',
@@ -4530,23 +4317,10 @@ class Fotosgescannt(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__excavation__post-excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -4601,11 +4375,23 @@ class Fotosgescannt(models.Model):
 
 
 class Fundinventar4DPuzzleID(models.Model):
-    """ A 4DPuzzleID was created for find inventories that did not have an ID """
+    ### A 4DPuzzleID was created for find inventories that did not have an ID ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    excavation_object_id = models.ForeignKey(
+        "ExcavationObjectID",
+        related_name='rvn_fundinventar4dpuzzleid_excavation_object_id_excavationobjectid',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Excavation object ID",
+        help_text="helptext for excavation_object_id",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Excavation_object_ID",
+    )
     find_inventory_4dpuzzle_number = models.CharField(
         max_length=250,
         blank=True,
@@ -4642,6 +4428,49 @@ class Fundinventar4DPuzzleID(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Corresponding_to_inventory_number",
     )
+    find_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Find comment",
+        help_text="helptext for find_comment",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Find_comment",
+    )
+    stratum_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Stratum Comment",
+        help_text="helptext for stratum_comment",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Stratum_comment",
+    )
+    find_date = models.DateField(
+        blank=True, null=True,
+        verbose_name="Find date",
+        help_text="helptext for find_date",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Find_date",
+    )
+    storage_find = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage of find",
+        help_text="helptext for storage_find",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Storage_find",
+    )
+    relatedto = models.ManyToManyField(
+        SkosConcept,
+        related_name='rvn_fundinventar4dpuzzleid_relatedto_skosconcept',
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__RelatedTo",
+    )
     find_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventar4dpuzzleid_find_material_skosconcept',
@@ -4653,6 +4482,14 @@ class Fundinventar4DPuzzleID(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Find_material",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="helptext for digitisation_comment",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Digitisation_comment",
     )
     find_type = models.ForeignKey(
         SkosConcept,
@@ -4666,25 +4503,41 @@ class Fundinventar4DPuzzleID(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Find_type",
     )
-    find_comment = models.TextField(
-        blank=True,
-        verbose_name="Find comment",
-        help_text="helptext for find_comment",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Find_comment",
-    )
-    excavation_object_id = models.ForeignKey(
-        "ExcavationObjectID",
-        related_name='rvn_fundinventar4dpuzzleid_excavation_object_id_excavationobjectid',
+    access = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventar4dpuzzleid_access_skosconcept',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
+        verbose_name="Access",
+        help_text="helptext for access",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Excavation_object_ID",
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Access",
+    )
+    uncertainty_excavation_digitisation = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventar4dpuzzleid_uncertainty_excavation_digitisation_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Whether it was created during excavation or digital",
+        help_text="helptext for uncertainty_excavation_digitisation",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Uncertainty__excavation_digitisation",
+    )
+    creator_metadata = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventar4dpuzzleid_creator_metadata_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Creator_metadata",
     )
     archaeological_object_id = models.ForeignKey(
         SkosConcept,
@@ -4722,14 +4575,6 @@ class Fundinventar4DPuzzleID(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Stratum_ID_absolute_prepub",
     )
-    stratum_comment = models.TextField(
-        blank=True,
-        verbose_name="Stratum Comment",
-        help_text="helptext for stratum_comment",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Stratum_comment",
-    )
     phase_id = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventar4dpuzzleid_phase_id_skosconcept',
@@ -4742,77 +4587,10 @@ class Fundinventar4DPuzzleID(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Phase_ID",
     )
-    find_date = models.DateField(
-        blank=True, null=True,
-        verbose_name="Find date",
-        help_text="helptext for find_date",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Find_date",
-    )
-    storage_find = models.CharField(
-        max_length=250,
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Storage of find",
-        help_text="helptext for storage_find",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Storage_find",
-    )
-    access = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_access_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Access",
-        help_text="helptext for access",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Access",
-    )
-    uncertainty_excavation_digitisation = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_uncertainty_excavation_digitisation_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Whether it was created during excavation or digital",
-        help_text="helptext for uncertainty_excavation_digitisation",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Uncertainty__excavation_digitisation",
-    )
-    relatedto = models.ManyToManyField(
-        SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_relatedto_skosconcept',
-        blank=True,
-        verbose_name="File is related to other TD resources",
-        help_text="helptext for relatedto",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__RelatedTo",
-    )
-    creator_metadata = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_creator_metadata_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Creator_metadata",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Digitisation_comment",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -4867,11 +4645,47 @@ class Fundinventar4DPuzzleID(models.Model):
 
 
 class FundinventarInventarnummern(models.Model):
-    """ Inventory numbers of find inventories """
+    ### Inventory numbers of find inventories ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_fundinventarinventarnummern_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Creator_metadata",
+    )
+    archaeological_object_id = models.ForeignKey(
+        "ArchaeologicalObjectID",
+        related_name='rvn_fundinventarinventarnummern_archaeological_object_id_archaeologicalobjectid',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Archaeological object ID",
+        help_text="helptext for archaeological_object_id",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Archaeological_object_ID",
+    )
+    corresponding_to_inventory_number = models.ForeignKey(
+        "FundinventarInventarnummern",
+        related_name='rvn_fundinventarinventarnummern_corresponding_to_inventory_number_fundinventarinventarnummern',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Corresponding to inventory number",
+        help_text="helptext for corresponding_to_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Corresponding_to_inventory_number",
+    )
     find_inventory_number = models.CharField(
         max_length=250,
         blank=True,
@@ -4899,17 +4713,23 @@ class FundinventarInventarnummern(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Convolute_inventory_number",
     )
-    corresponding_to_inventory_number = models.ForeignKey(
-        "FundinventarInventarnummern",
-        related_name='rvn_fundinventarinventarnummern_corresponding_to_inventory_number_fundinventarinventarnummern',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Corresponding to inventory number",
-        help_text="helptext for corresponding_to_inventory_number",
+    find_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Find comment",
+        help_text="helptext for find_comment",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Corresponding_to_inventory_number",
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Find_comment",
+    )
+    excavation_object_id = models.ManyToManyField(
+        "ExcavationObjectID",
+        related_name='rvn_fundinventarinventarnummern_excavation_object_id_excavationobjectid',
+        blank=True,
+        verbose_name="Excavation object ID",
+        help_text="helptext for excavation_object_id",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Excavation_object_ID",
     )
     find_material = models.ForeignKey(
         SkosConcept,
@@ -4935,35 +4755,13 @@ class FundinventarInventarnummern(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Find_type",
     )
-    find_comment = models.TextField(
-        blank=True,
-        verbose_name="Find comment",
-        help_text="helptext for find_comment",
+    stratum_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Stratum Comment",
+        help_text="helptext for stratum_comment",
     ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Find_comment",
-    )
-    excavation_object_id = models.ManyToManyField(
-        "ExcavationObjectID",
-        related_name='rvn_fundinventarinventarnummern_excavation_object_id_excavationobjectid',
-        blank=True,
-        verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Excavation_object_ID",
-    )
-    archaeological_object_id = models.ForeignKey(
-        "ArchaeologicalObjectID",
-        related_name='rvn_fundinventarinventarnummern_archaeological_object_id_archaeologicalobjectid',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Archaeological object ID",
-        help_text="helptext for archaeological_object_id",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Archaeological_object_ID",
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Stratum_comment",
     )
     stratum_id_relative = models.ForeignKey(
         SkosConcept,
@@ -4976,38 +4774,6 @@ class FundinventarInventarnummern(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Stratum_ID_relative",
-    )
-    stratum_id_absolute_prepub = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fundinventarinventarnummern_stratum_id_absolute_prepub_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Stratum ID absolute pre publication",
-        help_text="helptext for stratum_id_absolute_prepub",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Stratum_ID_absolute_prepub",
-    )
-    stratum_comment = models.TextField(
-        blank=True,
-        verbose_name="Stratum Comment",
-        help_text="helptext for stratum_comment",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Stratum_comment",
-    )
-    phase_id = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fundinventarinventarnummern_phase_id_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Phase ID",
-        help_text="helptext for phase_id",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Phase_ID",
     )
     find_date = models.DateField(
         blank=True, null=True,
@@ -5026,6 +4792,40 @@ class FundinventarInventarnummern(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Storage_find",
     )
+    stratum_id_absolute_prepub = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarinventarnummern_stratum_id_absolute_prepub_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Stratum ID absolute pre publication",
+        help_text="helptext for stratum_id_absolute_prepub",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Stratum_ID_absolute_prepub",
+    )
+    phase_id = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarinventarnummern_phase_id_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Phase ID",
+        help_text="helptext for phase_id",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Phase_ID",
+    )
+    relatedto = models.ManyToManyField(
+        SkosConcept,
+        related_name='rvn_fundinventarinventarnummern_relatedto_skosconcept',
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__RelatedTo",
+    )
     access = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarinventarnummern_access_skosconcept',
@@ -5037,6 +4837,14 @@ class FundinventarInventarnummern(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Access",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="helptext for digitisation_comment",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Digitisation_comment",
     )
     uncertainty_excavation_digitisation = models.ForeignKey(
         SkosConcept,
@@ -5050,36 +4858,10 @@ class FundinventarInventarnummern(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Uncertainty__excavation_digitisation",
     )
-    relatedto = models.ManyToManyField(
-        SkosConcept,
-        related_name='rvn_fundinventarinventarnummern_relatedto_skosconcept',
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="File is related to other TD resources",
-        help_text="helptext for relatedto",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__RelatedTo",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_fundinventarinventarnummern_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Creator_metadata",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Digitisation_comment",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -5134,7 +4916,7 @@ class FundinventarInventarnummern(models.Model):
 
 
 class FundinventarKonvolutnummern(models.Model):
-    """ Inventory of convolute numbers """
+    ### Inventory of convolute numbers ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -5185,20 +4967,8 @@ class FundinventarKonvolutnummern(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Find_material",
     )
-    find_type = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fundinventarkonvolutnummern_find_type_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Find type",
-        help_text="helptext for find_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Find_type",
-    )
     find_comment = models.TextField(
-        blank=True,
+        blank=True, null=True,
         verbose_name="Find comment",
         help_text="helptext for find_comment",
     ).set_extra(
@@ -5225,6 +4995,18 @@ class FundinventarKonvolutnummern(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Archaeological_object_ID",
     )
+    find_type = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarkonvolutnummern_find_type_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Find type",
+        help_text="helptext for find_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Find_type",
+    )
     stratum_id_relative = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarkonvolutnummern_stratum_id_relative_skosconcept',
@@ -5236,6 +5018,14 @@ class FundinventarKonvolutnummern(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Stratum_ID_relative",
+    )
+    stratum_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Stratum Comment",
+        help_text="helptext for stratum_comment",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Stratum_comment",
     )
     stratum_id_absolute_prepub = models.ForeignKey(
         SkosConcept,
@@ -5249,13 +5039,13 @@ class FundinventarKonvolutnummern(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Stratum_ID_absolute_prepub",
     )
-    stratum_comment = models.TextField(
-        blank=True,
-        verbose_name="Stratum Comment",
-        help_text="helptext for stratum_comment",
+    find_date = models.DateField(
+        blank=True, null=True,
+        verbose_name="Find date",
+        help_text="helptext for find_date",
     ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Stratum_comment",
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Find_date",
     )
     phase_id = models.ForeignKey(
         SkosConcept,
@@ -5268,14 +5058,6 @@ class FundinventarKonvolutnummern(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Phase_ID",
-    )
-    find_date = models.DateField(
-        blank=True, null=True,
-        verbose_name="Find date",
-        help_text="helptext for find_date",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Find_date",
     )
     storage_find = models.ForeignKey(
         SkosConcept,
@@ -5301,6 +5083,15 @@ class FundinventarKonvolutnummern(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Access",
     )
+    relatedto = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__RelatedTo",
+    )
     uncertainty_excavation_digitisation = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarkonvolutnummern_uncertainty_excavation_digitisation_skosconcept',
@@ -5313,14 +5104,13 @@ class FundinventarKonvolutnummern(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Uncertainty__excavation_digitisation",
     )
-    relatedto = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="File is related to other TD resources",
-        help_text="helptext for relatedto",
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="helptext for digitisation_comment",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__RelatedTo",
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Digitisation_comment",
     )
     creator_metadata = models.ForeignKey(
         SkosConcept,
@@ -5334,14 +5124,10 @@ class FundinventarKonvolutnummern(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Creator_metadata",
     )
-    digitisation_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="helptext for digitisation_comment",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Digitisation_comment",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -5396,11 +5182,47 @@ class FundinventarKonvolutnummern(models.Model):
 
 
 class FundinventarMaterialproben(models.Model):
-    """ Inventory of material samples """
+    ### Inventory of material samples ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_fundinventarmaterialproben_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Creator_metadata",
+    )
+    archaeological_object_id = models.ForeignKey(
+        "ExcavationObjectID",
+        related_name='rvn_fundinventarmaterialproben_archaeological_object_id_excavationobjectid',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Arachaeological object ID",
+        help_text="helptext for archaeological_object_id",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Archaeological_object_ID",
+    )
+    relatedto = models.ForeignKey(
+        "Fundinventar4DPuzzleID",
+        related_name='rvn_fundinventarmaterialproben_relatedto_fundinventar4dpuzzleid',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__RelatedTo",
+    )
     material_sample_inventory_number = models.CharField(
         max_length=250,
         blank=True,
@@ -5449,20 +5271,8 @@ class FundinventarMaterialproben(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Find_material",
     )
-    find_type = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fundinventarmaterialproben_find_type_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Find type",
-        help_text="helptext for find_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Find_type",
-    )
     find_comment = models.TextField(
-        blank=True,
+        blank=True, null=True,
         verbose_name="Find comment",
         help_text="helptext for find_comment",
     ).set_extra(
@@ -5479,17 +5289,17 @@ class FundinventarMaterialproben(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Excavation_object_ID",
     )
-    archaeological_object_id = models.ForeignKey(
-        "ExcavationObjectID",
-        related_name='rvn_fundinventarmaterialproben_archaeological_object_id_excavationobjectid',
+    find_type = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarmaterialproben_find_type_skosconcept',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Arachaeological object ID",
-        help_text="helptext for archaeological_object_id",
+        verbose_name="Find type",
+        help_text="helptext for find_type",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Archaeological_object_ID",
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Find_type",
     )
     stratum_id_relative = models.ForeignKey(
         SkosConcept,
@@ -5516,7 +5326,7 @@ class FundinventarMaterialproben(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Stratum_ID_absolute_prepub",
     )
     stratum_comment = models.TextField(
-        blank=True,
+        blank=True, null=True,
         verbose_name="Stratum Comment",
         help_text="helptext for stratum_comment",
     ).set_extra(
@@ -5579,38 +5389,18 @@ class FundinventarMaterialproben(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Uncertainty__excavation_digitisation",
     )
-    relatedto = models.ForeignKey(
-        "Fundinventar4DPuzzleID",
-        related_name='rvn_fundinventarmaterialproben_relatedto_fundinventar4dpuzzleid',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="File is related to other TD resources",
-        help_text="helptext for relatedto",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__RelatedTo",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_fundinventarmaterialproben_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Creator_metadata",
-    )
     digitisation_comment = models.TextField(
-        blank=True,
+        blank=True, null=True,
         verbose_name="Comment from digitisation",
         help_text="helptext for digitisation_comment",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Digitisation_comment",
     )
+    orig_data_csv = models.TextField(
+        blank=True,
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -5665,11 +5455,59 @@ class FundinventarMaterialproben(models.Model):
 
 
 class FundinventarSteininventar(models.Model):
-    """ Inventory of stones """
+    ### Inventory of stones ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_fundinventarsteininventar_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Creator_metadata",
+    )
+    archaeological_object_id = models.ForeignKey(
+        "ExcavationObjectID",
+        related_name='rvn_fundinventarsteininventar_archaeological_object_id_excavationobjectid',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Arachaeological object ID",
+        help_text="helptext for archaeological_object_id",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Archaeological_object_ID",
+    )
+    find_material = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarsteininventar_find_material_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Find material",
+        help_text="helptext for find_material",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Find_material",
+    )
+    find_type = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_fundinventarsteininventar_find_type_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Find type",
+        help_text="helptext for find_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Find_type",
+    )
     find_inventory_number = models.CharField(
         max_length=250,
         blank=True,
@@ -5706,60 +5544,6 @@ class FundinventarSteininventar(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Corresponding_to_inventory_number",
     )
-    find_material = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fundinventarsteininventar_find_material_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Find material",
-        help_text="helptext for find_material",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Find_material",
-    )
-    find_type = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_fundinventarsteininventar_find_type_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Find type",
-        help_text="helptext for find_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Find_type",
-    )
-    find_comment = models.TextField(
-        blank=True,
-        verbose_name="Find comment",
-        help_text="helptext for find_comment",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Find_comment",
-    )
-    excavation_object_id = models.ManyToManyField(
-        "ExcavationObjectID",
-        related_name='rvn_fundinventarsteininventar_excavation_object_id_excavationobjectid',
-        blank=True,
-        verbose_name="Excavation object ID",
-        help_text="helptext for excavation_object_id",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Excavation_object_ID",
-    )
-    archaeological_object_id = models.ForeignKey(
-        "ExcavationObjectID",
-        related_name='rvn_fundinventarsteininventar_archaeological_object_id_excavationobjectid',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Arachaeological object ID",
-        help_text="helptext for archaeological_object_id",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Archaeological_object_ID",
-    )
     stratum_id_relative = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarsteininventar_stratum_id_relative_skosconcept',
@@ -5784,13 +5568,23 @@ class FundinventarSteininventar(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Stratum_ID_absolute_prepub",
     )
-    stratum_comment = models.TextField(
-        blank=True,
-        verbose_name="Stratum Comment",
-        help_text="helptext for stratum_comment",
+    find_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Find comment",
+        help_text="helptext for find_comment",
     ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Stratum_comment",
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Find_comment",
+    )
+    excavation_object_id = models.ManyToManyField(
+        "ExcavationObjectID",
+        related_name='rvn_fundinventarsteininventar_excavation_object_id_excavationobjectid',
+        blank=True,
+        verbose_name="Excavation object ID",
+        help_text="helptext for excavation_object_id",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Excavation_object_ID",
     )
     phase_id = models.ForeignKey(
         SkosConcept,
@@ -5803,14 +5597,6 @@ class FundinventarSteininventar(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Phase_ID",
-    )
-    find_date = models.DateField(
-        blank=True, null=True,
-        verbose_name="Find date",
-        help_text="helptext for find_date",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Find_date",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -5836,6 +5622,14 @@ class FundinventarSteininventar(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Storage_find",
     )
+    stratum_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Stratum Comment",
+        help_text="helptext for stratum_comment",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Stratum_comment",
+    )
     uncertainty_excavation_digitisation = models.ForeignKey(
         SkosConcept,
         related_name='rvn_fundinventarsteininventar_uncertainty_excavation_digitisation_skosconcept',
@@ -5848,6 +5642,14 @@ class FundinventarSteininventar(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Uncertainty__excavation_digitisation",
     )
+    find_date = models.DateField(
+        blank=True, null=True,
+        verbose_name="Find date",
+        help_text="helptext for find_date",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Find_date",
+    )
     relatedto = models.ManyToManyField(
         SkosConcept,
         related_name='rvn_fundinventarsteininventar_relatedto_skosconcept',
@@ -5858,26 +5660,18 @@ class FundinventarSteininventar(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__RelatedTo",
     )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_fundinventarsteininventar_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Creator_metadata",
-    )
     digitisation_comment = models.TextField(
-        blank=True,
+        blank=True, null=True,
         verbose_name="Comment from digitisation",
         help_text="helptext for digitisation_comment",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Digitisation_comment",
     )
+    orig_data_csv = models.TextField(
+        blank=True,
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -5932,11 +5726,61 @@ class FundinventarSteininventar(models.Model):
 
 
 class GIS(models.Model):
-    """ Geographical information system """
+    ### Geographical information system ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_gis_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_gis_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original document",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Creator_original",
+    )
+    creator_archivalobject = models.ForeignKey(
+        "Actor",
+        related_name='rvn_gis_creator_archivalobject_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="creator of archival object",
+        help_text="Person who processed resource for digital long-term archiving.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__creator_archivalObject",
+        arche_prop="hasContributor",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_gis_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Document_type",
+    )
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -5985,50 +5829,6 @@ class GIS(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Path_filename_ARCHE",
         arche_prop="hasLocationPath",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_gis_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_gis_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__DT_abbr",
-    )
-    document_subtype = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_gis_document_subtype_documenttypes',
-        blank=True,
-        verbose_name="Document subtype",
-        help_text="helptext for document_subtype",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Document_subtype",
-    )
-    dst_abbr = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_gis_dst_abbr_documenttypes',
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="helptext for dst_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__DST_abbr",
-    )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
@@ -6056,6 +5856,61 @@ class GIS(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Creation_date_archivalObject",
         arche_prop="hasCreatedDate",
     )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date of metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Creation_date_metadata",
+    )
+    excavation_object_id = models.ManyToManyField(
+        "ExcavationObjectID",
+        related_name='rvn_gis_excavation_object_id_excavationobjectid',
+        blank=True,
+        verbose_name="Excavation object ID",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Excavation_object_ID",
+    )
+    archaeological_object_id = models.ManyToManyField(
+        "ArchaeologicalObjectID",
+        related_name='rvn_gis_archaeological_object_id_archaeologicalobjectid',
+        blank=True,
+        verbose_name="Archaeological object ID",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Archaeological_object_ID",
+    )
+    relatedto = models.ManyToManyField(
+        "DocumentTypes",
+        related_name='rvn_gis_relatedto_documenttypes',
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__RelatedTo",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Digitisation_comment",
+        arche_prop="hasNote",
+    )
     file_extension_original = models.ForeignKey(
         SkosConcept,
         related_name='rvn_gis_file_extension_original_skosconcept',
@@ -6080,39 +5935,6 @@ class GIS(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__File_extension_archivalObject",
         arche_prop="hasTechnicalInfo",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date of metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_gis_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_gis_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original document",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -6152,49 +5974,6 @@ class GIS(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Site_ID",
     )
-    creator_archivalobject = models.ForeignKey(
-        "Actor",
-        related_name='rvn_gis_creator_archivalobject_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="creator of archival object",
-        help_text="Person who processed resource for digital long-term archiving.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__creator_archivalObject",
-        arche_prop="hasContributor",
-    )
-    excavation_object_id = models.ManyToManyField(
-        "ExcavationObjectID",
-        related_name='rvn_gis_excavation_object_id_excavationobjectid',
-        blank=True,
-        verbose_name="Excavation object ID",
-        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Excavation_object_ID",
-    )
-    archaeological_object_id = models.ManyToManyField(
-        "ArchaeologicalObjectID",
-        related_name='rvn_gis_archaeological_object_id_archaeologicalobjectid',
-        blank=True,
-        verbose_name="Archaeological object ID",
-        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Archaeological_object_ID",
-    )
-    relatedto = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_gis_relatedto_documenttypes',
-        blank=True,
-        verbose_name="File is related to other TD resources",
-        help_text="helptext for relatedto",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__RelatedTo",
-    )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
         related_name='rvn_gis_excavation_post_excavation_skosconcept',
@@ -6207,23 +5986,10 @@ class GIS(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Excavation__post_excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -6278,11 +6044,61 @@ class GIS(models.Model):
 
 
 class Geophysics(models.Model):
-    """ Files from geophysical surveys """
+    ### Files from geophysical surveys ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_geophysics_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_geophysics_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original document",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creator_original",
+    )
+    creator_archivalobject = models.ForeignKey(
+        "Actor",
+        related_name='rvn_geophysics_creator_archivalobject_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of archival object",
+        help_text="Person who processed resource for digital long-term archiving.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creator_archivalObject",
+        arche_prop="hasContributor",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_geophysics_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Document_type",
+    )
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -6321,50 +6137,6 @@ class Geophysics(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Filename_old",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_geophysics_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_geophysics_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__DT_abbr",
-    )
-    document_subtype = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_geophysics_document_subtype_documenttypes',
-        blank=True,
-        verbose_name="Document subtype",
-        help_text="helptext for document_subtype",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Document_subtype",
-    )
-    dst_abbr = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_geophysics_dst_abbr_documenttypes',
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="helptext for dst_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__DST_abbr",
-    )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
@@ -6381,6 +6153,50 @@ class Geophysics(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creation_date_archivalObject",
         arche_prop="hasCreatedDate",
+    )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date of metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creation_date_metadata",
+    )
+    path_filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in old TD archive",
+        help_text="helptext for path_filename_old",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Path_filename_old",
+    )
+    excavation_object_id = models.ManyToManyField(
+        "ExcavationObjectID",
+        related_name='rvn_geophysics_excavation_object_id_excavationobjectid',
+        blank=True,
+        verbose_name="Excavation object ID",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Excavation_object_ID",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Digitisation_comment",
+        arche_prop="hasNote",
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
@@ -6432,39 +6248,6 @@ class Geophysics(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Equipment",
         arche_prop="HasUsedHardware",
     )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date of metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_geophysics_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_geophysics_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original document",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creator_original",
-    )
     copyright = models.ForeignKey(
         SkosConcept,
         related_name='rvn_geophysics_copyright_skosconcept',
@@ -6491,15 +6274,6 @@ class Geophysics(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Access",
         arche_prop="hasAccessRestriction",
     )
-    path_filename_old = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Data path in old TD archive",
-        help_text="helptext for path_filename_old",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Path_filename_old",
-    )
     site_id = models.ForeignKey(
         SkosConcept,
         related_name='rvn_geophysics_site_id_skosconcept',
@@ -6511,29 +6285,6 @@ class Geophysics(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Site_ID",
-    )
-    creator_archivalobject = models.ForeignKey(
-        "Actor",
-        related_name='rvn_geophysics_creator_archivalobject_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of archival object",
-        help_text="Person who processed resource for digital long-term archiving.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creator_archivalObject",
-        arche_prop="hasContributor",
-    )
-    excavation_object_id = models.ManyToManyField(
-        "ExcavationObjectID",
-        related_name='rvn_geophysics_excavation_object_id_excavationobjectid',
-        blank=True,
-        verbose_name="Excavation object ID",
-        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Excavation_object_ID",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -6547,23 +6298,10 @@ class Geophysics(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Excavation__post_excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -6618,11 +6356,87 @@ class Geophysics(models.Model):
 
 
 class Inventorybooks(models.Model):
-    """ Digitised inventory books """
+    ### Digitised inventory books ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_inventorybooks_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_inventorybooks_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original document",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creator_original",
+    )
+    creator_scan = models.ForeignKey(
+        "Actor",
+        related_name='rvn_inventorybooks_creator_scan_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of scan",
+        help_text="helptext for creator_scan",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creator_scan",
+        arche_prop="hasContributor",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_inventorybooks_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Document_type",
+    )
+    convolute_inventory_number = models.ForeignKey(
+        "FundinventarKonvolutnummern",
+        related_name='rvn_inventorybooks_convolute_inventory_number_fundinventarkonvolutnummern',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Convolute inventory number",
+        help_text="helptext for convolute_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Convolute_inventory_number",
+        arche_prop="hasNonLinkedIdentifier",
+    )
+    bone_stone_inventory_number = models.ForeignKey(
+        "FundinventarSteininventar",
+        related_name='rvn_inventorybooks_bone_stone_inventory_number_fundinventarsteininventar',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Bone or stone inventory number",
+        help_text="helptext for bone_stone_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Bone_stone_inventory_number",
+        arche_prop="hasNonLinkedIdentifier",
+    )
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -6661,30 +6475,6 @@ class Inventorybooks(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Filename_old",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_inventorybooks_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_inventorybooks_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__DT_abbr",
-    )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
@@ -6711,6 +6501,52 @@ class Inventorybooks(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creation_date_scan",
         arche_prop="hasCreatedDate",
     )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date of metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creation_date_metadata",
+    )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage folder of original document",
+        help_text="helptext for storage_folder_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Storage_folder_original",
+    )
+    resolution_scan_dpi = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Scan resolution",
+        help_text="helptext for resolution_scan_dpi",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Resolution_scan_dpi",
+        arche_prop="hasTechnicalInfo",
+    )
+    find_inventory_number = models.ManyToManyField(
+        "FundinventarInventarnummern",
+        related_name='rvn_inventorybooks_find_inventory_number_fundinventarinventarnummern',
+        blank=True,
+        verbose_name="Find inventory number",
+        help_text="helptext for find_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Find_inventory_number",
+        arche_prop="hasNonLinkedIdentifier",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Original_comment",
+        arche_prop="hasNote",
+    )
     file_extension = models.ForeignKey(
         SkosConcept,
         related_name='rvn_inventorybooks_file_extension_skosconcept',
@@ -6723,39 +6559,6 @@ class Inventorybooks(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__File_extension",
         arche_prop="hasTechnicalInfo",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date of metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_inventorybooks_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_inventorybooks_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original document",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -6782,15 +6585,6 @@ class Inventorybooks(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Access",
         arche_prop="hasAccessRestriction",
-    )
-    storage_folder_original = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Storage folder of original document",
-        help_text="helptext for storage_folder_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Storage_folder_original",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -6829,28 +6623,6 @@ class Inventorybooks(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Source__original_copy_edited-copy",
     )
-    resolution_scan_dpi = models.IntegerField(
-        blank=True, null=True,
-        verbose_name="Scan resolution",
-        help_text="helptext for resolution_scan_dpi",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Resolution_scan_dpi",
-        arche_prop="hasTechnicalInfo",
-    )
-    creator_scan = models.ForeignKey(
-        "Actor",
-        related_name='rvn_inventorybooks_creator_scan_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of scan",
-        help_text="helptext for creator_scan",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creator_scan",
-        arche_prop="hasContributor",
-    )
     original_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_inventorybooks_original_material_skosconcept',
@@ -6862,43 +6634,6 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Original_material",
-    )
-    find_inventory_number = models.ManyToManyField(
-        "FundinventarInventarnummern",
-        related_name='rvn_inventorybooks_find_inventory_number_fundinventarinventarnummern',
-        blank=True,
-        verbose_name="Find inventory number",
-        help_text="helptext for find_inventory_number",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Find_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
-    )
-    convolute_inventory_number = models.ForeignKey(
-        "FundinventarKonvolutnummern",
-        related_name='rvn_inventorybooks_convolute_inventory_number_fundinventarkonvolutnummern',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Convolute inventory number",
-        help_text="helptext for convolute_inventory_number",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Convolute_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
-    )
-    bone_stone_inventory_number = models.ForeignKey(
-        "FundinventarSteininventar",
-        related_name='rvn_inventorybooks_bone_stone_inventory_number_fundinventarsteininventar',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Bone or stone inventory number",
-        help_text="helptext for bone_stone_inventory_number",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Bone_stone_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -6912,15 +6647,10 @@ class Inventorybooks(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Excavation__post_excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Original_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -6975,27 +6705,11 @@ class Inventorybooks(models.Model):
 
 
 class PhasenID(models.Model):
-    """ Identifier of archaeological phases """
+    ### Identifier of archaeological phases ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
-    phase_id = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Phase ID",
-        help_text="helptext for phase_id",
-    ).set_extra(
-        is_public=False,
-    )
-    phase_title = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Phase title",
-        help_text="helptext for phase_title",
-    ).set_extra(
-        is_public=False,
-    )
     phase_type = models.ForeignKey(
         SkosConcept,
         related_name='rvn_phasenid_phase_type_skosconcept',
@@ -7018,6 +6732,22 @@ class PhasenID(models.Model):
     ).set_extra(
         is_public=False,
     )
+    phase_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Phase ID",
+        help_text="helptext for phase_id",
+    ).set_extra(
+        is_public=False,
+    )
+    phase_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Phase title",
+        help_text="helptext for phase_title",
+    ).set_extra(
+        is_public=False,
+    )
     area = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_phasenid_area_excavationobjectid',
@@ -7036,6 +6766,10 @@ class PhasenID(models.Model):
     ).set_extra(
         is_public=False,
     )
+    orig_data_csv = models.TextField(
+        blank=True,
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -7090,11 +6824,61 @@ class PhasenID(models.Model):
 
 
 class Protocols(models.Model):
-    """ Digitised protocols """
+    ### Digitised protocols ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_protocols_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_protocols_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original document",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creator_original",
+    )
+    creator_scan = models.ForeignKey(
+        "Actor",
+        related_name='rvn_protocols_creator_scan_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of scan",
+        help_text="helptext for creator_scan",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creator_scan",
+        arche_prop="hasContributor",
+    )
+    excavation_object_id = models.ForeignKey(
+        "ExcavationObjectID",
+        related_name='rvn_protocols_excavation_object_id_excavationobjectid',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Excavation object ID",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Excavation_object_ID",
+    )
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -7133,29 +6917,15 @@ class Protocols(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Filename_old",
     )
-    document_type = models.ForeignKey(
+    document_type = models.ManyToManyField(
         "DocumentTypes",
         related_name='rvn_protocols_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
         blank=True,
         verbose_name="Document type",
         help_text="helptext for document_type",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_protocols_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__DT_abbr",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
@@ -7183,6 +6953,67 @@ class Protocols(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creation_date_scan",
         arche_prop="hasCreatedDate",
     )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date of metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creation_date_metadata",
+    )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage folder of original document",
+        help_text="helptext for storage_folder_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Storage_folder_original",
+    )
+    resolution_scan_dpi = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Scan resolution",
+        help_text="helptext for resolution_scan_dpi",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Resolution_scan_dpi",
+        arche_prop="hasTechnicalInfo",
+    )
+    archaeological_object_id = models.ManyToManyField(
+        "ArchaeologicalObjectID",
+        related_name='rvn_protocols_archaeological_object_id_archaeologicalobjectid',
+        blank=True,
+        verbose_name="Archaeological object ID",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Archaeological_object_ID",
+    )
+    number_of_pages = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Number of pages",
+        help_text="helptext for number_of_pages",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Number_of_pages",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Digitisation_comment",
+        arche_prop="hasNote",
+    )
     file_extension = models.ForeignKey(
         SkosConcept,
         related_name='rvn_protocols_file_extension_skosconcept',
@@ -7195,39 +7026,6 @@ class Protocols(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__File_extension",
         arche_prop="hasTechnicalInfo",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date of metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_protocols_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_protocols_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original document",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -7254,15 +7052,6 @@ class Protocols(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Access",
         arche_prop="hasAccessRestriction",
-    )
-    storage_folder_original = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Storage folder of original document",
-        help_text="helptext for storage_folder_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Storage_folder_original",
     )
     storage = models.ForeignKey(
         SkosConcept,
@@ -7313,28 +7102,6 @@ class Protocols(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Source__original_copy_edited-copy",
     )
-    resolution_scan_dpi = models.IntegerField(
-        blank=True, null=True,
-        verbose_name="Scan resolution",
-        help_text="helptext for resolution_scan_dpi",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Resolution_scan_dpi",
-        arche_prop="hasTechnicalInfo",
-    )
-    creator_scan = models.ForeignKey(
-        "Actor",
-        related_name='rvn_protocols_creator_scan_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of scan",
-        help_text="helptext for creator_scan",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creator_scan",
-        arche_prop="hasContributor",
-    )
     original_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_protocols_original_material_skosconcept',
@@ -7346,36 +7113,6 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Original_material",
-    )
-    excavation_object_id = models.ForeignKey(
-        "ExcavationObjectID",
-        related_name='rvn_protocols_excavation_object_id_excavationobjectid',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Excavation object ID",
-        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Excavation_object_ID",
-    )
-    archaeological_object_id = models.ManyToManyField(
-        "ArchaeologicalObjectID",
-        related_name='rvn_protocols_archaeological_object_id_archaeologicalobjectid',
-        blank=True,
-        verbose_name="Archaeological object ID",
-        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Archaeological_object_ID",
-    )
-    number_of_pages = models.IntegerField(
-        blank=True, null=True,
-        verbose_name="Number of pages",
-        help_text="helptext for number_of_pages",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Number_of_pages",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -7389,23 +7126,10 @@ class Protocols(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Excavation__post_excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -7460,27 +7184,11 @@ class Protocols(models.Model):
 
 
 class StratenID(models.Model):
-    """ Identifier of archaeological strata """
+    ### Identifier of archaeological strata ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
-    stratum_id = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Stratum ID",
-        help_text="helptext for stratum_id",
-    ).set_extra(
-        is_public=False,
-    )
-    stratum_title = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Stratum title",
-        help_text="helptext for stratum_title",
-    ).set_extra(
-        is_public=False,
-    )
     stratum_type = models.ForeignKey(
         SkosConcept,
         related_name='rvn_stratenid_stratum_type_skosconcept',
@@ -7503,6 +7211,22 @@ class StratenID(models.Model):
     ).set_extra(
         is_public=False,
     )
+    stratum_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Stratum ID",
+        help_text="helptext for stratum_id",
+    ).set_extra(
+        is_public=False,
+    )
+    stratum_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Stratum title",
+        help_text="helptext for stratum_title",
+    ).set_extra(
+        is_public=False,
+    )
     area = models.ManyToManyField(
         "ExcavationObjectID",
         related_name='rvn_stratenid_area_excavationobjectid',
@@ -7521,6 +7245,10 @@ class StratenID(models.Model):
     ).set_extra(
         is_public=False,
     )
+    orig_data_csv = models.TextField(
+        blank=True,
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -7575,11 +7303,61 @@ class StratenID(models.Model):
 
 
 class Tables(models.Model):
-    """ Tables """
+    ### Tables ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_tables_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_tables_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original document",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Creator_original",
+    )
+    creator_archivalobject = models.ForeignKey(
+        "Actor",
+        related_name='rvn_tables_creator_archivalobject_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="creator of archival object",
+        help_text="Person who processed resource for digital long-term archiving.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__creator_archivalObject",
+        arche_prop="hasContributor",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_tables_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Document_type",
+    )
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -7618,50 +7396,6 @@ class Tables(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Path_filename_old",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_tables_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_tables_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__DT_abbr",
-    )
-    document_subtype = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_tables_document_subtype_documenttypes',
-        blank=True,
-        verbose_name="Document subtype",
-        help_text="helptext for document_subtype",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Document_subtype",
-    )
-    dst_abbr = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_tables_dst_abbr_documenttypes',
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="helptext for dst_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__DST_abbr",
-    )
     creation_year_original = models.CharField(
         max_length=250,
         blank=True,
@@ -7680,31 +7414,6 @@ class Tables(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Creation_date_archivalObject",
         arche_prop="hasCreatedDate",
     )
-    file_extension_original = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_tables_file_extension_original_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="File extension of original document",
-        help_text="helptext for file_extension_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__File_extension_original",
-    )
-    file_extension_archivalobject = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_tables_file_extension_archivalobject_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="File extension of archival object",
-        help_text="helptext for file_extension_archivalobject",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__File_extension_archivalObject",
-        arche_prop="hasTechnicalInfo",
-    )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of metadata",
@@ -7712,57 +7421,6 @@ class Tables(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_tables_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_tables_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original document",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Creator_original",
-    )
-    copyright = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_tables_copyright_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Copyright",
-        help_text="helptext for copyright",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Copyright",
-        arche_prop="hasOwner",
-    )
-    access = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_tables_access_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Access",
-        help_text="Whether access to the resource is restricted or if it is open to the public.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Access",
-        arche_prop="hasAccessRestriction",
     )
     folder_original = models.CharField(
         max_length=250,
@@ -7772,31 +7430,6 @@ class Tables(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__folder_original",
-    )
-    site_id = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_tables_site_id_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Site ID",
-        help_text="Abbreviation of Tell el-Daba is 'TD'.",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Site_ID",
-    )
-    creator_archivalobject = models.ForeignKey(
-        "Actor",
-        related_name='rvn_tables_creator_archivalobject_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="creator of archival object",
-        help_text="Person who processed resource for digital long-term archiving.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__creator_archivalObject",
-        arche_prop="hasContributor",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
@@ -7828,6 +7461,86 @@ class Tables(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__RelatedTo",
     )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Digitisation_comment",
+        arche_prop="hasNote",
+    )
+    file_extension_original = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_tables_file_extension_original_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="File extension of original document",
+        help_text="helptext for file_extension_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__File_extension_original",
+    )
+    file_extension_archivalobject = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_tables_file_extension_archivalobject_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="File extension of archival object",
+        help_text="helptext for file_extension_archivalobject",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__File_extension_archivalObject",
+        arche_prop="hasTechnicalInfo",
+    )
+    copyright = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_tables_copyright_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Copyright",
+        help_text="helptext for copyright",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Copyright",
+        arche_prop="hasOwner",
+    )
+    access = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_tables_access_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Access",
+        help_text="Whether access to the resource is restricted or if it is open to the public.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Access",
+        arche_prop="hasAccessRestriction",
+    )
+    site_id = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_tables_site_id_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Site ID",
+        help_text="Abbreviation of Tell el-Daba is 'TD'.",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Site_ID",
+    )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
         related_name='rvn_tables_excavation_post_excavation_skosconcept',
@@ -7840,23 +7553,10 @@ class Tables(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Excavation__post_excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -7911,7 +7611,7 @@ class Tables(models.Model):
 
 
 class ThreeDimensionalModel(models.Model):
-    """ 3D models """
+    ### 3D models ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
@@ -7954,49 +7654,18 @@ class ThreeDimensionalModel(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Path_filename_old",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_threedimensionalmodel_document_type_documenttypes',
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_threedimensionalmodel_creator_metadata_actor',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
     ).set_extra(
         is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_threedimensionalmodel_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__DT_abbr",
-    )
-    document_subtype = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_threedimensionalmodel_document_subtype_documenttypes',
-        blank=True,
-        verbose_name="Document subtype",
-        help_text="helptext for document_subtype",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Document_subtype",
-    )
-    dst_abbr = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_threedimensionalmodel_dst_abbr_documenttypes',
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="helptext for dst_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__DST_abbr",
+        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator",
     )
     creation_year_original = models.CharField(
         max_length=250,
@@ -8026,6 +7695,98 @@ class ThreeDimensionalModel(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Creation_date_archivalObject",
         arche_prop="hasCreatedDate",
     )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_threedimensionalmodel_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original ",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Creator_original",
+        arche_prop="hasCreator",
+    )
+    creator_archivalobject = models.ForeignKey(
+        "Actor",
+        related_name='rvn_threedimensionalmodel_creator_archivalobject_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of archival object",
+        help_text="helptext for creator_archivalobject",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__creator_archivalObject",
+        arche_prop="hasContributor",
+    )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Creation_date_metadata",
+    )
+    excavation_object_id = models.ManyToManyField(
+        "ExcavationObjectID",
+        related_name='rvn_threedimensionalmodel_excavation_object_id_excavationobjectid',
+        blank=True,
+        verbose_name="Excavation object ID",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Excavation_object_ID",
+    )
+    archaeological_object_id = models.ManyToManyField(
+        "ArchaeologicalObjectID",
+        related_name='rvn_threedimensionalmodel_archaeological_object_id_archaeologicalobjectid',
+        blank=True,
+        verbose_name="Archaeological object ID",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Archaeological_object_ID",
+    )
+    relatedto = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="File is related to other TD resources",
+        help_text="helptext for relatedto",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__RelatedTo",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Digitisation_comment",
+        arche_prop="hasNote",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_threedimensionalmodel_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Document_type",
+    )
     file_extension_original = models.ForeignKey(
         SkosConcept,
         related_name='rvn_threedimensionalmodel_file_extension_original_skosconcept',
@@ -8050,40 +7811,6 @@ class ThreeDimensionalModel(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__File_extension_archivalObject",
         arche_prop="hasTechnicalInfo",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_threedimensionalmodel_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_threedimensionalmodel_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original ",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Creator_original",
-        arche_prop="hasCreator",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -8123,48 +7850,6 @@ class ThreeDimensionalModel(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Site_ID",
     )
-    creator_archivalobject = models.ForeignKey(
-        "Actor",
-        related_name='rvn_threedimensionalmodel_creator_archivalobject_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of archival object",
-        help_text="helptext for creator_archivalobject",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__creator_archivalObject",
-        arche_prop="hasContributor",
-    )
-    excavation_object_id = models.ManyToManyField(
-        "ExcavationObjectID",
-        related_name='rvn_threedimensionalmodel_excavation_object_id_excavationobjectid',
-        blank=True,
-        verbose_name="Excavation object ID",
-        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Excavation_object_ID",
-    )
-    archaeological_object_id = models.ManyToManyField(
-        "ArchaeologicalObjectID",
-        related_name='rvn_threedimensionalmodel_archaeological_object_id_archaeologicalobjectid',
-        blank=True,
-        verbose_name="Archaeological object ID",
-        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Archaeological_object_ID",
-    )
-    relatedto = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="File is related to other TD resources",
-        help_text="helptext for relatedto",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__RelatedTo",
-    )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
         related_name='rvn_threedimensionalmodel_excavation_post_excavation_skosconcept',
@@ -8177,23 +7862,10 @@ class ThreeDimensionalModel(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Excavation__post_excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -8248,134 +7920,11 @@ class ThreeDimensionalModel(models.Model):
 
 
 class Videos(models.Model):
-    """ Videos """
+    ### Videos ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
-    filename = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Filename ",
-        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Filename",
-        arche_prop="hasTitle",
-    )
-    document_id = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Document ID ",
-        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. P for Protocol) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Document_ID",
-        arche_prop="hasNonLinkedIdentifier",
-    )
-    document_title = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Document title",
-        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Document_title",
-    )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_videos_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_videos_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__DT_abbr",
-    )
-    document_subtype = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_videos_document_subtype_documenttypes',
-        blank=True,
-        verbose_name="Document subtype",
-        help_text="helptext for document_subtype",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Document_subtype",
-    )
-    dst_abbr = models.ManyToManyField(
-        "DocumentTypes",
-        related_name='rvn_videos_dst_abbr_documenttypes',
-        blank=True,
-        verbose_name="Document subtype abbreviated",
-        help_text="helptext for dst_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__DST_abbr",
-    )
-    creation_date_original = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date of original document",
-        help_text="helptext for creation_date_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Creation_date_original",
-    )
-    creation_date_archivalobject = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date of archival object",
-        help_text="helptext for creation_date_archivalobject",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Creation_date_archivalObject",
-        arche_prop="hasCreatedDate",
-    )
-    file_extension_original = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_videos_file_extension_original_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="File extension of original document",
-        help_text="helptext for file_extension_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__File_extension_original",
-    )
-    file_extension_archivalobject = models.ForeignKey(
-        SkosConcept,
-        related_name='rvn_videos_file_extension_archivalobject_skosconcept',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="File extension of archival object",
-        help_text="helptext for file_extension_archivalobject",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__File_extension_archivalObject",
-        arche_prop="hasTechnicalInfo",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date of metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Creation_date_metadata",
-    )
     creator_metadata = models.ForeignKey(
         "Actor",
         related_name='rvn_videos_creator_metadata_actor',
@@ -8414,6 +7963,166 @@ class Videos(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__creator_archivalObject",
         arche_prop="hasContributor",
     )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_videos_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Document_type",
+    )
+    find_inventory_number = models.ForeignKey(
+        "FundinventarInventarnummern",
+        related_name='rvn_videos_find_inventory_number_fundinventarinventarnummern',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Find inventory number",
+        help_text="helptext for find_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Find_inventory_number",
+        arche_prop="hasNonLinkedIdentifier",
+    )
+    filename = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Filename ",
+        help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Filename",
+        arche_prop="hasTitle",
+    )
+    document_id = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document ID ",
+        help_text="The project-specific unique identifier of the document. It consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. P for Protocol) and an inventory number (or, if there was no inventory number, an ID with the prefix 4DPuzzle was created, e.g. 4DPuzzle1234).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Document_ID",
+        arche_prop="hasNonLinkedIdentifier",
+    )
+    document_title = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Document title",
+        help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Document_title",
+    )
+    creation_date_original = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date of original document",
+        help_text="helptext for creation_date_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Creation_date_original",
+    )
+    creation_date_archivalobject = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date of archival object",
+        help_text="helptext for creation_date_archivalobject",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Creation_date_archivalObject",
+        arche_prop="hasCreatedDate",
+    )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date of metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Creation_date_metadata",
+    )
+    path_filename_old = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in old TD archive",
+        help_text="helptext for path_filename_old",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Path_filename_old",
+    )
+    path_filename_arche = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Data path in ARCHE",
+        help_text="helptext for path_filename_arche",
+    ).set_extra(
+        is_public=False,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Path_filename_ARCHE",
+        arche_prop="hasLocationPath",
+    )
+    excavation_object_id = models.ManyToManyField(
+        "ExcavationObjectID",
+        related_name='rvn_videos_excavation_object_id_excavationobjectid',
+        blank=True,
+        verbose_name="Excavation object ID",
+        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Excavation_object_ID",
+    )
+    archaeological_object_id = models.ManyToManyField(
+        "ArchaeologicalObjectID",
+        related_name='rvn_videos_archaeological_object_id_archaeologicalobjectid',
+        blank=True,
+        verbose_name="Archaeological object ID",
+        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Archaeological_object_ID",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Digitisation_comment",
+        arche_prop="hasNote",
+    )
+    file_extension_original = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_videos_file_extension_original_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="File extension of original document",
+        help_text="helptext for file_extension_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__File_extension_original",
+    )
+    file_extension_archivalobject = models.ForeignKey(
+        SkosConcept,
+        related_name='rvn_videos_file_extension_archivalobject_skosconcept',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="File extension of archival object",
+        help_text="helptext for file_extension_archivalobject",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__File_extension_archivalObject",
+        arche_prop="hasTechnicalInfo",
+    )
     copyright = models.ForeignKey(
         SkosConcept,
         related_name='rvn_videos_copyright_skosconcept',
@@ -8440,25 +8149,6 @@ class Videos(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Access",
         arche_prop="hasAccessRestriction",
     )
-    path_filename_old = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Data path in old TD archive",
-        help_text="helptext for path_filename_old",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Path_filename_old",
-    )
-    path_filename_arche = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Data path in ARCHE",
-        help_text="helptext for path_filename_arche",
-    ).set_extra(
-        is_public=False,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Path_filename_ARCHE",
-        arche_prop="hasLocationPath",
-    )
     site_id = models.ForeignKey(
         SkosConcept,
         related_name='rvn_videos_site_id_skosconcept',
@@ -8471,56 +8161,10 @@ class Videos(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Site_ID",
     )
-    find_inventory_number = models.ForeignKey(
-        "FundinventarInventarnummern",
-        related_name='rvn_videos_find_inventory_number_fundinventarinventarnummern',
-        on_delete=models.SET_NULL,
-        null=True,
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Find inventory number",
-        help_text="helptext for find_inventory_number",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Find_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
-    )
-    excavation_object_id = models.ManyToManyField(
-        "ExcavationObjectID",
-        related_name='rvn_videos_excavation_object_id_excavationobjectid',
-        blank=True,
-        verbose_name="Excavation object ID",
-        help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Excavation_object_ID",
-    )
-    archaeological_object_id = models.ManyToManyField(
-        "ArchaeologicalObjectID",
-        related_name='rvn_videos_archaeological_object_id_archaeologicalobjectid',
-        blank=True,
-        verbose_name="Archaeological object ID",
-        help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Archaeological_object_ID",
-    )
-    original_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 
@@ -8575,11 +8219,61 @@ class Videos(models.Model):
 
 
 class WallpaintingInventory(models.Model):
-    """ Digitised inventory of wallpaintings """
+    ### Digitised inventory of wallpaintings ###
     legacy_id = models.CharField(
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    creator_metadata = models.ForeignKey(
+        "Actor",
+        related_name='rvn_wallpaintinginventory_creator_metadata_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of metadata",
+        help_text="helptext for creator_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creator_Metadata",
+        arche_prop="hasMetadataCreator",
+    )
+    creator_original = models.ForeignKey(
+        "Actor",
+        related_name='rvn_wallpaintinginventory_creator_original_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of original ",
+        help_text="helptext for creator_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creator_original",
+    )
+    creator_scan = models.ForeignKey(
+        "Actor",
+        related_name='rvn_wallpaintinginventory_creator_scan_actor',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Creator of scan",
+        help_text="helptext for creator_scan",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creator_scan",
+        arche_prop="hasContributor",
+    )
+    document_type = models.ForeignKey(
+        "DocumentTypes",
+        related_name='rvn_wallpaintinginventory_document_type_documenttypes',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Document type",
+        help_text="helptext for document_type",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Document_type",
+    )
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -8618,30 +8312,6 @@ class WallpaintingInventory(models.Model):
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Filename_old",
     )
-    document_type = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_wallpaintinginventory_document_type_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type",
-        help_text="helptext for document_type",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Document_type",
-    )
-    dt_abbr = models.ForeignKey(
-        "DocumentTypes",
-        related_name='rvn_wallpaintinginventory_dt_abbr_documenttypes',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Document type abbreviated",
-        help_text="helptext for dt_abbr",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__DT_abbr",
-    )
     creation_date_original = models.DateField(
         blank=True, null=True,
         verbose_name="Creation date of original document",
@@ -8668,6 +8338,59 @@ class WallpaintingInventory(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creation_date_scan",
         arche_prop="hasCreatedDate",
     )
+    creation_date_metadata = models.DateField(
+        blank=True, null=True,
+        verbose_name="Creation date of metadata",
+        help_text="helptext for creation_date_metadata",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creation_date_metadata",
+    )
+    storage_folder_original = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Storage folder of original wallpainting",
+        help_text="helptext for storage_folder_original",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Storage_folder_original",
+    )
+    resolution_scan_dpi = models.IntegerField(
+        blank=True, null=True,
+        verbose_name="Scan resolution",
+        help_text="helptext for resolution_scan_dpi",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Resolution_scan_dpi",
+        arche_prop="hasTechnicalInfo",
+    )
+    fresco_inventory_number = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="Fresco inventory number",
+        help_text="helptext for fresco_inventory_number",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Fresco_inventory_number",
+        arche_prop="hasNonLinkedIdentifier",
+    )
+    original_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment on the original document",
+        help_text="Comments from the creation of the original resource.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Original_comment",
+    )
+    digitisation_comment = models.TextField(
+        blank=True, null=True,
+        verbose_name="Comment from digitisation",
+        help_text="Comments from digitisation.",
+    ).set_extra(
+        is_public=True,
+        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Digitisation_comment",
+        arche_prop="hasNote",
+    )
     file_extension = models.ForeignKey(
         SkosConcept,
         related_name='rvn_wallpaintinginventory_file_extension_skosconcept',
@@ -8680,39 +8403,6 @@ class WallpaintingInventory(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__File_extension",
         arche_prop="hasTechnicalInfo",
-    )
-    creation_date_metadata = models.DateField(
-        blank=True, null=True,
-        verbose_name="Creation date of metadata",
-        help_text="helptext for creation_date_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creation_date_metadata",
-    )
-    creator_metadata = models.ForeignKey(
-        "Actor",
-        related_name='rvn_wallpaintinginventory_creator_metadata_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of metadata",
-        help_text="helptext for creator_metadata",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creator_Metadata",
-        arche_prop="hasMetadataCreator",
-    )
-    creator_original = models.ForeignKey(
-        "Actor",
-        related_name='rvn_wallpaintinginventory_creator_original_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of original ",
-        help_text="helptext for creator_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creator_original",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -8739,15 +8429,6 @@ class WallpaintingInventory(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Access",
         arche_prop="hasAccessRestriction",
-    )
-    storage_folder_original = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Storage folder of original wallpainting",
-        help_text="helptext for storage_folder_original",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Storage_folder_original",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -8786,28 +8467,6 @@ class WallpaintingInventory(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Source__original_copy_edited-copy",
     )
-    resolution_scan_dpi = models.IntegerField(
-        blank=True, null=True,
-        verbose_name="Scan resolution",
-        help_text="helptext for resolution_scan_dpi",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Resolution_scan_dpi",
-        arche_prop="hasTechnicalInfo",
-    )
-    creator_scan = models.ForeignKey(
-        "Actor",
-        related_name='rvn_wallpaintinginventory_creator_scan_actor',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Creator of scan",
-        help_text="helptext for creator_scan",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creator_scan",
-        arche_prop="hasContributor",
-    )
     original_material = models.ForeignKey(
         SkosConcept,
         related_name='rvn_wallpaintinginventory_original_material_skosconcept',
@@ -8819,16 +8478,6 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Original_material",
-    )
-    fresco_inventory_number = models.CharField(
-        max_length=250,
-        blank=True,
-        verbose_name="Fresco inventory number",
-        help_text="helptext for fresco_inventory_number",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Fresco_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -8842,23 +8491,10 @@ class WallpaintingInventory(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Excavation__post_excavation",
     )
-    original_comment = models.TextField(
+    orig_data_csv = models.TextField(
         blank=True,
-        verbose_name="Comment on the original document",
-        help_text="Comments from the creation of the original resource.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Original_comment",
-    )
-    digitisation_comment = models.TextField(
-        blank=True,
-        verbose_name="Comment from digitisation",
-        help_text="Comments from digitisation.",
-    ).set_extra(
-        is_public=True,
-        data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Digitisation_comment",
-        arche_prop="hasNote",
-    )
+        verbose_name="The original data"
+        )
 
     class Meta:
 

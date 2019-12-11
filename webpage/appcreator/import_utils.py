@@ -1,4 +1,7 @@
 import glob
+import json
+
+from django.core.serializers.json import DjangoJSONEncoder
 
 from django.apps import apps
 from django.core.exceptions import FieldDoesNotExist
@@ -70,7 +73,9 @@ def run_import(app_name, format_string, glob_pattern, m2m_sep="|", date_range_se
             if limit:
                 df_data = df_data.head(limit)
             for i, row in df_data.iterrows():
-                temp_item, _ = current_class.objects.get_or_create(legacy_id=row[0])
+                temp_item, _ = current_class.objects.get_or_create(legacy_id=row[0].lower())
+                row_data = f"{json.dumps(row.to_dict(), cls=DjangoJSONEncoder)}"
+                temp_item.orig_data_csv = row_data
                 col_counter = 0
                 while col_counter < nr_cols:
                     cur_attr = df_keys[col_counter]

@@ -46,9 +46,11 @@ def pop_fk_field(current_class, temp_item, row, cur_attr):
     """
     fk = current_class._meta.get_field(cur_attr)
     rel_model_name = fk.related_model._meta.model_name
-    temp_rel_obj, _ = fk.related_model.objects.get_or_create(legacy_id=row[cur_attr])
+    temp_rel_obj, _ = fk.related_model.objects.get_or_create(
+        legacy_id=row[cur_attr].strip().lower()
+    )
     if rel_model_name == 'skosconcept':
-        temp_rel_obj.pref_label = row[cur_attr]
+        temp_rel_obj.pref_label = row[cur_attr].strip().lower()
         col, _ = SkosCollection.objects.get_or_create(name=f"{cur_attr}")
         temp_rel_obj.collection.add(col)
         temp_rel_obj.save()
@@ -71,7 +73,7 @@ def pop_m2m_field(current_class, temp_item, row, cur_attr, sep='|'):
         col, _ = SkosCollection.objects.get_or_create(name=f"{cur_attr}")
         rel_things = []
         for x in row[cur_attr].split(sep):
-            temp_rel_obj, _ = fk.related_model.objects.get_or_create(pref_label=x.strip())
+            temp_rel_obj, _ = fk.related_model.objects.get_or_create(pref_label=x.strip().lower())
             temp_rel_obj.collection.add(col)
             rel_things.append(temp_rel_obj)
         m2m_attr = getattr(temp_item, cur_attr)
@@ -79,7 +81,7 @@ def pop_m2m_field(current_class, temp_item, row, cur_attr, sep='|'):
     else:
         rel_things = []
         for x in row[cur_attr].split(sep):
-            temp_rel_obj, _ = fk.related_model.objects.get_or_create(legacy_id=x.strip())
+            temp_rel_obj, _ = fk.related_model.objects.get_or_create(legacy_id=x.strip().lower())
             rel_things.append(temp_rel_obj)
         m2m_attr = getattr(temp_item, cur_attr)
         m2m_attr.set(rel_things)

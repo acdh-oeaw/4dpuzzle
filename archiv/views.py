@@ -437,7 +437,7 @@ class DocumentTypesListView(GenericListView):
     formhelper_class = DocumentTypesFilterFormHelper
     table_class = DocumentTypesTable
     init_columns = [
-        'id', 'document_type + document_subtype',
+        'id', 'document_type',
     ]
     enable_merge = True
 

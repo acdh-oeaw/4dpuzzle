@@ -90,8 +90,6 @@ class AutoCADTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
-    document_subtype = tables.columns.ManyToManyColumn()
-    dst_abbr = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
@@ -105,6 +103,7 @@ class ConvolutecardsTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    excavation_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Convolutecards
@@ -116,8 +115,6 @@ class DatenbaseTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
-    document_subtype = tables.columns.ManyToManyColumn()
-    dst_abbr = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
@@ -153,8 +150,7 @@ class ExcavationObjectIDTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
-    year = tables.columns.ManyToManyColumn()
-    season = tables.columns.ManyToManyColumn()
+    excavation_id = tables.columns.ManyToManyColumn()
     part_of_excavation_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
@@ -178,8 +174,7 @@ class FielddrawingTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
-    document_subtype = tables.columns.ManyToManyColumn()
-    dst_abbr = tables.columns.ManyToManyColumn()
+    document_type = tables.columns.ManyToManyColumn()
     creator_metadata = tables.columns.ManyToManyColumn()
     creator_original = tables.columns.ManyToManyColumn()
     original_material = tables.columns.ManyToManyColumn()
@@ -187,6 +182,7 @@ class FielddrawingTable(tables.Table):
     drawer_monogram = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
+    excavation_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Fielddrawing
@@ -198,6 +194,7 @@ class FilmTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    excavation_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Film
@@ -209,8 +206,6 @@ class FinddrawingTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
-    document_subtype = tables.columns.ManyToManyColumn()
-    dst_abbr = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Finddrawing
@@ -234,8 +229,6 @@ class FotoborndigitalTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
-    document_subtype = tables.columns.ManyToManyColumn()
-    dst_abbr = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
@@ -248,8 +241,7 @@ class FotosgescanntTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
-    document_subtype = tables.columns.ManyToManyColumn()
-    dst_abbreviation = tables.columns.ManyToManyColumn()
+    excavation_id = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
@@ -327,8 +319,6 @@ class GISTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
-    document_subtype = tables.columns.ManyToManyColumn()
-    dst_abbr = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
     relatedto = tables.columns.ManyToManyColumn()
@@ -343,8 +333,6 @@ class GeophysicsTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
-    document_subtype = tables.columns.ManyToManyColumn()
-    dst_abbr = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
@@ -382,6 +370,7 @@ class ProtocolsTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    document_type = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
@@ -407,8 +396,6 @@ class TablesTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
-    document_subtype = tables.columns.ManyToManyColumn()
-    dst_abbr = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
     relatedto = tables.columns.ManyToManyColumn()
@@ -423,8 +410,6 @@ class ThreeDimensionalModelTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
-    document_subtype = tables.columns.ManyToManyColumn()
-    dst_abbr = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
@@ -438,8 +423,6 @@ class VideosTable(tables.Table):
 
     id = tables.LinkColumn(verbose_name='ID')
     merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
-    document_subtype = tables.columns.ManyToManyColumn()
-    dst_abbr = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 

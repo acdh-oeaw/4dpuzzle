@@ -299,7 +299,7 @@ class {{ x.model_name }}(models.Model):
         max_length=250,
         blank=True,
         {%- elif y.field_type == 'TextField' %}
-        blank=True,
+        blank=True, null=True,
         {%- elif y.field_type == 'ForeignKey' %}
         {%- if y.related_class == 'SkosConcept' %}
         {{ y.related_class }},
@@ -333,6 +333,10 @@ class {{ x.model_name }}(models.Model):
         {%- endif %}
     )
     {%- endfor %}
+    orig_data_csv = models.TextField(
+        blank=True,
+        verbose_name="The original data"
+        )
 
     class Meta:
         {% if x.model_order == 'nan' %}
