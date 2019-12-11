@@ -75,7 +75,7 @@
                   {% if x.f_type == 'M2M' %}
                   {% for y in x.value %}
                   <li>
-                    <a href="{{ y.get_absolute_url }}">{{ y.legacy_id }}</a>
+                    <a href="{{ y.get_absolute_url }}">{{ y }}</a>
                   </li>
                   {% endfor %}
                   {% elif  x.f_type == 'FK' %}
@@ -85,7 +85,7 @@
                   {% elif  x.f_type == 'REVRESE_RELATION' %}
                   {% for y in x.value %}
                   <li>
-                    <a href="{{ y.get_absolute_url }}">{{ y.legacy_id }}</a>
+                    <a href="{{ y.get_absolute_url }}">{{ y }}</a>
                   </li>
                   {% endfor %}
 
@@ -107,7 +107,7 @@
                   {% if x.f_type == 'M2M' %}
                   {% for y in x.value %}
                   <li>
-                    <a href="{{ y.get_absolute_url }}">{{ y.legacy_id }}</a>
+                    <a href="{{ y.get_absolute_url }}">{{ y }}</a>
                   </li>
                   {% endfor %}
                   {% elif  x.f_type == 'FK' %}
@@ -117,7 +117,7 @@
                   {% elif  x.f_type == 'REVRESE_RELATION' %}
                   {% for y in x.value %}
                   <li>
-                    <a href="{{ y.get_absolute_url }}">{{ y.legacy_id }}</a>
+                    <a href="{{ y.get_absolute_url }}">{{ y }}</a>
                   </li>
                   {% endfor %}
 
