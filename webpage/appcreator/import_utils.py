@@ -73,7 +73,7 @@ def run_import(app_name, format_string, glob_pattern, m2m_sep="|", date_range_se
             if limit:
                 df_data = df_data.head(limit)
             for i, row in df_data.iterrows():
-                temp_item, _ = current_class.objects.get_or_create(legacy_id=row[0].lower())
+                temp_item, _ = current_class.objects.get_or_create(legacy_id=f"{row[0]}".lower().strip())
                 row_data = f"{json.dumps(row.to_dict(), cls=DjangoJSONEncoder)}"
                 temp_item.orig_data_csv = row_data
                 col_counter = 0
