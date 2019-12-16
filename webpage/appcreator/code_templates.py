@@ -335,7 +335,48 @@ class {{ x.model_name }}(models.Model):
     {%- endfor %}
     orig_data_csv = models.TextField(
         blank=True,
+        null=True,
         verbose_name="The original data"
+        ).set_extra(
+            is_public=True
+        )
+    fc_name = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="filechecker field name"
+        ).set_extra(
+            is_public=False
+        )
+    fc_directory = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="filechecker field directory"
+        ).set_extra(
+            is_public=False,
+            arche_prop="isPartOf",
+        )
+    fc_type = models.CharField(
+        blank=True,
+        null=True,
+        max_length=40,
+        verbose_name="filechecker field type"
+        ).set_extra(
+            is_public=False
+        )
+    fc_filename = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="filechecker field filename"
+        ).set_extra(
+            is_public=False
+        )
+    fc_extension = models.CharField(
+        blank=True,
+        null=True,
+        max_length=40,
+        verbose_name="filechecker field extension"
+        ).set_extra(
+            is_public=False
         )
 
     class Meta:
