@@ -353,7 +353,6 @@ class {{ x.model_name }}(models.Model):
         verbose_name="filechecker field directory"
         ).set_extra(
             is_public=False,
-            arche_prop="isPartOf",
         )
     fc_type = models.CharField(
         blank=True,
@@ -378,6 +377,10 @@ class {{ x.model_name }}(models.Model):
         ).set_extra(
             is_public=False
         )
+    fc_match = models.BooleanField(
+        default=False,
+        verbose_name="Matches FileChecker Entry",
+    )
 
     class Meta:
         {% if x.model_order == 'nan' %}
