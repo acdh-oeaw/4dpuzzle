@@ -82,7 +82,7 @@ class GenericListView(django_tables2.SingleTableView):
     filter_class = None
     formhelper_class = None
     context_filter_name = 'filter'
-    paginate_by = 25
+    paginate_by = 50
     template_name = 'browsing/generic_list.html'
     init_columns = []
     enable_merge = False
