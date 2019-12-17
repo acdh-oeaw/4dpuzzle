@@ -69,6 +69,31 @@ class {{ x.model_name }}ListFilter(django_filters.FilterSet):
         help_text={{ x.model_name}}._meta.get_field('legacy_id').help_text,
         label={{ x.model_name}}._meta.get_field('legacy_id').verbose_name
     )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text={{ x.model_name}}._meta.get_field('fc_name').help_text,
+        label={{ x.model_name}}._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text={{ x.model_name}}._meta.get_field('fc_directory').help_text,
+        label={{ x.model_name}}._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text={{ x.model_name}}._meta.get_field('fc_type').help_text,
+        label={{ x.model_name}}._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text={{ x.model_name}}._meta.get_field('fc_filename').help_text,
+        label={{ x.model_name}}._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text={{ x.model_name}}._meta.get_field('fc_extension').help_text,
+        label={{ x.model_name}}._meta.get_field('fc_extension').verbose_name
+    )
     {%- for y in x.model_fields %}
     {%- if y.field_type == 'CharField' %}
     {{y.field_name}} = django_filters.CharFilter(
@@ -91,6 +116,11 @@ class {{ x.model_name }}ListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             {% for y in x.model_fields %}
             {%- if y.field_type == 'DateRangeField' %}
             {%- else %}'{{ y.field_name }}',
@@ -134,8 +164,13 @@ class {{ x.model_name }}FilterFormHelper(FormHelper):
                     {%- else %}'{{ y.field_name }}',
                     {%- endif %}
                     {%- endfor %}
-                    'legacy_id',
                     css_id="more"
+                    ),
+                AccordionGroup(
+                    'admin',
+                    'legacy_id',
+                    'fc_match',
+                    css_id="admin_search"
                     ),
                 )
             )

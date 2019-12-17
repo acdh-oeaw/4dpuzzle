@@ -43,6 +43,31 @@ class ActorListFilter(django_filters.FilterSet):
         help_text=Actor._meta.get_field('legacy_id').help_text,
         label=Actor._meta.get_field('legacy_id').verbose_name
     )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Actor._meta.get_field('fc_name').help_text,
+        label=Actor._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Actor._meta.get_field('fc_directory').help_text,
+        label=Actor._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Actor._meta.get_field('fc_type').help_text,
+        label=Actor._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Actor._meta.get_field('fc_filename').help_text,
+        label=Actor._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Actor._meta.get_field('fc_extension').help_text,
+        label=Actor._meta.get_field('fc_extension').verbose_name
+    )
     name = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Actor._meta.get_field('name').help_text,
@@ -74,6 +99,11 @@ class ActorListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'name',
             'drawer_monogram',
             'excavation',
@@ -88,6 +118,31 @@ class ArchaeologicalObject4DPuzzleIDListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('legacy_id').help_text,
         label=ArchaeologicalObject4DPuzzleID._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('fc_name').help_text,
+        label=ArchaeologicalObject4DPuzzleID._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('fc_directory').help_text,
+        label=ArchaeologicalObject4DPuzzleID._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('fc_type').help_text,
+        label=ArchaeologicalObject4DPuzzleID._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('fc_filename').help_text,
+        label=ArchaeologicalObject4DPuzzleID._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObject4DPuzzleID._meta.get_field('fc_extension').help_text,
+        label=ArchaeologicalObject4DPuzzleID._meta.get_field('fc_extension').verbose_name
     )
     archaeological_object_4dpuzzle_id = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -120,6 +175,11 @@ class ArchaeologicalObject4DPuzzleIDListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'archaeological_object_id',
             'archaeological_object_4dpuzzle_id',
@@ -140,6 +200,31 @@ class ArchaeologicalObjectIDListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=ArchaeologicalObjectID._meta.get_field('legacy_id').help_text,
         label=ArchaeologicalObjectID._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('fc_name').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('fc_directory').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('fc_type').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('fc_filename').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchaeologicalObjectID._meta.get_field('fc_extension').help_text,
+        label=ArchaeologicalObjectID._meta.get_field('fc_extension').verbose_name
     )
     archaeological_object_id = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -192,6 +277,11 @@ class ArchaeologicalObjectIDListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'archaeological_object_id',
             'archaeological_object_comment',
@@ -213,6 +303,31 @@ class ArchiveINFListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=ArchiveINF._meta.get_field('legacy_id').help_text,
         label=ArchiveINF._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchiveINF._meta.get_field('fc_name').help_text,
+        label=ArchiveINF._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchiveINF._meta.get_field('fc_directory').help_text,
+        label=ArchiveINF._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchiveINF._meta.get_field('fc_type').help_text,
+        label=ArchiveINF._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchiveINF._meta.get_field('fc_filename').help_text,
+        label=ArchiveINF._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ArchiveINF._meta.get_field('fc_extension').help_text,
+        label=ArchiveINF._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -245,6 +360,11 @@ class ArchiveINFListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_archivalobject',
@@ -269,6 +389,31 @@ class AutoCADListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=AutoCAD._meta.get_field('legacy_id').help_text,
         label=AutoCAD._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('fc_name').help_text,
+        label=AutoCAD._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('fc_directory').help_text,
+        label=AutoCAD._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('fc_type').help_text,
+        label=AutoCAD._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('fc_filename').help_text,
+        label=AutoCAD._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=AutoCAD._meta.get_field('fc_extension').help_text,
+        label=AutoCAD._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -321,6 +466,11 @@ class AutoCADListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_archivalobject',
@@ -352,6 +502,31 @@ class ConvolutecardsListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Convolutecards._meta.get_field('legacy_id').help_text,
         label=Convolutecards._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('fc_name').help_text,
+        label=Convolutecards._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('fc_directory').help_text,
+        label=Convolutecards._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('fc_type').help_text,
+        label=Convolutecards._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('fc_filename').help_text,
+        label=Convolutecards._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Convolutecards._meta.get_field('fc_extension').help_text,
+        label=Convolutecards._meta.get_field('fc_extension').verbose_name
     )
     creation_year_original = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -424,6 +599,11 @@ class ConvolutecardsListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_scan',
@@ -462,6 +642,31 @@ class DatenbaseListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Datenbase._meta.get_field('legacy_id').help_text,
         label=Datenbase._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('fc_name').help_text,
+        label=Datenbase._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('fc_directory').help_text,
+        label=Datenbase._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('fc_type').help_text,
+        label=Datenbase._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('fc_filename').help_text,
+        label=Datenbase._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Datenbase._meta.get_field('fc_extension').help_text,
+        label=Datenbase._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -514,6 +719,11 @@ class DatenbaseListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_archivalobject',
@@ -547,6 +757,31 @@ class Document4DPuzzleIDListFilter(django_filters.FilterSet):
         help_text=Document4DPuzzleID._meta.get_field('legacy_id').help_text,
         label=Document4DPuzzleID._meta.get_field('legacy_id').verbose_name
     )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Document4DPuzzleID._meta.get_field('fc_name').help_text,
+        label=Document4DPuzzleID._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Document4DPuzzleID._meta.get_field('fc_directory').help_text,
+        label=Document4DPuzzleID._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Document4DPuzzleID._meta.get_field('fc_type').help_text,
+        label=Document4DPuzzleID._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Document4DPuzzleID._meta.get_field('fc_filename').help_text,
+        label=Document4DPuzzleID._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Document4DPuzzleID._meta.get_field('fc_extension').help_text,
+        label=Document4DPuzzleID._meta.get_field('fc_extension').verbose_name
+    )
     document_id = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=Document4DPuzzleID._meta.get_field('document_id').help_text,
@@ -578,6 +813,11 @@ class Document4DPuzzleIDListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'document_type',
             'document_id',
@@ -593,6 +833,31 @@ class DocumentTypesListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=DocumentTypes._meta.get_field('legacy_id').help_text,
         label=DocumentTypes._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=DocumentTypes._meta.get_field('fc_name').help_text,
+        label=DocumentTypes._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=DocumentTypes._meta.get_field('fc_directory').help_text,
+        label=DocumentTypes._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=DocumentTypes._meta.get_field('fc_type').help_text,
+        label=DocumentTypes._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=DocumentTypes._meta.get_field('fc_filename').help_text,
+        label=DocumentTypes._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=DocumentTypes._meta.get_field('fc_extension').help_text,
+        label=DocumentTypes._meta.get_field('fc_extension').verbose_name
     )
     document_type = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -630,6 +895,11 @@ class DocumentTypesListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'document_type',
             'document_maintype',
             'dt_abbr',
@@ -645,6 +915,31 @@ class ExcavationObjectIDListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=ExcavationObjectID._meta.get_field('legacy_id').help_text,
         label=ExcavationObjectID._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationObjectID._meta.get_field('fc_name').help_text,
+        label=ExcavationObjectID._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationObjectID._meta.get_field('fc_directory').help_text,
+        label=ExcavationObjectID._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationObjectID._meta.get_field('fc_type').help_text,
+        label=ExcavationObjectID._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationObjectID._meta.get_field('fc_filename').help_text,
+        label=ExcavationObjectID._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationObjectID._meta.get_field('fc_extension').help_text,
+        label=ExcavationObjectID._meta.get_field('fc_extension').verbose_name
     )
     excavation_object_id = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -677,6 +972,11 @@ class ExcavationObjectIDListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'excavation_object_id',
             'profile_orientation',
@@ -699,6 +999,31 @@ class ExcavationSeasonsListFilter(django_filters.FilterSet):
         help_text=ExcavationSeasons._meta.get_field('legacy_id').help_text,
         label=ExcavationSeasons._meta.get_field('legacy_id').verbose_name
     )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationSeasons._meta.get_field('fc_name').help_text,
+        label=ExcavationSeasons._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationSeasons._meta.get_field('fc_directory').help_text,
+        label=ExcavationSeasons._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationSeasons._meta.get_field('fc_type').help_text,
+        label=ExcavationSeasons._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationSeasons._meta.get_field('fc_filename').help_text,
+        label=ExcavationSeasons._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ExcavationSeasons._meta.get_field('fc_extension').help_text,
+        label=ExcavationSeasons._meta.get_field('fc_extension').verbose_name
+    )
     excavation_id = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=ExcavationSeasons._meta.get_field('excavation_id').help_text,
@@ -720,6 +1045,11 @@ class ExcavationSeasonsListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'excavation_id',
             'grabungskampagnen',
 
@@ -734,6 +1064,31 @@ class FielddrawingListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Fielddrawing._meta.get_field('legacy_id').help_text,
         label=Fielddrawing._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('fc_name').help_text,
+        label=Fielddrawing._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('fc_directory').help_text,
+        label=Fielddrawing._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('fc_type').help_text,
+        label=Fielddrawing._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('fc_filename').help_text,
+        label=Fielddrawing._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fielddrawing._meta.get_field('fc_extension').help_text,
+        label=Fielddrawing._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -821,6 +1176,11 @@ class FielddrawingListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'filename',
             'document_id',
             'document_title',
@@ -866,6 +1226,31 @@ class FilmListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Film._meta.get_field('legacy_id').help_text,
         label=Film._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('fc_name').help_text,
+        label=Film._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('fc_directory').help_text,
+        label=Film._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('fc_type').help_text,
+        label=Film._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('fc_filename').help_text,
+        label=Film._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Film._meta.get_field('fc_extension').help_text,
+        label=Film._meta.get_field('fc_extension').verbose_name
     )
     film_id = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -918,6 +1303,11 @@ class FilmListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'film_id',
             'film_number',
             'addition_film_identifier',
@@ -942,6 +1332,31 @@ class FinddrawingListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Finddrawing._meta.get_field('legacy_id').help_text,
         label=Finddrawing._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('fc_name').help_text,
+        label=Finddrawing._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('fc_directory').help_text,
+        label=Finddrawing._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('fc_type').help_text,
+        label=Finddrawing._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('fc_filename').help_text,
+        label=Finddrawing._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Finddrawing._meta.get_field('fc_extension').help_text,
+        label=Finddrawing._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -999,6 +1414,11 @@ class FinddrawingListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_scan',
@@ -1036,6 +1456,31 @@ class FindsheetsListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Findsheets._meta.get_field('legacy_id').help_text,
         label=Findsheets._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Findsheets._meta.get_field('fc_name').help_text,
+        label=Findsheets._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Findsheets._meta.get_field('fc_directory').help_text,
+        label=Findsheets._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Findsheets._meta.get_field('fc_type').help_text,
+        label=Findsheets._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Findsheets._meta.get_field('fc_filename').help_text,
+        label=Findsheets._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Findsheets._meta.get_field('fc_extension').help_text,
+        label=Findsheets._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1078,6 +1523,11 @@ class FindsheetsListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_scan',
@@ -1115,6 +1565,31 @@ class FotoborndigitalListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Fotoborndigital._meta.get_field('legacy_id').help_text,
         label=Fotoborndigital._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('fc_name').help_text,
+        label=Fotoborndigital._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('fc_directory').help_text,
+        label=Fotoborndigital._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('fc_type').help_text,
+        label=Fotoborndigital._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('fc_filename').help_text,
+        label=Fotoborndigital._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotoborndigital._meta.get_field('fc_extension').help_text,
+        label=Fotoborndigital._meta.get_field('fc_extension').verbose_name
     )
     folder_name = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1172,6 +1647,11 @@ class FotoborndigitalListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'folder_name',
             'folder_id',
@@ -1197,6 +1677,31 @@ class FotosgescanntListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Fotosgescannt._meta.get_field('legacy_id').help_text,
         label=Fotosgescannt._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('fc_name').help_text,
+        label=Fotosgescannt._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('fc_directory').help_text,
+        label=Fotosgescannt._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('fc_type').help_text,
+        label=Fotosgescannt._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('fc_filename').help_text,
+        label=Fotosgescannt._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fotosgescannt._meta.get_field('fc_extension').help_text,
+        label=Fotosgescannt._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1259,6 +1764,11 @@ class FotosgescanntListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_scan',
@@ -1301,6 +1811,31 @@ class Fundinventar4DPuzzleIDListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Fundinventar4DPuzzleID._meta.get_field('legacy_id').help_text,
         label=Fundinventar4DPuzzleID._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fundinventar4DPuzzleID._meta.get_field('fc_name').help_text,
+        label=Fundinventar4DPuzzleID._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fundinventar4DPuzzleID._meta.get_field('fc_directory').help_text,
+        label=Fundinventar4DPuzzleID._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fundinventar4DPuzzleID._meta.get_field('fc_type').help_text,
+        label=Fundinventar4DPuzzleID._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fundinventar4DPuzzleID._meta.get_field('fc_filename').help_text,
+        label=Fundinventar4DPuzzleID._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Fundinventar4DPuzzleID._meta.get_field('fc_extension').help_text,
+        label=Fundinventar4DPuzzleID._meta.get_field('fc_extension').verbose_name
     )
     find_inventory_4dpuzzle_number = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1348,6 +1883,11 @@ class Fundinventar4DPuzzleIDListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'excavation_object_id',
             'find_inventory_4dpuzzle_number',
             'find_local_number',
@@ -1376,6 +1916,31 @@ class FundinventarInventarnummernListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=FundinventarInventarnummern._meta.get_field('legacy_id').help_text,
         label=FundinventarInventarnummern._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarInventarnummern._meta.get_field('fc_name').help_text,
+        label=FundinventarInventarnummern._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarInventarnummern._meta.get_field('fc_directory').help_text,
+        label=FundinventarInventarnummern._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarInventarnummern._meta.get_field('fc_type').help_text,
+        label=FundinventarInventarnummern._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarInventarnummern._meta.get_field('fc_filename').help_text,
+        label=FundinventarInventarnummern._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarInventarnummern._meta.get_field('fc_extension').help_text,
+        label=FundinventarInventarnummern._meta.get_field('fc_extension').verbose_name
     )
     find_inventory_number = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1418,6 +1983,11 @@ class FundinventarInventarnummernListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'archaeological_object_id',
             'corresponding_to_inventory_number',
@@ -1446,6 +2016,31 @@ class FundinventarKonvolutnummernListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=FundinventarKonvolutnummern._meta.get_field('legacy_id').help_text,
         label=FundinventarKonvolutnummern._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('fc_name').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('fc_directory').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('fc_type').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('fc_filename').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarKonvolutnummern._meta.get_field('fc_extension').help_text,
+        label=FundinventarKonvolutnummern._meta.get_field('fc_extension').verbose_name
     )
     convolute_inventory_number = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1493,6 +2088,11 @@ class FundinventarKonvolutnummernListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'convolute_inventory_number',
             'convolute_subnumber',
             'find_local_number',
@@ -1521,6 +2121,31 @@ class FundinventarMaterialprobenListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=FundinventarMaterialproben._meta.get_field('legacy_id').help_text,
         label=FundinventarMaterialproben._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarMaterialproben._meta.get_field('fc_name').help_text,
+        label=FundinventarMaterialproben._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarMaterialproben._meta.get_field('fc_directory').help_text,
+        label=FundinventarMaterialproben._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarMaterialproben._meta.get_field('fc_type').help_text,
+        label=FundinventarMaterialproben._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarMaterialproben._meta.get_field('fc_filename').help_text,
+        label=FundinventarMaterialproben._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarMaterialproben._meta.get_field('fc_extension').help_text,
+        label=FundinventarMaterialproben._meta.get_field('fc_extension').verbose_name
     )
     material_sample_inventory_number = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1563,6 +2188,11 @@ class FundinventarMaterialprobenListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'archaeological_object_id',
             'relatedto',
@@ -1591,6 +2221,31 @@ class FundinventarSteininventarListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=FundinventarSteininventar._meta.get_field('legacy_id').help_text,
         label=FundinventarSteininventar._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarSteininventar._meta.get_field('fc_name').help_text,
+        label=FundinventarSteininventar._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarSteininventar._meta.get_field('fc_directory').help_text,
+        label=FundinventarSteininventar._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarSteininventar._meta.get_field('fc_type').help_text,
+        label=FundinventarSteininventar._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarSteininventar._meta.get_field('fc_filename').help_text,
+        label=FundinventarSteininventar._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=FundinventarSteininventar._meta.get_field('fc_extension').help_text,
+        label=FundinventarSteininventar._meta.get_field('fc_extension').verbose_name
     )
     find_inventory_number = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1633,6 +2288,11 @@ class FundinventarSteininventarListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'archaeological_object_id',
             'find_material',
@@ -1661,6 +2321,31 @@ class GISListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=GIS._meta.get_field('legacy_id').help_text,
         label=GIS._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=GIS._meta.get_field('fc_name').help_text,
+        label=GIS._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=GIS._meta.get_field('fc_directory').help_text,
+        label=GIS._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=GIS._meta.get_field('fc_type').help_text,
+        label=GIS._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=GIS._meta.get_field('fc_filename').help_text,
+        label=GIS._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=GIS._meta.get_field('fc_extension').help_text,
+        label=GIS._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1708,6 +2393,11 @@ class GISListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_archivalobject',
@@ -1740,6 +2430,31 @@ class GeophysicsListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Geophysics._meta.get_field('legacy_id').help_text,
         label=Geophysics._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Geophysics._meta.get_field('fc_name').help_text,
+        label=Geophysics._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Geophysics._meta.get_field('fc_directory').help_text,
+        label=Geophysics._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Geophysics._meta.get_field('fc_type').help_text,
+        label=Geophysics._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Geophysics._meta.get_field('fc_filename').help_text,
+        label=Geophysics._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Geophysics._meta.get_field('fc_extension').help_text,
+        label=Geophysics._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1782,6 +2497,11 @@ class GeophysicsListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_archivalobject',
@@ -1813,6 +2533,31 @@ class InventorybooksListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Inventorybooks._meta.get_field('legacy_id').help_text,
         label=Inventorybooks._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Inventorybooks._meta.get_field('fc_name').help_text,
+        label=Inventorybooks._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Inventorybooks._meta.get_field('fc_directory').help_text,
+        label=Inventorybooks._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Inventorybooks._meta.get_field('fc_type').help_text,
+        label=Inventorybooks._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Inventorybooks._meta.get_field('fc_filename').help_text,
+        label=Inventorybooks._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Inventorybooks._meta.get_field('fc_extension').help_text,
+        label=Inventorybooks._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1855,6 +2600,11 @@ class InventorybooksListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_scan',
@@ -1890,6 +2640,31 @@ class PhasenIDListFilter(django_filters.FilterSet):
         help_text=PhasenID._meta.get_field('legacy_id').help_text,
         label=PhasenID._meta.get_field('legacy_id').verbose_name
     )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=PhasenID._meta.get_field('fc_name').help_text,
+        label=PhasenID._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=PhasenID._meta.get_field('fc_directory').help_text,
+        label=PhasenID._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=PhasenID._meta.get_field('fc_type').help_text,
+        label=PhasenID._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=PhasenID._meta.get_field('fc_filename').help_text,
+        label=PhasenID._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=PhasenID._meta.get_field('fc_extension').help_text,
+        label=PhasenID._meta.get_field('fc_extension').verbose_name
+    )
     phase_id = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=PhasenID._meta.get_field('phase_id').help_text,
@@ -1906,6 +2681,11 @@ class PhasenIDListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'phase_type',
             'site_id',
             'phase_id',
@@ -1920,6 +2700,31 @@ class ProtocolsListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Protocols._meta.get_field('legacy_id').help_text,
         label=Protocols._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('fc_name').help_text,
+        label=Protocols._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('fc_directory').help_text,
+        label=Protocols._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('fc_type').help_text,
+        label=Protocols._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('fc_filename').help_text,
+        label=Protocols._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Protocols._meta.get_field('fc_extension').help_text,
+        label=Protocols._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -1967,6 +2772,11 @@ class ProtocolsListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_scan',
@@ -2004,6 +2814,31 @@ class StratenIDListFilter(django_filters.FilterSet):
         help_text=StratenID._meta.get_field('legacy_id').help_text,
         label=StratenID._meta.get_field('legacy_id').verbose_name
     )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=StratenID._meta.get_field('fc_name').help_text,
+        label=StratenID._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=StratenID._meta.get_field('fc_directory').help_text,
+        label=StratenID._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=StratenID._meta.get_field('fc_type').help_text,
+        label=StratenID._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=StratenID._meta.get_field('fc_filename').help_text,
+        label=StratenID._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=StratenID._meta.get_field('fc_extension').help_text,
+        label=StratenID._meta.get_field('fc_extension').verbose_name
+    )
     stratum_id = django_filters.CharFilter(
         lookup_expr='icontains',
         help_text=StratenID._meta.get_field('stratum_id').help_text,
@@ -2020,6 +2855,11 @@ class StratenIDListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'stratum_type',
             'site_id',
             'stratum_id',
@@ -2034,6 +2874,31 @@ class TablesListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Tables._meta.get_field('legacy_id').help_text,
         label=Tables._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Tables._meta.get_field('fc_name').help_text,
+        label=Tables._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Tables._meta.get_field('fc_directory').help_text,
+        label=Tables._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Tables._meta.get_field('fc_type').help_text,
+        label=Tables._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Tables._meta.get_field('fc_filename').help_text,
+        label=Tables._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Tables._meta.get_field('fc_extension').help_text,
+        label=Tables._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -2081,6 +2946,11 @@ class TablesListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_archivalobject',
@@ -2112,6 +2982,31 @@ class ThreeDimensionalModelListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=ThreeDimensionalModel._meta.get_field('legacy_id').help_text,
         label=ThreeDimensionalModel._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('fc_name').help_text,
+        label=ThreeDimensionalModel._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('fc_directory').help_text,
+        label=ThreeDimensionalModel._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('fc_type').help_text,
+        label=ThreeDimensionalModel._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('fc_filename').help_text,
+        label=ThreeDimensionalModel._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=ThreeDimensionalModel._meta.get_field('fc_extension').help_text,
+        label=ThreeDimensionalModel._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -2164,6 +3059,11 @@ class ThreeDimensionalModelListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'filename',
             'document_id',
             'document_title',
@@ -2195,6 +3095,31 @@ class VideosListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=Videos._meta.get_field('legacy_id').help_text,
         label=Videos._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Videos._meta.get_field('fc_name').help_text,
+        label=Videos._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Videos._meta.get_field('fc_directory').help_text,
+        label=Videos._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Videos._meta.get_field('fc_type').help_text,
+        label=Videos._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Videos._meta.get_field('fc_filename').help_text,
+        label=Videos._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=Videos._meta.get_field('fc_extension').help_text,
+        label=Videos._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -2237,6 +3162,11 @@ class VideosListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_archivalobject',
@@ -2267,6 +3197,31 @@ class WallpaintingInventoryListFilter(django_filters.FilterSet):
         lookup_expr='icontains',
         help_text=WallpaintingInventory._meta.get_field('legacy_id').help_text,
         label=WallpaintingInventory._meta.get_field('legacy_id').verbose_name
+    )
+    fc_name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('fc_name').help_text,
+        label=WallpaintingInventory._meta.get_field('fc_name').verbose_name
+    )
+    fc_directory = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('fc_directory').help_text,
+        label=WallpaintingInventory._meta.get_field('fc_directory').verbose_name
+    )
+    fc_type = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('fc_type').help_text,
+        label=WallpaintingInventory._meta.get_field('fc_type').verbose_name
+    )
+    fc_filename = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('fc_filename').help_text,
+        label=WallpaintingInventory._meta.get_field('fc_filename').verbose_name
+    )
+    fc_extension = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=WallpaintingInventory._meta.get_field('fc_extension').help_text,
+        label=WallpaintingInventory._meta.get_field('fc_extension').verbose_name
     )
     filename = django_filters.CharFilter(
         lookup_expr='icontains',
@@ -2319,6 +3274,11 @@ class WallpaintingInventoryListFilter(django_filters.FilterSet):
         fields = [
             'id',
             'legacy_id',
+            'fc_name',
+            'fc_directory',
+            'fc_type',
+            'fc_filename',
+            'fc_match',
             'creator_metadata',
             'creator_original',
             'creator_scan',
