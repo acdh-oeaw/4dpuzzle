@@ -18,6 +18,8 @@ ARCHE_CONST_MAPPINGS = getattr(settings, 'ARCHE_CONST_MAPPINGS', False)
 
 
 ARCHE_BASE_URI = getattr(settings, 'ARCHE_BASE_URI', 'https://id.acdh.oeaw.ac.at/MYPROJECT')
+ARCHE_PREFIX_REMOVE = getattr(settings, 'ARCHE_PREFIX_REMOVE', '')
+
 pickle_file = os.path.join(settings.BASE_DIR, 'archeutils', 'arche_descriptions.pickle')
 
 ARCHE_RE_PATTERN = re.compile(r'{(.*?)}', re.IGNORECASE)
@@ -66,21 +68,38 @@ def get_arche_desc(res):
         "No description template found"
 
 
+def directory_to_col_id(
+    res, path_prop='fc_directory', pre_remove=ARCHE_PREFIX_REMOVE, pre_add=ARCHE_BASE_URI
+):
+    """ creates a col-id from a file path
+        :param path_prop: The resource' property providing the binary location path
+        :pre_remove: some prefix which should be replaced
+        :pre_add: The projects base URI
+        :return: An arche id of the acdh:partOf collection
+    """
+    orig_path = getattr(res, path_prop)
+    if orig_path is not None:
+        new_path = orig_path.replace(pre_remove, f"{pre_add}/")
+    else:
+        new_path = None
+    return new_path
+
+
 def get_category(
-    obj,
+    res,
     prop="fc_extension",
     mapping=EXTENSION_HAS_CATEGORY_MAPPING,
     default='https://vocabs.acdh.oeaw.ac.at/archecategory/dataset'
 ):
     """ maps an object to an acdh:hasCategory value by an object's property
-        :param obj: A django model object
+        :param res: A django model object
         :param prop: The property providing a file extension, defaults to "fc_extension"
         :param mapping: a dict mapping the file extension to a category
         :param default: a default cateogry in case no match for the provided mapping
         :return: A string with the URL of the matching category
     """
     category = default
-    extension = getattr(obj, prop)
+    extension = getattr(res, prop)
     if extension is not None:
         category = mapping.get(extension.lower().strip(), default)
     return category
@@ -119,7 +138,7 @@ def col_id_from_res(res, arche_uri=ARCHE_BASE_URI):
 
 def col_from_res(res, arche_uri=ARCHE_BASE_URI):
     g = Graph()
-    sub = URIRef(col_id_from_res(res))
+    sub = URIRef(directory_to_col_id(res))
     g.add((sub, RDF.type, acdh_ns.Collection))
     g.add((sub, acdh_ns.hasDescription, Literal(res.__class__.__doc__)))
     g.add((sub, acdh_ns.hasIdentifier, URIRef(col_id_from_res(res))))
@@ -135,9 +154,9 @@ def as_arche_res(res, res_type='Resource'):
     g.add((
         sub, acdh_ns.hasDescription, Literal(get_arche_desc(res))
     ))
-    col_graph = col_from_res(res)
-    g = g + col_graph
-    g.add((sub, acdh_ns.isPartOf, URIRef(col_id_from_res(res))))
+    # col_graph = col_from_res(res)
+    # g = g + col_graph
+    g.add((sub, acdh_ns.isPartOf, URIRef(directory_to_col_id(res))))
     g.add((sub, acdh_ns.hasCategory, URIRef(get_category(res))))
     for x in get_arche_fields(res):
         cur_val = x['value']
