@@ -10,8 +10,9 @@ from django.db.models.query import QuerySet
 from rdflib import Graph, Namespace, URIRef, Literal, XSD
 from rdflib.namespace import RDF
 
-
 from browsing.browsing_utils import model_to_dict
+
+from . configs import EXTENSION_HAS_CATEGORY_MAPPING
 
 ARCHE_CONST_MAPPINGS = getattr(settings, 'ARCHE_CONST_MAPPINGS', False)
 
@@ -63,6 +64,26 @@ def get_arche_desc(res):
         return desc
     else:
         "No description template found"
+
+
+def get_category(
+    obj,
+    prop="fc_extension",
+    mapping=EXTENSION_HAS_CATEGORY_MAPPING,
+    default='https://vocabs.acdh.oeaw.ac.at/archecategory/dataset'
+):
+    """ maps an object to an acdh:hasCategory value by an object's property
+        :param obj: A django model object
+        :param prop: The property providing a file extension, defaults to "fc_extension"
+        :param mapping: a dict mapping the file extension to a category
+        :param default: a default cateogry in case no match for the provided mapping
+        :return: A string with the URL of the matching category
+    """
+    category = default
+    extension = getattr(obj, prop)
+    if extension is not None:
+        category = mapping.get(extension.lower().strip(), default)
+    return category
 
 
 def get_arche_id(res, id_prop="pk", arche_uri=ARCHE_BASE_URI):
@@ -117,6 +138,7 @@ def as_arche_res(res, res_type='Resource'):
     col_graph = col_from_res(res)
     g = g + col_graph
     g.add((sub, acdh_ns.isPartOf, URIRef(col_id_from_res(res))))
+    g.add((sub, acdh_ns.hasCategory, URIRef(get_category(res))))
     for x in get_arche_fields(res):
         cur_val = x['value']
         arche_prop = x['extra_fields']['arche_prop'].strip()
