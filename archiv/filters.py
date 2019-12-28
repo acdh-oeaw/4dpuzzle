@@ -53,7 +53,7 @@ class ActorListFilter(django_filters.FilterSet):
             url="/vocabs-ac/specific-concept-ac/access",
             attrs={
                 'data-placeholder': 'Autocomplete ...',
-                'data-minimum-input-length': 3,
+                'data-minimum-input-length': 2,
                 },
         )
     )

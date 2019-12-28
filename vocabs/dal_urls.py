@@ -55,12 +55,12 @@ urlpatterns = [
         name='skos-constraint-no-hierarchy-ac',
     ),
     path(
-        r'specific-concept-ac/<str:scheme>', dal_views.SpecificConcepts.as_view(
+        r'specific-concept-ac/<str:collection>', dal_views.SpecificConceptsByCollection.as_view(
             model=SkosConcept),
         name='specific-concept-ac',
     ),
     path(
-        r'concept-by-colleciton-ac/<str:scheme>', dal_views.SpecificConceptsByCollection.as_view(
+        r'concept-by-colleciton-ac/<str:collections>', dal_views.SpecificConceptsByCollection.as_view(
             model=SkosConcept),
         name='concept-by-collection-ac',
     )
