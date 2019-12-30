@@ -127,6 +127,7 @@ VOCABS_SETTINGS = {
     'default_lang': "en"
 }
 ARCHE_BASE_URI = "https://id.acdh.oeaw.ac.at/td-archiv"
+ARCHE_LANG = 'en'
 ARCHE_PREFIX_REMOVE = r"R:/OREA-EGYPT_Puzzle4D/ARCHE-preparation/original/"
 ARCHE_CONST_MAPPINGS = [
     ('hasOwner', "https://id.acdh.oeaw.ac.at/OREA",),

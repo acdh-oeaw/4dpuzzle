@@ -16,7 +16,7 @@ from . configs import EXTENSION_HAS_CATEGORY_MAPPING
 
 ARCHE_CONST_MAPPINGS = getattr(settings, 'ARCHE_CONST_MAPPINGS', False)
 
-
+ARCHE_LANG = getattr(settings, 'ARCHE_LANG', 'en')
 ARCHE_BASE_URI = getattr(settings, 'ARCHE_BASE_URI', 'https://id.acdh.oeaw.ac.at/MYPROJECT')
 ARCHE_PREFIX_REMOVE = getattr(settings, 'ARCHE_PREFIX_REMOVE', '')
 
@@ -155,7 +155,7 @@ def col_from_res(res, arche_uri=ARCHE_BASE_URI):
     g = Graph()
     sub = URIRef(directory_to_col_id(res))
     g.add((sub, RDF.type, acdh_ns.Collection))
-    g.add((sub, acdh_ns.hasDescription, Literal(res.__class__.__doc__)))
+    g.add((sub, acdh_ns.hasDescription, Literal(res.__class__.__doc__, lang=ARCHE_LANG)))
     g.add((sub, acdh_ns.hasIdentifier, URIRef(col_id_from_res(res))))
     for const in ARCHE_CONST_MAPPINGS:
         g.add((sub, acdh_ns[const[0]], URIRef(const[1])))
@@ -168,7 +168,7 @@ def as_arche_res(res, res_type='Resource'):
     g.add((sub, RDF.type, acdh_ns[res_type]))
     g.add((sub, acdh_ns.hasIdentifier, URIRef(get_p4d_id(res))))
     g.add((
-        sub, acdh_ns.hasDescription, Literal(get_arche_desc(res))
+        sub, acdh_ns.hasDescription, Literal(get_arche_desc(res), lang=ARCHE_LANG)
     ))
     # col_graph = col_from_res(res)
     # g = g + col_graph
@@ -179,7 +179,7 @@ def as_arche_res(res, res_type='Resource'):
         arche_prop = x['extra_fields']['arche_prop'].strip()
         arche_prop_domain = ARCHE_PROPS_LOOKUP.get(arche_prop, 'No Match')
         if arche_prop_domain == 'string':
-            g.add((sub, acdh_ns[arche_prop], Literal(cur_val)))
+            g.add((sub, acdh_ns[arche_prop], Literal(cur_val, lang=ARCHE_LANG)))
         elif arche_prop_domain == 'date':
             g.add((sub, acdh_ns[arche_prop], Literal(cur_val, datatype=XSD.date)))
         else:
