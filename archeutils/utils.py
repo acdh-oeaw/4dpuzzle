@@ -61,7 +61,7 @@ def get_arche_desc(res):
                 value = f"no value provided for property {x}"
             else:
                 pass
-            lookup_dict[x] = f"**{value}**"
+            lookup_dict[x] = f"'{value}'"
         desc = desc_dict.format(**lookup_dict)
         return desc
     else:
@@ -83,6 +83,21 @@ def directory_to_col_id(
     else:
         new_path = None
     return new_path
+
+
+def get_p4d_id(res, arche_uri=ARCHE_BASE_URI):
+    """ function to generate a the canonical p4d ID
+        :param res: A model object
+        :param arche_uri: A base url; should be configued in the projects settings file
+        :return: An canonical ARCHE-ID (URI)
+
+    """
+    if res.fc_filename and res.fc_directory:
+        new_path = directory_to_col_id(res)
+        if new_path.endswith('/'):
+            return f"{new_path}{res.fc_filename}"
+        else:
+            return f"{new_path}/{res.fc_filename}"
 
 
 def get_category(
@@ -151,6 +166,7 @@ def as_arche_res(res, res_type='Resource'):
     g = Graph()
     sub = URIRef(get_arche_id(res))
     g.add((sub, RDF.type, acdh_ns[res_type]))
+    g.add((sub, acdh_ns.hasIdentifier, URIRef(get_p4d_id(res))))
     g.add((
         sub, acdh_ns.hasDescription, Literal(get_arche_desc(res))
     ))
