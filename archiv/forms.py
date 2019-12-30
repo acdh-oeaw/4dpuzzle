@@ -3,6 +3,8 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit,  Layout, Fieldset, Div, MultiField, HTML
 from crispy_forms.bootstrap import Accordion, AccordionGroup
+
+from vocabs.models import SkosConcept
 from . models import (
     Actor,
     ArchaeologicalObject4DPuzzleID,
@@ -56,7 +58,13 @@ class ActorFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'name','drawer_monogram','excavation','xx_4dpuzzle','year','access',
+
+                    'name',
+                    'drawer_monogram',
+                    'excavation',
+                    'xx_4dpuzzle',
+                    'year',
+                    'access',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -70,6 +78,12 @@ class ActorFilterFormHelper(FormHelper):
 
 
 class ActorForm(forms.ModelForm):
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+
     class Meta:
         model = Actor
         fields = "__all__"
@@ -101,7 +115,19 @@ class ArchaeologicalObject4DPuzzleIDFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','archaeological_object_id','archaeological_object_4dpuzzle_id','archaeological_object_comment','excavation_object_id','position','stratum_comment','digitisation_comment','archaeological_object_type','stratum_id_relative','stratum_id_absolute_prepub','phase_id',
+
+                    'creator_metadata',
+                    'archaeological_object_id',
+                    'archaeological_object_4dpuzzle_id',
+                    'archaeological_object_comment',
+                    'excavation_object_id',
+                    'position',
+                    'stratum_comment',
+                    'digitisation_comment',
+                    'archaeological_object_type',
+                    'stratum_id_relative',
+                    'stratum_id_absolute_prepub',
+                    'phase_id',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -115,6 +141,27 @@ class ArchaeologicalObject4DPuzzleIDFilterFormHelper(FormHelper):
 
 
 class ArchaeologicalObject4DPuzzleIDForm(forms.ModelForm):
+    archaeological_object_type = forms.ModelChoiceField(
+        required=False,
+        label="Archaeological object type",
+        queryset=SkosConcept.objects.filter(collection__name="archaeological_object_type")
+    )
+    stratum_id_relative = forms.ModelChoiceField(
+        required=False,
+        label="Stratum ID relative",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_id_relative")
+    )
+    stratum_id_absolute_prepub = forms.ModelChoiceField(
+        required=False,
+        label="Stratum ID absolute pre publication",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_id_absolute_prepub")
+    )
+    phase_id = forms.ModelChoiceField(
+        required=False,
+        label="Phase ID",
+        queryset=SkosConcept.objects.filter(collection__name="phase_id")
+    )
+
     class Meta:
         model = ArchaeologicalObject4DPuzzleID
         fields = "__all__"
@@ -146,7 +193,20 @@ class ArchaeologicalObjectIDFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','archaeological_object_id','archaeological_object_comment','excavation_object_id','position','stratum_id_relative','stratum_id_absolute_prepub','stratum_comment','phase_id','corresponding_to_archaeological_object_id','relatedto','digitisation_comment','archaeological_object_type',
+
+                    'creator_metadata',
+                    'archaeological_object_id',
+                    'archaeological_object_comment',
+                    'excavation_object_id',
+                    'position',
+                    'stratum_id_relative',
+                    'stratum_id_absolute_prepub',
+                    'stratum_comment',
+                    'phase_id',
+                    'corresponding_to_archaeological_object_id',
+                    'relatedto',
+                    'digitisation_comment',
+                    'archaeological_object_type',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -160,6 +220,12 @@ class ArchaeologicalObjectIDFilterFormHelper(FormHelper):
 
 
 class ArchaeologicalObjectIDForm(forms.ModelForm):
+    archaeological_object_type = forms.ModelChoiceField(
+        required=False,
+        label="Archaeological object type",
+        queryset=SkosConcept.objects.filter(collection__name="archaeological_object_type")
+    )
+
     class Meta:
         model = ArchaeologicalObjectID
         fields = "__all__"
@@ -191,7 +257,23 @@ class ArchiveINFFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_archivalobject','filename','document_id','document_title','creation_year_original','creation_date_archivalobject','creation_date_metadata','comment','document_type','relatedto','file_extension_archivalobject','copyright','access','site_id',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_archivalobject',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'creation_year_original',
+                    'creation_date_archivalobject',
+                    'creation_date_metadata',
+                    'comment',
+                    'document_type',
+                    'relatedto',
+                    'file_extension_archivalobject',
+                    'copyright',
+                    'access',
+                    'site_id',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -205,6 +287,27 @@ class ArchiveINFFilterFormHelper(FormHelper):
 
 
 class ArchiveINFForm(forms.ModelForm):
+    file_extension_archivalobject = forms.ModelChoiceField(
+        required=False,
+        label="File extension of archival object",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_archivalobject")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+
     class Meta:
         model = ArchiveINF
         fields = "__all__"
@@ -236,7 +339,30 @@ class AutoCADFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_archivalobject','filename','document_id','document_title','path_filename_old','path_filename_arche','creation_year_original','creation_date_archivalobject','creation_date_metadata','excavation_object_id','archaeological_object_id','relatedto','original_comment','digitisation_comment','document_type','file_extension_original','file_extension_archivalobject','copyright','access','site_id','excavation_post_excavation',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_archivalobject',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'path_filename_old',
+                    'path_filename_arche',
+                    'creation_year_original',
+                    'creation_date_archivalobject',
+                    'creation_date_metadata',
+                    'excavation_object_id',
+                    'archaeological_object_id',
+                    'relatedto',
+                    'original_comment',
+                    'digitisation_comment',
+                    'document_type',
+                    'file_extension_original',
+                    'file_extension_archivalobject',
+                    'copyright',
+                    'access',
+                    'site_id',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -250,6 +376,37 @@ class AutoCADFilterFormHelper(FormHelper):
 
 
 class AutoCADForm(forms.ModelForm):
+    file_extension_original = forms.ModelChoiceField(
+        required=False,
+        label="File extension of original",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_original")
+    )
+    file_extension_archivalobject = forms.ModelChoiceField(
+        required=False,
+        label="File extension of archival object",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_archivalobject")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = AutoCAD
         fields = "__all__"
@@ -281,7 +438,37 @@ class ConvolutecardsFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_scan','document_type','excavation_id','creation_year_original','season','filename_document_id','convolute_inventory_number','convolute_subnumber','filename_old','creation_date_original','creation_date_scan','creation_date_metadata','storage_folder_original','resolution_scan_dpi','month','position','lowest_height_meters_standard_elevation_zero','maximum_height_meters_standard_elevation_zero','original_comment','digitisation_comment','file_extension','copyright','access','site_id','equipment_scan','source_original_copy_edited_copy','original_material','excavation_post_excavation',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_scan',
+                    'document_type',
+                    'excavation_id',
+                    'creation_year_original',
+                    'season',
+                    'filename_document_id',
+                    'convolute_inventory_number',
+                    'convolute_subnumber',
+                    'filename_old',
+                    'creation_date_original',
+                    'creation_date_scan',
+                    'creation_date_metadata',
+                    'storage_folder_original',
+                    'resolution_scan_dpi',
+                    'month',
+                    'position',
+                    'lowest_height_meters_standard_elevation_zero',
+                    'maximum_height_meters_standard_elevation_zero',
+                    'original_comment',
+                    'digitisation_comment',
+                    'file_extension',
+                    'copyright',
+                    'access',
+                    'site_id',
+                    'equipment_scan',
+                    'source_original_copy_edited_copy',
+                    'original_material',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -295,6 +482,47 @@ class ConvolutecardsFilterFormHelper(FormHelper):
 
 
 class ConvolutecardsForm(forms.ModelForm):
+    file_extension = forms.ModelChoiceField(
+        required=False,
+        label="File extension",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    equipment_scan = forms.ModelChoiceField(
+        required=False,
+        label="Equipment used for scanning",
+        queryset=SkosConcept.objects.filter(collection__name="equipment_scan")
+    )
+    source_original_copy_edited_copy = forms.ModelChoiceField(
+        required=False,
+        label="Wheter source is a original or a copy",
+        queryset=SkosConcept.objects.filter(collection__name="source_original_copy_edited_copy")
+    )
+    original_material = forms.ModelChoiceField(
+        required=False,
+        label="Material of original document",
+        queryset=SkosConcept.objects.filter(collection__name="original_material")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = Convolutecards
         fields = "__all__"
@@ -326,7 +554,31 @@ class DatenbaseFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_archivalobject','filename','document_id','document_title','creation_year_original','creation_date_archivalobject','creation_date_metadata','path_filename_old','path_filename_arche','excavation_object_id','archaeological_object_id','relatedto','original_comment','digitisation_comment','document_type','file_extension_original','file_extension_archivalobject','copyright','access','site_id','find_material','excavation_post_excavation',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_archivalobject',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'creation_year_original',
+                    'creation_date_archivalobject',
+                    'creation_date_metadata',
+                    'path_filename_old',
+                    'path_filename_arche',
+                    'excavation_object_id',
+                    'archaeological_object_id',
+                    'relatedto',
+                    'original_comment',
+                    'digitisation_comment',
+                    'document_type',
+                    'file_extension_original',
+                    'file_extension_archivalobject',
+                    'copyright',
+                    'access',
+                    'site_id',
+                    'find_material',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -340,6 +592,42 @@ class DatenbaseFilterFormHelper(FormHelper):
 
 
 class DatenbaseForm(forms.ModelForm):
+    file_extension_original = forms.ModelChoiceField(
+        required=False,
+        label="File extension of original",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_original")
+    )
+    file_extension_archivalobject = forms.ModelChoiceField(
+        required=False,
+        label="File extension of archival object",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_archivalobject")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    find_material = forms.ModelChoiceField(
+        required=False,
+        label="Find material",
+        queryset=SkosConcept.objects.filter(collection__name="find_material")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = Datenbase
         fields = "__all__"
@@ -371,7 +659,14 @@ class Document4DPuzzleIDFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','document_type','document_id','original_4dpuzzle_id','document_title','digitisation_comment','corresponding_to',
+
+                    'creator_metadata',
+                    'document_type',
+                    'document_id',
+                    'original_4dpuzzle_id',
+                    'document_title',
+                    'digitisation_comment',
+                    'corresponding_to',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -385,6 +680,7 @@ class Document4DPuzzleIDFilterFormHelper(FormHelper):
 
 
 class Document4DPuzzleIDForm(forms.ModelForm):
+
     class Meta:
         model = Document4DPuzzleID
         fields = "__all__"
@@ -416,7 +712,14 @@ class DocumentTypesFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'document_type','document_maintype','dt_abbr','document_subtype','ds_abbr','description','analogue_borndigital',
+
+                    'document_type',
+                    'document_maintype',
+                    'dt_abbr',
+                    'document_subtype',
+                    'ds_abbr',
+                    'description',
+                    'analogue_borndigital',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -430,6 +733,12 @@ class DocumentTypesFilterFormHelper(FormHelper):
 
 
 class DocumentTypesForm(forms.ModelForm):
+    analogue_borndigital = forms.ModelChoiceField(
+        required=False,
+        label="Analogue or born-digital",
+        queryset=SkosConcept.objects.filter(collection__name="analogue_borndigital")
+    )
+
     class Meta:
         model = DocumentTypes
         fields = "__all__"
@@ -461,7 +770,20 @@ class ExcavationObjectIDFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','excavation_object_id','profile_orientation','excavation_id','year','season','part_of_excavation_object_id','digitisation_comment','excavation_object_type','site_id','area','square_trench','planum',
+
+                    'creator_metadata',
+                    'excavation_object_id',
+                    'profile_orientation',
+                    'excavation_id',
+                    'year',
+                    'season',
+                    'part_of_excavation_object_id',
+                    'digitisation_comment',
+                    'excavation_object_type',
+                    'site_id',
+                    'area',
+                    'square_trench',
+                    'planum',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -475,6 +797,32 @@ class ExcavationObjectIDFilterFormHelper(FormHelper):
 
 
 class ExcavationObjectIDForm(forms.ModelForm):
+    excavation_object_type = forms.ModelChoiceField(
+        required=False,
+        label="Type of Excavation Object",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_object_type")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    area = forms.ModelChoiceField(
+        required=False,
+        label="Area",
+        queryset=SkosConcept.objects.filter(collection__name="area")
+    )
+    square_trench = forms.ModelChoiceField(
+        required=False,
+        label="Square trench",
+        queryset=SkosConcept.objects.filter(collection__name="square_trench")
+    )
+    planum = forms.ModelChoiceField(
+        required=False,
+        label="Planum",
+        queryset=SkosConcept.objects.filter(collection__name="planum")
+    )
+
     class Meta:
         model = ExcavationObjectID
         fields = "__all__"
@@ -506,7 +854,14 @@ class ExcavationSeasonsFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'excavation_id','grabungskampagnen','year','season','access',
+
+                    'excavation_id',
+                    'grabungskampagnen',
+
+
+                    'year',
+                    'season',
+                    'access',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -520,6 +875,17 @@ class ExcavationSeasonsFilterFormHelper(FormHelper):
 
 
 class ExcavationSeasonsForm(forms.ModelForm):
+    season = forms.ModelChoiceField(
+        required=False,
+        label="Season",
+        queryset=SkosConcept.objects.filter(collection__name="season")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+
     class Meta:
         model = ExcavationSeasons
         fields = "__all__"
@@ -551,7 +917,44 @@ class FielddrawingFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'filename','document_id','document_title','document_type','creation_date_original','creation_date_scan','creation_date_metadata','creator_metadata','creator_original','storage_folder_original','resolution_scan_ppi','original_material','original_inventory_number','find_inventory_number','amendment_drawn_by','amendment_date','drawer_monogram','excavation_object_id','archaeological_object_id','stratum_id_relative','stratum_id_absolute_prepub','stratum_comment','month','scale','original_comment','digitisation_comment','excavation_id','creation_year_original','season','file_extension','copyright','access','site_id','equipment_scan','source_original_copy_edited_copy','creator_scan','excavation_post_excavation',
+
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'document_type',
+                    'creation_date_original',
+                    'creation_date_scan',
+                    'creation_date_metadata',
+                    'creator_metadata',
+                    'creator_original',
+                    'storage_folder_original',
+                    'resolution_scan_ppi',
+                    'original_material',
+                    'original_inventory_number',
+                    'find_inventory_number',
+                    'amendment_drawn_by',
+                    'amendment_date',
+                    'drawer_monogram',
+                    'excavation_object_id',
+                    'archaeological_object_id',
+                    'stratum_id_relative',
+                    'stratum_id_absolute_prepub',
+                    'stratum_comment',
+                    'month',
+                    'scale',
+                    'original_comment',
+                    'digitisation_comment',
+                    'excavation_id',
+                    'creation_year_original',
+                    'season',
+                    'file_extension',
+                    'copyright',
+                    'access',
+                    'site_id',
+                    'equipment_scan',
+                    'source_original_copy_edited_copy',
+                    'creator_scan',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -565,6 +968,52 @@ class FielddrawingFilterFormHelper(FormHelper):
 
 
 class FielddrawingForm(forms.ModelForm):
+    original_material = forms.ModelMultipleChoiceField(
+        required=False,
+        label="Material of original document",
+        queryset=SkosConcept.objects.filter(collection__name="original_material")
+    )
+    file_extension = forms.ModelChoiceField(
+        required=False,
+        label="File extension",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    equipment_scan = forms.ModelChoiceField(
+        required=False,
+        label="Scanner",
+        queryset=SkosConcept.objects.filter(collection__name="equipment_scan")
+    )
+    source_original_copy_edited_copy = forms.ModelChoiceField(
+        required=False,
+        label="Scan was either made from an original fielddrawing, a copy of a fielddrawing or copy of a fielddrawing that was edited",
+        queryset=SkosConcept.objects.filter(collection__name="source_original_copy_edited_copy")
+    )
+    creator_scan = forms.ModelChoiceField(
+        required=False,
+        label="Creator of scan",
+        queryset=SkosConcept.objects.filter(collection__name="creator_scan")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = Fielddrawing
         fields = "__all__"
@@ -596,7 +1045,23 @@ class FilmFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'film_id','film_number','addition_film_identifier','foto_numbers_missing','decomposition_phenomenon','acetic_acid_smell','storage_folder_original','original_comment','digitisation_comment','document_type','excavation_id','creation_year_original','film_format','film_brand','equipment_camera_brand','original_material',
+
+                    'film_id',
+                    'film_number',
+                    'addition_film_identifier',
+                    'foto_numbers_missing',
+                    'decomposition_phenomenon',
+                    'acetic_acid_smell',
+                    'storage_folder_original',
+                    'original_comment',
+                    'digitisation_comment',
+                    'document_type',
+                    'excavation_id',
+                    'creation_year_original',
+                    'film_format',
+                    'film_brand',
+                    'equipment_camera_brand',
+                    'original_material',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -610,6 +1075,27 @@ class FilmFilterFormHelper(FormHelper):
 
 
 class FilmForm(forms.ModelForm):
+    film_format = forms.ModelChoiceField(
+        required=False,
+        label="Film format",
+        queryset=SkosConcept.objects.filter(collection__name="film_format")
+    )
+    film_brand = forms.ModelChoiceField(
+        required=False,
+        label="Film brand",
+        queryset=SkosConcept.objects.filter(collection__name="film_brand")
+    )
+    equipment_camera_brand = forms.ModelChoiceField(
+        required=False,
+        label="Equipment camera brand",
+        queryset=SkosConcept.objects.filter(collection__name="equipment_camera_brand")
+    )
+    original_material = forms.ModelChoiceField(
+        required=False,
+        label="Material of original document",
+        queryset=SkosConcept.objects.filter(collection__name="original_material")
+    )
+
     class Meta:
         model = Film
         fields = "__all__"
@@ -641,7 +1127,36 @@ class FinddrawingFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_scan','document_type','find_inventory_number','filename','document_id','document_title','filename_old','creation_date_original','creation_year_original','creation_date_scan','convolute_inventory_number','creation_date_metadata','bone_stone_inventory_number','storage_folder_original','equipment','resolution_scan_dpi','find_date','rendered_in_ink','original_comment','digitisation_comment','file_extension','copyright','access','site_id','source_original_copy_edited_copy','original_material','excavation_post_excavation',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_scan',
+                    'document_type',
+                    'find_inventory_number',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'filename_old',
+                    'creation_date_original',
+                    'creation_year_original',
+                    'creation_date_scan',
+                    'convolute_inventory_number',
+                    'creation_date_metadata',
+                    'bone_stone_inventory_number',
+                    'storage_folder_original',
+                    'equipment',
+                    'resolution_scan_dpi',
+                    'find_date',
+                    'rendered_in_ink',
+                    'original_comment',
+                    'digitisation_comment',
+                    'file_extension',
+                    'copyright',
+                    'access',
+                    'site_id',
+                    'source_original_copy_edited_copy',
+                    'original_material',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -655,6 +1170,42 @@ class FinddrawingFilterFormHelper(FormHelper):
 
 
 class FinddrawingForm(forms.ModelForm):
+    file_extension = forms.ModelChoiceField(
+        required=False,
+        label="File extension ",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    source_original_copy_edited_copy = forms.ModelChoiceField(
+        required=False,
+        label="Wheter source is a original or a copy",
+        queryset=SkosConcept.objects.filter(collection__name="source_original_copy_edited_copy")
+    )
+    original_material = forms.ModelChoiceField(
+        required=False,
+        label="Material of original document",
+        queryset=SkosConcept.objects.filter(collection__name="original_material")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = Finddrawing
         fields = "__all__"
@@ -686,7 +1237,36 @@ class FindsheetsFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_scan','archaeological_object_id','document_type','find_inventory_number','convolute_inventory_number','bone_stone_inventory_number','filename','document_id','document_title','filename_old','creation_date_original','creation_year_original','creation_date_scan','creation_date_metadata','resolution_scan_dpi','excavation_object_id','original_comment','digitisation_comment','file_extension','copyright','access','storage_original','site_id','equipment_scan','source_original_copy_edited_copy','original_material','excavation_post_excavation',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_scan',
+                    'archaeological_object_id',
+                    'document_type',
+                    'find_inventory_number',
+                    'convolute_inventory_number',
+                    'bone_stone_inventory_number',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'filename_old',
+                    'creation_date_original',
+                    'creation_year_original',
+                    'creation_date_scan',
+                    'creation_date_metadata',
+                    'resolution_scan_dpi',
+                    'excavation_object_id',
+                    'original_comment',
+                    'digitisation_comment',
+                    'file_extension',
+                    'copyright',
+                    'access',
+                    'storage_original',
+                    'site_id',
+                    'equipment_scan',
+                    'source_original_copy_edited_copy',
+                    'original_material',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -700,6 +1280,52 @@ class FindsheetsFilterFormHelper(FormHelper):
 
 
 class FindsheetsForm(forms.ModelForm):
+    file_extension = forms.ModelChoiceField(
+        required=False,
+        label="File extension ",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    storage_original = forms.ModelChoiceField(
+        required=False,
+        label="Storage of original document",
+        queryset=SkosConcept.objects.filter(collection__name="storage_original")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    equipment_scan = forms.ModelChoiceField(
+        required=False,
+        label="Equipment for scan",
+        queryset=SkosConcept.objects.filter(collection__name="equipment_scan")
+    )
+    source_original_copy_edited_copy = forms.ModelChoiceField(
+        required=False,
+        label="Wheter source is a original or a copy",
+        queryset=SkosConcept.objects.filter(collection__name="source_original_copy_edited_copy")
+    )
+    original_material = forms.ModelChoiceField(
+        required=False,
+        label="Material of original document",
+        queryset=SkosConcept.objects.filter(collection__name="original_material")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = Findsheets
         fields = "__all__"
@@ -731,7 +1357,24 @@ class FotoborndigitalFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','folder_name','folder_id','folder_title','folder_name_old','path_filename_old','path_filename_arche','creation_date_metadata','find_inventory_number_from_to','excavation_object_id','creation_year_original','original_comment','digitisation_comment','document_type','copyright','access','site_id',
+
+                    'creator_metadata',
+                    'folder_name',
+                    'folder_id',
+                    'folder_title',
+                    'folder_name_old',
+                    'path_filename_old',
+                    'path_filename_arche',
+                    'creation_date_metadata',
+                    'find_inventory_number_from_to',
+                    'excavation_object_id',
+                    'creation_year_original',
+                    'original_comment',
+                    'digitisation_comment',
+                    'document_type',
+                    'copyright',
+                    'access',
+                    'site_id',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -745,6 +1388,22 @@ class FotoborndigitalFilterFormHelper(FormHelper):
 
 
 class FotoborndigitalForm(forms.ModelForm):
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+
     class Meta:
         model = Fotoborndigital
         fields = "__all__"
@@ -776,7 +1435,41 @@ class FotosgescanntFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_scan','filename','document_id','document_title','filename_old','film_number','photo_number','creation_date_original','excavation_id','creation_year_original','creation_date_scan','creation_date_metadata','document_type','resolution_scan_ppi','pixel_size','find_inventory_number','excavation_object_id','archaeological_object_id','season','original_comment','digitisation_comment','film_id','file_extension','copyright','access','site_id','equipment_scan','source_original_copy_edited_copy','archaeological_object_type','find_type','find_material','excavation_post_excavation',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_scan',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'filename_old',
+                    'film_number',
+                    'photo_number',
+                    'creation_date_original',
+                    'excavation_id',
+                    'creation_year_original',
+                    'creation_date_scan',
+                    'creation_date_metadata',
+                    'document_type',
+                    'resolution_scan_ppi',
+                    'pixel_size',
+                    'find_inventory_number',
+                    'excavation_object_id',
+                    'archaeological_object_id',
+                    'season',
+                    'original_comment',
+                    'digitisation_comment',
+                    'film_id',
+                    'file_extension',
+                    'copyright',
+                    'access',
+                    'site_id',
+                    'equipment_scan',
+                    'source_original_copy_edited_copy',
+                    'archaeological_object_type',
+                    'find_type',
+                    'find_material',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -790,6 +1483,57 @@ class FotosgescanntFilterFormHelper(FormHelper):
 
 
 class FotosgescanntForm(forms.ModelForm):
+    file_extension = forms.ModelChoiceField(
+        required=False,
+        label="File extension of scan",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    equipment_scan = forms.ModelChoiceField(
+        required=False,
+        label="Equipment used for scanning",
+        queryset=SkosConcept.objects.filter(collection__name="equipment_scan")
+    )
+    source_original_copy_edited_copy = forms.ModelChoiceField(
+        required=False,
+        label="Wheter source is a original or a copy",
+        queryset=SkosConcept.objects.filter(collection__name="source_original_copy_edited_copy")
+    )
+    archaeological_object_type = forms.ModelChoiceField(
+        required=False,
+        label="Archeological object type",
+        queryset=SkosConcept.objects.filter(collection__name="archaeological_object_type")
+    )
+    find_type = forms.ModelChoiceField(
+        required=False,
+        label="Find type",
+        queryset=SkosConcept.objects.filter(collection__name="find_type")
+    )
+    find_material = forms.ModelChoiceField(
+        required=False,
+        label="Find material",
+        queryset=SkosConcept.objects.filter(collection__name="find_material")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = Fotosgescannt
         fields = "__all__"
@@ -821,7 +1565,27 @@ class Fundinventar4DPuzzleIDFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'excavation_object_id','find_inventory_4dpuzzle_number','find_local_number','convolute_inventory_number','corresponding_to_inventory_number','find_comment','stratum_comment','find_date','storage_find','relatedto','find_material','digitisation_comment','find_type','access','uncertainty_excavation_digitisation','creator_metadata','archaeological_object_id','stratum_id_relative','stratum_id_absolute_prepub','phase_id',
+
+                    'excavation_object_id',
+                    'find_inventory_4dpuzzle_number',
+                    'find_local_number',
+                    'convolute_inventory_number',
+                    'corresponding_to_inventory_number',
+                    'find_comment',
+                    'stratum_comment',
+                    'find_date',
+                    'storage_find',
+                    'relatedto',
+                    'find_material',
+                    'digitisation_comment',
+                    'find_type',
+                    'access',
+                    'uncertainty_excavation_digitisation',
+                    'creator_metadata',
+                    'archaeological_object_id',
+                    'stratum_id_relative',
+                    'stratum_id_absolute_prepub',
+                    'phase_id',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -835,6 +1599,57 @@ class Fundinventar4DPuzzleIDFilterFormHelper(FormHelper):
 
 
 class Fundinventar4DPuzzleIDForm(forms.ModelForm):
+    relatedto = forms.ModelMultipleChoiceField(
+        required=False,
+        label="File is related to other TD resources",
+        queryset=SkosConcept.objects.filter(collection__name="relatedto")
+    )
+    find_material = forms.ModelChoiceField(
+        required=False,
+        label="Find material",
+        queryset=SkosConcept.objects.filter(collection__name="find_material")
+    )
+    find_type = forms.ModelChoiceField(
+        required=False,
+        label="Find type",
+        queryset=SkosConcept.objects.filter(collection__name="find_type")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    uncertainty_excavation_digitisation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or digital",
+        queryset=SkosConcept.objects.filter(collection__name="uncertainty_excavation_digitisation")
+    )
+    creator_metadata = forms.ModelChoiceField(
+        required=False,
+        label="Creator of metadata",
+        queryset=SkosConcept.objects.filter(collection__name="creator_metadata")
+    )
+    archaeological_object_id = forms.ModelChoiceField(
+        required=False,
+        label="Archaeological object ID",
+        queryset=SkosConcept.objects.filter(collection__name="archaeological_object_id")
+    )
+    stratum_id_relative = forms.ModelChoiceField(
+        required=False,
+        label="Stratum ID relative",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_id_relative")
+    )
+    stratum_id_absolute_prepub = forms.ModelChoiceField(
+        required=False,
+        label="Stratum ID absolute pre publication",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_id_absolute_prepub")
+    )
+    phase_id = forms.ModelChoiceField(
+        required=False,
+        label="Phase ID",
+        queryset=SkosConcept.objects.filter(collection__name="phase_id")
+    )
+
     class Meta:
         model = Fundinventar4DPuzzleID
         fields = "__all__"
@@ -866,7 +1681,27 @@ class FundinventarInventarnummernFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','archaeological_object_id','corresponding_to_inventory_number','find_inventory_number','find_local_number','convolute_inventory_number','find_comment','excavation_object_id','find_material','find_type','stratum_comment','stratum_id_relative','find_date','storage_find','stratum_id_absolute_prepub','phase_id','relatedto','access','digitisation_comment','uncertainty_excavation_digitisation',
+
+                    'creator_metadata',
+                    'archaeological_object_id',
+                    'corresponding_to_inventory_number',
+                    'find_inventory_number',
+                    'find_local_number',
+                    'convolute_inventory_number',
+                    'find_comment',
+                    'excavation_object_id',
+                    'find_material',
+                    'find_type',
+                    'stratum_comment',
+                    'stratum_id_relative',
+                    'find_date',
+                    'storage_find',
+                    'stratum_id_absolute_prepub',
+                    'phase_id',
+                    'relatedto',
+                    'access',
+                    'digitisation_comment',
+                    'uncertainty_excavation_digitisation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -880,6 +1715,47 @@ class FundinventarInventarnummernFilterFormHelper(FormHelper):
 
 
 class FundinventarInventarnummernForm(forms.ModelForm):
+    find_material = forms.ModelChoiceField(
+        required=False,
+        label="Find material",
+        queryset=SkosConcept.objects.filter(collection__name="find_material")
+    )
+    find_type = forms.ModelChoiceField(
+        required=False,
+        label="Find type",
+        queryset=SkosConcept.objects.filter(collection__name="find_type")
+    )
+    stratum_id_relative = forms.ModelChoiceField(
+        required=False,
+        label="Stratum ID relative",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_id_relative")
+    )
+    stratum_id_absolute_prepub = forms.ModelChoiceField(
+        required=False,
+        label="Stratum ID absolute pre publication",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_id_absolute_prepub")
+    )
+    phase_id = forms.ModelChoiceField(
+        required=False,
+        label="Phase ID",
+        queryset=SkosConcept.objects.filter(collection__name="phase_id")
+    )
+    relatedto = forms.ModelMultipleChoiceField(
+        required=False,
+        label="File is related to other TD resources",
+        queryset=SkosConcept.objects.filter(collection__name="relatedto")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    uncertainty_excavation_digitisation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or digital",
+        queryset=SkosConcept.objects.filter(collection__name="uncertainty_excavation_digitisation")
+    )
+
     class Meta:
         model = FundinventarInventarnummern
         fields = "__all__"
@@ -911,7 +1787,27 @@ class FundinventarKonvolutnummernFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'convolute_inventory_number','convolute_subnumber','find_local_number','corresponding_to_inventory_number','find_material','find_comment','excavation_object_id','archaeological_object_id','find_type','stratum_id_relative','stratum_comment','stratum_id_absolute_prepub','find_date','phase_id','storage_find','access','relatedto','uncertainty_excavation_digitisation','digitisation_comment','creator_metadata',
+
+                    'convolute_inventory_number',
+                    'convolute_subnumber',
+                    'find_local_number',
+                    'corresponding_to_inventory_number',
+                    'find_material',
+                    'find_comment',
+                    'excavation_object_id',
+                    'archaeological_object_id',
+                    'find_type',
+                    'stratum_id_relative',
+                    'stratum_comment',
+                    'stratum_id_absolute_prepub',
+                    'find_date',
+                    'phase_id',
+                    'storage_find',
+                    'access',
+                    'relatedto',
+                    'uncertainty_excavation_digitisation',
+                    'digitisation_comment',
+                    'creator_metadata',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -925,6 +1821,52 @@ class FundinventarKonvolutnummernFilterFormHelper(FormHelper):
 
 
 class FundinventarKonvolutnummernForm(forms.ModelForm):
+    find_material = forms.ModelMultipleChoiceField(
+        required=False,
+        label="Find material",
+        queryset=SkosConcept.objects.filter(collection__name="find_material")
+    )
+    find_type = forms.ModelChoiceField(
+        required=False,
+        label="Find type",
+        queryset=SkosConcept.objects.filter(collection__name="find_type")
+    )
+    stratum_id_relative = forms.ModelChoiceField(
+        required=False,
+        label="Stratum ID relative",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_id_relative")
+    )
+    stratum_id_absolute_prepub = forms.ModelChoiceField(
+        required=False,
+        label="Stratum ID absolute pre publication",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_id_absolute_prepub")
+    )
+    phase_id = forms.ModelChoiceField(
+        required=False,
+        label="Phase ID",
+        queryset=SkosConcept.objects.filter(collection__name="phase_id")
+    )
+    storage_find = forms.ModelChoiceField(
+        required=False,
+        label="Storage of find",
+        queryset=SkosConcept.objects.filter(collection__name="storage_find")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    uncertainty_excavation_digitisation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or digital",
+        queryset=SkosConcept.objects.filter(collection__name="uncertainty_excavation_digitisation")
+    )
+    creator_metadata = forms.ModelChoiceField(
+        required=False,
+        label="Creator of metadata",
+        queryset=SkosConcept.objects.filter(collection__name="creator_metadata")
+    )
+
     class Meta:
         model = FundinventarKonvolutnummern
         fields = "__all__"
@@ -956,7 +1898,27 @@ class FundinventarMaterialprobenFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','archaeological_object_id','relatedto','material_sample_inventory_number','find_local_number','convolute_inventory_number','corresponding_to_inventory_number','find_material','find_comment','excavation_object_id','find_type','stratum_id_relative','stratum_id_absolute_prepub','stratum_comment','phase_id','find_year','storage_find','access','uncertainty_excavation_digitisation','digitisation_comment',
+
+                    'creator_metadata',
+                    'archaeological_object_id',
+                    'relatedto',
+                    'material_sample_inventory_number',
+                    'find_local_number',
+                    'convolute_inventory_number',
+                    'corresponding_to_inventory_number',
+                    'find_material',
+                    'find_comment',
+                    'excavation_object_id',
+                    'find_type',
+                    'stratum_id_relative',
+                    'stratum_id_absolute_prepub',
+                    'stratum_comment',
+                    'phase_id',
+                    'find_year',
+                    'storage_find',
+                    'access',
+                    'uncertainty_excavation_digitisation',
+                    'digitisation_comment',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -970,6 +1932,47 @@ class FundinventarMaterialprobenFilterFormHelper(FormHelper):
 
 
 class FundinventarMaterialprobenForm(forms.ModelForm):
+    find_material = forms.ModelChoiceField(
+        required=False,
+        label="Find material",
+        queryset=SkosConcept.objects.filter(collection__name="find_material")
+    )
+    find_type = forms.ModelChoiceField(
+        required=False,
+        label="Find type",
+        queryset=SkosConcept.objects.filter(collection__name="find_type")
+    )
+    stratum_id_relative = forms.ModelChoiceField(
+        required=False,
+        label="Stratum ID relative",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_id_relative")
+    )
+    stratum_id_absolute_prepub = forms.ModelChoiceField(
+        required=False,
+        label="Stratum ID absolute pre publication",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_id_absolute_prepub")
+    )
+    phase_id = forms.ModelChoiceField(
+        required=False,
+        label="Phase ID",
+        queryset=SkosConcept.objects.filter(collection__name="phase_id")
+    )
+    storage_find = forms.ModelChoiceField(
+        required=False,
+        label="Storage find",
+        queryset=SkosConcept.objects.filter(collection__name="storage_find")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    uncertainty_excavation_digitisation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or digital",
+        queryset=SkosConcept.objects.filter(collection__name="uncertainty_excavation_digitisation")
+    )
+
     class Meta:
         model = FundinventarMaterialproben
         fields = "__all__"
@@ -1001,7 +2004,27 @@ class FundinventarSteininventarFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','archaeological_object_id','find_material','find_type','find_inventory_number','find_local_number','convolute_inventory_number','corresponding_to_inventory_number','stratum_id_relative','stratum_id_absolute_prepub','find_comment','excavation_object_id','phase_id','access','storage_find','stratum_comment','uncertainty_excavation_digitisation','find_date','relatedto','digitisation_comment',
+
+                    'creator_metadata',
+                    'archaeological_object_id',
+                    'find_material',
+                    'find_type',
+                    'find_inventory_number',
+                    'find_local_number',
+                    'convolute_inventory_number',
+                    'corresponding_to_inventory_number',
+                    'stratum_id_relative',
+                    'stratum_id_absolute_prepub',
+                    'find_comment',
+                    'excavation_object_id',
+                    'phase_id',
+                    'access',
+                    'storage_find',
+                    'stratum_comment',
+                    'uncertainty_excavation_digitisation',
+                    'find_date',
+                    'relatedto',
+                    'digitisation_comment',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -1015,6 +2038,52 @@ class FundinventarSteininventarFilterFormHelper(FormHelper):
 
 
 class FundinventarSteininventarForm(forms.ModelForm):
+    find_material = forms.ModelChoiceField(
+        required=False,
+        label="Find material",
+        queryset=SkosConcept.objects.filter(collection__name="find_material")
+    )
+    find_type = forms.ModelChoiceField(
+        required=False,
+        label="Find type",
+        queryset=SkosConcept.objects.filter(collection__name="find_type")
+    )
+    stratum_id_relative = forms.ModelChoiceField(
+        required=False,
+        label="Stratum ID relative",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_id_relative")
+    )
+    stratum_id_absolute_prepub = forms.ModelChoiceField(
+        required=False,
+        label="Stratum ID absolute pre publication",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_id_absolute_prepub")
+    )
+    phase_id = forms.ModelChoiceField(
+        required=False,
+        label="Phase ID",
+        queryset=SkosConcept.objects.filter(collection__name="phase_id")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    storage_find = forms.ModelChoiceField(
+        required=False,
+        label="Storage of find",
+        queryset=SkosConcept.objects.filter(collection__name="storage_find")
+    )
+    uncertainty_excavation_digitisation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or digital",
+        queryset=SkosConcept.objects.filter(collection__name="uncertainty_excavation_digitisation")
+    )
+    relatedto = forms.ModelMultipleChoiceField(
+        required=False,
+        label="File is related to other TD resources",
+        queryset=SkosConcept.objects.filter(collection__name="relatedto")
+    )
+
     class Meta:
         model = FundinventarSteininventar
         fields = "__all__"
@@ -1046,7 +2115,31 @@ class GISFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_archivalobject','document_type','filename','document_id','document_title','path_filename_old','path_filename_arche','creation_date_original','software_used','creation_date_archivalobject','creation_date_metadata','excavation_object_id','archaeological_object_id','relatedto','original_comment','digitisation_comment','file_extension_original','file_extension_archivalobject','copyright','access','site_id','excavation_post_excavation',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_archivalobject',
+                    'document_type',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'path_filename_old',
+                    'path_filename_arche',
+                    'creation_date_original',
+                    'software_used',
+                    'creation_date_archivalobject',
+                    'creation_date_metadata',
+                    'excavation_object_id',
+                    'archaeological_object_id',
+                    'relatedto',
+                    'original_comment',
+                    'digitisation_comment',
+                    'file_extension_original',
+                    'file_extension_archivalobject',
+                    'copyright',
+                    'access',
+                    'site_id',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -1060,6 +2153,37 @@ class GISFilterFormHelper(FormHelper):
 
 
 class GISForm(forms.ModelForm):
+    file_extension_original = forms.ModelChoiceField(
+        required=False,
+        label="File extension of original document",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_original")
+    )
+    file_extension_archivalobject = forms.ModelChoiceField(
+        required=False,
+        label="File extension of archival object",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_archivalobject")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = GIS
         fields = "__all__"
@@ -1091,7 +2215,30 @@ class GeophysicsFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_archivalobject','document_type','filename','document_id','document_title','filename_old','creation_date_original','creation_date_archivalobject','creation_date_metadata','path_filename_old','excavation_object_id','original_comment','digitisation_comment','file_extension_original','file_extension_archivalobject','method','equipment','copyright','access','site_id','excavation_post_excavation',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_archivalobject',
+                    'document_type',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'filename_old',
+                    'creation_date_original',
+                    'creation_date_archivalobject',
+                    'creation_date_metadata',
+                    'path_filename_old',
+                    'excavation_object_id',
+                    'original_comment',
+                    'digitisation_comment',
+                    'file_extension_original',
+                    'file_extension_archivalobject',
+                    'method',
+                    'equipment',
+                    'copyright',
+                    'access',
+                    'site_id',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -1105,6 +2252,47 @@ class GeophysicsFilterFormHelper(FormHelper):
 
 
 class GeophysicsForm(forms.ModelForm):
+    file_extension_original = forms.ModelChoiceField(
+        required=False,
+        label="File extension of original document",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_original")
+    )
+    file_extension_archivalobject = forms.ModelChoiceField(
+        required=False,
+        label="File extension of archival object",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_archivalobject")
+    )
+    method = forms.ModelChoiceField(
+        required=False,
+        label="Method",
+        queryset=SkosConcept.objects.filter(collection__name="method")
+    )
+    equipment = forms.ModelChoiceField(
+        required=False,
+        label="Equipment",
+        queryset=SkosConcept.objects.filter(collection__name="equipment")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = Geophysics
         fields = "__all__"
@@ -1136,7 +2324,33 @@ class InventorybooksFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_scan','document_type','convolute_inventory_number','bone_stone_inventory_number','filename','document_id','document_title','filename_old','creation_date_original','creation_year_original','creation_date_scan','creation_date_metadata','storage_folder_original','resolution_scan_dpi','find_inventory_number','original_comment','file_extension','copyright','access','site_id','equipment_scan','source_original_copy_edited_copy','original_material','excavation_post_excavation',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_scan',
+                    'document_type',
+                    'convolute_inventory_number',
+                    'bone_stone_inventory_number',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'filename_old',
+                    'creation_date_original',
+                    'creation_year_original',
+                    'creation_date_scan',
+                    'creation_date_metadata',
+                    'storage_folder_original',
+                    'resolution_scan_dpi',
+                    'find_inventory_number',
+                    'original_comment',
+                    'file_extension',
+                    'copyright',
+                    'access',
+                    'site_id',
+                    'equipment_scan',
+                    'source_original_copy_edited_copy',
+                    'original_material',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -1150,6 +2364,47 @@ class InventorybooksFilterFormHelper(FormHelper):
 
 
 class InventorybooksForm(forms.ModelForm):
+    file_extension = forms.ModelChoiceField(
+        required=False,
+        label="File extension",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    equipment_scan = forms.ModelChoiceField(
+        required=False,
+        label="Equipment used for scanning",
+        queryset=SkosConcept.objects.filter(collection__name="equipment_scan")
+    )
+    source_original_copy_edited_copy = forms.ModelChoiceField(
+        required=False,
+        label="Wheter source is a original or a copy",
+        queryset=SkosConcept.objects.filter(collection__name="source_original_copy_edited_copy")
+    )
+    original_material = forms.ModelChoiceField(
+        required=False,
+        label="Material of original document",
+        queryset=SkosConcept.objects.filter(collection__name="original_material")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = Inventorybooks
         fields = "__all__"
@@ -1181,7 +2436,13 @@ class PhasenIDFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'phase_type','site_id','phase_id','phase_title','area','containing_phase_id',
+
+                    'phase_type',
+                    'site_id',
+                    'phase_id',
+                    'phase_title',
+                    'area',
+                    'containing_phase_id',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -1195,6 +2456,22 @@ class PhasenIDFilterFormHelper(FormHelper):
 
 
 class PhasenIDForm(forms.ModelForm):
+    phase_type = forms.ModelChoiceField(
+        required=False,
+        label="Phase type",
+        queryset=SkosConcept.objects.filter(collection__name="phase_type")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    containing_phase_id = forms.ModelMultipleChoiceField(
+        required=False,
+        label="Containing phase ID",
+        queryset=SkosConcept.objects.filter(collection__name="containing_phase_id")
+    )
+
     class Meta:
         model = PhasenID
         fields = "__all__"
@@ -1226,7 +2503,35 @@ class ProtocolsFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_scan','excavation_object_id','filename','document_id','document_title','filename_old','document_type','creation_date_original','creation_year_original','creation_date_scan','creation_date_metadata','storage_folder_original','resolution_scan_dpi','archaeological_object_id','number_of_pages','original_comment','digitisation_comment','file_extension','copyright','access','storage','site_id','equipment_scan','source_original_copy_edited_copy','original_material','excavation_post_excavation',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_scan',
+                    'excavation_object_id',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'filename_old',
+                    'document_type',
+                    'creation_date_original',
+                    'creation_year_original',
+                    'creation_date_scan',
+                    'creation_date_metadata',
+                    'storage_folder_original',
+                    'resolution_scan_dpi',
+                    'archaeological_object_id',
+                    'number_of_pages',
+                    'original_comment',
+                    'digitisation_comment',
+                    'file_extension',
+                    'copyright',
+                    'access',
+                    'storage',
+                    'site_id',
+                    'equipment_scan',
+                    'source_original_copy_edited_copy',
+                    'original_material',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -1240,6 +2545,52 @@ class ProtocolsFilterFormHelper(FormHelper):
 
 
 class ProtocolsForm(forms.ModelForm):
+    file_extension = forms.ModelChoiceField(
+        required=False,
+        label="File extension",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    storage = forms.ModelChoiceField(
+        required=False,
+        label="Storage folder of original document",
+        queryset=SkosConcept.objects.filter(collection__name="storage")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    equipment_scan = forms.ModelChoiceField(
+        required=False,
+        label="Equipment used for scanning",
+        queryset=SkosConcept.objects.filter(collection__name="equipment_scan")
+    )
+    source_original_copy_edited_copy = forms.ModelChoiceField(
+        required=False,
+        label="Wheter source is a original or a copy",
+        queryset=SkosConcept.objects.filter(collection__name="source_original_copy_edited_copy")
+    )
+    original_material = forms.ModelChoiceField(
+        required=False,
+        label="Material of original document",
+        queryset=SkosConcept.objects.filter(collection__name="original_material")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = Protocols
         fields = "__all__"
@@ -1271,7 +2622,13 @@ class StratenIDFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'stratum_type','site_id','stratum_id','stratum_title','area','containing_stratum_id',
+
+                    'stratum_type',
+                    'site_id',
+                    'stratum_id',
+                    'stratum_title',
+                    'area',
+                    'containing_stratum_id',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -1285,6 +2642,22 @@ class StratenIDFilterFormHelper(FormHelper):
 
 
 class StratenIDForm(forms.ModelForm):
+    stratum_type = forms.ModelChoiceField(
+        required=False,
+        label="Stratum type",
+        queryset=SkosConcept.objects.filter(collection__name="stratum_type")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    containing_stratum_id = forms.ModelMultipleChoiceField(
+        required=False,
+        label="Containing stratum ID",
+        queryset=SkosConcept.objects.filter(collection__name="containing_stratum_id")
+    )
+
     class Meta:
         model = StratenID
         fields = "__all__"
@@ -1316,7 +2689,30 @@ class TablesFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_archivalobject','document_type','filename','document_id','document_title','path_filename_old','creation_year_original','creation_date_archivalobject','creation_date_metadata','folder_original','excavation_object_id','archaeological_object_id','relatedto','original_comment','digitisation_comment','file_extension_original','file_extension_archivalobject','copyright','access','site_id','excavation_post_excavation',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_archivalobject',
+                    'document_type',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'path_filename_old',
+                    'creation_year_original',
+                    'creation_date_archivalobject',
+                    'creation_date_metadata',
+                    'folder_original',
+                    'excavation_object_id',
+                    'archaeological_object_id',
+                    'relatedto',
+                    'original_comment',
+                    'digitisation_comment',
+                    'file_extension_original',
+                    'file_extension_archivalobject',
+                    'copyright',
+                    'access',
+                    'site_id',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -1330,6 +2726,37 @@ class TablesFilterFormHelper(FormHelper):
 
 
 class TablesForm(forms.ModelForm):
+    file_extension_original = forms.ModelChoiceField(
+        required=False,
+        label="File extension of original document",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_original")
+    )
+    file_extension_archivalobject = forms.ModelChoiceField(
+        required=False,
+        label="File extension of archival object",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_archivalobject")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = Tables
         fields = "__all__"
@@ -1361,7 +2788,30 @@ class ThreeDimensionalModelFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'filename','document_id','document_title','path_filename_old','creator_metadata','creation_year_original','software_used','creation_date_archivalobject','creator_original','creator_archivalobject','creation_date_metadata','excavation_object_id','archaeological_object_id','relatedto','original_comment','digitisation_comment','document_type','file_extension_original','file_extension_archivalobject','copyright','access','site_id','excavation_post_excavation',
+
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'path_filename_old',
+                    'creator_metadata',
+                    'creation_year_original',
+                    'software_used',
+                    'creation_date_archivalobject',
+                    'creator_original',
+                    'creator_archivalobject',
+                    'creation_date_metadata',
+                    'excavation_object_id',
+                    'archaeological_object_id',
+                    'relatedto',
+                    'original_comment',
+                    'digitisation_comment',
+                    'document_type',
+                    'file_extension_original',
+                    'file_extension_archivalobject',
+                    'copyright',
+                    'access',
+                    'site_id',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -1375,6 +2825,37 @@ class ThreeDimensionalModelFilterFormHelper(FormHelper):
 
 
 class ThreeDimensionalModelForm(forms.ModelForm):
+    file_extension_original = forms.ModelChoiceField(
+        required=False,
+        label="File extension of original 3D model",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_original")
+    )
+    file_extension_archivalobject = forms.ModelChoiceField(
+        required=False,
+        label="File extension of archival data",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_archivalobject")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="The document ID is a project-specific unique identifier which consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. SWnegfilm for black &white negative film, FDfilm for colour slide film, FDdig for colour slide film digitised ) and the inventory numbers (from_to).",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = ThreeDimensionalModel
         fields = "__all__"
@@ -1406,7 +2887,29 @@ class VideosFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_archivalobject','document_type','find_inventory_number','filename','document_id','document_title','creation_date_original','creation_date_archivalobject','creation_date_metadata','path_filename_old','path_filename_arche','excavation_object_id','archaeological_object_id','original_comment','digitisation_comment','file_extension_original','file_extension_archivalobject','copyright','access','site_id',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_archivalobject',
+                    'document_type',
+                    'find_inventory_number',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'creation_date_original',
+                    'creation_date_archivalobject',
+                    'creation_date_metadata',
+                    'path_filename_old',
+                    'path_filename_arche',
+                    'excavation_object_id',
+                    'archaeological_object_id',
+                    'original_comment',
+                    'digitisation_comment',
+                    'file_extension_original',
+                    'file_extension_archivalobject',
+                    'copyright',
+                    'access',
+                    'site_id',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -1420,6 +2923,32 @@ class VideosFilterFormHelper(FormHelper):
 
 
 class VideosForm(forms.ModelForm):
+    file_extension_original = forms.ModelChoiceField(
+        required=False,
+        label="File extension of original document",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_original")
+    )
+    file_extension_archivalobject = forms.ModelChoiceField(
+        required=False,
+        label="File extension of archival object",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension_archivalobject")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+
     class Meta:
         model = Videos
         fields = "__all__"
@@ -1451,7 +2980,32 @@ class WallpaintingInventoryFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    'creator_metadata','creator_original','creator_scan','document_type','filename','document_id','document_title','filename_old','creation_date_original','creation_year_original','creation_date_scan','creation_date_metadata','storage_folder_original','resolution_scan_dpi','fresco_inventory_number','original_comment','digitisation_comment','file_extension','copyright','access','site_id','equipment_scan','source_original_copy_edited_copy','original_material','excavation_post_excavation',
+
+                    'creator_metadata',
+                    'creator_original',
+                    'creator_scan',
+                    'document_type',
+                    'filename',
+                    'document_id',
+                    'document_title',
+                    'filename_old',
+                    'creation_date_original',
+                    'creation_year_original',
+                    'creation_date_scan',
+                    'creation_date_metadata',
+                    'storage_folder_original',
+                    'resolution_scan_dpi',
+                    'fresco_inventory_number',
+                    'original_comment',
+                    'digitisation_comment',
+                    'file_extension',
+                    'copyright',
+                    'access',
+                    'site_id',
+                    'equipment_scan',
+                    'source_original_copy_edited_copy',
+                    'original_material',
+                    'excavation_post_excavation',
                     css_id="more"
                     ),
                 AccordionGroup(
@@ -1465,6 +3019,47 @@ class WallpaintingInventoryFilterFormHelper(FormHelper):
 
 
 class WallpaintingInventoryForm(forms.ModelForm):
+    file_extension = forms.ModelChoiceField(
+        required=False,
+        label="File extension ",
+        queryset=SkosConcept.objects.filter(collection__name="file_extension")
+    )
+    copyright = forms.ModelChoiceField(
+        required=False,
+        label="Copyright",
+        queryset=SkosConcept.objects.filter(collection__name="copyright")
+    )
+    access = forms.ModelChoiceField(
+        required=False,
+        label="Access",
+        queryset=SkosConcept.objects.filter(collection__name="access")
+    )
+    site_id = forms.ModelChoiceField(
+        required=False,
+        label="Site ID",
+        queryset=SkosConcept.objects.filter(collection__name="site_id")
+    )
+    equipment_scan = forms.ModelChoiceField(
+        required=False,
+        label="Equipment for scan",
+        queryset=SkosConcept.objects.filter(collection__name="equipment_scan")
+    )
+    source_original_copy_edited_copy = forms.ModelChoiceField(
+        required=False,
+        label="Wheter source is a original or a copy",
+        queryset=SkosConcept.objects.filter(collection__name="source_original_copy_edited_copy")
+    )
+    original_material = forms.ModelChoiceField(
+        required=False,
+        label="Material of original document",
+        queryset=SkosConcept.objects.filter(collection__name="original_material")
+    )
+    excavation_post_excavation = forms.ModelChoiceField(
+        required=False,
+        label="Whether it was created during excavation or after (post-excavation)",
+        queryset=SkosConcept.objects.filter(collection__name="excavation_post_excavation")
+    )
+
     class Meta:
         model = WallpaintingInventory
         fields = "__all__"

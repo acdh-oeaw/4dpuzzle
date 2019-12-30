@@ -157,6 +157,8 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit,  Layout, Fieldset, Div, MultiField, HTML
 from crispy_forms.bootstrap import Accordion, AccordionGroup
+
+from vocabs.models import SkosConcept
 from . models import (
 {%- for x in data %}
     {{ x.model_name }}{{ "," if not loop.last }}
@@ -182,8 +184,8 @@ class {{ x.model_name }}FilterFormHelper(FormHelper):
                 AccordionGroup(
                     'Advanced search',
                     {% for y in x.model_fields %}
-                    {%- if y.field_type == 'DateRangeField' or y.field_type == 'id' %}
-                    {%- else %}'{{ y.field_name }}',
+                    {% if y.field_type == 'DateRangeField' or y.field_type == 'id' %}
+                    {% else %}'{{ y.field_name }}',
                     {%- endif %}
                     {%- endfor %}
                     css_id="more"
@@ -199,6 +201,23 @@ class {{ x.model_name }}FilterFormHelper(FormHelper):
 
 
 class {{ x.model_name }}Form(forms.ModelForm):
+
+    {%- for y in x.model_fields %}
+    {%- if y.related_class == 'SkosConcept' and y.field_type == 'ForeignKey'%}
+    {{y.field_name}} = forms.ModelChoiceField(
+        required=False,
+        label="{{y.field_verbose_name}}",
+        queryset=SkosConcept.objects.filter(collection__name="{{y.field_name}}")
+    )
+    {%- elif y.related_class == 'SkosConcept' and y.field_type == 'ManyToManyField'%}
+    {{y.field_name}} = forms.ModelMultipleChoiceField(
+        required=False,
+        label="{{y.field_verbose_name}}",
+        queryset=SkosConcept.objects.filter(collection__name="{{y.field_name}}")
+    )
+    {%- endif -%}
+    {% endfor %}
+
     class Meta:
         model = {{ x.model_name }}
         fields = "__all__"
