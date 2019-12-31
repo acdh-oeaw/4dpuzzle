@@ -41,7 +41,8 @@ pg_local*
 
 
 output_*
-data/*
+*/data/*
+/data/*
 
 prepare_lueckentexte.ipynb
 myenv
@@ -50,3 +51,4 @@ netvis
 charts
 Untitled*
 matching_binaries.csv
+play.*

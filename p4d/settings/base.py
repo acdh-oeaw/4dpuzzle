@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mptt',
     'django_extensions',
     'crispy_forms',
     'django_filters',
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'archeutils',
     'netvis',
     'charts',
+    'filechecker',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"

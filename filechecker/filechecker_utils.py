@@ -1,6 +1,20 @@
 import json
 import pandas as pd
 
+from archeutils.utils import ARCHE_BASE_URI, ARCHE_PREFIX_REMOVE
+
+
+def filename_to_arche_id(
+    filename,
+    pre_remove=ARCHE_PREFIX_REMOVE,
+    pre_add=ARCHE_BASE_URI
+):
+    if pre_add.endswith('/'):
+        pass
+    else:
+        pre_add = f"{pre_add}/"
+    return filename.replace(pre_remove, pre_add)
+
 
 def filechecker_to_df(filelist_json):
     """reads a fileList.json and returns a pandas DataFrame
@@ -36,3 +50,28 @@ def find_matching_objects(model_list, matching_chars, matching_prop="legacy_id")
             return all_qs[0]
         else:
             return None
+
+
+def path2cols(path, separator="/"):
+    """takes a splittable string and creates nested collections"""
+    counter = 1
+    current = 0
+    cols = []
+    path_parts = path.split(separator)[:-1]
+    path_length = len(path_parts)
+    prefix = path_length
+    for x in reversed(path_parts):
+        col_title = '/'.join(path_parts[0:prefix])
+        col, _ = Collection.objects.get_or_create(
+            has_title=col_title
+        )
+        cols.append(col)
+        prefix = prefix - 1
+    while counter != len(cols):
+        current_col = cols[current]
+        parent_col = cols[counter]
+        current_col.part_of = parent_col
+        current_col.save()
+        counter += 1
+        current += 1
+    return cols
