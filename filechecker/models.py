@@ -1,10 +1,10 @@
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 
-from archeutils.utils import directory_to_col_id, get_category
+from archeutils.utils import get_category
 from vocabs.models import SkosConcept
 
-from . filechecker_utils import filename_to_arche_id
+from . filechecker_utils import filename_to_arche_id, remove_trailing_slash
 
 
 class FcCollection(MPTTModel):
@@ -26,10 +26,13 @@ class FcCollection(MPTTModel):
         return f"{self.fc_fullname}"
 
     def save(self, *args, **kwargs):
-
-        self.fc_name = self.fc_fullname.split('/')[-2]
-        self.fc_ordername = self.fc_name[:254]
-        self.fc_arche_id = directory_to_col_id(self, path_prop="fc_fullname")
+        self.fc_fullname = remove_trailing_slash(self.fc_fullname)
+        try:
+            self.fc_name = self.fc_fullname.split('/')[-1]
+        except IndexError:
+            self.fc_name = self.fc_fullname
+        self.fc_ordername = self.fc_name
+        self.fc_arche_id = filename_to_arche_id(self.fc_fullname)
         super(FcCollection, self).save(*args, **kwargs)
         return self
 
