@@ -282,6 +282,10 @@ def model_to_dict(instance):
             field_dict['verbose_name'] = getattr(x, 'verbose_name', x.name)
             field_dict['value'] = getattr(instance, x.name, '')
             field_dict['f_type'] = 'FK'
+        elif 'TreeForeignKey' in f_type:
+            field_dict['verbose_name'] = getattr(x, 'verbose_name', x.name)
+            field_dict['value'] = getattr(instance, x.name, '')
+            field_dict['f_type'] = 'FK'
         elif 'related.ManyToManyField' in f_type:
             values = getattr(instance, x.name, None)
             if values is not None:
@@ -293,9 +297,9 @@ def model_to_dict(instance):
         elif 'fields.DateTimeField' in f_type:
             field_value = getattr(instance, x.name, '')
             field_dict['verbose_name'] = getattr(x, 'verbose_name', x.name)
+            field_dict['f_type'] = 'DateTime'
             if field_value:
                 field_dict['value'] = (field_value.strftime("%Y-%m-%d %H:%M:%S"))
-                field_dict['f_type'] = 'DateTime'
         else:
             field_dict['verbose_name'] = getattr(x, 'verbose_name', x.name)
             field_dict['value'] = f"{getattr(instance, x.name, '')}"

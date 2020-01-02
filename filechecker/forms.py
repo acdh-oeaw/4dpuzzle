@@ -23,15 +23,13 @@ class FcCollectionFilterFormHelper(FormHelper):
             Fieldset(
                 'Basic search options',
                 'id',
+                'fc_fullname',
+                'fc_name',
                 css_id="basic_search_fields"
                 ),
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    
-                    'id',
-                    'fc_fullname',
-                    'fc_name',
                     'fc_ordername',
                     'fc_firstmod',
                     'fc_lastmod',
@@ -83,7 +81,7 @@ class FcResourceFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-                    
+
                     'id',
                     'fc_fullname',
                     'fc_filename',
@@ -115,5 +113,3 @@ class FcResourceForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-9'
         self.helper.add_input(Submit('submit', 'save'),)
-
-

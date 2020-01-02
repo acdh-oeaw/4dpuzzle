@@ -23,7 +23,8 @@ class FcCollectionListView(GenericListView):
     formhelper_class = FcCollectionFilterFormHelper
     table_class = FcCollectionTable
     init_columns = [
-        'id', 'False',
+        'id',
+        'fc_name',
     ]
     enable_merge = True
 
@@ -31,7 +32,7 @@ class FcCollectionListView(GenericListView):
 class FcCollectionDetailView(BaseDetailView):
 
     model = FcCollection
-    template_name = 'browsing/generic_detail.html'
+    template_name = 'filechecker/fc_collection_detail.html'
 
 
 class FcCollectionCreate(BaseCreateView):
@@ -57,7 +58,7 @@ class FcCollectionUpdate(BaseUpdateView):
 class FcCollectionDelete(DeleteView):
     model = FcCollection
     template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:fccollection_browse')
+    success_url = reverse_lazy('filechecker:fccollection_browse')
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -71,7 +72,8 @@ class FcResourceListView(GenericListView):
     formhelper_class = FcResourceFilterFormHelper
     table_class = FcResourceTable
     init_columns = [
-        'id', 'False',
+        'id',
+        'fc_filename',
     ]
     enable_merge = True
 
@@ -79,7 +81,7 @@ class FcResourceListView(GenericListView):
 class FcResourceDetailView(BaseDetailView):
 
     model = FcResource
-    template_name = 'browsing/generic_detail.html'
+    template_name = 'filechecker/fc_resource_detail.html'
 
 
 class FcResourceCreate(BaseCreateView):
@@ -105,7 +107,7 @@ class FcResourceUpdate(BaseUpdateView):
 class FcResourceDelete(DeleteView):
     model = FcResource
     template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:fcresource_browse')
+    success_url = reverse_lazy('filechecker:fcresource_browse')
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):

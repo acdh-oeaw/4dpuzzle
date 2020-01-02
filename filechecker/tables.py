@@ -29,4 +29,3 @@ class FcResourceTable(tables.Table):
         model = FcResource
         sequence = ('id',)
         attrs = {"class": "table table-responsive table-hover"}
-

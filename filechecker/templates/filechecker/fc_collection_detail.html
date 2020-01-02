@@ -1,0 +1,87 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load webpage_extras %}
+{% block title %}{{ object.name }}{% endblock %}
+{% block scriptHeader %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/three@latest/build/three.min.js"></script>
+<script crossorigin src="https://unpkg.com/@acdh/network-visualization@latest/lib/network-visualization.umd.js"></script>
+<script src="{% static 'netvis/js/netvis.js' %}"></script>
+{% endblock %}
+{% block content %}
+<!-- <div class="container"> -->
+<div class="card w-100">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-2">
+        {% if object.get_prev %}
+        <h2>
+          <a href="{{ object.get_prev }}" title="previous">
+            <i data-feather="chevron-left"></i>
+          </a>
+        </h2>
+        {% endif %}
+      </div>
+      <div class="col-md-8">
+        <h2 style="text-align: center;">
+          <small><a href="{{ object.get_listview_url }}" title="back to listview"><small>{{ class_name }}</small></a></small>
+          {{ object }}
+          {% if user.is_authenticated %}
+            <a href="{{ object.get_edit_url }}" title="edit">
+              <i data-feather="edit-3"></i>
+            </a>
+            <a href="{{ object.get_delete_url }}" title="delete">
+              <i data-feather="trash-2"></i>
+            </a>
+          {% endif %}
+          {% if 'archeutils' in APPS %}
+          <a href="{% url 'filechecker-rdf:res_as_arche_graph' model_name=class_name|lower pk=object.id %}" title="As ARCHE-RDF">
+            <i data-feather="download"></i>
+          </a>
+          {% endif%}
+        </h2>
+      </div>
+      <div class="col-md-2">
+        <h2>
+          {% if object.get_next %}
+          <a href="{{ object.get_next }}" style="float:right" title="next">
+            <i data-feather="chevron-right"></i>
+          </a>
+        </h2>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    {% block custom %}
+    <legend>Basic Information</legend>
+    <div class="row">
+        <div class="col-md-6">
+                  {% drilldown_tree_for_node object as drilldown cumulative count filechecker.FcResource.fc_directory in game_count%}
+                    {% for node,structure in drilldown|tree_info %}
+                    {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
+                      {% if node == object %}
+                        <strong>{{ node }}</strong>
+                    {% else %}
+                        <a href="{{ node.get_absolute_url }}">{{ node }}</a>
+                        {% if node.parent_id == object.pk %}({{ node.game_count }}){% endif %}
+                    {% endif %}
+  {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+                    {% endfor %}
+        </div>
+        <div class="col-md-6">
+            <div id="visualization" style="position: relative; height: 700px; background: #fafafa;"></div>
+            <script type="text/javascript">
+              showGraph("{% url 'netvis:graph' app_name=app_name model_name=class_name|lower pk=object.id %}", "visualization")
+            </script>
+        </div>
+    </div>
+
+
+  </div>
+</div>
+{% endblock custom %}
+{% endblock %}
