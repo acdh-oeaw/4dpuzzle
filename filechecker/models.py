@@ -1,7 +1,10 @@
 from django.db import models
+from django.urls import reverse
+
 from mptt.models import MPTTModel, TreeForeignKey
 
 from archeutils.utils import get_category
+from browsing.browsing_utils import model_to_dict
 from vocabs.models import SkosConcept
 
 from . filechecker_utils import filename_to_arche_id, remove_trailing_slash
@@ -58,6 +61,47 @@ class FcCollection(MPTTModel):
         super(FcCollection, self).save(*args, **kwargs)
         return self
 
+    def field_dict(self):
+        return model_to_dict(self)
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('filechecker:fccollection_browse')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('filechecker:fccollection_create')
+
+    def get_absolute_url(self):
+        return reverse('filechecker:fccollection_detail', kwargs={'pk': self.id})
+
+    def get_absolute_url(self):
+        return reverse('filechecker:fccollection_detail', kwargs={'pk': self.id})
+
+    def get_delete_url(self):
+        return reverse('filechecker:fccollection_delete', kwargs={'pk': self.id})
+
+    def get_edit_url(self):
+        return reverse('filechecker:fccollection_edit', kwargs={'pk': self.id})
+
+    def get_next(self):
+        next = self.__class__.objects.filter(id__gt=self.id)
+        if next:
+            return reverse(
+                'filechecker:fccollection_detail',
+                kwargs={'pk': next.first().id}
+            )
+        return False
+
+    def get_prev(self):
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return reverse(
+                'filechecker:fccollection_detail',
+                kwargs={'pk': prev.first().id}
+            )
+        return False
+
 
 class FcResource(models.Model):
     fc_fullname = models.TextField()
@@ -97,3 +141,44 @@ class FcResource(models.Model):
         self.fc_arche_cat = get_category(self)
         super(FcResource, self).save(*args, **kwargs)
         return self
+
+    def field_dict(self):
+        return model_to_dict(self)
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('filechecker:fcresource_browse')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('filechecker:fcresource_create')
+
+    def get_absolute_url(self):
+        return reverse('filechecker:fcresource_detail', kwargs={'pk': self.id})
+
+    def get_absolute_url(self):
+        return reverse('filechecker:fcresource_detail', kwargs={'pk': self.id})
+
+    def get_delete_url(self):
+        return reverse('filechecker:fcresource_delete', kwargs={'pk': self.id})
+
+    def get_edit_url(self):
+        return reverse('filechecker:fcresource_edit', kwargs={'pk': self.id})
+
+    def get_next(self):
+        next = self.__class__.objects.filter(id__gt=self.id)
+        if next:
+            return reverse(
+                'filechecker:fcresource_detail',
+                kwargs={'pk': next.first().id}
+            )
+        return False
+
+    def get_prev(self):
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        if prev:
+            return reverse(
+                'filechecker:fcresource_detail',
+                kwargs={'pk': prev.first().id}
+            )
+        return False

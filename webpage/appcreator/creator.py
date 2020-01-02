@@ -1,7 +1,61 @@
 import ast
 import pandas as pd
 from jinja2 import Template
-from . import code_templates
+
+from django.apps import apps
+
+from . import code_templates_default as code_templates
+
+
+def model_fields_to_dict(sample):
+    """
+    returns a list of dictionary fields from a given model
+    :param sample: a model class
+    """
+    model_fields = []
+    for x in sample._meta.get_fields():
+        field_dict = {}
+        if 'reverse_related' in f"{type(x)}":
+            continue
+        else:
+            field_dict['field_name'] = x.name
+            field_dict['field_type'] = type(x).__name__
+            if x.verbose_name:
+                field_dict['field_verbose_name'] = x.verbose_name
+            else:
+                field_dict['field_verbose_name'] = x.name
+            if x.help_text:
+                field_dict['field_helptext'] = x.help_text
+            else:
+                field_dict['field_helptext'] = x.name
+            if field_dict['field_type'] in ['ForeignKey', 'ManyToManyField']:
+                field_dict['related_class'] = f"{x.related_model.__name__}"
+                field_dict['related_name'] = f"{x.related_query_name()}"
+            model_fields.append(field_dict)
+    return model_fields
+
+
+def get_classdict_from_model(sample):
+    """
+    returns a dict describing a model and its fields
+    :param sample: a model class
+    """
+    class_dict = {}
+    class_dict['model_name'] = f"{sample.__name__}"
+    class_dict['model_verbose_name'] = f"{sample._meta.verbose_name}"
+    class_dict['model_helptext'] = f"{sample.__doc__.strip()}"
+    class_dict['model_representation'] = False
+    class_dict['model_order'] = False
+    class_dict['model_fields'] = model_fields_to_dict(sample)
+    return class_dict
+
+
+def app_to_classdicts(app_name):
+    class_dicts = []
+    app_models = apps.get_app_config(app_name).get_models()
+    for x in app_models:
+        class_dicts.append(get_classdict_from_model(x))
+    return class_dicts
 
 
 def xlsx_to_classdicts(file):
