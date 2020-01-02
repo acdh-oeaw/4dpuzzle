@@ -85,14 +85,16 @@ def directory_to_col_id(
     return new_path
 
 
-def get_p4d_id(res, arche_uri=ARCHE_BASE_URI):
+def get_p4d_id(res, arche_uri=ARCHE_BASE_URI, arche_prop=False):
     """ function to generate a the canonical p4d ID
         :param res: A model object
         :param arche_uri: A base url; should be configued in the projects settings file
         :return: An canonical ARCHE-ID (URI)
 
     """
-    if res.fc_filename and res.fc_directory:
+    if arche_prop:
+        return getattr(res, arche_prop)
+    elif res.fc_filename and res.fc_directory:
         new_path = directory_to_col_id(res)
         if new_path.endswith('/'):
             return f"{new_path}{res.fc_filename}"
@@ -162,18 +164,19 @@ def col_from_res(res, arche_uri=ARCHE_BASE_URI):
     return g
 
 
-def as_arche_res(res, res_type='Resource'):
+def as_arche_res(res, res_type='Resource', arche_prop=False):
     g = Graph()
-    sub = URIRef(get_arche_id(res))
+    sub = URIRef(get_arche_id(res,))
     g.add((sub, RDF.type, acdh_ns[res_type]))
-    g.add((sub, acdh_ns.hasIdentifier, URIRef(get_p4d_id(res))))
+    g.add((sub, acdh_ns.hasIdentifier, URIRef(get_p4d_id(res, arche_prop=arche_prop))))
     g.add((
         sub, acdh_ns.hasDescription, Literal(get_arche_desc(res), lang=ARCHE_LANG)
     ))
-    # col_graph = col_from_res(res)
-    # g = g + col_graph
-    g.add((sub, acdh_ns.isPartOf, URIRef(directory_to_col_id(res))))
-    g.add((sub, acdh_ns.hasCategory, URIRef(get_category(res))))
+    # g.add((sub, acdh_ns.isPartOf, URIRef(directory_to_col_id(res))))
+    if res_type == 'Collection':
+        pass
+    else:
+        g.add((sub, acdh_ns.hasCategory, URIRef(get_category(res))))
     for x in get_arche_fields(res):
         cur_val = x['value']
         arche_prop = x['extra_fields']['arche_prop'].strip()
