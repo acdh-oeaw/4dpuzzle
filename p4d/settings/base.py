@@ -134,11 +134,15 @@ ARCHE_PREFIX_REMOVE = r"R:/OREA-EGYPT_Puzzle4D/ARCHE-preparation/original/"
 ARCHE_CONST_MAPPINGS = [
     ('hasOwner', "https://id.acdh.oeaw.ac.at/OREA",),
     ('hasOwner', "https://id.acdh.oeaw.ac.at/OAI",),
+    ('hasContact', "https://id.acdh.oeaw.ac.at/OREA",),
+    ('hasContact', "https://id.acdh.oeaw.ac.at/OAI",),
     ('hasRightsHolder', "https://id.acdh.oeaw.ac.at/OREA",),
     ('hasRightsHolder', "https://id.acdh.oeaw.ac.at/OAI",),
     ('hasLicensor', 'https://id.acdh.oeaw.ac.at/OREA',),
     ('hasLicensor', 'https://id.acdh.oeaw.ac.at/OAI',),
     ('hasLicense', 'https://vocabs.acdh.oeaw.ac.at/license/cc-by-40',),
     ('hasRelatedDiscipline', 'https://vocabs.acdh.oeaw.ac.at/oefosdisciplines/601003',),
-    ('hasPrincipalInvestigator', 'https://id.acdh.oeaw.ac.at/bhorejs',),
+    ('hasMetadataCreator', 'https://id.acdh.oeaw.ac.at/OAI',),
+    ('hasDepositor', 'https://id.acdh.oeaw.ac.at/OAI',),
+    # ('hasPrincipalInvestigator', 'https://id.acdh.oeaw.ac.at/bhorejs',),
 ]

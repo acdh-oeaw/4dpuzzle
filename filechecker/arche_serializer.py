@@ -2,7 +2,7 @@ from rdflib import Graph, Namespace, URIRef, Literal, XSD
 from rdflib.namespace import RDF
 
 from archeutils.utils import (
-    ARCHE_PROPS_LOOKUP, ARCHE_LANG, ARCHE_CONST_MAPPINGS, acdh_ns
+    ARCHE_PROPS_LOOKUP, ARCHE_LANG, ARCHE_CONST_MAPPINGS, acdh_ns, ARCHE_BASE_URI
 )
 
 
@@ -32,6 +32,8 @@ def as_arche_graph(res):
         g.add((sub, RDF.type, acdh_ns.Collection))
         if res.parent:
             g.add((sub, acdh_ns.isPartOf, URIRef(res.parent.fc_arche_id)))
+        else:
+            g.add((sub, acdh_ns.isPartOf, URIRef(ARCHE_BASE_URI)))
     for const in ARCHE_CONST_MAPPINGS:
         g.add((sub, acdh_ns[const[0]], URIRef(const[1])))
     for x in get_arche_fields(res):
@@ -43,3 +45,10 @@ def as_arche_graph(res):
         elif arche_prop_domain == 'date':
             g.add((sub, acdh_ns[arche_prop], Literal(cur_val, datatype=XSD.date)))
     return g
+
+
+def qs_as_arche_res(qs):
+    maingraph = Graph()
+    for res in qs:
+        maingraph += as_arche_graph(res)
+    return maingraph
