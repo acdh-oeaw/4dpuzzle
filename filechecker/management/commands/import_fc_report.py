@@ -41,6 +41,7 @@ class Command(BaseCommand):
                 fc_col.fc_items = len(gr[1])
                 fc_col.fc_size = gr[1].sum(axis=0, skipna=True)['size']
                 fc_col.fc_lastmod = gr[1].sort_values(by=['lastmod'], ascending=False)['lastmod'].iloc[0]
+                fc_col.fc_firstmod = gr[1].sort_values(by=['lastmod'], ascending=True)['lastmod'].iloc[0]
                 fc_col.save()
                 try:
                     path2cols(col_fullname)
