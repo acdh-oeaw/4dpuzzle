@@ -11,6 +11,21 @@ from archeutils.utils import (
 )
 
 
+def fetch_access_restriction(res):
+    access_res = None
+    if res.fc_arche_access:
+        access_res = res.fc_arche_access
+        return access_res
+    elif getattr(res, 'fc_directory', False):
+        access_res = res.fc_directory.fc_arche_access
+        if len(access_res) > 0:
+            return access_res
+        else:
+            return None
+    else:
+        return access_res
+
+
 def get_arche_fields(res):
     fields = []
     for x in res._meta._get_fields():
@@ -40,6 +55,9 @@ def as_arche_graph(res):
             g.add((sub, acdh_ns.isPartOf, URIRef(res.parent.fc_arche_id)))
         else:
             g.add((sub, acdh_ns.isPartOf, URIRef(ARCHE_BASE_URI)))
+    access_res = fetch_access_restriction(res)
+    if access_res:
+        g.add((sub, acdh_ns.hasAccessRestriction, URIRef(access_res)))
     for const in ARCHE_CONST_MAPPINGS:
         g.add((sub, acdh_ns[const[0]], URIRef(const[1])))
     for x in get_arche_fields(res):
@@ -50,6 +68,8 @@ def as_arche_graph(res):
             g.add((sub, acdh_ns[arche_prop], Literal(cur_val, lang=ARCHE_LANG)))
         elif arche_prop_domain == 'date':
             g.add((sub, acdh_ns[arche_prop], Literal(cur_val, datatype=XSD.date)))
+        else:
+            g.add((sub, acdh_ns[arche_prop], URIRef(cur_val)))
     if res.fc_custom_rdf:
         custom_graph = Graph()
         try:

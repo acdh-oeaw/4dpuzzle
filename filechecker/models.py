@@ -43,6 +43,9 @@ class FcCollection(MPTTModel):
     fc_arche_description = models.TextField(blank=True).set_extra(
         arche_prop="hasDescription",
     )
+    fc_arche_access = models.TextField(blank=True).set_extra(
+        arche_prop="hasAccessRestriction",
+    )
     fc_custom_rdf = models.TextField(blank=True)
 
     class MPTTMeta:
@@ -132,6 +135,12 @@ class FcResource(models.Model):
     )
     fc_arche_description = models.TextField(blank=True).set_extra(
         arche_prop="hasDescription",
+    )
+    fc_arche_access = models.TextField(
+        blank=True,
+        help_text="If set blank a given value from the parent directory\
+        is taken for the rdf serialisation").set_extra(
+        arche_prop="hasAccessRestriction",
     )
     fc_custom_rdf = models.TextField(blank=True)
 
