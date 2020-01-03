@@ -137,6 +137,43 @@
       </div>
     </div>
   </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <h3>Download Options</h3>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        <ul>
+          <li>
+            Metadata of the collection only
+            <ul>
+              <li>
+                <a href="{% url 'filechecker-rdf:res_as_arche_graph' model_name=class_name|lower pk=object.id %}?format=turtle">turtle (ttl)</a>
+              </li>
+              <li>
+                <a href="{% url 'filechecker-rdf:res_as_arche_graph' model_name=class_name|lower pk=object.id %}">xml</a>
+              </li>
+            </ul>
+            </li>
+            <li>
+              Metata of Collection (ancestors) and (direct) child resources
+              <ul>
+                <li>
+                  <a href="{% url 'filechecker-rdf:collection_and_resources_as_graph' pk=object.id %}?format=turtle">turtle (ttl)</a>
+                </li>
+                <li>
+                  <a href="{% url 'filechecker-rdf:collection_and_resources_as_graph' pk=object.id %}">xml</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
       <div class="card">

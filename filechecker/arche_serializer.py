@@ -2,7 +2,12 @@ from rdflib import Graph, Namespace, URIRef, Literal, XSD
 from rdflib.namespace import RDF
 
 from archeutils.utils import (
-    ARCHE_PROPS_LOOKUP, ARCHE_LANG, ARCHE_CONST_MAPPINGS, acdh_ns, ARCHE_BASE_URI
+    ARCHE_PROPS_LOOKUP,
+    ARCHE_LANG,
+    ARCHE_CONST_MAPPINGS,
+    ARCHE_BASE_URI,
+    acdh_ns,
+    get_category
 )
 
 
@@ -28,6 +33,7 @@ def as_arche_graph(res):
     if res.__class__._meta.model_name.lower() == 'fcresource':
         g.add((sub, RDF.type, acdh_ns.Resource))
         g.add((sub, acdh_ns.isPartOf, URIRef(res.fc_directory.fc_arche_id)))
+        g.add((sub, acdh_ns.hasCategory, URIRef(get_category(res, prop='fc_extension'))))
     else:
         g.add((sub, RDF.type, acdh_ns.Collection))
         if res.parent:
