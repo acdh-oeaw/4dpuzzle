@@ -81,8 +81,6 @@ class FcResourceFilterFormHelper(FormHelper):
             Accordion(
                 AccordionGroup(
                     'Advanced search',
-
-                    'id',
                     'fc_fullname',
                     'fc_filename',
                     'fc_lastmod',
