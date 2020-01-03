@@ -50,7 +50,16 @@ def as_arche_graph(res):
             g.add((sub, acdh_ns[arche_prop], Literal(cur_val, lang=ARCHE_LANG)))
         elif arche_prop_domain == 'date':
             g.add((sub, acdh_ns[arche_prop], Literal(cur_val, datatype=XSD.date)))
-    return g
+    if res.fc_custom_rdf:
+        custom_graph = Graph()
+        try:
+            custom_graph.parse(data=res.fc_custom_rdf, format='n3')
+        except Exception as e:
+            print(e)
+            return g
+        return custom_graph + g
+    else:
+        return g
 
 
 def qs_as_arche_res(qs):

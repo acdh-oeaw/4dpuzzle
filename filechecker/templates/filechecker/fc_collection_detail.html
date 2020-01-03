@@ -37,7 +37,7 @@
               <i data-feather="trash-2"></i>
             </a>
           {% endif %}
-          <a href="{% url 'filechecker-rdf:res_as_arche_graph' model_name=class_name|lower pk=object.id %}" title="As ARCHE-RDF">
+          <a href="{% url 'filechecker-rdf:res_as_arche_graph' model_name=class_name|lower pk=object.id %}?format=turtle" title="As ARCHE-RDF">
             <i data-feather="download"></i>
           </a>
         </h2>
@@ -174,6 +174,24 @@
       </div>
     </div>
   </div>
+  {% if object.fc_custom_rdf %}
+  <div class="card">
+    <div class="card-header" id="headingFour">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          <h3>Custom Arche RDF</h3>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+      <div class="card-body">
+        <code>
+          {{ object.fc_custom_rdf}}
+        </code>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 </div>
 
       <div class="card">

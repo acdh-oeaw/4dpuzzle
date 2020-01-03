@@ -43,6 +43,7 @@ class FcCollection(MPTTModel):
     fc_arche_description = models.TextField(blank=True).set_extra(
         arche_prop="hasDescription",
     )
+    fc_custom_rdf = models.TextField(blank=True)
 
     class MPTTMeta:
         order_insertion_by = ['fc_ordername']
@@ -132,6 +133,7 @@ class FcResource(models.Model):
     fc_arche_description = models.TextField(blank=True).set_extra(
         arche_prop="hasDescription",
     )
+    fc_custom_rdf = models.TextField(blank=True)
 
     def __str__(self):
         return f"{self.fc_fullname}"
