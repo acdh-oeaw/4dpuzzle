@@ -37,11 +37,9 @@
               <i data-feather="trash-2"></i>
             </a>
           {% endif %}
-          {% if 'archeutils' in APPS %}
           <a href="{% url 'filechecker-rdf:res_as_arche_graph' model_name=class_name|lower pk=object.id %}" title="As ARCHE-RDF">
             <i data-feather="download"></i>
           </a>
-          {% endif%}
         </h2>
       </div>
       <div class="col-md-2">
@@ -57,22 +55,95 @@
   </div>
   <div class="card-body">
     {% block custom %}
-    <legend>Basic Information</legend>
-    <div class="row">
-        <div class="col-md-6">
-                  {% drilldown_tree_for_node object as drilldown cumulative count filechecker.FcResource.fc_directory in game_count%}
-                    {% for node,structure in drilldown|tree_info %}
-                    {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
-                      {% if node == object %}
-                        <strong>{{ node }}</strong>
+    <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <h3>Basic Information</h3>
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <table class="table">
+          <tr>
+            <th>Arche-ID</th>
+            <td><a href="{{ object.fc_arche_id }}">{{ object.fc_arche_id}}</a></td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td><p>{{ object.fc_arche_description }}</p></td>
+          </tr>
+          <tr>
+            <th>Child-Collections</th>
+            <td>{{ object.children.all|length }}</td>
+          </tr>
+          <tr>
+            <th>Child-Resources</th>
+            <td>{{ object.has_fc_resource.all|length }}</td>
+          </tr>
+          <tr>
+            <th>Created</th>
+            <td>{{ object.fc_firstmod }} - {{ object.fc_lastmod}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <h3>Collections and Resources</h3>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        {% drilldown_tree_for_node object as drilldown cumulative count filechecker.FcResource.fc_directory in game_count%}
+          {% for node,structure in drilldown|tree_info %}
+            {% if structure.new_level %}
+              <ul>
+                <li>{% else %}</li>
+                <li>
+                  {% endif %}
+                  {% if node == object %}
+                    <strong> <i data-feather="folder"></i> {{ node }}</strong> <i data-feather="chevron-down"></i>
                     {% else %}
-                        <a href="{{ node.get_absolute_url }}">{{ node }}</a>
-                        {% if node.parent_id == object.pk %}({{ node.game_count }}){% endif %}
+                      <a href="{{ node.get_absolute_url }}"><i data-feather="folder"></i>{{ node }}</a>
+                    {% if node.parent_id == object.pk %}
+                      (<i data-feather="file"></i> {{ node.game_count }})
                     {% endif %}
-  {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+                    {% if node.children.all %}
+                      (<i data-feather="folder"></i>{{ node.children.all|length }})
+                    {% endif %}
+                  {% endif %}
+                  {% if node == object %}
+                  <ul>
+                    {% for child_res in object.has_fc_resource.all %}
+                    <li>
+                      <a href="{{ child_res.get_absolute_url }}"><i data-feather="file"></i>{{ child_res.fc_filename }}</a> </li>
                     {% endfor %}
+                  </ul>
+                  {% endif %}
+                  {% for level in structure.closed_levels %}
+
+                </li>
+              </ul>
+            {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Netvis</h3>
         </div>
-        <div class="col-md-6">
+        <div class="card-body">
             <div id="visualization" style="position: relative; height: 700px; background: #fafafa;"></div>
             <script type="text/javascript">
               showGraph("{% url 'netvis:graph' app_name=app_name model_name=class_name|lower pk=object.id %}", "visualization")
