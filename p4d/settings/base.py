@@ -144,5 +144,6 @@ ARCHE_CONST_MAPPINGS = [
     ('hasRelatedDiscipline', 'https://vocabs.acdh.oeaw.ac.at/oefosdisciplines/601003',),
     ('hasMetadataCreator', 'https://id.acdh.oeaw.ac.at/OAI',),
     ('hasDepositor', 'https://id.acdh.oeaw.ac.at/OAI',),
+    # ('hasAvailableDate', '2020-02-01',),
     # ('hasPrincipalInvestigator', 'https://id.acdh.oeaw.ac.at/bhorejs',),
 ]

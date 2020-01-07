@@ -59,6 +59,11 @@ def as_arche_graph(res):
     if access_res:
         g.add((sub, acdh_ns.hasAccessRestriction, URIRef(access_res)))
     for const in ARCHE_CONST_MAPPINGS:
+        arche_prop_domain = ARCHE_PROPS_LOOKUP.get(const[0], 'No Match')
+        if arche_prop_domain == 'date':
+            g.add((sub, acdh_ns[const[0]], Literal(const[1], datatype=XSD.date)))
+        else:
+            g.add((sub, acdh_ns[const[0]], URIRef(const[1])))
         g.add((sub, acdh_ns[const[0]], URIRef(const[1])))
     for x in get_arche_fields(res):
         cur_val = x['cur_val']
