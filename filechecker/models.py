@@ -34,8 +34,6 @@ class FcCollection(MPTTModel):
     fc_items = models.BigIntegerField(default=0)
     parent = TreeForeignKey(
         'self', on_delete=models.CASCADE, null=True, blank=True, related_name='children'
-    ).set_extra(
-        arche_prop="isPartOf",
     )
     fc_arche_id = models.TextField(blank=True).set_extra(
         arche_prop="hasIdentifier",
