@@ -42,7 +42,26 @@ def get_arche_fields(res):
     return fields
 
 
-def as_arche_graph(res):
+def get_root_col():
+    g = Graph()
+    sub = URIRef(ARCHE_BASE_URI)
+    g.add(
+        (sub, acdh_ns.hasTitle, Literal(ARCHE_BASE_URI.split('/')[-1], lang=ARCHE_LANG))
+    )
+    g.add((sub, acdh_ns.hasTitleImage, URIRef('https://add-something-useful.com')))
+    g.add((sub, RDF.type, acdh_ns.Collection))
+    g.add((sub, acdh_ns.hasIdentifier, sub))
+    for const in ARCHE_CONST_MAPPINGS:
+        arche_prop_domain = ARCHE_PROPS_LOOKUP.get(const[0], 'No Match')
+        if arche_prop_domain == 'date':
+            g.add((sub, acdh_ns[const[0]], Literal(const[1], datatype=XSD.date)))
+        else:
+            g.add((sub, acdh_ns[const[0]], URIRef(const[1])))
+        g.add((sub, acdh_ns[const[0]], URIRef(const[1])))
+    return g
+
+
+def as_arche_graph(res, start=True):
     g = Graph()
     sub = URIRef((res.fc_arche_id))
     if res.__class__._meta.model_name.lower() == 'fcresource':

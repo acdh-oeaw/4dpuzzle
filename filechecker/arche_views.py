@@ -7,7 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from . models import FcCollection, FcResource
 
-from . arche_serializer import as_arche_graph, qs_as_arche_res
+from . arche_serializer import as_arche_graph, qs_as_arche_res, get_root_col
 
 
 def res_as_arche_graph(request, model_name, pk):
@@ -77,8 +77,10 @@ def children_as_arche_graph(request, pk):
         children_graph = qs_as_arche_res(qs)
         g = g + children_graph
     ancestors = res.get_ancestors()
+    print(ancestors)
     if len(ancestors) > 0:
         g = g + qs_as_arche_res(ancestors)
+    g = g + get_root_col()
     if format == 'turtle':
         return HttpResponse(
             g.serialize(encoding='utf-8', format='turtle'), content_type='text/turtle'
