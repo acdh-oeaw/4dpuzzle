@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^qgisapp/', include('qgisapp.urls', namespace='qgisapp')),
     url(r'^vocabs/', include('vocabs.urls', namespace='vocabs')),
     url(r'^vocabs-ac/', include('vocabs.dal_urls', namespace='vocabs-ac')),
+    url(r'^sparql/', include('sparql.urls', namespace='sparql')),
     url(r'^', include('webpage.urls', namespace='webpage')),
 ]
 

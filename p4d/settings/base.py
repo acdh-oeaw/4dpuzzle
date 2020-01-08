@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'charts',
     'filechecker',
     'qgisapp',
+    'sparql'
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
