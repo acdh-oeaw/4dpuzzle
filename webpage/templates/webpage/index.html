@@ -13,8 +13,14 @@
         </div>
 
     <div class="container">
+
         <div class="row">
             <div class="col-md-12" style="text-align:center">
+                <div class="card">
+                  <div class="card-header">
+                    <h2><a href="{% url 'qgisapp:qgis_map' %}">GIS</a></h2>
+                  </div>
+                </div>
                 <h4>Data-Count</h4>
             </div>
             {% create_object_count app='filechecker' as models %}

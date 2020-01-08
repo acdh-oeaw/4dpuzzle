@@ -48,979 +48,1001 @@
 <script src="{% static 'qgisapp/data/CasestudyareaTDFIj21_5.js' %}"></script>
 <script src="{% static 'qgisapp/data/Casestudyinformationpoints_6.js' %}"></script>
 <script>
-var map = L.map('map', {
-    zoomControl:true, maxZoom:28, minZoom:1
-}).fitBounds([[30.78837157371277,31.818100532874965],[30.788501598793495,31.818277561003708]]);
-var hash = new L.Hash(map);
-map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
-var measureControl = new L.Control.Measure({
-    position: 'topleft',
-    primaryLengthUnit: 'meters',
-    secondaryLengthUnit: 'kilometers',
-    primaryAreaUnit: 'sqmeters',
-    secondaryAreaUnit: 'hectares'
-});
-measureControl.addTo(map);
-document.getElementsByClassName('leaflet-control-measure-toggle')[0]
-.innerHTML = '';
-document.getElementsByClassName('leaflet-control-measure-toggle')[0]
-.className += ' fas fa-ruler';
-var bounds_group = new L.featureGroup([]);
-function setBounds() {
-}
-var layer_OpenStreetMap_0 = L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    opacity: 1.0,
-    attribution: '',
-});
-layer_OpenStreetMap_0;
-map.addLayer(layer_OpenStreetMap_0);
-function pop_TDexcavationareas_1(feature, layer) {
-    var popupContent = '<table>\
-            <tr>\
-                <td colspan="2">' + (feature.properties['Area_text'] !== null ? Autolinker.link(String(feature.properties['Area_text'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <td colspan="2">' + (feature.properties['Area'] !== null ? Autolinker.link(String(feature.properties['Area'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <td colspan="2">' + (feature.properties['OREA_GIS_ID'] !== null ? Autolinker.link(String(feature.properties['OREA_GIS_ID'])) : '') + '</td>\
-            </tr>\
-        </table>';
-    layer.bindPopup(popupContent, {maxHeight: 400});
-}
+  var map = L.map('map', {
+      zoomControl:true, maxZoom:28, minZoom:1
+  }).fitBounds([[30.78837157371277,31.818100532874965],[30.788501598793495,31.818277561003708]]);
+  var hash = new L.Hash(map);
+  map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+  var measureControl = new L.Control.Measure({
+      position: 'topleft',
+      primaryLengthUnit: 'meters',
+      secondaryLengthUnit: 'kilometers',
+      primaryAreaUnit: 'sqmeters',
+      secondaryAreaUnit: 'hectares'
+  });
+  measureControl.addTo(map);
+  document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+  .innerHTML = '';
+  document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+  .className += ' fas fa-ruler';
+  var bounds_group = new L.featureGroup([]);
+  function setBounds() {
+  }
+  var layer_OpenStreetMap_0 = L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      opacity: 1.0,
+      attribution: '',
+  });
+  layer_OpenStreetMap_0;
+  map.addLayer(layer_OpenStreetMap_0);
+  function pop_TDexcavationareas_1(feature, layer) {
+      var popupContent = '<table>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Area_text'] !== null ? Autolinker.link(String(feature.properties['Area_text'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Area'] !== null ? Autolinker.link(String(feature.properties['Area'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['OREA_GIS_ID'] !== null ? Autolinker.link(String(feature.properties['OREA_GIS_ID'])) : '') + '</td>\
+              </tr>\
+          </table>';
+      layer.bindPopup(popupContent, {maxHeight: 400});
+  }
 
-function style_TDexcavationareas_1_0() {
-    return {
-        pane: 'pane_TDexcavationareas_1',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(232,220,113,0.0)',
-        interactive: false,
-    }
-}
-map.createPane('pane_TDexcavationareas_1');
-map.getPane('pane_TDexcavationareas_1').style.zIndex = 401;
-map.getPane('pane_TDexcavationareas_1').style['mix-blend-mode'] = 'normal';
-var layer_TDexcavationareas_1 = new L.geoJson(json_TDexcavationareas_1, {
-    attribution: '',
-    interactive: false,
-    dataVar: 'json_TDexcavationareas_1',
-    layerName: 'layer_TDexcavationareas_1',
-    pane: 'pane_TDexcavationareas_1',
-    onEachFeature: pop_TDexcavationareas_1,
-    style: style_TDexcavationareas_1_0,
-});
-bounds_group.addLayer(layer_TDexcavationareas_1);
-map.addLayer(layer_TDexcavationareas_1);
-function pop_TDareagrids_2(feature, layer) {
-    var popupContent = '<table>\
-            <tr>\
-                <td colspan="2">' + (feature.properties['Area'] !== null ? Autolinker.link(String(feature.properties['Area'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <td colspan="2">' + (feature.properties['OREA_GIS_ID'] !== null ? Autolinker.link(String(feature.properties['OREA_GIS_ID'])) : '') + '</td>\
-            </tr>\
-        </table>';
-    layer.bindPopup(popupContent, {maxHeight: 400});
-}
+  function style_TDexcavationareas_1_0() {
+      return {
+          pane: 'pane_TDexcavationareas_1',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(232,220,113,0.0)',
+          interactive: false,
+      }
+  }
+  map.createPane('pane_TDexcavationareas_1');
+  map.getPane('pane_TDexcavationareas_1').style.zIndex = 401;
+  map.getPane('pane_TDexcavationareas_1').style['mix-blend-mode'] = 'normal';
+  var layer_TDexcavationareas_1 = new L.geoJson(json_TDexcavationareas_1, {
+      attribution: '',
+      interactive: false,
+      dataVar: 'json_TDexcavationareas_1',
+      layerName: 'layer_TDexcavationareas_1',
+      pane: 'pane_TDexcavationareas_1',
+      onEachFeature: pop_TDexcavationareas_1,
+      style: style_TDexcavationareas_1_0,
+  });
+  bounds_group.addLayer(layer_TDexcavationareas_1);
+  map.addLayer(layer_TDexcavationareas_1);
+  function pop_TDareagrids_2(feature, layer) {
+      var popupContent = '<table>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Area'] !== null ? Autolinker.link(String(feature.properties['Area'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['OREA_GIS_ID'] !== null ? Autolinker.link(String(feature.properties['OREA_GIS_ID'])) : '') + '</td>\
+              </tr>\
+          </table>';
+      layer.bindPopup(popupContent, {maxHeight: 400});
+  }
 
-function style_TDareagrids_2_0() {
-    return {
-        pane: 'pane_TDareagrids_2',
-        opacity: 1,
-        color: 'rgba(165,163,159,1.0)',
-        dashArray: '',
-        lineCap: 'square',
-        lineJoin: 'bevel',
-        weight: 1.0,
-        fillOpacity: 0,
-        interactive: false,
-    }
-}
-map.createPane('pane_TDareagrids_2');
-map.getPane('pane_TDareagrids_2').style.zIndex = 402;
-map.getPane('pane_TDareagrids_2').style['mix-blend-mode'] = 'normal';
-var layer_TDareagrids_2 = new L.geoJson(json_TDareagrids_2, {
-    attribution: '',
-    interactive: false,
-    dataVar: 'json_TDareagrids_2',
-    layerName: 'layer_TDareagrids_2',
-    pane: 'pane_TDareagrids_2',
-    onEachFeature: pop_TDareagrids_2,
-    style: style_TDareagrids_2_0,
-});
-bounds_group.addLayer(layer_TDareagrids_2);
-map.addLayer(layer_TDareagrids_2);
-function pop_TDFIPhaseG4palatialbuilding_3(feature, layer) {
-    var popupContent = '<table>\
-            <tr>\
-                <th scope="row">OREA_GIS_ID</th>\
-                <td>' + (feature.properties['OREA_GIS_ID'] !== null ? Autolinker.link(String(feature.properties['OREA_GIS_ID'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Phase_ID</th>\
-                <td>' + (feature.properties['Phase_ID'] !== null ? Autolinker.link(String(feature.properties['Phase_ID'])) : '') + '</td>\
-            </tr>\
-        </table>';
-    layer.bindPopup(popupContent, {maxHeight: 400});
-}
+  function style_TDareagrids_2_0() {
+      return {
+          pane: 'pane_TDareagrids_2',
+          opacity: 1,
+          color: 'rgba(165,163,159,1.0)',
+          dashArray: '',
+          lineCap: 'square',
+          lineJoin: 'bevel',
+          weight: 1.0,
+          fillOpacity: 0,
+          interactive: false,
+      }
+  }
+  map.createPane('pane_TDareagrids_2');
+  map.getPane('pane_TDareagrids_2').style.zIndex = 402;
+  map.getPane('pane_TDareagrids_2').style['mix-blend-mode'] = 'normal';
+  var layer_TDareagrids_2 = new L.geoJson(json_TDareagrids_2, {
+      attribution: '',
+      interactive: false,
+      dataVar: 'json_TDareagrids_2',
+      layerName: 'layer_TDareagrids_2',
+      pane: 'pane_TDareagrids_2',
+      onEachFeature: pop_TDareagrids_2,
+      style: style_TDareagrids_2_0,
+  });
+  bounds_group.addLayer(layer_TDareagrids_2);
+  map.addLayer(layer_TDareagrids_2);
+  function pop_TDFIPhaseG4palatialbuilding_3(feature, layer) {
+      var popupContent = '<table>\
+              <tr>\
+                  <th scope="row">OREA_GIS_ID</th>\
+                  <td>' + (feature.properties['OREA_GIS_ID'] !== null ? Autolinker.link(String(feature.properties['OREA_GIS_ID'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Phase_ID</th>\
+                  <td>' + (feature.properties['Phase_ID'] !== null ? Autolinker.link(String(feature.properties['Phase_ID'])) : '') + '</td>\
+              </tr>\
+          </table>';
+      layer.bindPopup(popupContent, {maxHeight: 400});
+  }
 
-function style_TDFIPhaseG4palatialbuilding_3_0() {
-    return {
-        pane: 'pane_TDFIPhaseG4palatialbuilding_3',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(145,145,145,1.0)',
-        interactive: true,
-    }
-}
-map.createPane('pane_TDFIPhaseG4palatialbuilding_3');
-map.getPane('pane_TDFIPhaseG4palatialbuilding_3').style.zIndex = 403;
-map.getPane('pane_TDFIPhaseG4palatialbuilding_3').style['mix-blend-mode'] = 'normal';
-var layer_TDFIPhaseG4palatialbuilding_3 = new L.geoJson(json_TDFIPhaseG4palatialbuilding_3, {
-    attribution: '',
-    interactive: true,
-    dataVar: 'json_TDFIPhaseG4palatialbuilding_3',
-    layerName: 'layer_TDFIPhaseG4palatialbuilding_3',
-    pane: 'pane_TDFIPhaseG4palatialbuilding_3',
-    onEachFeature: pop_TDFIPhaseG4palatialbuilding_3,
-    style: style_TDFIPhaseG4palatialbuilding_3_0,
-});
-bounds_group.addLayer(layer_TDFIPhaseG4palatialbuilding_3);
-function pop_TDplacenames_4(feature, layer) {
-    var popupContent = '<table>\
-            <tr>\
-                <td colspan="2">' + (feature.properties['OREA_GIS_ID'] !== null ? Autolinker.link(String(feature.properties['OREA_GIS_ID'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <td colspan="2">' + (feature.properties['Text'] !== null ? Autolinker.link(String(feature.properties['Text'])) : '') + '</td>\
-            </tr>\
-        </table>';
-    layer.bindPopup(popupContent, {maxHeight: 400});
-}
+  function style_TDFIPhaseG4palatialbuilding_3_0() {
+      return {
+          pane: 'pane_TDFIPhaseG4palatialbuilding_3',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(145,145,145,1.0)',
+          interactive: true,
+      }
+  }
+  map.createPane('pane_TDFIPhaseG4palatialbuilding_3');
+  map.getPane('pane_TDFIPhaseG4palatialbuilding_3').style.zIndex = 403;
+  map.getPane('pane_TDFIPhaseG4palatialbuilding_3').style['mix-blend-mode'] = 'normal';
+  var layer_TDFIPhaseG4palatialbuilding_3 = new L.geoJson(json_TDFIPhaseG4palatialbuilding_3, {
+      attribution: '',
+      interactive: true,
+      dataVar: 'json_TDFIPhaseG4palatialbuilding_3',
+      layerName: 'layer_TDFIPhaseG4palatialbuilding_3',
+      pane: 'pane_TDFIPhaseG4palatialbuilding_3',
+      onEachFeature: pop_TDFIPhaseG4palatialbuilding_3,
+      style: style_TDFIPhaseG4palatialbuilding_3_0,
+  });
+  bounds_group.addLayer(layer_TDFIPhaseG4palatialbuilding_3);
+  function pop_TDplacenames_4(feature, layer) {
+      var popupContent = '<table>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['OREA_GIS_ID'] !== null ? Autolinker.link(String(feature.properties['OREA_GIS_ID'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Text'] !== null ? Autolinker.link(String(feature.properties['Text'])) : '') + '</td>\
+              </tr>\
+          </table>';
+      layer.bindPopup(popupContent, {maxHeight: 400});
+  }
 
-function style_TDplacenames_4_0() {
-    return {
-        fill: false,
-        stroke: false,
-        interactive: false
-    }
-}
-map.createPane('pane_TDplacenames_4');
-map.getPane('pane_TDplacenames_4').style.zIndex = 404;
-map.getPane('pane_TDplacenames_4').style['mix-blend-mode'] = 'normal';
-var layer_TDplacenames_4 = new L.geoJson(json_TDplacenames_4, {
-    attribution: '',
-    interactive: false,
-    dataVar: 'json_TDplacenames_4',
-    layerName: 'layer_TDplacenames_4',
-    pane: 'pane_TDplacenames_4',
-    onEachFeature: pop_TDplacenames_4,
-    pointToLayer: function (feature, latlng) {
-        var context = {
-            feature: feature,
-            variables: {}
-        };
-        return L.circleMarker(latlng, style_TDplacenames_4_0(feature));
-    },
-});
-bounds_group.addLayer(layer_TDplacenames_4);
-map.addLayer(layer_TDplacenames_4);
-function pop_CasestudyareaTDFIj21_5(feature, layer) {
-    var popupContent = '<table>\
-            <tr>\
-                <th scope="row">OREA_GIS_ID</th>\
-                <td>' + (feature.properties['OREA_GIS_ID'] !== null ? Autolinker.link(String(feature.properties['OREA_GIS_ID'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Excavation_object_ID</th>\
-                <td>' + (feature.properties['Excavation_object_ID'] !== null ? Autolinker.link(String(feature.properties['Excavation_object_ID'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Archaeological_object_ID</th>\
-                <td>' + (feature.properties['Archaeological_object_ID'] !== null ? Autolinker.link(String(feature.properties['Archaeological_object_ID'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Archaeological_object_type</th>\
-                <td>' + (feature.properties['Archaeological_object_type'] !== null ? Autolinker.link(String(feature.properties['Archaeological_object_type'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Archaeological_object_GIS_comment</th>\
-                <td>' + (feature.properties['Archaeological_object_GIS_comment'] !== null ? Autolinker.link(String(feature.properties['Archaeological_object_GIS_comment'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Phase_ID</th>\
-                <td>' + (feature.properties['Phase_ID'] !== null ? Autolinker.link(String(feature.properties['Phase_ID'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Phase_GIS_comment</th>\
-                <td>' + (feature.properties['Phase_GIS_comment'] !== null ? Autolinker.link(String(feature.properties['Phase_GIS_comment'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Stratum_ID</th>\
-                <td>' + (feature.properties['Stratum_ID'] !== null ? Autolinker.link(String(feature.properties['Stratum_ID'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Stratum_GIS_comment</th>\
-                <td>' + (feature.properties['Stratum_GIS_comment'] !== null ? Autolinker.link(String(feature.properties['Stratum_GIS_comment'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Eigner_map_numbers</th>\
-                <td>' + (feature.properties['Eigner_map_numbers'] !== null ? Autolinker.link(String(feature.properties['Eigner_map_numbers'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Resources_ID</th>\
-                <td>' + (feature.properties['Resources_ID'] !== null ? Autolinker.link(String(feature.properties['Resources_ID'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Locus_wall_comment</th>\
-                <td>' + (feature.properties['Locus_wall_comment'] !== null ? Autolinker.link(String(feature.properties['Locus_wall_comment'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Height</th>\
-                <td>' + (feature.properties['Height'] !== null ? Autolinker.link(String(feature.properties['Height'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Base_height</th>\
-                <td>' + (feature.properties['Base_height'] !== null ? Autolinker.link(String(feature.properties['Base_height'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Extrusion</th>\
-                <td>' + (feature.properties['Extrusion'] !== null ? Autolinker.link(String(feature.properties['Extrusion'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Height_top_max</th>\
-                <td>' + (feature.properties['Height_top_max'] !== null ? Autolinker.link(String(feature.properties['Height_top_max'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Height_top_min</th>\
-                <td>' + (feature.properties['Height_top_min'] !== null ? Autolinker.link(String(feature.properties['Height_top_min'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Height_bottom_max</th>\
-                <td>' + (feature.properties['Height_bottom_max'] !== null ? Autolinker.link(String(feature.properties['Height_bottom_max'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Height_bottom_min</th>\
-                <td>' + (feature.properties['Height_bottom_min'] !== null ? Autolinker.link(String(feature.properties['Height_bottom_min'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Height_max</th>\
-                <td>' + (feature.properties['Height_max'] !== null ? Autolinker.link(String(feature.properties['Height_max'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">GIS_Comment</th>\
-                <td>' + (feature.properties['GIS_Comment'] !== null ? Autolinker.link(String(feature.properties['GIS_Comment'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Orientation_classified</th>\
-                <td>' + (feature.properties['Orientation_classified'] !== null ? Autolinker.link(String(feature.properties['Orientation_classified'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Shape_classified</th>\
-                <td>' + (feature.properties['Shape_classified'] !== null ? Autolinker.link(String(feature.properties['Shape_classified'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Archaeological_object_subtype</th>\
-                <td>' + (feature.properties['Archaeological_object_subtype'] !== null ? Autolinker.link(String(feature.properties['Archaeological_object_subtype'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Archaeological_object_material</th>\
-                <td>' + (feature.properties['Archaeological_object_material'] !== null ? Autolinker.link(String(feature.properties['Archaeological_object_material'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Excavation_object_type</th>\
-                <td>' + (feature.properties['Excavation_object_type'] !== null ? Autolinker.link(String(feature.properties['Excavation_object_type'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Find_type</th>\
-                <td>' + (feature.properties['Find_type'] !== null ? Autolinker.link(String(feature.properties['Find_type'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Find_material</th>\
-                <td>' + (feature.properties['Find_material'] !== null ? Autolinker.link(String(feature.properties['Find_material'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Find_GIS_comment</th>\
-                <td>' + (feature.properties['Find_GIS_comment'] !== null ? Autolinker.link(String(feature.properties['Find_GIS_comment'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Find_local_number</th>\
-                <td>' + (feature.properties['Find_local_number'] !== null ? Autolinker.link(String(feature.properties['Find_local_number'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Find_inventory_number</th>\
-                <td>' + (feature.properties['Find_inventory_number'] !== null ? Autolinker.link(String(feature.properties['Find_inventory_number'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Pit_find_GIS_comment</th>\
-                <td>' + (feature.properties['Pit_find_GIS_comment'] !== null ? Autolinker.link(String(feature.properties['Pit_find_GIS_comment'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Brick_type</th>\
-                <td>' + (feature.properties['Brick_type'] !== null ? Autolinker.link(String(feature.properties['Brick_type'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Brick_material</th>\
-                <td>' + (feature.properties['Brick_material'] !== null ? Autolinker.link(String(feature.properties['Brick_material'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Wall_courses</th>\
-                <td>' + (feature.properties['Wall_courses'] !== null ? Autolinker.link(String(feature.properties['Wall_courses'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Wall_brick_type</th>\
-                <td>' + (feature.properties['Wall_brick_type'] !== null ? Autolinker.link(String(feature.properties['Wall_brick_type'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Wall_function</th>\
-                <td>' + (feature.properties['Wall_function'] !== null ? Autolinker.link(String(feature.properties['Wall_function'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Wall_connection_comment</th>\
-                <td>' + (feature.properties['Wall_connection_comment'] !== null ? Autolinker.link(String(feature.properties['Wall_connection_comment'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Add_phase_ID_2</th>\
-                <td>' + (feature.properties['Add_phase_ID_2'] !== null ? Autolinker.link(String(feature.properties['Add_phase_ID_2'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Add_phase_ID</th>\
-                <td>' + (feature.properties['Add_phase_ID'] !== null ? Autolinker.link(String(feature.properties['Add_phase_ID'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">GIS_feature_type</th>\
-                <td>' + (feature.properties['GIS_feature_type'] !== null ? Autolinker.link(String(feature.properties['GIS_feature_type'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">GIS_feature_type_number</th>\
-                <td>' + (feature.properties['GIS_feature_type_number'] !== null ? Autolinker.link(String(feature.properties['GIS_feature_type_number'])) : '') + '</td>\
-            </tr>\
-        </table>';
-    layer.bindPopup(popupContent, {maxHeight: 400});
-}
-function style_CasestudyareaTDFIj21_5_0(feature) {
-    var context = {
-        feature: feature,
-        variables: {}
-    };
-    // Start of if blocks and style check logic
-    if (exp_CasestudyareaTDFIj21_5rule0_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(0,0,0,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(202,123,74,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule1_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(0,0,0,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(166,88,50,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule2_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(0,0,0,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(170,128,148,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule3_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(0,0,0,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(240,237,241,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule4_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(0,0,0,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(247,244,237,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule5_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(0,0,0,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(0,153,219,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule6_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,36,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(110,110,112,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule7_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(123,113,74,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(255,235,191,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule8_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(202,197,178,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule9_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(152,155,117,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule10_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(202,197,178,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule11_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(202,197,178,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule12_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(81,46,22,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(255,244,130,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule13_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(81,46,22,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(197,201,214,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule14_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(66,63,41,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(156,150,97,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule15_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(81,46,22,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(255,249,200,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule16_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(72,61,52,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(200,171,146,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule17_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(110,110,112,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule18_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(110,110,112,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(202,197,178,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule19_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(152,155,117,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule20_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(202,123,74,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule21_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(126,107,93,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule22_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(81,46,22,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule23_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(175,134,85,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule24_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(247,244,237,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule25_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(168,138,105,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule26_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(35,35,35,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(156,156,156,1.0)',
-        interactive: true,
-    };
-        }
-        else if (exp_CasestudyareaTDFIj21_5rule27_eval_expression(context)) {
-          return {
-        pane: 'pane_CasestudyareaTDFIj21_5',
-        opacity: 1,
-        color: 'rgba(88,88,88,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(206,206,206,1.0)',
-        interactive: true,
-    };
-        }
-    else {
-        return {fill: false, stroke: false};
-    }
-}
-map.createPane('pane_CasestudyareaTDFIj21_5');
-map.getPane('pane_CasestudyareaTDFIj21_5').style.zIndex = 405;
-map.getPane('pane_CasestudyareaTDFIj21_5').style['mix-blend-mode'] = 'normal';
-var layer_CasestudyareaTDFIj21_5 = new L.geoJson(json_CasestudyareaTDFIj21_5, {
-    attribution: '',
-    interactive: true,
-    dataVar: 'json_CasestudyareaTDFIj21_5',
-    layerName: 'layer_CasestudyareaTDFIj21_5',
-    pane: 'pane_CasestudyareaTDFIj21_5',
-    onEachFeature: pop_CasestudyareaTDFIj21_5,
-    style: style_CasestudyareaTDFIj21_5_0,
-});
-bounds_group.addLayer(layer_CasestudyareaTDFIj21_5);
-map.addLayer(layer_CasestudyareaTDFIj21_5);
-function pop_Casestudyinformationpoints_6(feature, layer) {
-    var popupContent = '<table>\
-            <tr>\
-                <td colspan="2">' + (feature.properties['Info_title'] !== null ? Autolinker.link(String(feature.properties['Info_title'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <td colspan="2">' + (feature.properties['Info_text'] !== null ? Autolinker.link(String(feature.properties['Info_text'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Stratum_ID</th>\
-                <td>' + (feature.properties['Stratum_ID'] !== null ? Autolinker.link(String(feature.properties['Stratum_ID'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Phase_ID</th>\
-                <td>' + (feature.properties['Phase_ID'] !== null ? Autolinker.link(String(feature.properties['Phase_ID'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Archaeological_object_ID</th>\
-                <td>' + (feature.properties['Archaeological_object_ID'] !== null ? Autolinker.link(String(feature.properties['Archaeological_object_ID'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">Link</th>\
-                <td>' + (feature.properties['Link'] !== null ? Autolinker.link(String(feature.properties['Link'])) : '') + '</td>\
-            </tr>\
-            <tr>\
-                <th scope="row">OREA_GIS_ID</th>\
-                <td>' + (feature.properties['OREA_GIS_ID'] !== null ? Autolinker.link(String(feature.properties['OREA_GIS_ID'])) : '') + '</td>\
-            </tr>\
-        </table>';
-    layer.bindPopup(popupContent, {maxHeight: 400});
-}
+  function style_TDplacenames_4_0() {
+      return {
+          fill: false,
+          stroke: false,
+          interactive: false
+      }
+  }
+  map.createPane('pane_TDplacenames_4');
+  map.getPane('pane_TDplacenames_4').style.zIndex = 404;
+  map.getPane('pane_TDplacenames_4').style['mix-blend-mode'] = 'normal';
+  var layer_TDplacenames_4 = new L.geoJson(json_TDplacenames_4, {
+      attribution: '',
+      interactive: false,
+      dataVar: 'json_TDplacenames_4',
+      layerName: 'layer_TDplacenames_4',
+      pane: 'pane_TDplacenames_4',
+      onEachFeature: pop_TDplacenames_4,
+      pointToLayer: function (feature, latlng) {
+          var context = {
+              feature: feature,
+              variables: {}
+          };
+          return L.circleMarker(latlng, style_TDplacenames_4_0(feature));
+      },
+  });
+  bounds_group.addLayer(layer_TDplacenames_4);
+  map.addLayer(layer_TDplacenames_4);
+  function pop_CasestudyareaTDFIj21_5(feature, layer) {
+      var popupContent = '<table>\
+              <tr>\
+                  <th scope="row">OREA_GIS_ID</th>\
+                  <td>' + (feature.properties['OREA_GIS_ID'] !== null ? Autolinker.link(String(feature.properties['OREA_GIS_ID'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Excavation_object_ID</th>\
+                  <td>' + (feature.properties['Excavation_object_ID'] !== null ? Autolinker.link(String(feature.properties['Excavation_object_ID'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Archaeological_object_ID</th>\
+                  <td>' + (feature.properties['Archaeological_object_ID'] !== null ? Autolinker.link(String(feature.properties['Archaeological_object_ID'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Archaeological_object_type</th>\
+                  <td>' + (feature.properties['Archaeological_object_type'] !== null ? Autolinker.link(String(feature.properties['Archaeological_object_type'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Archaeological_object_GIS_comment</th>\
+                  <td>' + (feature.properties['Archaeological_object_GIS_comment'] !== null ? Autolinker.link(String(feature.properties['Archaeological_object_GIS_comment'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Phase_ID</th>\
+                  <td>' + (feature.properties['Phase_ID'] !== null ? Autolinker.link(String(feature.properties['Phase_ID'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Phase_GIS_comment</th>\
+                  <td>' + (feature.properties['Phase_GIS_comment'] !== null ? Autolinker.link(String(feature.properties['Phase_GIS_comment'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Stratum_ID</th>\
+                  <td>' + (feature.properties['Stratum_ID'] !== null ? Autolinker.link(String(feature.properties['Stratum_ID'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Stratum_GIS_comment</th>\
+                  <td>' + (feature.properties['Stratum_GIS_comment'] !== null ? Autolinker.link(String(feature.properties['Stratum_GIS_comment'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Eigner_map_numbers</th>\
+                  <td>' + (feature.properties['Eigner_map_numbers'] !== null ? Autolinker.link(String(feature.properties['Eigner_map_numbers'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Resources_ID</th>\
+                  <td>' + (feature.properties['Resources_ID'] !== null ? Autolinker.link(String(feature.properties['Resources_ID'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Locus_wall_comment</th>\
+                  <td>' + (feature.properties['Locus_wall_comment'] !== null ? Autolinker.link(String(feature.properties['Locus_wall_comment'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Height</th>\
+                  <td>' + (feature.properties['Height'] !== null ? Autolinker.link(String(feature.properties['Height'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Base_height</th>\
+                  <td>' + (feature.properties['Base_height'] !== null ? Autolinker.link(String(feature.properties['Base_height'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Extrusion</th>\
+                  <td>' + (feature.properties['Extrusion'] !== null ? Autolinker.link(String(feature.properties['Extrusion'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Height_top_max</th>\
+                  <td>' + (feature.properties['Height_top_max'] !== null ? Autolinker.link(String(feature.properties['Height_top_max'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Height_top_min</th>\
+                  <td>' + (feature.properties['Height_top_min'] !== null ? Autolinker.link(String(feature.properties['Height_top_min'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Height_bottom_max</th>\
+                  <td>' + (feature.properties['Height_bottom_max'] !== null ? Autolinker.link(String(feature.properties['Height_bottom_max'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Height_bottom_min</th>\
+                  <td>' + (feature.properties['Height_bottom_min'] !== null ? Autolinker.link(String(feature.properties['Height_bottom_min'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Height_max</th>\
+                  <td>' + (feature.properties['Height_max'] !== null ? Autolinker.link(String(feature.properties['Height_max'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">GIS_Comment</th>\
+                  <td>' + (feature.properties['GIS_Comment'] !== null ? Autolinker.link(String(feature.properties['GIS_Comment'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Orientation_classified</th>\
+                  <td>' + (feature.properties['Orientation_classified'] !== null ? Autolinker.link(String(feature.properties['Orientation_classified'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Shape_classified</th>\
+                  <td>' + (feature.properties['Shape_classified'] !== null ? Autolinker.link(String(feature.properties['Shape_classified'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Archaeological_object_subtype</th>\
+                  <td>' + (feature.properties['Archaeological_object_subtype'] !== null ? Autolinker.link(String(feature.properties['Archaeological_object_subtype'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Archaeological_object_material</th>\
+                  <td>' + (feature.properties['Archaeological_object_material'] !== null ? Autolinker.link(String(feature.properties['Archaeological_object_material'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Excavation_object_type</th>\
+                  <td>' + (feature.properties['Excavation_object_type'] !== null ? Autolinker.link(String(feature.properties['Excavation_object_type'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Find_type</th>\
+                  <td>' + (feature.properties['Find_type'] !== null ? Autolinker.link(String(feature.properties['Find_type'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Find_material</th>\
+                  <td>' + (feature.properties['Find_material'] !== null ? Autolinker.link(String(feature.properties['Find_material'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Find_GIS_comment</th>\
+                  <td>' + (feature.properties['Find_GIS_comment'] !== null ? Autolinker.link(String(feature.properties['Find_GIS_comment'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Find_local_number</th>\
+                  <td>' + (feature.properties['Find_local_number'] !== null ? Autolinker.link(String(feature.properties['Find_local_number'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Find_inventory_number</th>\
+                  <td>' + (feature.properties['Find_inventory_number'] !== null ? Autolinker.link(String(feature.properties['Find_inventory_number'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Pit_find_GIS_comment</th>\
+                  <td>' + (feature.properties['Pit_find_GIS_comment'] !== null ? Autolinker.link(String(feature.properties['Pit_find_GIS_comment'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Brick_type</th>\
+                  <td>' + (feature.properties['Brick_type'] !== null ? Autolinker.link(String(feature.properties['Brick_type'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Brick_material</th>\
+                  <td>' + (feature.properties['Brick_material'] !== null ? Autolinker.link(String(feature.properties['Brick_material'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Wall_courses</th>\
+                  <td>' + (feature.properties['Wall_courses'] !== null ? Autolinker.link(String(feature.properties['Wall_courses'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Wall_brick_type</th>\
+                  <td>' + (feature.properties['Wall_brick_type'] !== null ? Autolinker.link(String(feature.properties['Wall_brick_type'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Wall_function</th>\
+                  <td>' + (feature.properties['Wall_function'] !== null ? Autolinker.link(String(feature.properties['Wall_function'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Wall_connection_comment</th>\
+                  <td>' + (feature.properties['Wall_connection_comment'] !== null ? Autolinker.link(String(feature.properties['Wall_connection_comment'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Add_phase_ID_2</th>\
+                  <td>' + (feature.properties['Add_phase_ID_2'] !== null ? Autolinker.link(String(feature.properties['Add_phase_ID_2'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Add_phase_ID</th>\
+                  <td>' + (feature.properties['Add_phase_ID'] !== null ? Autolinker.link(String(feature.properties['Add_phase_ID'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">GIS_feature_type</th>\
+                  <td>' + (feature.properties['GIS_feature_type'] !== null ? Autolinker.link(String(feature.properties['GIS_feature_type'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">GIS_feature_type_number</th>\
+                  <td>' + (feature.properties['GIS_feature_type_number'] !== null ? Autolinker.link(String(feature.properties['GIS_feature_type_number'])) : '') + '</td>\
+              </tr>\
+          </table>';
+      layer.bindPopup(popupContent, {maxHeight: 400});
+  }
+  function style_CasestudyareaTDFIj21_5_0(feature) {
+      var context = {
+          feature: feature,
+          variables: {}
+      };
+      // Start of if blocks and style check logic
+      if (exp_CasestudyareaTDFIj21_5rule0_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(202,123,74,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule1_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(166,88,50,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule2_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(170,128,148,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule3_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(240,237,241,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule4_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(247,244,237,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule5_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(0,153,219,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule6_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,36,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(110,110,112,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule7_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(123,113,74,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(255,235,191,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule8_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(202,197,178,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule9_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(152,155,117,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule10_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(202,197,178,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule11_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(202,197,178,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule12_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(81,46,22,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(255,244,130,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule13_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(81,46,22,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(197,201,214,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule14_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(66,63,41,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(156,150,97,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule15_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(81,46,22,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(255,249,200,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule16_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(72,61,52,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(200,171,146,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule17_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(110,110,112,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule18_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(110,110,112,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(202,197,178,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule19_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(152,155,117,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule20_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(202,123,74,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule21_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(126,107,93,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule22_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(81,46,22,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule23_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(175,134,85,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule24_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(247,244,237,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule25_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(168,138,105,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule26_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(35,35,35,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(156,156,156,1.0)',
+          interactive: true,
+      };
+          }
+          else if (exp_CasestudyareaTDFIj21_5rule27_eval_expression(context)) {
+            return {
+          pane: 'pane_CasestudyareaTDFIj21_5',
+          opacity: 1,
+          color: 'rgba(88,88,88,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(206,206,206,1.0)',
+          interactive: true,
+      };
+          }
+      else {
+          return {fill: false, stroke: false};
+      }
+  }
+  map.createPane('pane_CasestudyareaTDFIj21_5');
+  map.getPane('pane_CasestudyareaTDFIj21_5').style.zIndex = 405;
+  map.getPane('pane_CasestudyareaTDFIj21_5').style['mix-blend-mode'] = 'normal';
+  var layer_CasestudyareaTDFIj21_5 = new L.geoJson(json_CasestudyareaTDFIj21_5, {
+      attribution: '',
+      interactive: true,
+      dataVar: 'json_CasestudyareaTDFIj21_5',
+      layerName: 'layer_CasestudyareaTDFIj21_5',
+      pane: 'pane_CasestudyareaTDFIj21_5',
+      onEachFeature: pop_CasestudyareaTDFIj21_5,
+      style: style_CasestudyareaTDFIj21_5_0,
+  });
+  bounds_group.addLayer(layer_CasestudyareaTDFIj21_5);
+  map.addLayer(layer_CasestudyareaTDFIj21_5);
+  function pop_Casestudyinformationpoints_6(feature, layer) {
+      var popupContent = '<table>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Info_title'] !== null ? Autolinker.link(String(feature.properties['Info_title'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Info_text'] !== null ? Autolinker.link(String(feature.properties['Info_text'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Stratum_ID</th>\
+                  <td>' + (feature.properties['Stratum_ID'] !== null ? Autolinker.link(String(feature.properties['Stratum_ID'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Phase_ID</th>\
+                  <td>' + (feature.properties['Phase_ID'] !== null ? Autolinker.link(String(feature.properties['Phase_ID'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Archaeological_object_ID</th>\
+                  <td>' + (feature.properties['Archaeological_object_ID'] !== null ? Autolinker.link(String(feature.properties['Archaeological_object_ID'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">Link</th>\
+                  <td>' + (feature.properties['Link'] !== null ? Autolinker.link(String(feature.properties['Link'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <th scope="row">OREA_GIS_ID</th>\
+                  <td>' + (feature.properties['OREA_GIS_ID'] !== null ? Autolinker.link(String(feature.properties['OREA_GIS_ID'])) : '') + '</td>\
+              </tr>\
+          </table>';
+      layer.bindPopup(popupContent, {maxHeight: 400});
+  }
 
-function style_Casestudyinformationpoints_6_0() {
-    return {
-        pane: 'pane_Casestudyinformationpoints_6',
-        shape: 'diamond',
-        radius: 8.0,
-        opacity: 1,
-        color: 'rgba(255,255,255,1.0)',
-        dashArray: '',
-        lineCap: 'butt',
-        lineJoin: 'miter',
-        weight: 1.0,
-        fill: true,
-        fillOpacity: 1,
-        fillColor: 'rgba(1,35,255,1.0)',
-        interactive: true,
-    }
-}
-map.createPane('pane_Casestudyinformationpoints_6');
-map.getPane('pane_Casestudyinformationpoints_6').style.zIndex = 406;
-map.getPane('pane_Casestudyinformationpoints_6').style['mix-blend-mode'] = 'normal';
-var layer_Casestudyinformationpoints_6 = new L.geoJson(json_Casestudyinformationpoints_6, {
-    attribution: '',
-    interactive: true,
-    dataVar: 'json_Casestudyinformationpoints_6',
-    layerName: 'layer_Casestudyinformationpoints_6',
-    pane: 'pane_Casestudyinformationpoints_6',
-    onEachFeature: pop_Casestudyinformationpoints_6,
-    pointToLayer: function (feature, latlng) {
-        var context = {
-            feature: feature,
-            variables: {}
-        };
-        return L.shapeMarker(latlng, style_Casestudyinformationpoints_6_0(feature));
-    },
-});
-bounds_group.addLayer(layer_Casestudyinformationpoints_6);
-map.addLayer(layer_Casestudyinformationpoints_6);
-    var title = new L.Control();
-    title.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
-    };
-    title.update = function () {
-        this._div.innerHTML = '<h2>A Puzzle in 4D GIS case study</h2>';
-    };
-    title.addTo(map);
-var baseMaps = {};
-setBounds();
-var i = 0;
-layer_TDexcavationareas_1.eachLayer(function(layer) {
-    var context = {
-        feature: layer.feature,
-        variables: {}
-    };
-    layer.bindTooltip((layer.feature.properties['Area_text'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'Times New Roman\', sans-serif;">' + layer.feature.properties['Area_text']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_TDexcavationareas_1'});
-    labels.push(layer);
-    totalMarkers += 1;
-      layer.added = true;
-      addLabel(layer, i);
-      i++;
-});
-var i = 0;
-layer_TDplacenames_4.eachLayer(function(layer) {
-    var context = {
-        feature: layer.feature,
-        variables: {}
-    };
-    layer.bindTooltip((layer.feature.properties['Text'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['Text']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_TDplacenames_4'});
-    labels.push(layer);
-    totalMarkers += 1;
-      layer.added = true;
-      addLabel(layer, i);
-      i++;
-});
-var mapDiv = document.getElementById('map');
-var row = document.createElement('div');
-row.className="row";
-row.id="all";
-row.style.height = "100%";
-var col1 = document.createElement('div');
-col1.className="col9";
-col1.id = "mapWindow";
-col1.style.height = "99%";
-col1.style.width = "80%";
-col1.style.display = "inline-block";
-var col2 = document.createElement('div');
-col2.className="col3";
-col2.id = "menu";
-col2.style.display = "inline-block";
-mapDiv.parentNode.insertBefore(row, mapDiv);
-document.getElementById("all").appendChild(col1);
-document.getElementById("all").appendChild(col2);
-col1.appendChild(mapDiv)
-var Filters = {"Stratum_ID": "str","Excavation_object_ID": "str"};
-function filterFunc() {
-  map.eachLayer(function(lyr){
-  if ("options" in lyr && "dataVar" in lyr["options"]){
-    features = this[lyr["options"]["dataVar"]].features.slice(0);
-    try{
-      for (key in Filters){
-        if (Filters[key] == "str" || Filters[key] == "bool"){
-          var selection = [];
-          for (option in Array.from(
-            document.getElementById(
-              "sel_" + key).selectedOptions)){
-            selection.push(
-              document.getElementById("sel_"+key)
-              .selectedOptions[option].value);
-            }
-            try{
-              if (key in features[0].properties){
-                for (i = features.length - 1;
-                  i >= 0; --i){
-                  if (selection.indexOf(
-                  features[i].properties[key])<0
-                  && selection.length>0) {
-                  features.splice(i,1);
+  function style_Casestudyinformationpoints_6_0() {
+      return {
+          pane: 'pane_Casestudyinformationpoints_6',
+          shape: 'diamond',
+          radius: 8.0,
+          opacity: 1,
+          color: 'rgba(255,255,255,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1.0,
+          fill: true,
+          fillOpacity: 1,
+          fillColor: 'rgba(1,35,255,1.0)',
+          interactive: true,
+      }
+  }
+  map.createPane('pane_Casestudyinformationpoints_6');
+  map.getPane('pane_Casestudyinformationpoints_6').style.zIndex = 406;
+  map.getPane('pane_Casestudyinformationpoints_6').style['mix-blend-mode'] = 'normal';
+  var layer_Casestudyinformationpoints_6 = new L.geoJson(json_Casestudyinformationpoints_6, {
+      attribution: '',
+      interactive: true,
+      dataVar: 'json_Casestudyinformationpoints_6',
+      layerName: 'layer_Casestudyinformationpoints_6',
+      pane: 'pane_Casestudyinformationpoints_6',
+      onEachFeature: pop_Casestudyinformationpoints_6,
+      pointToLayer: function (feature, latlng) {
+          var context = {
+              feature: feature,
+              variables: {}
+          };
+          return L.shapeMarker(latlng, style_Casestudyinformationpoints_6_0(feature));
+      },
+  });
+  bounds_group.addLayer(layer_Casestudyinformationpoints_6);
+  map.addLayer(layer_Casestudyinformationpoints_6);
+      var title = new L.Control();
+      title.onAdd = function (map) {
+          this._div = L.DomUtil.create('div', 'info');
+          this.update();
+          return this._div;
+      };
+      title.update = function () {
+          this._div.innerHTML = '<h2>A Puzzle in 4D GIS case study</h2>';
+      };
+      title.addTo(map);
+  var baseMaps = {};
+  L.control.layers(baseMaps,{'<img src="{% static 'qgisapp/legend/Casestudyinformationpoints_6.png' %}" /> Case study information points ': layer_Casestudyinformationpoints_6,'Case study area TD F/I j/21<br /><table><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_firepit0.png' %}" /></td><td>fire pit</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_pottery1.png' %}" /></td><td>pottery</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_smallfind2.png' %}" /></td><td>small find</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_bonehumanremainshumanremains3.png' %}" /></td><td>bone, human remains, human remains?</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_stone4.png' %}" /></td><td>stone</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_wallplaster5.png' %}" /></td><td>wall plaster</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_mudbrick6.png' %}" /></td><td>mud brick</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_brick7.png' %}" /></td><td>brick</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_sandbrick8.png' %}" /></td><td>sand brick</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_sandmudbrick9.png' %}" /></td><td>sand-mud brick</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_sandbrickbench10.png' %}" /></td><td>sand brick bench</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_sandbrickfloor11.png' %}" /></td><td>sand brick floor</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_columnfoundationfoundationstaircasefloorbase12.png' %}" /></td><td>column_foundation, foundation, staircase, floor base</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_firepitlayerashlayerashsandwallcollapseash13.png' %}" /></td><td>fire_pit, layer_ash layer_ash_sand, wall_collapse_ash</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_floor14.png' %}" /></td><td>floor</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_foundationcut15.png' %}" /></td><td>foundation_cut</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_layerwallcollapse16.png' %}" /></td><td>layer, wall_collapse</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_layermudthresholdmud17.png' %}" /></td><td>layer_mud, threshold_mud</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_layersandwallcollapsesand18.png' %}" /></td><td>layer_sand, wall_collapse_sand</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_layersandmudwallcollapsesandmud19.png' %}" /></td><td>layer_sand_mud, wall_collapse_sand_mud</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_oven20.png' %}" /></td><td>oven</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_pit21.png' %}" /></td><td>pit</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_posthole22.png' %}" /></td><td>post_hole</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_robberpit23.png' %}" /></td><td>robber_pit</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_threshold24.png' %}" /></td><td>threshold</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_tomb25.png' %}" /></td><td>tomb</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_wall26.png' %}" /></td><td>wall</td></tr><tr><td style="text-align: center;"><img src="{% static 'qgisapp/legend/CasestudyareaTDFIj21_5_Navillepit27.png' %}" /></td><td>Naville pit</td></tr></table>': layer_CasestudyareaTDFIj21_5,'': layer_TDplacenames_4,'<img src="{% static 'qgisapp/legend/TDFIPhaseG4palatialbuilding_3.png' %}" /> TD F/I Phase G/4 palatial building': layer_TDFIPhaseG4palatialbuilding_3,'<img src="{% static 'qgisapp/legend/TDareagrids_2.png' %}" /> TD area grids': layer_TDareagrids_2,'<img src="{% static 'qgisapp/legend/TDexcavationareas_1.png' %}" /> TD excavation areas': layer_TDexcavationareas_1,"OpenStreetMap": layer_OpenStreetMap_0,}).addTo(map);
+
+  setBounds();
+  var i = 0;
+  layer_TDexcavationareas_1.eachLayer(function(layer) {
+      var context = {
+          feature: layer.feature,
+          variables: {}
+      };
+      layer.bindTooltip((layer.feature.properties['Area_text'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'Times New Roman\', sans-serif;">' + layer.feature.properties['Area_text']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_TDexcavationareas_1'});
+      labels.push(layer);
+      totalMarkers += 1;
+        layer.added = true;
+        addLabel(layer, i);
+        i++;
+  });
+  var i = 0;
+  layer_TDplacenames_4.eachLayer(function(layer) {
+      var context = {
+          feature: layer.feature,
+          variables: {}
+      };
+      layer.bindTooltip((layer.feature.properties['Text'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['Text']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_TDplacenames_4'});
+      labels.push(layer);
+      totalMarkers += 1;
+        layer.added = true;
+        addLabel(layer, i);
+        i++;
+  });
+  var mapDiv = document.getElementById('map');
+  var row = document.createElement('div');
+  row.className="row";
+  row.id="all";
+  row.style.height = "100%";
+  var col1 = document.createElement('div');
+  col1.className="col9";
+  col1.id = "mapWindow";
+  col1.style.height = "99%";
+  col1.style.width = "80%";
+  col1.style.display = "inline-block";
+  var col2 = document.createElement('div');
+  col2.className="col3";
+  col2.id = "menu";
+  col2.style.display = "inline-block";
+  mapDiv.parentNode.insertBefore(row, mapDiv);
+  document.getElementById("all").appendChild(col1);
+  document.getElementById("all").appendChild(col2);
+  col1.appendChild(mapDiv)
+  var Filters = {"Stratum_ID": "str","Excavation_object_ID": "str"};
+  function filterFunc() {
+    map.eachLayer(function(lyr){
+    if ("options" in lyr && "dataVar" in lyr["options"]){
+      features = this[lyr["options"]["dataVar"]].features.slice(0);
+      try{
+        for (key in Filters){
+          if (Filters[key] == "str" || Filters[key] == "bool"){
+            var selection = [];
+            for (option in Array.from(
+              document.getElementById(
+                "sel_" + key).selectedOptions)){
+              selection.push(
+                document.getElementById("sel_"+key)
+                .selectedOptions[option].value);
+              }
+              try{
+                if (key in features[0].properties){
+                  for (i = features.length - 1;
+                    i >= 0; --i){
+                    if (selection.indexOf(
+                    features[i].properties[key])<0
+                    && selection.length>0) {
+                    features.splice(i,1);
+                    }
                   }
                 }
-              }
-            } catch(err){
+              } catch(err){
+            }
           }
-        }
-        if (Filters[key] == "int" || Filters[key] == "real"){
-          sliderVals =  document.getElementById(
-            "div_" + key).noUiSlider.get();
-          try{
-            if (key in features[0].properties){
-            for (i = features.length - 1; i >= 0; --i){
-              if (parseInt(features[i].properties[key])
-                  < sliderVals[0]
-                  || parseInt(features[i].properties[key])
-                  > sliderVals[1]){
+          if (Filters[key] == "int" || Filters[key] == "real"){
+            sliderVals =  document.getElementById(
+              "div_" + key).noUiSlider.get();
+            try{
+              if (key in features[0].properties){
+              for (i = features.length - 1; i >= 0; --i){
+                if (parseInt(features[i].properties[key])
+                    < sliderVals[0]
+                    || parseInt(features[i].properties[key])
+                    > sliderVals[1]){
+                      features.splice(i,1);
+                    }
+                  }
+                }
+              } catch(err){
+              }
+            }
+          if (Filters[key] == "date"
+            || Filters[key] == "datetime"
+            || Filters[key] == "time"){
+            try{
+              if (key in features[0].properties){
+                HTMLkey = key.replace(/[&\/\#,+()$~%.'":*?<>{} ]/g, '');
+                startdate = document.getElementById("dat_" +
+                  HTMLkey + "_date1").value.replace(" ", "T");
+                enddate = document.getElementById("dat_" +
+                  HTMLkey + "_date2").value.replace(" ", "T");
+                for (i = features.length - 1; i >= 0; --i){
+                  if (features[i].properties[key] < startdate
+                    || features[i].properties[key] > enddate){
                     features.splice(i,1);
                   }
                 }
@@ -1028,115 +1050,95 @@ function filterFunc() {
             } catch(err){
             }
           }
-        if (Filters[key] == "date"
-          || Filters[key] == "datetime"
-          || Filters[key] == "time"){
-          try{
-            if (key in features[0].properties){
-              HTMLkey = key.replace(/[&\/\#,+()$~%.'":*?<>{} ]/g, '');
-              startdate = document.getElementById("dat_" +
-                HTMLkey + "_date1").value.replace(" ", "T");
-              enddate = document.getElementById("dat_" +
-                HTMLkey + "_date2").value.replace(" ", "T");
-              for (i = features.length - 1; i >= 0; --i){
-                if (features[i].properties[key] < startdate
-                  || features[i].properties[key] > enddate){
-                  features.splice(i,1);
-                }
-              }
-            }
-          } catch(err){
-          }
         }
+      } catch(err){
       }
-    } catch(err){
+    this[lyr["options"]["layerName"]].clearLayers();
+    this[lyr["options"]["layerName"]].addData(features);
     }
-  this[lyr["options"]["layerName"]].clearLayers();
-  this[lyr["options"]["layerName"]].addData(features);
+    })
   }
-  })
-}
-    document.getElementById("menu").appendChild(
-        document.createElement("div"));
-    var div_Stratum_ID = document.createElement('div');
-    div_Stratum_ID.id = "div_Stratum_ID";
-    div_Stratum_ID.className= "filterselect";
-    document.getElementById("menu").appendChild(div_Stratum_ID);
-    sel_Stratum_ID = document.createElement('select');
-    sel_Stratum_ID.multiple = true;
-    sel_Stratum_ID.id = "sel_Stratum_ID";
-    var Stratum_ID_options_str = "<option value='' unselected></option>";
-    sel_Stratum_ID.onchange = function(){filterFunc()};
-    Stratum_ID_options_str  += '<option value="TD_F-I_d2">TD_F-I_d2</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_e">TD_F-I_e</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_e2">TD_F-I_e2</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_e3-2">TD_F-I_e3-2</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_d1_2">TD_F-I_d1_2</option>';
-    Stratum_ID_options_str  += '<option value="NULL">NULL</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_c">TD_F-I_c</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_d1_1">TD_F-I_d1_1</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_b1">TD_F-I_b1</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_d1_2-1_1">TD_F-I_d1_2-1_1</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_b2">TD_F-I_b2</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_b3">TD_F-I_b3</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_e2-1">TD_F-I_e2-1</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_d2-1_2">TD_F-I_d2-1_2</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_d1">TD_F-I_d1</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_a1">TD_F-I_a1</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_a2">TD_F-I_a2</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_b2-1">TD_F-I_b2-1</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_b2-a2">TD_F-I_b2-a2</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_b3-2">TD_F-I_b3-2</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_b3-1">TD_F-I_b3-1</option>';
-    Stratum_ID_options_str  += '<option value="TD_F-I_b">TD_F-I_b</option>';
-    sel_Stratum_ID.innerHTML = Stratum_ID_options_str;
-    div_Stratum_ID.appendChild(sel_Stratum_ID);
-    var lab_Stratum_ID = document.createElement('div');
-    lab_Stratum_ID.innerHTML = 'Stratum_ID';
-    lab_Stratum_ID.className = 'filterLabel';
-    div_Stratum_ID.appendChild(lab_Stratum_ID);
-    document.getElementById("menu").appendChild(
-        document.createElement("div"));
-    var div_Excavation_object_ID = document.createElement('div');
-    div_Excavation_object_ID.id = "div_Excavation_object_ID";
-    div_Excavation_object_ID.className= "filterselect";
-    document.getElementById("menu").appendChild(div_Excavation_object_ID);
-    sel_Excavation_object_ID = document.createElement('select');
-    sel_Excavation_object_ID.multiple = true;
-    sel_Excavation_object_ID.id = "sel_Excavation_object_ID";
-    var Excavation_object_ID_options_str = "<option value='' unselected></option>";
-    sel_Excavation_object_ID.onchange = function(){filterFunc()};
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum5_1">TD_F-I_j21_Planum5_1</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum5">TD_F-I_j21_Planum5</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum4-K4">TD_F-I_j21_Planum4-K4</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum4-K3">TD_F-I_j21_Planum4-K3</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum4-K2">TD_F-I_j21_Planum4-K2</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum4-5">TD_F-I_j21_Planum4-5</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum4">TD_F-I_j21_Planum4</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum3">TD_F-I_j21_Planum3</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum2_2">TD_F-I_j21_Planum2_2</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum2_1">TD_F-I_j21_Planum2_1</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum2-3">TD_F-I_j21_Planum2-3</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum2">TD_F-I_j21_Planum2</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum1-2">TD_F-I_j21_Planum1-2</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum1">TD_F-I_j21_Planum1</option>';
-    Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum0-1">TD_F-I_j21_Planum0-1</option>';
-    sel_Excavation_object_ID.innerHTML = Excavation_object_ID_options_str;
-    div_Excavation_object_ID.appendChild(sel_Excavation_object_ID);
-    var lab_Excavation_object_ID = document.createElement('div');
-    lab_Excavation_object_ID.innerHTML = 'Excavation_object_ID';
-    lab_Excavation_object_ID.className = 'filterLabel';
-    div_Excavation_object_ID.appendChild(lab_Excavation_object_ID);
-resetLabels([layer_TDexcavationareas_1,layer_TDplacenames_4]);
-map.on("zoomend", function(){
-    resetLabels([layer_TDexcavationareas_1,layer_TDplacenames_4]);
-});
-map.on("layeradd", function(){
-    resetLabels([layer_TDexcavationareas_1,layer_TDplacenames_4]);
-});
-map.on("layerremove", function(){
-    resetLabels([layer_TDexcavationareas_1,layer_TDplacenames_4]);
-});
+      document.getElementById("menu").appendChild(
+          document.createElement("div"));
+      var div_Stratum_ID = document.createElement('div');
+      div_Stratum_ID.id = "div_Stratum_ID";
+      div_Stratum_ID.className= "filterselect";
+      document.getElementById("menu").appendChild(div_Stratum_ID);
+      sel_Stratum_ID = document.createElement('select');
+      sel_Stratum_ID.multiple = true;
+      sel_Stratum_ID.id = "sel_Stratum_ID";
+      var Stratum_ID_options_str = "<option value='' unselected></option>";
+      sel_Stratum_ID.onchange = function(){filterFunc()};
+      Stratum_ID_options_str  += '<option value="TD_F-I_d2">TD_F-I_d2</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_e">TD_F-I_e</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_e2">TD_F-I_e2</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_e3-2">TD_F-I_e3-2</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_d1_2">TD_F-I_d1_2</option>';
+      Stratum_ID_options_str  += '<option value="NULL">NULL</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_c">TD_F-I_c</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_d1_1">TD_F-I_d1_1</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_b1">TD_F-I_b1</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_d1_2-1_1">TD_F-I_d1_2-1_1</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_b2">TD_F-I_b2</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_b3">TD_F-I_b3</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_e2-1">TD_F-I_e2-1</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_d2-1_2">TD_F-I_d2-1_2</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_d1">TD_F-I_d1</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_a1">TD_F-I_a1</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_a2">TD_F-I_a2</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_b2-1">TD_F-I_b2-1</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_b2-a2">TD_F-I_b2-a2</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_b3-2">TD_F-I_b3-2</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_b3-1">TD_F-I_b3-1</option>';
+      Stratum_ID_options_str  += '<option value="TD_F-I_b">TD_F-I_b</option>';
+      sel_Stratum_ID.innerHTML = Stratum_ID_options_str;
+      div_Stratum_ID.appendChild(sel_Stratum_ID);
+      var lab_Stratum_ID = document.createElement('div');
+      lab_Stratum_ID.innerHTML = 'Stratum_ID';
+      lab_Stratum_ID.className = 'filterLabel';
+      div_Stratum_ID.appendChild(lab_Stratum_ID);
+      document.getElementById("menu").appendChild(
+          document.createElement("div"));
+      var div_Excavation_object_ID = document.createElement('div');
+      div_Excavation_object_ID.id = "div_Excavation_object_ID";
+      div_Excavation_object_ID.className= "filterselect";
+      document.getElementById("menu").appendChild(div_Excavation_object_ID);
+      sel_Excavation_object_ID = document.createElement('select');
+      sel_Excavation_object_ID.multiple = true;
+      sel_Excavation_object_ID.id = "sel_Excavation_object_ID";
+      var Excavation_object_ID_options_str = "<option value='' unselected></option>";
+      sel_Excavation_object_ID.onchange = function(){filterFunc()};
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum5_1">TD_F-I_j21_Planum5_1</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum5">TD_F-I_j21_Planum5</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum4-K4">TD_F-I_j21_Planum4-K4</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum4-K3">TD_F-I_j21_Planum4-K3</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum4-K2">TD_F-I_j21_Planum4-K2</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum4-5">TD_F-I_j21_Planum4-5</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum4">TD_F-I_j21_Planum4</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum3">TD_F-I_j21_Planum3</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum2_2">TD_F-I_j21_Planum2_2</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum2_1">TD_F-I_j21_Planum2_1</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum2-3">TD_F-I_j21_Planum2-3</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum2">TD_F-I_j21_Planum2</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum1-2">TD_F-I_j21_Planum1-2</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum1">TD_F-I_j21_Planum1</option>';
+      Excavation_object_ID_options_str  += '<option value="TD_F-I_j21_Planum0-1">TD_F-I_j21_Planum0-1</option>';
+      sel_Excavation_object_ID.innerHTML = Excavation_object_ID_options_str;
+      div_Excavation_object_ID.appendChild(sel_Excavation_object_ID);
+      var lab_Excavation_object_ID = document.createElement('div');
+      lab_Excavation_object_ID.innerHTML = 'Excavation_object_ID';
+      lab_Excavation_object_ID.className = 'filterLabel';
+      div_Excavation_object_ID.appendChild(lab_Excavation_object_ID);
+  resetLabels([layer_TDexcavationareas_1,layer_TDplacenames_4]);
+  map.on("zoomend", function(){
+      resetLabels([layer_TDexcavationareas_1,layer_TDplacenames_4]);
+  });
+  map.on("layeradd", function(){
+      resetLabels([layer_TDexcavationareas_1,layer_TDplacenames_4]);
+  });
+  map.on("layerremove", function(){
+      resetLabels([layer_TDexcavationareas_1,layer_TDplacenames_4]);
+  });
 </script>
 </body>
 </html>
