@@ -51,6 +51,7 @@ def qs_as_arche_graph(request, model_name):
         raise Http404(f"No model: {model_name} in app: filechecker defined")
     qs = ct.model_class().objects.all()[start:end]
     g = qs_as_arche_res(qs)
+    g = g + get_root_col()
     if format == 'turtle':
         return HttpResponse(
             g.serialize(encoding='utf-8', format='turtle'), content_type='text/turtle'
