@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^netvis/', include('netvis.urls', namespace="netvis")),
     url(r'^info/', include('infos.urls', namespace='info')),
     url(r'^archiv/', include('archiv.urls', namespace='archiv')),
+    url(r'^qgisapp/', include('qgisapp.urls', namespace='qgisapp')),
     url(r'^vocabs/', include('vocabs.urls', namespace='vocabs')),
     url(r'^vocabs-ac/', include('vocabs.dal_urls', namespace='vocabs-ac')),
     url(r'^', include('webpage.urls', namespace='webpage')),

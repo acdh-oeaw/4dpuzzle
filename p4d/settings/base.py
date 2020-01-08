@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'netvis',
     'charts',
     'filechecker',
+    'qgisapp',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -56,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+APPEND_SLASH = False
 
 ROOT_URLCONF = 'p4d.urls'
 
