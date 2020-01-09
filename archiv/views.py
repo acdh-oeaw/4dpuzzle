@@ -4,6 +4,9 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
+
+from archeutils.utils import get_p4d_id
+
 from . filters import *
 from . forms import *
 from . tables import *
@@ -301,7 +304,14 @@ class ConvolutecardsListView(GenericListView):
 class ConvolutecardsDetailView(BaseDetailView):
 
     model = Convolutecards
-    template_name = 'browsing/generic_detail.html'
+    template_name = 'archiv/convolutecards_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        cur_obj = self.get_object()
+        context['arche_id'] = get_p4d_id(cur_obj)
+        context['arche_thumb'] = f"{context['arche_id']}?format=thumbnail"
+        return context
 
 
 class ConvolutecardsCreate(BaseCreateView):
