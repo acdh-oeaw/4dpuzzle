@@ -149,3 +149,5 @@ ARCHE_CONST_MAPPINGS = [
     # ('hasAvailableDate', '2020-02-01',),
     # ('hasPrincipalInvestigator', 'https://id.acdh.oeaw.ac.at/bhorejs',),
 ]
+FC_DEFAULT_ACCESS_RES = "https://vocabs.acdh.oeaw.ac.at/archeaccessrestrictions/restricted"
+FC_DEFAULT_ACCESS_COL = "https://vocabs.acdh.oeaw.ac.at/archeaccessrestrictions/public"

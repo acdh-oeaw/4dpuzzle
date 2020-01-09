@@ -1,5 +1,9 @@
+from django.conf import settings
+
 from rdflib import Graph, Namespace, URIRef, Literal, XSD
 from rdflib.namespace import RDF
+
+from . models import FcResource
 
 from archeutils.utils import (
     ARCHE_PROPS_LOOKUP,
@@ -10,20 +14,28 @@ from archeutils.utils import (
     get_category
 )
 
+FC_DEFAULT_ACCESS_RES = getattr(
+    settings,
+    'FC_DEFAULT_ACCESS_RES',
+    'https://vocabs.acdh.oeaw.ac.at/archeaccessrestrictions/public'
+)
+
+FC_DEFAULT_ACCESS_COL = getattr(
+    settings,
+    'FC_DEFAULT_ACCESS_COL',
+    'https://vocabs.acdh.oeaw.ac.at/archeaccessrestrictions/public'
+)
+
 
 def fetch_access_restriction(res):
-    access_res = None
-    if res.fc_arche_access:
-        access_res = res.fc_arche_access
-        return access_res
-    elif getattr(res, 'fc_directory', False):
-        access_res = res.fc_directory.fc_arche_access
-        if len(access_res) > 0:
-            return access_res
-        else:
-            return None
+    if isinstance(res, FcResource):
+        default_restriction = FC_DEFAULT_ACCESS_RES
     else:
-        return access_res
+        default_restriction = FC_DEFAULT_ACCESS_COL
+    if res.fc_arche_access:
+        return res.fc_arche_access
+    else:
+        return default_restriction
 
 
 def get_arche_fields(res):
@@ -74,9 +86,7 @@ def as_arche_graph(res, start=True):
             g.add((sub, acdh_ns.isPartOf, URIRef(res.parent.fc_arche_id)))
         else:
             g.add((sub, acdh_ns.isPartOf, URIRef(ARCHE_BASE_URI)))
-    access_res = fetch_access_restriction(res)
-    if access_res:
-        g.add((sub, acdh_ns.hasAccessRestriction, URIRef(access_res)))
+    g.add((sub, acdh_ns.hasAccessRestriction, URIRef(fetch_access_restriction(res))))
     for const in ARCHE_CONST_MAPPINGS:
         arche_prop_domain = ARCHE_PROPS_LOOKUP.get(const[0], 'No Match')
         if arche_prop_domain == 'date':

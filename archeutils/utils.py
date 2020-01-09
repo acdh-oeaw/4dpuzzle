@@ -100,6 +100,8 @@ def get_p4d_id(res, arche_uri=ARCHE_BASE_URI, arche_prop=False):
             return f"{new_path}{res.fc_filename}"
         else:
             return f"{new_path}/{res.fc_filename}"
+    else:
+        return "https://hansi4ever.com"
 
 
 def get_category(
