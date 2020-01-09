@@ -57,14 +57,17 @@
   <div class="card-body">
     {% block custom %}
     <legend>Basic Information </legend>
-    <img src="{{ arche_thumb }}" alt="..." class="img-thumbnail">
     <div class="row">
+
         <div class="col-md-6">
             <table class="table table-responsive table-hover">
+              <tr>
+                <th>preview</th>
+                <td><img src="{{ arche_thumb }}" alt="..." class="img-thumbnail">
+              <tr>
               {% for x in object.field_dict %}
               {% if x.value %}
               {% if user.is_authenticated %}
-              <tr>
                 <th>
                   {% if x.help_text %}
                   <abbr title="{{ x.help_text }}">{{ x.verbose_name }}</abbr>
@@ -137,7 +140,20 @@
             <script type="text/javascript">
               showGraph("{% url 'netvis:graph' app_name=app_name model_name=class_name|lower pk=object.id %}", "visualization")
             </script>
+            <div id="openseadragon-photo" style="height: 350px;"></div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.1/openseadragon.min.js"></script>
+            <script type="text/javascript">
+                var viewer = OpenSeadragon({
+                    id: "openseadragon-photo",
+                    protocol: "http://iiif.io/api/image",
+                    prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.1/images/",
+                    sequenceMode : true,
+                    showReferenceStrip: true,
+                    tileSources: ["{{ arche_id }}?PARAM=info.json&format=iiif"]
+                });
+            </script>
         </div>
+
     </div>
 
 
