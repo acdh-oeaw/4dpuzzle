@@ -63,7 +63,13 @@
             <table class="table table-responsive table-hover">
               <tr>
                 <th>preview</th>
-                <td><img src="{{ arche_thumb }}" alt="..." class="img-thumbnail">
+                <td>
+                  {% if object.access.pref_label == 'public' %}
+                    <img src="{{ arche_thumb }}" alt="..." class="img-thumbnail" />
+                  {% else %}
+                    restricted access
+                  {% endif %}
+                </td>
               <tr>
               {% for x in object.field_dict %}
               {% if x.value %}
@@ -140,18 +146,22 @@
             <script type="text/javascript">
               showGraph("{% url 'netvis:graph' app_name=app_name model_name=class_name|lower pk=object.id %}", "visualization")
             </script>
-            <div id="openseadragon-photo" style="height: 350px;"></div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.1/openseadragon.min.js"></script>
-            <script type="text/javascript">
-                var viewer = OpenSeadragon({
-                    id: "openseadragon-photo",
-                    protocol: "http://iiif.io/api/image",
-                    prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.1/images/",
-                    sequenceMode : true,
-                    showReferenceStrip: true,
-                    tileSources: ["{{ arche_id }}?PARAM=info.json&format=iiif"]
-                });
-            </script>
+            {% if object.access.pref_label == 'public' %}
+              <div id="openseadragon-photo" style="height: 350px;"></div>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.1/openseadragon.min.js"></script>
+              <script type="text/javascript">
+                  var viewer = OpenSeadragon({
+                      id: "openseadragon-photo",
+                      protocol: "http://iiif.io/api/image",
+                      prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.1/images/",
+                      sequenceMode : true,
+                      showReferenceStrip: true,
+                      tileSources: ["{{ arche_id }}?PARAM=info.json&format=iiif"]
+                  });
+              </script>
+              {% else %}
+                restricted access
+              {% endif %}
         </div>
 
     </div>
