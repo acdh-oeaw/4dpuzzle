@@ -1,0 +1,42 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block content %}
+<div class="container-planning" style="padding-bottom:150px;">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">Tell el-Daba 4D</li>
+        <li class="breadcrumb-item">GIS project</li>
+      </ol>
+		<div class="text-center">
+			<h1>GIS project </h1>
+			<hr style="border-color:#83C653; border-width: 2px" width="10%">
+		</div>
+        <div class="row">
+					<div class="col-md-4">
+            <ul class="images">
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/gis_arcmap_tumb.jpeg' %}" originalUrl="{% static 'webpage/media/gis_arcmap.jpeg' %}" alt="Screenshot of the GIS project in ArcMap."/>
+              <b>Figure 1</b>: Screenshot of the GIS project in ArcMap.
+            </ul>
+        <br />
+				<br />
+
+			</div>
+			<div class="col-md-8">
+				<p>
+          To test the AIS one area of Tell el Daba (F/I) which contains the remains of a palace has been analysed. You can access the 2-dimensional GIS project to explore the archaeological evidence of an Egyptian palace. In this movie you can see how the GIS works with the stratigraphic sequencer for the analysis of stratigraphy (<a href="{% url 'webpage:staticpage' template='video_hmc' %}">HMC+ movie</a>).</p>
+        </p>
+        <h3>2D GIS online </h3>
+        <p>
+          You can access the 2-dimensional GIS project that to explore the archaeological evidence of an Egyptian palace. It is possible to see the evidence according to phases (straten) and types of evidence (e.g. tombs).<br>
+        </p>
+        <p>
+          <a href="http://arcg.is/2yX6Bok" target="_blank">Enter Here </a>
+        </p>
+			</div>
+
+		</div>
+    </div>
+</div>
+
+{% endblock %}

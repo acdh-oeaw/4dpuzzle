@@ -1,0 +1,76 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block content %}
+<div class="container-planning" style="padding-bottom:150px;">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">About the project</li>
+        <li class="breadcrumb-item"><a href="{% url 'webpage:staticpage' template='archive' %}">Creation of the digital archive</a></li>
+        <li class="breadcrumb-item">Metadata</li>
+      </ol>
+		<div class="text-center">
+			<h1>Metadata and semantic enrichment </h1>
+      <h4>(Gerald Hiebel, Edeltraud Aspöck)</h4>
+			<hr style="border-color:#83C653; border-width: 2px" width="10%">
+		</div>
+        <div class="row">
+					<div class="col-md-4">
+            <ul class="images">
+      				<img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/archive_fig1_tumb.jpeg' %}" originalUrl="{% static 'webpage/media/archive_fig1.jpeg' %}" alt="Main categories of physical reality, documentation and digitizing processes."/>
+              <b>Figure 1</b>: Main categories of physical reality, documentation and digitising processes.
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/metadata_table.jpeg' %}" originalUrl="{% static 'webpage/media/metadata_table.jpeg' %}" alt="Metadata created for TD resources and documented object."/>
+              <b>Table 1</b>: Metadata created for TD resources and documented object.
+
+            </ul>
+        <br />
+				<br />
+
+			</div>
+			<div class="col-md-8">
+				<p>
+          To retrieve resources from the TD archive for archaeological research a data model was required to organise and integrate the metadata of the digital and analogue resources for querying. Entity relationship models have been used widely to model archaeological data in relational databases like Postgres, MySQL or MS Access. However, due to the complexity of archaeological documentation and the relations between physical objects, the processes excavating, documenting and interpreting them and the documentation created on the physical objects and the processes, the use of ontologies as data models increases in archaeology and semantic technologies are employed to implement the ontology and store the data.
+        </p>
+        <p>
+          We decided to use the CIDOC CRM ontology (Le Boeuf, P. et al. 2015) as the conceptual background to model TD resources, the physical reality they document and the process of creating digital documentation from analogue sources. The CIDOC CRM is an ISO standard for cultural heritage documentation and was extended in the past few years to model archaeological excavations (CRMarchaeo), scientific observation (CRMsci) and digital provenance (CRMdig) (CIDOC CRM 2016).
+        </p>
+        <p>
+          Analysing the available documentation and the process of digitising analogue sources we identified five main categories distinct in their nature: excavation areas, archaeological features and finds, documentation (analogue & digital), physical storage, digital secondary documentation (<b>Figure 1</b>).
+        </p>
+        <p>
+          In very simple terms it can be said that the physical reality of archaeological features and finds (archaeological objects created in the distant past) that were found in specific excavation areas (excavation objects such as squares and areas created by the archaeologists in the not so distant past) are documented in analogue and digital documentation. In the A Puzzle in 4D project we create homogeneous metadata to answer the following questions:
+        </p>
+        <p>
+          <ul>
+            <li><i>Which files document an excavation area? For example, which resources document the archaeological evidence and finds in area F/1, square j/21, Planum 3?? </i></li>
+            <li><i>Which files document archaeological features/finds of a specific type (e.g. graves)?  </i></li>
+            <li><i>Which files document a specific archaeological feature/find (e.g. grave 5 and walls in area F/1 square j/21)? </i></li>
+            <li><i>Which archaeological features/finds of a specific type and material are documented in an excavation area?</i></li>
+            <li><i>What stratum was assigned to archaeological features/finds?</i></li>
+          </ul>
+        </p>
+        <p>
+          In order to create homogeneous metadata we had to define processes to create identifiers for instances of the main categories. That meant we had to find out in what context is a name of the documentation unique and add the necessary context to the name. For example, “grave 5” is unique within a square such as „j/21”, which is unique in area “F/1”. Hence, the unique identifier for grave 5 would be “TD_F1_j21_grave5” (TD being acronym for the site). The naming conventions used in the TD excavations were very elaborated and allow creation of unique identifiers if context information is added. For archaeological features and finds that were not given names in their local context we assigned “puzzle4D” – identifiers. For resources that had not been assigned the conventional TD identifiers (such as inventory numbers etc.) during excavation we applied the same procedure and added the new identifiers on the analogue documentation or named the files with the identifiers in case of digital documentation. The thesaurus was extended with terms for documentation and digitising processes. Up to October 2017, metadata for the following resources, physical and conceptual objects has been created (<b>Table 1</b>).
+        </p>
+        <p>
+          The main aim of the remaining 2,5 years of 4DP is to create a workflow and metadata entry forms for all types of TD digital and analogue resources.
+        </p>
+
+        <div class="clearfix"></div>
+        <h2><i class="fa fa-book" style="color: #83C653" aria-hidden="true"></i>&nbsp;Bibliography</h2>
+        <p class="text-justify">
+        <ul>
+          <li>
+            <b> Le Boeuf, P. et al. (2015)</b>, 'Definition of the CIDOC Conceptual Reference Model', <a href="http://www.cidoc-crm.org/official_release_cidoc.html" target="_blank">http://www.cidoc-crm.org/official_release_cidoc.html</a>, (accessed 18.09.2017)..<br>
+          </li>
+        </ul>
+        </p>
+
+
+			</div>
+
+		</div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block content %}
+<div class="container-planning">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">About the project</li>
+        <li class="breadcrumb-item">Team</li>
+      </ol>
+
+    <div class="row">
+			<div class="col-md-8">
+        <div class="text-center">
+          <h1>Team</h1>
+          <hr style="border-color:#83C653; border-width: 2px" width="10%">
+        </div>
+				<h2>OREA Digital Archaeology Research Group <a class="fa fa-home" style="color:#83C653;"></a></h2>
+				<p class="justify">
+				<b>Project leader:</b> <a href="http://www.orea.oeaw.ac.at/das-institut/team/horejs-barbara/" target="_blank">Barbara Horejs</a><br>
+				<b>Scientific coordinator:</b> <a href="http://www.orea.oeaw.ac.at/das-institut/team/aspoeck-edeltraud/" target="_blank">Edeltraud Aspöck</a><br>
+				<b>Project management:</b> <a href="http://www.orea.oeaw.ac.at/das-institut/team/schwab-angela/" target="_blank">Angela Schwab</a><br>
+				<b>Scientific Advisors:</b> <a href="http://www.orea.oeaw.ac.at/das-institut/team/bietak-manfred/" target="_blank">Manfred Bietak</a>, <a href="http://www.orea.oeaw.ac.at/das-institut/team/kopetzky-karin/" target="_blank">Karin Kopetzky</a><br>
+				<b>Researcher:</b> <a href="https://www.uibk.ac.at/vermessung/personal/hiebel.html" target="_blank">Gerald Hiebel</a><br>
+				<b>Project assistant:</b> <a href="http://www.orea.oeaw.ac.at/das-institut/team/simon-martina/" target="_blank">Martina Simon</a><br>
+        <b>GIS:</b> <a href="http://www.orea.oeaw.ac.at/das-institut/team/petschko-irene/" target="_blank">Irene Petschko</a><br>
+        <b>Developer:</b> <a href="http://www.orea.oeaw.ac.at/das-institut/team/burkhart-karl/" target="_blank">Karl Burkhart</a><br>
+				<b>Student assistants:</b> <a href="http://www.orea.oeaw.ac.at/das-institut/team/burkhart-karl/" target="_blank">Karl Burkhart</a>, <a href="http://www.orea.oeaw.ac.at/das-institut/team/fragner-stefanie/" target="_blank">Stefanie Fragner</a>, <a href="http://www.orea.oeaw.ac.at/das-institut/team/posch-julian/" target="_blank">Julian Posch</a><br>
+				<h2>LBI ArchPro <a class="fa fa-home" style="color:#83C653;" target="_blank" href="http://archpro.lbg.ac.at"></a></h2>
+				<b>Project leader:</b> <a href="http://archpro.lbg.ac.at/node/42" target="_blank">Wolfgang Neubauer</a> <br>
+				<b>Scientific coordinator:</b> <a href="http://archpro.lbg.ac.at/node/48" target="_blank">Matthias Kucera</a><br>
+				<b>Researchers:</b> <a href="http://archpro.lbg.ac.at/node/45" target="_blank">Nives Doneus</a>, <a href="http://archpro.lbg.ac.at/node/807" target="_blank">Sandra Müller</a>, <a href="http://archpro.lbg.ac.at/node/819" target="_blank">Milena Nowak</a>, <a href="http://archpro.lbg.ac.at/node/140" target="_blank">Mario Wallner</a>, <a href="http://archpro.lbg.ac.at/node/661" target="_blank">Juan Torrejón Valdelomar</a><br>
+	      <h2>ACDH Austrian Center for Digital Humanities <a class="fa fa-home" style="color:#83C653;" target="_blank" href="https://www.oeaw.ac.at/acdh/acdh-home/"></a></h2>
+        <b>Project leader:</b> <a href="https://www.oeaw.ac.at/acdh/team/current-team/matej-durco/" target="_blank">Matej Durco</a><br>
+        <b>Developers:</b> <a href="https://www.oeaw.ac.at/acdh/team/current-team/peter-andorfer/" target="_blank">Peter Andorfer</a>, <a href="https://www.oeaw.ac.at/acdh/team/current-team/ksenia-zaytseva/" target="_blank">Ksenia Zaytseva</a> <br>
+				</p>
+				<br>
+				<br>
+
+			</div>
+			<div class="col-lg-4" align="center">
+				<br>
+        <a href="http://www.orea.oeaw.ac.at/home/" target="_blank"><img src="{% static 'webpage/media/logo_orea.png' %}" width="40%" class="img-responsive"></a>
+				<br>
+        <a href="https://www.oeaw.ac.at/acdh/acdh-home/" target="_blank"><img src="{% static 'webpage/media/logo_acdh.jpg' %}" width="40%" class="img-responsive"></a>
+        <br>
+  			<a href="http://thehyksosenigma.oeaw.ac.at" target="_blank"><img src="{% static 'webpage/media/logo_hyksos.jpeg' %}" width="40%" class="img-responsive"></a>
+        <br>
+				<a href="https://www.oeaw.ac.at/oeai/home/" target="_blank"><img src="{% static 'webpage/media/logo_oai.jpg' %}" width="30%" class="img-responsive"></a>
+				<br>
+				<a href="http://www.ariadne-infrastructure.eu/" target="_blank"><img src="{% static 'webpage/media/logo_ariadne.jpg' %}" width="40%" class="img-responsive"></a>
+				<br>
+        <a href="http://archpro.lbg.ac.at" target="_blank"><img src="{% static 'webpage/media/logo_lbi.png' %}" width="40%" class="img-responsive"></a>
+        <br>
+        <a href="http://www.parthenos-project.eu/consortium/pin-s-c-r-l/" target="_blank"><img src="{% static 'webpage/media/logo_pin.jpeg' %}" width="40%" class="img-responsive"></a>
+        <br>
+        <a href="http://archaeologydataservice.ac.uk/" target="_blank"><img src="{% static 'webpage/media/logo_ads.jpeg' %}" width="40%" class="img-responsive"></a>
+        <br>
+        <img src="{% static 'webpage/media/logo_chicago.jpeg' %}" width="40%" class="img-responsive">
+        <br>
+        <img src="{% static 'webpage/media/logo_bochum.jpeg' %}" width="40%" class="img-responsive">
+        <br>
+			</div>
+		</div>
+    </div>
+</div>
+{% endblock %}

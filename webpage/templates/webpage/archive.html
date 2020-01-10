@@ -1,0 +1,101 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block content %}
+<div class="container-planning" style="padding-bottom:150px;">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">About the project</li>
+        <li class="breadcrumb-item">Creation of the digital archive</li>
+      </ol>
+		<div class="text-center">
+			<h1>Creation of the digital archive</h1>
+			<hr style="border-color:#83C653; border-width: 2px" width="10%">
+		</div>
+        <div class="row">
+					<div class="col-md-4">
+            <ul class="images">
+      				<img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/archive_fig1_tumb.jpeg' %}" originalUrl="{% static 'webpage/media/archive_fig1.jpeg' %}" alt="Main categories of physical reality, documentation and digitizing processes."/>
+              <b>Figure 1</b>: Main categories of physical reality, documentation and digitizing processes.
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/archive_fig2_tumb.jpeg' %}" originalUrl="{% static 'webpage/media/archive_fig2.jpeg' %}" alt="Scanning over-sized plans. (© copyright ÖAW/ACDH)"/>
+              <b>Figure 2</b>: Scanning over-sized plans. (© copyright ÖAW/ACDH)
+
+            </ul>
+        <br />
+				<br />
+
+        <div class="container" >
+          <div class="col-md-4" style=" margin-left:-30px;background-color:#f2f2f2; border: 2px solid; border-radius: 25px; padding-bottom:35px;">
+            <h4><i class="fa fa-camera fa" style="color: #83C653" aria-hidden="true"></i>&nbsp;Image Gallery</h4>
+            <ul class="images">
+              <div class="row">
+              <div class="col-lg-4" style="">
+                  <img originalUrl="{% static 'webpage/media/archive01.jpeg' %}" src="{% static 'webpage/media/archive01_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="">
+              </div>
+              <div class="col-lg-4" style="">
+                  <img originalUrl="{% static 'webpage/media/archive02.jpeg' %}" src="{% static 'webpage/media/archive02_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="">
+              </div>
+              <div class="col-lg-4" style="">
+                  <img originalUrl="{% static 'webpage/media/archive03.jpeg' %}" src="{% static 'webpage/media/archive03_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4" style="">
+                  <img originalUrl="{% static 'webpage/media/archive04.jpeg' %}" src="{% static 'webpage/media/archive04_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="">
+              </div>
+              <div class="col-lg-4" style="">
+                  <img originalUrl="{% static 'webpage/media/archive05.jpeg' %}" src="{% static 'webpage/media/archive05_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="">
+              </div>
+              <div class="col-lg-4" style="">
+                  <img originalUrl="{% static 'webpage/media/archive06.jpeg' %}" src="{% static 'webpage/media/archive06_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4" style="">
+                  <img originalUrl="{% static 'webpage/media/archive07.jpeg' %}" src="{% static 'webpage/media/archive07_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="">
+              </div>
+              <div class="col-lg-4" style="">
+                  <img originalUrl="{% static 'webpage/media/archive08.jpeg' %}" src="{% static 'webpage/media/archive08_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="">
+              </div>
+              <div class="col-lg-4" style="">
+                  <img originalUrl="{% static 'webpage/media/archive09.jpeg' %}" src="{% static 'webpage/media/archive09_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="">
+              </div>
+            </div>
+            </ul>
+          </div>
+        </div>
+
+
+			</div>
+			<div class="col-md-8">
+				<p class="">
+          The TD archive at OREA holds a large quantity of analogue and digital resources which document the process of archaeological fieldwork and the archaeological discoveries that were made. For the digital archiving of these resources, we had to create a data model that represents the relationships between the information in the analogue and digital documentation, the actual archaeological evidence, the process of excavating this evidence and, of course, of us digitizing and processing the resources (<b>Fig 1</b>). We have used an ontology to represent this complex network of information.
+        </p>
+        <p>
+          The CIDOC CRM ontology is an ISO standard for cultural heritage documentation. Using this ontology does not only allow us to create the complex relationships that we need for our data model, but it also enables the data to be encoded in a machine-readable format. This is important if other computers want to access the information from the TD archive.
+        </p>
+        <p>
+          The preparation of the analogue resources for digital long-term preservation includes the digitization of resources, for example the scanning of paper records such as field drawings and the creation of metadata for the scan (<b>Fig 2</b>). Metadata can be information about the content depicted or described on the analogue resources, characteristics of the information carriers and/or information on the digitisation process. Depending on the future use of the digitised resources a set of Metadata is defined and presented in a standardized way, in our case the organisation of the metadata follows the standards set by the CIDOC CRM ontology. Typical metadata records in the A Puzzle in 4D for a digitised photo of a find are for example the inventory number of the find, the date when the photo was made and information about the scanning. The metadata about the finds include information about the type of find, the dating of the find and the find spot. The relationships that we have created between the different types of metadata allow a complex querying of the archive.
+        </p>
+        <p>
+          When the files are ready for long-term preservation, they will be imported into the data repository ARCHE. ARCHE is the data archive that is currently set up at the ÖAW ACDH.
+        </p>
+        <p>
+          For more information on our data model, the use of CIDOC CRM, the digitization workflow and the system architecture please continue reading here:
+        </p>
+        <p>
+          <ul>
+            <li><i><a href="{% url 'webpage:staticpage' template='metadata' %}">Metadata and semantic enrichment </a></i></li>
+            <li><i><a href="{% url 'webpage:staticpage' template='digitisation' %}">Digitisation of Tell el-Daba resources </a></i></li>
+            <li><i><a href="{% url 'webpage:staticpage' template='integration' %}">Data integration, storage, archiving and open access </a></i></li>
+          </ul>
+
+        </p>
+
+			</div>
+
+		</div>
+    </div>
+</div>
+
+{% endblock %}

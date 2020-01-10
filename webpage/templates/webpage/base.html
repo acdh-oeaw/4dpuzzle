@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 {% load webpage_extras %}
-{% load browsing_extras %}
-{% load infos_extras %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -13,20 +11,24 @@
         <meta name="author" content="{{ metadata.author }}">
     {% endblock %}
     <!-- favicons -->
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ SHARED_URL }}favicon/apple-touch-icon.png"/>
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ SHARED_URL }}favicon/favicon-32x32.png"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ SHARED_URL }}favicon/favicon-16x16.png"/>
-        <link rel="manifest" href="{{ SHARED_URL }}favicon/manifest.json"/>
-        <link rel="mask-icon" href="{{ SHARED_URL }}favicon/safari-pinned-tab.svg" color="#00aba9"/>
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css" />
-	<meta name="theme-color" content="#ffffff"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'webpage/img/favicon/apple-touch-icon.png' %}"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'webpage/img/favicon/favicon-32x32.png' %}"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'webpage/img/favicon/favicon-16x16.png' %}"/>
+        <link rel="manifest" href="{% static 'webpage/img/favicon/manifest.json' %}"/>
+        <link rel="mask-icon" href="{% static 'webpage/img/favicon/safari-pinned-tab.svg' %}" color="#00aba9"/>
+        <meta name="theme-color" content="#ffffff"/>
     <!--favicons end -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,500" rel="stylesheet" />
-    <link rel="stylesheet" id="fundament-styles"  href="{{ SHARED_URL }}fundament/dist/fundament/css/fundament.min.css" type="text/css"/>
-    <link rel="stylesheet" href="{% static 'webpage/css/style.css' %}" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{ SHARED_URL }}apis/libraries/scroll-to-top/css/ap-scroll-top.min.css" />
-    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+
+    <!-- Bootstrap -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'webpage/bower_components/bootstrap/dist/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'webpage/bower_components/font-awesome/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'webpage/bower_components/imageviewer/dist/viewer.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'webpage/css/main.min.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'webpage/css/style.css' %}" type="text/css"/>
+
+
     <script type="text/javascript">
         window.cookieconsent_options = {
             "message":"This website uses cookies to ensure you get the best experience on our website",
@@ -36,7 +38,6 @@
             "theme":"dark-bottom"};
     </script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
-    <!-- End Cookie Consent plugin -->
     <!-- Matomo -->
       <script type="text/javascript">
         var _paq = _paq || [];
@@ -55,127 +56,139 @@
     {% block scriptHeader %}
     {% endblock %}
 </head>
-<body role="document" class="home contained fixed-nav" id="body">
-    <div class="hfeed site" id="page">
-        <div class="wrapper-fluid wrapper-navbar sticky-navbar" id="wrapper-navbar" itemscope="" itemtype="http://schema.org/WebSite">
-            <a class="skip-link screen-reader-text sr-only" href="#content">Skip to content</a>
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container-fluid">
-                    <!-- Your site title as branding in the menu -->
-                    <a href="/" class="navbar-brand custom-logo-link" rel="home" itemprop="url">
-                        <img src="https://4dpuzzle.orea.oeaw.ac.at/static/webpage/media/4dpuzzle_logo_wei%C3%9F.png" class="img-fluid" alt="{% projects_metadata 'title' %}" itemprop="{% projects_metadata 'title' %}"/>
-                    </a><!-- end custom logo -->
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"/>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                        <!-- Your menu goes here -->
-                        <ul id="main-menu" class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About
-                                    <span class="caret"/>
-                                </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{% url 'infos:about-the-project' %}">About the project</a>
-                                        <a class="dropdown-item" href="{% url 'infos:project-team' %}">Team</a>
-                                        <a class="dropdown-item" href="{% url 'webpage:staticpage' template='imprint' %}">Imprint | Impressum</a>
-                                    </div>
-                                </li>
-                                {% if 'vocabs' in APPS %}
-                                    {% if user.is_authenticated %}
-                                        <li class="nav-item dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vocabs Curation
-                                        <span class="caret"/>
-                                        </a>
-                                            <div class="dropdown-menu">
-                                                {% nav_menu app='vocabs' as links %}
-                                                {% for x in links %}
-                                                    <a class="dropdown-item" href="{{ x.link }}">{{ x.name }}</a>
-                                                {% endfor %}
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="{% url 'api-root' %}">Export SKOS (API)</a>
-                                            </div>
-                                        </li>
-                                    {% endif %}
-                                {% endif %}
-                            </ul>
-                            <ul class="navbar-nav justify-content-end">
-                                {% if user.is_authenticated %}
-                                <li class="nav-item dropdown ml-auto">
-                                    <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        {{ user.get_username }}
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="nav-link" href="{% url 'webpage:user_logout' %}">log out <i class="feather-32" data-feather="log-out"></i></a>
-                                    </div>
-                                </li>
-                                {% else %}
-                                <li class="nav-item dropdown my-2 my-lg-0">
-                                    <a class="nav-link" href="{% url 'webpage:user_login' %}">
-                                    <i class="feather-32" data-feather="log-in"></i>
-                                    </a>
-                                </li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                        <!-- .collapse navbar-collapse -->
-                    </div>
-                    <!-- .container -->
-                </nav>
-                <!-- .site-navigation -->
-            </div>
-            <div id="content">
-                {% if DEV_VERSION %}
-                <div class="alert alert-danger" role="alert">
-                    This is a DEVELOPMENT instance. Click <a href="https://{{ PROJECT_NAME }}.acdh.oeaw.ac.at">here</a> for the Production version
-                </div>
-                {% endif %}
-                {% block content %}{% endblock %}
-            </div>
-            <div class="wrapper fundament-default-footer" id="wrapper-footer-full">
-                <div class="container-fluid" id="footer-full-content" tabindex="-1">
-                    <div class="footer-separator">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle">
-                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                        </svg> KONTAKT
-                    </div>
-                    <div class="row justify-content-md-center" style="text-align:center">
-                        <div class="col">
-                            <a href="https://www.oeaw.ac.at/acdh/" target="_blank" rel="noopener" aria-label="ACDH">
-                                <img src="https://fundament.acdh.oeaw.ac.at/common-assets/images/acdh_logo.svg" alt="ACDH" title="Austrian Centre for Digital Humanities (ACDH) of the Austrian Academy of Sciences"/>
+<body>
+<header class="procustom-header">
+    <div class="container" id="procustom-affix">
+        <div class="logo-container">
+            <a href="{% url 'webpage:start' %}" class="navlink">
+                <!-- <img src="{% static 'webpage/img/test.png' %}" id="pro-logo" alt=""/> -->
+            </a>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+    	<div class="container" style="width:90%; padding-left:25px;" >
+    		<!-- Brand and toggle get grouped for better mobile display -->
+    		<div class="navbar-header">
+    			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    				<span class="sr-only">Toggle navigation</span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    			</button>
+
+    		</div>
+    		<!-- Collect the nav links, forms, and other content for toggling -->
+    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    			<ul class="nav navbar-nav navbar">
+    				<li class="active"><a href="{% url 'webpage:staticpage' template='index' %}" class="smooth-scroll">HOME</a></li>
+    				<li class="dropdown">
+    					<a class="dropdown-toggle" data-toggle="dropdown" href="">ABOUT THE PROJECT
+    					<span class="caret"></span></a>
+    					<ul class="dropdown-menu">
+    						<li><a href="{% url 'webpage:staticpage' template='about' %}">What is "A Puzzle in 4D"?</a></li>
+                <li><a href="{% url 'webpage:staticpage' template='team' %}">Team</a></li>
+                <li><a href="{% url 'webpage:staticpage' template='events' %}">Publications & Events</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'webpage:staticpage' template='site' %}">Archaeological Site</a></li>
+                <li><a href="{% url 'webpage:staticpage' template='casestudy' %}">Case Study area F/I square j/21  </a></li>
+                <li><a href="https://www.zotero.org/4dpuzzle/items" target="_blank">Tell el-Daba Bibliography</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'webpage:staticpage' template='archive' %}">Creation of the digital archive</a></li>
+                <li><a href="{% url 'webpage:staticpage' template='downloads' %}">Downloads</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'webpage:staticpage' template='ais' %}">Archaeological Information System </a></li>
+    					</ul>
+    				</li>
+            <li class="dropdown">
+    					<a class="dropdown-toggle" data-toggle="dropdown" href="#">DIGITAL ARCHIVE
+    					<span class="caret"></span></a>
+    					<ul class="dropdown-menu">
+                <li><a href="{% url 'webpage:staticpage' template='explore' %}">Explore TD resources </a></li>
+    					</ul>
+    				</li>
+            <li class="dropdown">
+    					<a class="dropdown-toggle" data-toggle="dropdown" href="#">TELL EL-DABA 4D
+    					<span class="caret"></span></a>
+    					<ul class="dropdown-menu">
+                <li><a href="{% url 'webpage:staticpage' template='gisstudy' %}">GIS Project </a></li>
+                <!--<li><a href="{% url 'webpage:staticpage' template='hmc' %}">HMC+ </a></li>-->
+                <li><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstructions</a></li>
+                <li><a href="{% url 'webpage:staticpage' template='movies' %}">Movies</a></li>
+              </ul>
+    				</li>
+
+    			</ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        {% if user.is_authenticated %}
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                {{ user.get_username }}
                             </a>
-                            <br />
-                            Austrian Centre for Digital Humanities (ACDH) of the Austrian Academy of Sciences
-                        </div>
-                        {% project_insts as insts %}
-                        {% for x in insts %}
-                            <div class="col">
-                                <a href="{{ x.website }}" target="_blank" rel="noopener" aria-label="{{ x.abbr }}">
-                                    <img src="{{ x.logo_url}}" alt="{{ x.abbr }}" title="{{ x.name }}">
-                                </a>
-                                <br />
-                                {{ x.name }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
+                            <ul class="dropdown-menu procustom-dropdown-menu">
+                                <li><a href="{% url 'webpage:user_logout' %}">Log-Out</a></li>
+                            </ul>
+                        {% else %}
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                            </a>
+                            <ul class="dropdown-menu procustom-dropdown-menu">
+                                <li><a href="{% url 'webpage:user_login' %}">Log-In</a></li>
+                            </ul>
+                        {% endif %}
+                    </li>
+                </ul>
+    		</div><!-- /.navbar-collapse -->
+    	</div><!-- /.container-fluid -->
+    </nav>
+
+</header>
+<section class="main-content">
+    {% block procustom-index %}{% endblock %}
+    <div id="content">{% block content %}{% endblock %}</div>
+</section>
+<div style="text-align:center">
+    <span class="socialShare"><!-- The share buttons will be inserted here --></span>
+</div>
+<footer id="footer" class="clearfix">
+    <div class="container">
+        <div class="col-md-8">
+            <div class="row">
+							<img src="{% static 'webpage/media/4dpuzzle_logo_weiß.png' %}" width="50%" class=""><br><br>
+              <p>
+                <a href="{% url 'webpage:staticpage' template='license' %}">Terms of Use / License</a><br>
+              <a href="{% url 'webpage:staticpage' template='imprint' %}">Imprint</a>
+            </p>
             </div>
-            <div class="footer-imprint-bar" id="wrapper-footer-secondary" style="text-align:center; padding:0.4rem 0; font-size: 0.9rem;">
-                <a href="imprint.html">Impressum/Imprint</a>
-                {% if user.is_authenticated %}
-                    {% if DB_NAME %}
-                        <div class="footer-imprint-bar">
-                            <small>{{ DB_NAME }}</small>
-                        </div>
-                    {% endif %}
-                {% endif %}
-            </div>
-            {% block scripts %}
-                <script src="{{ SHARED_URL }}fundament/dist/fundament/js/fundament.min.js"></script>
-        	    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-                <script src="{{ SHARED_URL }}apis/libraries/scroll-to-top/js/ap-scroll-top.min.js"></script>
-            {% endblock %}
-            {% block scripts2 %}
-            {% endblock scripts2 %}
-    </body>
+        </div>
+        <div class="col-md-4">
+					<h3 class="text-success" style="margin-bottom: 20px;">Contact:</h3>
+          <p>Dr. Edeltraud Aspöck</p>
+          <p>OREA Institute for Oriental and European Archaeology<br>
+          Austrian Academy of Sciences<br>
+          Hollandstrasse 11-13, 1020 Vienna, Austria<br>
+          </p>
+					<p><a href="mailto:Edeltraud.Aspoeck@oeaw.ac.at">Edeltraud.Aspoeck@oeaw.ac.at</a></p>
+        </div>
+	</div>
+</footer>
+{% block scripts %}
+<script src="{% static 'webpage/bower_components/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'webpage/bower_components/bootstrap/dist/js/bootstrap.min.js'  %}"></script>
+<script src="{% static 'webpage/bower_components/imageviewer/dist/viewer.js' %}"></script>
+{% endblock %}
+{% block scripts2 %}
+{% endblock scripts2 %}
+<script>
+$(function () {
+    var options = {
+    url: 'originalUrl'};
+        $('.images').viewer(options);
+});
+
+</script>
+</body>
 </html>

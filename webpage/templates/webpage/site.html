@@ -1,0 +1,186 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block content %}
+<div class="container-planning" style="padding-bottom:150px;">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">About the project</li>
+        <li class="breadcrumb-item">Archaeological site</li>
+      </ol>
+		<div class="text-center">
+			<h1>Tell el-Daba, ancient Avaris</h1>
+			<hr style="border-color:#83C653; border-width: 2px" width="10%">
+		</div>
+        <div class="row">
+					<div class="col-md-4">
+            <ul class="images">
+      				<img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/site_fig1.jpeg' %}" alt="Geomagnetic map of TD with excavation areas marked in green (© copyright ÖAI/OREA archive)."/>
+              <b>Figure 1</b>: Geomagnetic map of TD with excavation areas marked in green (© copyright ÖAI/OREA archive).
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/site_fig2.jpeg' %}" alt="Reconstruction of early 13th dynasty tombs in area F/I (after Schiestl 2009, pl. XXXII/a)."/>
+              <b>Figure 2</b>: Reconstruction of early 13th dynasty tombs in area F/I (after Schiestl 2009, pl. XXXII/a).
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/site_fig3_tumb.jpeg' %}" originalUrl="{% static 'webpage/media/site_fig3.jpeg' %}" alt="Two units of the planned settlement in area F/I – n/17 (M. Bietak, © copyright ÖAI/OREA archive)."/>
+              <b>Figure 3</b>: Two units of the planned settlement in area F/I – n/17 (M. Bietak, © copyright ÖAI/OREA archive).
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/site_fig4_tumb.jpeg' %}" originalUrl="{% static 'webpage/media/site_fig4.jpeg' %}" alt="Plan of Palaces F, G and J and building L in Ezbet Helmi (plan by N. Math, © copyright ÖAI/OREA archive)."/>
+              <b>Figure 4</b>: Plan of Palaces F, G and J and building L in Ezbet Helmi (plan by N. Math, © copyright ÖAI/OREA archive).
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/site_fig5_tumb.jpeg' %}" originalUrl="{% static 'webpage/media/site_fig5.jpeg' %}" alt="Area H/III palace G: Reconstructed Minoan-style wall paintings covering a wall or ceiling (drawing: M.A. Negrete Martinez © ÖAI/OREA)"/>
+              <b>Figure 5</b>: Area H/III palace G: Reconstructed Minoan-style wall paintings covering a wall or ceiling (drawing: M.A. Negrete Martinez © ÖAI/OREA)
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/media/TD_stratigraphy_2008_tumb.jpeg' %}" originalUrl="{% static 'webpage/media/TD_stratigraphy_2008.jpeg' %}" alt="Egyptian chronology and the phases of Tell el-Daba."/>
+              <b>Table 1</b>: Egyptian chronology and the phases of Tell el-Daba.
+            </ul>
+        <br />
+				<br />
+				<div class="container" >
+					<div class="col-md-4" style=" margin-left:-30px;background-color:#f2f2f2; border: 2px solid; border-radius: 25px; padding-bottom:35px;">
+						<h4><i class="fa fa-camera fa" style="color: #83C653" aria-hidden="true"></i>&nbsp;Image Gallery</h4>
+						<ul class="images">
+							<div class="row">
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site01.jpeg' %}" src="{% static 'webpage/media/site01_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Area F/I during its first excavation season in autumn season 1979, squares i/20, 21 and j/20, 21 (photo: M. Bietak © ÖAI/OREA)">
+								</div>
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site02.jpeg' %}" src="{% static 'webpage/media/site02_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Areal A/1: part of an early Ptolemaic tower house (E. Lehmann © ÖAI/OREA)">
+								</div>
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site03.jpeg' %}" src="{% static 'webpage/media/site03_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Documentation in area H/VI during the spring season 2007 (photo: M. Weissl © ÖAI/OREA)">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site04.jpeg' %}" src="{% static 'webpage/media/site04_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Beginning of the working day during the autumn season 2011 (photo: A. Krause © ÖAI/OREA)">
+								</div>
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site05.jpeg' %}" src="{% static 'webpage/media/site05_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Restauration of pottery (photo: A. Krause © ÖAI/OREA)">
+								</div>
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site06.jpeg' %}" src="{% static 'webpage/media/site06_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Area H/VI: work in palace G during the autumn season 2000 (photo: P. Janosi © ÖAI/OREA)">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site07.jpeg' %}" src="{% static 'webpage/media/site07_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Tell el-Daba: way from the Diadamun canal to the excavation house, autumn 2006 (photo: M. Weissl © ÖAI/OREA)">
+								</div>
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site08.jpeg' %}" src="{% static 'webpage/media/site08_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Sieving the sun-dried excavated soil for small finds, Ezbet Rushdi, autumn 2008 (photo: S. Müller © ÖAI/OREA)">
+								</div>
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site09.jpeg' %}" src="{% static 'webpage/media/site09_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Spring season 2009: part of the vast Hyksos palace in Area F/II cut by a modern draining (photo: M. Bietak © ÖAI/OREA)">
+								</div>
+							</div>
+							<div class="row">
+                <div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site21.jpeg' %}" src="{% static 'webpage/media/site21_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Work in area A/II during the spring season 2011 (photo: E. Lehmann © ÖAI/OREA)">
+								</div>
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site11.jpeg' %}" src="{% static 'webpage/media/site11_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Building L with plastered floor still in situ, area H/VI, spring 2005 (photo: M. Weissl © ÖAI/OREA)">
+								</div>
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site12.jpeg' %}" src="{% static 'webpage/media/site12_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Nosy visitors to the site in hope of food (photo: A. Krause © ÖAI/OREA)">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site13.jpeg' %}" src="{% static 'webpage/media/site13_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Area F/I – i/22 showing the walls of strata b/2 and b/3 (photo: M. Bietak © ÖAI/OREA)">
+								</div>
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site14.jpeg' %}" src="{% static 'webpage/media/site14_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Fragments of paintings fallen from the walls of a large four-columned reception hall of the F/I palace (photo: M. Bietak © ÖAI/OREA)">
+								</div>
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site15.jpeg' %}" src="{% static 'webpage/media/site15_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Detail of the wall decoration of the reception hall of the F/I palace (photo: M. Bietak © ÖAI/OREA)">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site16.jpeg' %}" src="{% static 'webpage/media/site16_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Ramesside slipper coffin (L6555) found in area H/VI during the autumn season 2005 (photo: M. Weissl © ÖAI/OREA)">
+								</div>
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site17.jpeg' %}" src="{% static 'webpage/media/site17_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Black burnished juglet found in tomb L115 in area R/II in autumn 2008 (photo: S. Müller © ÖAI/OREA)">
+								</div>
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site19.jpeg' %}" src="{% static 'webpage/media/site19_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Burnt layer L1421 found in a pre-Hyksos building in area F/II in autumn 2011 (after: Bietak et al. 2012-13, Fig. 16B)">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4" style="">
+										<img originalUrl="{% static 'webpage/media/site20.jpeg' %}" src="{% static 'webpage/media/site20_tumb.jpeg' %}"  style="padding-top:5px;" class="img-responsive gallery-items" alt="Small storage pit lined with bricks that were retrieved from the drainage system of the F/I palace (photo: M. Bietak © ÖAI/OREA)">
+								</div>
+
+							</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<p class="">
+          The archaeological site of Tell el-Daba (TD), ancient Avaris, is situated on the eastern most of the five ancient Nile branches. Today the tell lies on the Didamun canal about 7 km north of the modern town Faqus in the Egyptian province of Sharkiyya (<b>Fig. 1</b>). Twenty phases of occupation at TD covered nearly 900 years of Egyptian history from the early 12th dynasty (c. 1980/70 BC)<sup>1</sup> to the early Ptolemaic period.<sup>2</sup> With a size of about 2,5 km<sup>2</sup>, it was one of the largest towns in the Eastern Mediterranean during the first half of the second millennium BC, when the site was one of the most important trading centres in this area.
+				</p>
+        <p>
+          From 1966 to date, with a short interruption due to the Arab-Israeli war from 1970‒1975, the site was investigated by the Austrian Archaeological Institute under the directorship of Manfred Bietak and his successor Irene Forstner-Müller. During that period, fieldwork took place in nine different areas, revealing a continuous stratigraphy from the early Middle Kingdom to the New Kingdom<sup>3</sup> (c. 1980/70 ‒ 1410 BC) (<b>Fig. 1</b>). With its mixture of Egyptian and Near Eastern Bronze Age culture, TD is important for chronological research in the region providing a link between Egyptian and Near Eastern chronologies (<b>Table 1</b>).<sup>4</sup> Research on ancient Egyptian culture highly benefits from the excavations at Tell el-Daba as the site reveals evidence about all aspects of human life in an ancient harbour town, from temples and palaces to simple living quarters and cemeteries (<b>Fig. 2</b>).
+        </p>
+        <p>
+          At Tell el-Daba a planned settlement dating to the early Middle Kingdom (c. 1970 BC) is the first preserved archaeological evidence (<b>Fig. 3</b>). Founded at the eastern frontier of the Nile delta, it was built as a bulwark towards nomads from the east but at the same time was very likely used as a starting point for expeditions and as a trading outpost.<sup>5</sup> After a short hiatus the town was extended and an enclosed settlement with houses arranged in insulae was built (c. 1900). Parts of these buildings were replaced by a temple founded by king Senwosret III in the first half of the Middle Kingdom (c. 1870 BC).<sup>6</sup> After Senwosret III, people from the Near East who can be identified by Middle Bronze Age material culture settled in TD (c. 1825 BC). They conducted trade between Egypt and the Levantine coast and brought with them a new way of life and foreign beliefs. Evidence of these can be found in the architecture and burial traditions. In the following three centuries, a unique culture from traditional and incoming influences developed at TD, which was specific to the north-eastern Nile Delta and today is known as “the Hyksos culture”. The city of Avaris transformed to one of the most important ports in the Eastern Mediterranean and to a transshipment centre for Egypt.
+        </p>
+        <p>
+          During the last quarter of the Middle Kingdom (c. 1790/80 BC) a palace-like mansion was constructed with a garden and tombs which testify to the wealth of their owners.<sup>7</sup> It seems that at the end of the Middle Kingdom (c. 1710/1700 BC), an epidemic struck the city and killed a large part of its population. In the following Second Intermediate Period, Tell el-Daba and a part of the eastern Nile delta separated politically from the Egyptian crown and formed the kingdom of Avaris. In one part of TD a cultic centre emerged with a series of temples of Near Eastern and Egyptian layouts surrounded by large cemeteries.<sup>8</sup> Huge villas show the economic success of the inhabitants of Tell el-Daba at that time (c. 1700-1650 BC).<sup>9</sup> The following period is known as the Hyksos period (c. 1650‒1530 BC). The names of the Hyksos kings, the “lords of the foreign countries” were documented by Manetho, an Egyptian priest, who wrote the first Egyptian history in the 3rd century BC. At Tell el-Daba the Hyksos kings constructed a huge palace of Near Eastern style.<sup>10</sup> The residential areas were densely populated, with tombs partly built under the houses and used as family crypts.<sup>11</sup> In this period the trade with the Levantine regions and other parts of Egypt declined,<sup>12</sup> whilst exchange of goods with Cyprus boomed.<sup>13</sup> After the conquest of Avaris by king Ahmose, the first ruler of the New Kingdom (c. 1530 BC), the Egyptians expanded the harbour and most likely based their naval fleet there.<sup>14</sup> Large Egyptian-style palaces were now constructed at the area which is now Ezbet Helmi (<b>Fig. 4</b>). An important discovery was that the wall paintings in these palaces are very similar to those found in the palaces of Minoan Crete (<b>Fig. 5</b>). This shows a unique connection between Egyptian and Minoan culture at that time. A massive fortification wall was built on top of the palaces in the middle of the New Kingdom. Relicts of the Ramesside era are found all over Tell el-Daba, whether it be the massive enclosure wall of the Seth temple, vineyards, pits or slipper coffins. Finally, in the early Ptolmaic period the construction of tower houses, the ancient Egyptian equivalents to modern skyscrapers, represents the last chapter of the more than 17 centuries long history of Tell el-Daba.
+        </p>
+
+        <div class="clearfix"></div>
+				<h2><i class="fa fa-book" style="color: #83C653" aria-hidden="true"></i>&nbsp;Bibliography</h2>
+				<p class="text-justify">
+				<ol>
+          <li>
+            <b> E. Czerny</b>, Tell el-Dabca IX. Eine Plansiedlung des frühen Mittleren Reiches, UZK 15 (Vienna 1999).<br>
+          </li>
+          <li>
+          	<b> M. Lehmann</b>, Die materielle Kultur der Spät- und Ptolemäerzeit im Delta Ägyptens am Beispiel von Tell el-Dabca (PhD Diss. University of Berlin, Berlin 2015).<br>
+          </li>
+          <li>
+            <b> K. A. Kitchen</b>, The Strenght and Weakness of Egyptian Chronology – A Reconsideration, Ägipten und Levante 16, 2006, 293–308. <br>
+          </li>
+          <li>
+            <b> M. Bietak</b>, Egypt and Canaan during the Middle Bronze Age, BASOR 281, 1991, 27–72. <br>
+            <b> M. Bietak</b>, Antagonism in Historical and Radiocarbon Chronology, in: A. J. Shortland – C. Bronk Ramsey (eds.), Radiocarbon and the Chronologies of Ancient Egypt (Oxford 2013), 76‒109. <br>
+            <b> K. Kopetzky</b>, Tell el-Dabca XX. Die Chronologie der Siedlungskeramik der Zweiten Zwischenzeit aus Tell el-Dabca, UZK32 (Vienna 2010). <br>
+          </li>
+          <li>
+            <b>  E. Czerny</b>, Tell el-Dabca IX. Eine Plansiedlung des frühen Mittleren Reiches, UZK 15 (Vienna 1999).<br>
+          </li>
+          <li>
+            <b> E. Czerny</b>, Tell el-Dabca XII. „Der Mund der beiden Wege“. Die Siedlung und der Tempelbezirk des Mittleren Reiches von Ezbet Ruschdi, 2 vols., UZK 38 (Vienna 2015).<br>
+          </li>
+          <li>
+            <b> R. Schiestl</b>, Tell el-Dabca XVIII. Die Palastnekropole von Tell el-Dabca. Die Gräber des Areals F/I der Straten d/2 und d/1, UZK 30 (Vienna 2009).<br>
+          </li>
+          <li>
+              <b> M. Bietak</b>, Egypt and Canaan during the Middle Bronze Age, BASOR 281, 1991, 27–72.<br>
+              <b> V. Müller</b>, Tell el-Dabca XVII. Opferdeponierungen in der Hyksoshauptstadt Auaris (Tell el-Dabca) vom späten Mittleren Reich bis zum frühen Neuen Reich, 2 vols., UZK 29 (Vienna 2008).<br>
+              <b>Forstner-Müller</b>, Tell el-Dabca XVI. Die Gräber des Areals A/II von Tell el-Dabca, UZK 28 (Vienna 2008).<br>
+          </li>
+          <li>
+            <b> M. Bietak</b>, Avaris. The Capital of the Hyksos (London 1996).<br>
+          </li>
+          <li>
+            <b> M. Bietak – N. Math – V. Müller</b>, Report on the Excavation of a Hyksos Palace at Tell el-Dabca/Avaris, Ägipten und Levante 22/23, 2012/2013, 17–53.<br>
+          </li>
+          <li>
+            <b> I. Hein – P. Janosi</b>, Tell el-Dabca, XI: Areal A/V, Siedlungsrelikte der späten Hyksoszeit, UZK 21 (Vienna 2004).<br>
+            <b> Forstner-Müller – C. Jeuthe – V. Michel – S. Prell</b>, Das Areal R/III. Zweiter Vorbericht, Ägypten und Levante 25, 2015, 17–71.<br>
+          </li>
+          <li>
+              <b> K. Kopetzky</b>, Tell el-Dabca XX. Die Chronologie der Siedlungskeramik der Zweiten Zwischenzeit aus Tell el-Dabca, UZK32 (Vienna 2010).<br>
+          </li>
+          <li>
+            <b> L.C. Maguire</b>, Tell el-Dabca XXI. The Cypriot Pottery and its Circulation in the Levant, UZK 33 (Vienna 2009).<br>
+          </li>
+          <li>
+            <b> M. Bietak</b>, Harbours and Coastal Military Bases in Egypt in the Second Millenium B.C. Avaris, Peru-nefer, Pi-Ramesse, in: H. Willems – J.M. Dahms (eds.), The Nile: Natural and Cultural Landscape in Egypt (Mainz 2017), 53-70.<br>
+          </li>
+        </ol>
+				</p>
+			</div>
+
+		</div>
+    </div>
+</div>
+
+{% endblock %}
