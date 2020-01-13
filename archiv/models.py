@@ -374,7 +374,10 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         verbose_name = "ArchaeologicalObject4DPuzzleID"
 
     def __str__(self):
-        return "{}".format(self.archaeological_object_id)
+        if self.archaeological_object_id:
+            return "{}".format(self.archaeological_object_id)
+        else:
+            return "{}".format(self.legacy)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2368,7 +2371,10 @@ class DocumentTypes(models.Model):
         verbose_name = "Document types"
 
     def __str__(self):
-        return "{}".format(self.document_type)
+        if self.document_type:
+            return "{}".format(self.document_type)
+        else:
+            return f"{self.legacy_id}"
 
     def field_dict(self):
         return model_to_dict(self)
