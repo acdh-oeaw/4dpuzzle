@@ -23,6 +23,13 @@ class Actor(models.Model):
         max_length=300, blank=True,
         verbose_name="Legacy ID"
         )
+    canonic_arche_uri = models.TextField(
+        blank=True,
+        verbose_name="authority file URI"
+    ).set_extra(
+        is_public=True,
+        arche_prop="hasIdentifier"
+    )
     name = models.CharField(
         max_length=250,
         blank=True,

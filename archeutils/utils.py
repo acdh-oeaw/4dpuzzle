@@ -101,7 +101,7 @@ def get_p4d_id(res, arche_uri=ARCHE_BASE_URI, arche_prop=False):
         else:
             return f"{new_path}/{res.fc_filename}"
     else:
-        return "https://hansi4ever.com"
+        return None
 
 
 def get_category(
@@ -132,11 +132,14 @@ def get_arche_id(res, id_prop="pk", arche_uri=ARCHE_BASE_URI):
         :return: An ARCHE-ID (URI)
 
     """
-    app_name = res.__class__._meta.app_label.lower()
-    class_name = res.__class__.__name__.lower()
-    return "/".join(
-        [arche_uri, app_name, class_name, f"{getattr(res, id_prop)}"]
-    )
+    if isinstance(res, str):
+        return res
+    else:
+        app_name = res.__class__._meta.app_label.lower()
+        class_name = res.__class__.__name__.lower()
+        return "/".join(
+            [arche_uri, app_name, class_name, f"{getattr(res, id_prop)}"]
+        )
 
 
 def get_arche_fields(
@@ -170,7 +173,10 @@ def as_arche_res(res, res_type='Resource', arche_prop=False):
     g = Graph()
     sub = URIRef(get_arche_id(res,))
     g.add((sub, RDF.type, acdh_ns[res_type]))
-    g.add((sub, acdh_ns.hasIdentifier, URIRef(get_p4d_id(res, arche_prop=arche_prop))))
+    try:
+        g.add((sub, acdh_ns.hasIdentifier, URIRef(get_p4d_id(res, arche_prop=arche_prop))))
+    except TypeError:
+        pass
     g.add((
         sub, acdh_ns.hasDescription, Literal(get_arche_desc(res), lang=ARCHE_LANG)
     ))
