@@ -30,15 +30,15 @@
           {{ object }}
           {% if user.is_authenticated %}
             <a href="{{ object.get_edit_url }}" title="edit">
-              <i data-feather="edit-3"></i>
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </a>
             <a href="{{ object.get_delete_url }}" title="delete">
-              <i data-feather="trash-2"></i>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </a>
           {% endif %}
           {% if 'archeutils' in APPS %}
           <a href="{% url 'archeutils:res_as_arche_graph' app_name=app_name model_name=class_name|lower pk=object.id %}" title="As ARCHE-RDF">
-            <i data-feather="download"></i>
+            <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
           </a>
           {% endif%}
         </h2>
