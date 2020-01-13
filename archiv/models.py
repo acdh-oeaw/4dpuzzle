@@ -30,6 +30,7 @@ class Actor(models.Model):
         is_public=True,
         arche_prop="hasIdentifier"
     )
+
     name = models.CharField(
         max_length=250,
         blank=True,
@@ -144,7 +145,10 @@ class Actor(models.Model):
         verbose_name = "Actor"
 
     def __str__(self):
-        return "{}".format(self.name)
+        if self.name:
+            return "{}".format(self.name)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -377,7 +381,7 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         if self.archaeological_object_id:
             return "{}".format(self.archaeological_object_id)
         else:
-            return "{}".format(self.legacy)
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -607,7 +611,10 @@ class ArchaeologicalObjectID(models.Model):
         verbose_name = "ArchaeologicalObjectID"
 
     def __str__(self):
-        return "{}".format(self.archaeological_object_id)
+        if self.archaeological_object_id:
+            return "{}".format(self.archaeological_object_id)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -890,7 +897,10 @@ class ArchiveINF(models.Model):
         verbose_name = "Archive information"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1242,7 +1252,10 @@ class AutoCAD(models.Model):
         verbose_name = "AutoCAD"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -1660,7 +1673,10 @@ class Convolutecards(models.Model):
         verbose_name = "Convolute cards"
 
     def __str__(self):
-        return "{}".format(self.filename_document_id)
+        if self.filename_document_id:
+            return "{}".format(self.filename_document_id)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2024,7 +2040,10 @@ class Datenbase(models.Model):
         verbose_name = "Database"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2199,7 +2218,10 @@ class Document4DPuzzleID(models.Model):
         verbose_name = "Document 4DPuzzle ID"
 
     def __str__(self):
-        return "{}".format(self.document_id)
+        if self.document_id:
+            return "{}".format(self.document_id)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2374,7 +2396,7 @@ class DocumentTypes(models.Model):
         if self.document_type:
             return "{}".format(self.document_type)
         else:
-            return f"{self.legacy_id}"
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2615,7 +2637,10 @@ class ExcavationObjectID(models.Model):
         verbose_name = "Excavation Objects"
 
     def __str__(self):
-        return "{}".format(self.excavation_object_id)
+        if self.excavation_object_id:
+            return "{}".format(self.excavation_object_id)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -2781,7 +2806,10 @@ class ExcavationSeasons(models.Model):
         verbose_name = "Excavation Seasons"
 
     def __str__(self):
-        return "{}".format(self.grabungskampagnen)
+        if self.grabungskampagnen:
+            return "{}".format(self.grabungskampagnen)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3259,7 +3287,10 @@ class Fielddrawing(models.Model):
         verbose_name = "Fielddrawing"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3525,7 +3556,10 @@ class Film(models.Model):
         verbose_name = "Photographic Film"
 
     def __str__(self):
-        return "{}".format(self.film_id)
+        if self.film_id:
+            return "{}".format(self.film_id)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -3913,7 +3947,10 @@ class Finddrawing(models.Model):
         verbose_name = "Finddrawing"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4341,7 +4378,10 @@ class Findsheets(models.Model):
         verbose_name = "Findsheets"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -4622,7 +4662,10 @@ class Fotoborndigital(models.Model):
         verbose_name = "Fotos born digital"
 
     def __str__(self):
-        return "{}".format(self.folder_name)
+        if self.folder_name:
+            return "{}".format(self.folder_name)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5091,7 +5134,10 @@ class Fotosgescannt(models.Model):
         verbose_name = "Fotos gescannt"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5405,7 +5451,10 @@ class Fundinventar4DPuzzleID(models.Model):
         verbose_name = "Fundinventar 4DPuzzle ID"
 
     def __str__(self):
-        return "{}".format(self.find_inventory_4dpuzzle_number)
+        if self.find_inventory_4dpuzzle_number:
+            return "{}".format(self.find_inventory_4dpuzzle_number)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -5720,7 +5769,10 @@ class FundinventarInventarnummern(models.Model):
         verbose_name = "Fundinventar Inventarnummern"
 
     def __str__(self):
-        return "{}".format(self.find_inventory_number)
+        if self.find_inventory_number:
+            return "{}".format(self.find_inventory_number)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -6030,7 +6082,10 @@ class FundinventarKonvolutnummern(models.Model):
         verbose_name = "Fundinventar Konvolutnummern"
 
     def __str__(self):
-        return "{}".format(self.convolute_inventory_number)
+        if self.convolute_inventory_number:
+            return "{}".format(self.convolute_inventory_number)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -6347,7 +6402,10 @@ class FundinventarMaterialproben(models.Model):
         verbose_name = "Fundinventar Materialproben"
 
     def __str__(self):
-        return "{}".format(self.material_sample_inventory_number)
+        if self.material_sample_inventory_number:
+            return "{}".format(self.material_sample_inventory_number)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -6662,7 +6720,10 @@ class FundinventarSteininventar(models.Model):
         verbose_name = "FundinventarSteininventar"
 
     def __str__(self):
-        return "{}".format(self.find_inventory_number)
+        if self.find_inventory_number:
+            return "{}".format(self.find_inventory_number)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -7024,7 +7085,10 @@ class GIS(models.Model):
         verbose_name = "GIS"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -7380,7 +7444,10 @@ class Geophysics(models.Model):
         verbose_name = "Geophysics"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -7773,7 +7840,10 @@ class Inventorybooks(models.Model):
         verbose_name = "Inventory books"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -7936,7 +8006,10 @@ class PhasenID(models.Model):
         verbose_name = "Phasen ID"
 
     def __str__(self):
-        return "{}".format(self.phase_id)
+        if self.phase_id:
+            return "{}".format(self.phase_id)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -8340,7 +8413,10 @@ class Protocols(models.Model):
         verbose_name = "Protocols"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -8503,7 +8579,10 @@ class StratenID(models.Model):
         verbose_name = "Straten ID"
 
     def __str__(self):
-        return "{}".format(self.stratum_id)
+        if self.stratum_id:
+            return "{}".format(self.stratum_id)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -8855,7 +8934,10 @@ class Tables(models.Model):
         verbose_name = "Tables"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -9208,7 +9290,10 @@ class ThreeDimensionalModel(models.Model):
         verbose_name = "3D models"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -9551,7 +9636,10 @@ class Videos(models.Model):
         verbose_name = "Videos"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)
@@ -9925,7 +10013,10 @@ class WallpaintingInventory(models.Model):
         verbose_name = "Freskeninventar"
 
     def __str__(self):
-        return "{}".format(self.filename)
+        if self.filename:
+            return "{}".format(self.filename)
+        else:
+            return "{}".format(self.legacy_id)
 
     def field_dict(self):
         return model_to_dict(self)

@@ -474,7 +474,10 @@ class {{ x.model_name }}(models.Model):
         return "{}".format(self.id)
     {%- else %}
     def __str__(self):
-        return "{}".format(self.{{ x.model_representation }})
+        if self.{{ x.model_representation }}:
+            return "{}".format(self.{{ x.model_representation }})
+        else:
+            return "{}".format(self.legacy_id)
     {%- endif %}
 
     def field_dict(self):

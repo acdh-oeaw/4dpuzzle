@@ -4,7 +4,7 @@ from jinja2 import Template
 
 from django.apps import apps
 
-from . import code_templates_default as code_templates
+from . import code_templates
 
 
 def model_fields_to_dict(sample):
