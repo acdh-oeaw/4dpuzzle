@@ -154,6 +154,10 @@ class Actor(models.Model):
         return model_to_dict(self)
 
     @classmethod
+    def is_binary_class(self):
+        return False
+
+    @classmethod
     def get_listview_url(self):
         return reverse('archiv:actor_browse')
 
@@ -3296,6 +3300,10 @@ class Fielddrawing(models.Model):
         return model_to_dict(self)
 
     @classmethod
+    def is_binary_class(self):
+        return True
+
+    @classmethod
     def get_listview_url(self):
         return reverse('archiv:fielddrawing_browse')
 
@@ -5141,6 +5149,10 @@ class Fotosgescannt(models.Model):
 
     def field_dict(self):
         return model_to_dict(self)
+
+    @classmethod
+    def is_binary_class(self):
+        return True
 
     @classmethod
     def get_listview_url(self):

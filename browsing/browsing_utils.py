@@ -103,11 +103,18 @@ class GenericListView(django_tables2.SingleTableView):
 
     def get_queryset(self, **kwargs):
         qs = super(GenericListView, self).get_queryset()
-        if hasattr(self.model, 'fc_match'):
-            if self.request.user.is_authenticated:
-                pass
+        try:
+            binary = self.model.is_binary_class()
+        except AttributeError:
+            binary = False
+        if binary:
+            if hasattr(self.model, 'fc_match'):
+                if self.request.user.is_authenticated:
+                    pass
+                else:
+                    qs = qs.exclude(fc_match=False)
             else:
-                qs = qs.exclude(fc_match=False)
+                pass
         self.filter = self.filter_class(self.request.GET, queryset=qs)
         self.filter.form.helper = self.formhelper_class()
         return self.filter.qs
