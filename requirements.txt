@@ -5,6 +5,8 @@ django-autocomplete-light==3.4.1
 django-crispy-forms==1.8.0
 django-extensions==2.2.5
 django-filter==2.2.0
+django-js-asset==1.2.2
+django-mptt==0.10.0
 django-super-deduper==0.1.2
 django-tables2==2.1.1
 djangorestframework==3.10.3
@@ -13,6 +15,7 @@ idna==2.8
 isodate==0.6.0
 numpy==1.17.3
 pandas==0.25.2
+pkg-resources==0.0.0
 psycopg2-binary==2.8.4
 pyparsing==2.4.2
 python-dateutil==2.8.0
@@ -22,6 +25,7 @@ regex==2018.1.10
 requests==2.22.0
 rita==0.0.7
 six==1.12.0
+SPARQLWrapper==1.8.5
 sqlparse==0.3.0
 ujson==1.35
 urllib3==1.25.6
