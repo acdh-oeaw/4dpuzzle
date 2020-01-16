@@ -187,10 +187,10 @@ def as_arche_res(res, res_type='Resource', arche_prop=False):
         sub, acdh_ns.hasDescription, Literal(get_arche_desc(res), lang=ARCHE_LANG)
     ))
     # g.add((sub, acdh_ns.isPartOf, URIRef(directory_to_col_id(res))))
-    if res_type == 'Collection':
-        pass
-    else:
-        g.add((sub, acdh_ns.hasCategory, URIRef(get_category(res))))
+    # if res_type == 'Collection':
+    #     pass
+    # else:
+    #     g.add((sub, acdh_ns.hasCategory, URIRef(get_category(res))))
     for x in get_arche_fields(res):
         cur_val = x['value']
         arche_prop = x['extra_fields']['arche_prop'].strip()
