@@ -223,7 +223,6 @@ def as_arche_res(res, res_type='Resource', arche_prop=False):
                     g.add((sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))))
         for const in ARCHE_CONST_MAPPINGS:
             arche_prop_domain = ARCHE_PROPS_LOOKUP.get(const[0], 'No Match')
-            print(arche_prop_domain)
             if arche_prop_domain == 'date':
                 g.add((sub, acdh_ns[const[0]], Literal(const[1], datatype=XSD.date)))
             else:
