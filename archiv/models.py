@@ -30,7 +30,6 @@ class Actor(models.Model):
         is_public=True,
         arche_prop="hasIdentifier"
     )
-
     name = models.CharField(
         max_length=250,
         blank=True,
@@ -679,7 +678,6 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -704,7 +702,6 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__creator_archivalObject",
-        arche_prop="hasContributor",
     )
     filename = models.CharField(
         max_length=250,
@@ -714,7 +711,6 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Filename",
-        arche_prop="hasTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -724,7 +720,6 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Document_ID",
-        arche_prop="hasNonLinkedIdentifier",
     )
     document_title = models.CharField(
         max_length=250,
@@ -767,7 +762,6 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Comment",
-        arche_prop="hasNote",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -804,7 +798,6 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__File_extension_archivalObject",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -817,7 +810,6 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -830,7 +822,6 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Access",
-        arche_prop="hasAccessRestriction",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -965,7 +956,6 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creator_metadata",
-        arche_prop="hasMetadataCreator",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -990,7 +980,6 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__creator_archivalObject",
-        arche_prop="hasContributor",
     )
     filename = models.CharField(
         max_length=250,
@@ -1000,7 +989,6 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Filename",
-        arche_prop="hasTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -1010,7 +998,6 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Document_ID",
-        arche_prop="hasNonLinkedIdentifier",
     )
     document_title = models.CharField(
         max_length=250,
@@ -1038,7 +1025,6 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Path_filename_ARCHE",
-        arche_prop="hasLocationPath",
     )
     creation_year_original = models.CharField(
         max_length=250,
@@ -1056,7 +1042,6 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creation_date_archivalObject",
-        arche_prop="hasCreatedDate",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -1110,7 +1095,6 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Digitisation_comment",
-        arche_prop="hasNote",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -1147,7 +1131,6 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__File_extension_archivalObject",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -1160,7 +1143,6 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -1173,7 +1155,6 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Access",
-        arche_prop="hasAccessRestriction",
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -1320,7 +1301,6 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -1345,7 +1325,6 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_scan",
-        arche_prop="hasContributor",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -1403,7 +1382,6 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Convolute_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     convolute_subnumber = models.CharField(
         max_length=250,
@@ -1531,7 +1509,6 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__File_extension",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -1544,7 +1521,6 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -1582,7 +1558,7 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Equipment_scan",
-        arche_prop="HasUsedHardware",
+        arche_prop="hasUsedHardware",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
@@ -1754,6 +1730,7 @@ class Datenbase(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Creator_original",
+        arche_prop="hasCreator",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -1796,6 +1773,7 @@ class Datenbase(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Document_title",
+        arche_prop="hasAlternativeTitle",
     )
     creation_year_original = models.CharField(
         max_length=250,
@@ -1805,6 +1783,7 @@ class Datenbase(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Creation_year_original",
+        arche_prop="hasCreatedDate",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
@@ -1813,7 +1792,6 @@ class Datenbase(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Creation_date_archivalObject",
-        arche_prop="hasCreatedDate",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -1840,7 +1818,6 @@ class Datenbase(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Path_filename_ARCHE",
-        arche_prop="hasLocationPath",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
@@ -1923,7 +1900,6 @@ class Datenbase(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__File_extension_archivalObject",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -1936,7 +1912,6 @@ class Datenbase(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -2994,7 +2969,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Find_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     amendment_drawn_by = models.ManyToManyField(
         "Actor",
@@ -3144,7 +3118,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__File_extension",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -3157,7 +3130,6 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Copyright",
-        arche_prop="hasLicensor",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -3356,7 +3328,6 @@ class Film(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Film_ID",
-        arche_prop="hasTitle",
     )
     film_number = models.IntegerField(
         blank=True, null=True,
@@ -3365,7 +3336,6 @@ class Film(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Film_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     addition_film_identifier = models.CharField(
         max_length=250,
@@ -3375,7 +3345,6 @@ class Film(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Addition_film_identifier",
-        arche_prop="hasNonLinkedIdentifier",
     )
     foto_numbers_missing = models.CharField(
         max_length=250,
@@ -3427,7 +3396,6 @@ class Film(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Digitisation_comment",
-        arche_prop="hasNote",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -3673,7 +3641,6 @@ class Finddrawing(models.Model):
         help_text="helptext for find_inventory_number",
     ).set_extra(
         is_public=True,
-        arche_prop="hasNonLinkedIdentifier",
     )
     filename = models.CharField(
         max_length=250,
@@ -3700,6 +3667,7 @@ class Finddrawing(models.Model):
         help_text="A description of the content of the document.  It allows information about the contents of the file to be understood by a human being without opening it. ",
     ).set_extra(
         is_public=True,
+        arche_prop="hasAlternativeTitle",
     )
     filename_old = models.CharField(
         max_length=250,
@@ -3742,7 +3710,6 @@ class Finddrawing(models.Model):
         help_text="helptext for convolute_inventory_number",
     ).set_extra(
         is_public=True,
-        arche_prop="hasNonLinkedIdentifier",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -3761,7 +3728,6 @@ class Finddrawing(models.Model):
         help_text="helptext for bone_stone_inventory_number",
     ).set_extra(
         is_public=True,
-        arche_prop="hasNonLinkedIdentifier",
     )
     storage_folder_original = models.CharField(
         max_length=250,
@@ -3828,7 +3794,6 @@ class Finddrawing(models.Model):
         help_text="helptext for file_extension",
     ).set_extra(
         is_public=True,
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -3840,7 +3805,6 @@ class Finddrawing(models.Model):
         help_text="helptext for copyright",
     ).set_extra(
         is_public=True,
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -4081,7 +4045,6 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Find_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     convolute_inventory_number = models.ForeignKey(
         "FundinventarKonvolutnummern",
@@ -4094,7 +4057,6 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Convolute_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     bone_stone_inventory_number = models.ForeignKey(
         "FundinventarSteininventar",
@@ -4107,7 +4069,6 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Bone_stone_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     filename = models.CharField(
         max_length=250,
@@ -4137,6 +4098,7 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Document_title",
+        arche_prop="hasAlternativeTitle",
     )
     filename_old = models.CharField(
         max_length=250,
@@ -4228,7 +4190,6 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__File_extension",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -4241,7 +4202,6 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -4291,7 +4251,7 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Equipment_scan",
-        arche_prop="HasUsedHardware",
+        arche_prop="hasUsedHardware",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
@@ -4460,7 +4420,6 @@ class Fotoborndigital(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Folder_name",
-        arche_prop="hasTitle",
     )
     folder_id = models.CharField(
         max_length=250,
@@ -4470,7 +4429,6 @@ class Fotoborndigital(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Folder_ID",
-        arche_prop="hasNonLinkedIdentifier",
     )
     folder_title = models.CharField(
         max_length=250,
@@ -4507,7 +4465,6 @@ class Fotoborndigital(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Path_filename_ARCHE",
-        arche_prop="hasLocationPath",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -4525,7 +4482,6 @@ class Fotoborndigital(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Find_inventory_number|from/to",
-        arche_prop="hasNonLinkedIdentifier",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
@@ -4561,7 +4517,6 @@ class Fotoborndigital(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Digitisation_comment",
-        arche_prop="hasNote",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -4586,7 +4541,6 @@ class Fotoborndigital(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -4789,6 +4743,7 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Document_title",
+        arche_prop="hasAlternativeTitle",
     )
     filename_old = models.CharField(
         max_length=250,
@@ -4806,7 +4761,6 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Film_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     photo_number = models.CharField(
         max_length=250,
@@ -4891,7 +4845,7 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Pixel_size",
-        arche_prop="hasTechnicalInfo",
+        arche_prop="hasExtent",
     )
     find_inventory_number = models.CharField(
         max_length=250,
@@ -4972,7 +4926,6 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__File_extension",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -4985,7 +4938,6 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -5149,10 +5101,6 @@ class Fotosgescannt(models.Model):
 
     def field_dict(self):
         return model_to_dict(self)
-
-    @classmethod
-    def is_binary_class(self):
-        return True
 
     @classmethod
     def get_listview_url(self):
@@ -6809,6 +6757,7 @@ class GIS(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Creator_original",
+        arche_prop="hasCreator",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -6843,7 +6792,7 @@ class GIS(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Filename",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -6863,6 +6812,7 @@ class GIS(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Document_title",
+        arche_prop="hasAlternativeTitle",
     )
     path_filename_old = models.CharField(
         max_length=250,
@@ -6881,7 +6831,6 @@ class GIS(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Path_filename_ARCHE",
-        arche_prop="hasLocationPath",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
@@ -6890,6 +6839,7 @@ class GIS(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Creation_date_original",
+        arche_prop="hasCreatedDate",
     )
     software_used = models.CharField(
         max_length=250,
@@ -6899,7 +6849,7 @@ class GIS(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Software_used",
-        arche_prop="hasTechnicalInfo",
+        arche_prop="hasUsedSoftware",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
@@ -6908,7 +6858,6 @@ class GIS(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Creation_date_archivalObject",
-        arche_prop="hasCreatedDate",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -6988,7 +6937,6 @@ class GIS(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__File_extension_archivalObject",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -7001,7 +6949,6 @@ class GIS(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -7174,6 +7121,7 @@ class Geophysics(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creator_original",
+        arche_prop="hasCreator",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -7208,7 +7156,7 @@ class Geophysics(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Filename",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -7228,6 +7176,7 @@ class Geophysics(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Document_title",
+        arche_prop="hasAlternativeTitle",
     )
     filename_old = models.CharField(
         max_length=250,
@@ -7245,6 +7194,7 @@ class Geophysics(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creation_date_original",
+        arche_prop="hasCreatedDate",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
@@ -7253,7 +7203,6 @@ class Geophysics(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creation_date_archivalObject",
-        arche_prop="hasCreatedDate",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -7289,6 +7238,7 @@ class Geophysics(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Original_comment",
+        arche_prop="hasDescription",
     )
     digitisation_comment = models.TextField(
         blank=True, null=True,
@@ -7322,7 +7272,6 @@ class Geophysics(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__File_extension_archivalObject",
-        arche_prop="hasTechnicalInfo",
     )
     method = models.ForeignKey(
         SkosConcept,
@@ -7335,6 +7284,7 @@ class Geophysics(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Method",
+        arche_prop="hasAppliedMethod",
     )
     equipment = models.ForeignKey(
         SkosConcept,
@@ -7347,7 +7297,7 @@ class Geophysics(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Equipment",
-        arche_prop="HasUsedHardware",
+        arche_prop="hasUsedHardware",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -7360,7 +7310,6 @@ class Geophysics(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -7570,7 +7519,6 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Convolute_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     bone_stone_inventory_number = models.ForeignKey(
         "FundinventarSteininventar",
@@ -7583,7 +7531,6 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Bone_stone_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     filename = models.CharField(
         max_length=250,
@@ -7613,6 +7560,7 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Document_title",
+        arche_prop="hasAlternativeTitle",
     )
     filename_old = models.CharField(
         max_length=250,
@@ -7684,7 +7632,6 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Find_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     original_comment = models.TextField(
         blank=True, null=True,
@@ -7706,7 +7653,6 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__File_extension",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -7719,7 +7665,6 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -7757,7 +7702,7 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Equipment_scan",
-        arche_prop="HasUsedHardware",
+        arche_prop="hasUsedHardware",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
@@ -8149,6 +8094,7 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Document_title",
+        arche_prop="hasAlternativeTitle",
     )
     filename_old = models.CharField(
         max_length=250,
@@ -8238,6 +8184,7 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Number_of_pages",
+        arche_prop="hasExtent",
     )
     original_comment = models.TextField(
         blank=True, null=True,
@@ -8267,7 +8214,6 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__File_extension",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -8280,7 +8226,6 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -8330,7 +8275,7 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Equipment_scan",
-        arche_prop="HasUsedHardware",
+        arche_prop="hasUsedHardware",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
@@ -8668,6 +8613,7 @@ class Tables(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Creator_original",
+        arche_prop="hasCreator",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -8722,6 +8668,7 @@ class Tables(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Document_title",
+        arche_prop="hasAlternativeTitle",
     )
     path_filename_old = models.CharField(
         max_length=250,
@@ -8740,6 +8687,7 @@ class Tables(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Creation_year_original",
+        arche_prop="hasCreatedDate",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
@@ -8748,7 +8696,6 @@ class Tables(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Creation_date_archivalObject",
-        arche_prop="hasCreatedDate",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -8837,7 +8784,6 @@ class Tables(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__File_extension_archivalObject",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -8850,7 +8796,6 @@ class Tables(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -9027,6 +8972,7 @@ class ThreeDimensionalModel(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="Thefilenameofconvolutecardsconsistsofthedocument_ID(uniqueidentifier).ThedocumentIDisaproject-specificuniqueidentifierwhichconsistsoftheabbreviationforthesite(TDforTellel-Daba),theabbreviationforthedocumenttype(e.g.KKforKonvolutkarte)andtheconvoluteinventorynumber(or,iftherewasnoinventorynumber,anIDwiththeprefix4DPuzzlewascreated,e.g.4DPuzzle1234).",
+        arche_prop="hasAlternativeTitle",
     )
     path_filename_old = models.CharField(
         max_length=250,
@@ -9058,6 +9004,7 @@ class ThreeDimensionalModel(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Creation_year_original",
+        arche_prop="hasCreatedDate",
     )
     software_used = models.CharField(
         max_length=250,
@@ -9067,7 +9014,7 @@ class ThreeDimensionalModel(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Software_used",
-        arche_prop="hasTechnicalInfo",
+        arche_prop="hasUsedSoftware",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
@@ -9076,7 +9023,6 @@ class ThreeDimensionalModel(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Creation_date_archivalObject",
-        arche_prop="hasCreatedDate",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -9193,7 +9139,6 @@ class ThreeDimensionalModel(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__File_extension_archivalObject",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -9206,7 +9151,6 @@ class ThreeDimensionalModel(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -9379,6 +9323,7 @@ class Videos(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Creator_original",
+        arche_prop="hasCreator",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -9416,7 +9361,6 @@ class Videos(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Find_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     filename = models.CharField(
         max_length=250,
@@ -9446,6 +9390,7 @@ class Videos(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Document_title",
+        arche_prop="hasAlternativeTitle",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
@@ -9454,6 +9399,7 @@ class Videos(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Creation_date_original",
+        arche_prop="hasCreatedDate",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
@@ -9462,7 +9408,6 @@ class Videos(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Creation_date_archivalObject",
-        arche_prop="hasCreatedDate",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -9489,7 +9434,6 @@ class Videos(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Path_filename_ARCHE",
-        arche_prop="hasLocationPath",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
@@ -9551,7 +9495,6 @@ class Videos(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__File_extension_archivalObject",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -9564,7 +9507,6 @@ class Videos(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -9779,6 +9721,7 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Document_title",
+        arche_prop="hasAlternativeTitle",
     )
     filename_old = models.CharField(
         max_length=250,
@@ -9849,7 +9792,6 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Fresco_inventory_number",
-        arche_prop="hasNonLinkedIdentifier",
     )
     original_comment = models.TextField(
         blank=True, null=True,
@@ -9879,7 +9821,6 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__File_extension",
-        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -9892,7 +9833,6 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Copyright",
-        arche_prop="hasOwner",
     )
     access = models.ForeignKey(
         SkosConcept,
@@ -9930,7 +9870,7 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Equipment_scan",
-        arche_prop="HasUsedHardware",
+        arche_prop="hasUsedHardware",
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
