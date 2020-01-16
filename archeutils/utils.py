@@ -16,6 +16,12 @@ from . configs import EXTENSION_HAS_CATEGORY_MAPPING
 
 ARCHE_CONST_MAPPINGS = getattr(settings, 'ARCHE_CONST_MAPPINGS', False)
 
+FC_DEFAULT_ACCESS_RES = getattr(
+    settings,
+    'FC_DEFAULT_ACCESS_RES',
+    "https://vocabs.acdh.oeaw.ac.at/archeaccessrestrictions/public"
+)
+
 ARCHE_LANG = getattr(settings, 'ARCHE_LANG', 'en')
 ARCHE_BASE_URI = getattr(settings, 'ARCHE_BASE_URI', 'https://id.acdh.oeaw.ac.at/MYPROJECT')
 ARCHE_PREFIX_REMOVE = getattr(settings, 'ARCHE_PREFIX_REMOVE', '')
@@ -189,7 +195,21 @@ def as_arche_res(res, res_type='Resource', arche_prop=False):
         cur_val = x['value']
         arche_prop = x['extra_fields']['arche_prop'].strip()
         arche_prop_domain = ARCHE_PROPS_LOOKUP.get(arche_prop, 'No Match')
-        if arche_prop_domain == 'string':
+        if arche_prop == 'hasAccessRestriction':
+            print(arche_prop)
+            if cur_val.pref_label.startswith('publ'):
+                g.add((
+                    sub,
+                    acdh_ns[arche_prop],
+                    URIRef("https://vocabs.acdh.oeaw.ac.at/archeaccessrestrictions/public")
+                ))
+            else:
+                g.add((
+                    sub,
+                    acdh_ns[arche_prop],
+                    URIRef(FC_DEFAULT_ACCESS_RES)
+                ))
+        elif arche_prop_domain == 'string':
             g.add((sub, acdh_ns[arche_prop], Literal(cur_val, lang=ARCHE_LANG)))
         elif arche_prop_domain == 'date':
             g.add((sub, acdh_ns[arche_prop], Literal(cur_val, datatype=XSD.date)))
