@@ -211,7 +211,7 @@ def as_arche_res(res, res_type='Resource', arche_prop=False):
         elif arche_prop_domain == 'string':
             arche_prop_str_template = x['extra_fields'].get('arche_prop_str_template', None)
             if arche_prop_str_template:
-                cur_val = arche_prop_str_template.replace('<value>', cur_val)
+                cur_val = arche_prop_str_template.replace('<value>', f"{cur_val}")
             g.add((sub, acdh_ns[arche_prop], Literal(cur_val, lang=ARCHE_LANG)))
         elif arche_prop_domain == 'date':
             g.add((sub, acdh_ns[arche_prop], Literal(cur_val, datatype=XSD.date)))
