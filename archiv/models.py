@@ -38,6 +38,7 @@ class Actor(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Actor/Actor.csv__first_name",
+        arche_prop="hasTitle"
     )
     drawer_monogram = models.CharField(
         max_length=250,
