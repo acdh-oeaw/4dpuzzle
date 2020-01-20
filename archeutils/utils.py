@@ -196,8 +196,7 @@ def as_arche_res(res, res_type='Resource', arche_prop=False):
         arche_prop = x['extra_fields']['arche_prop'].strip()
         arche_prop_domain = ARCHE_PROPS_LOOKUP.get(arche_prop, 'No Match')
         if arche_prop == 'hasAccessRestriction':
-            print(arche_prop)
-            if cur_val.pref_label.startswith('publ'):
+            if cur_val.pref_label.startswith('publ') or cur_val.pref_label.startswith('open'):
                 g.add((
                     sub,
                     acdh_ns[arche_prop],
