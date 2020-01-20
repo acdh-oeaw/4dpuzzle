@@ -219,10 +219,16 @@ def as_arche_res(res, res_type='Resource', arche_prop=False):
             if isinstance(cur_val, QuerySet):
                 for obj in cur_val:
                     if obj is not None:
-                        g.add((sub, acdh_ns[arche_prop], URIRef(get_arche_id(obj))))
+                        try:
+                            g.add((sub, acdh_ns[arche_prop], URIRef(obj.canonic_arche_uri)))
+                        except AttributeError:
+                            g.add((sub, acdh_ns[arche_prop], URIRef(get_arche_id(obj))))
             else:
                 if cur_val is not None:
-                    g.add((sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))))
+                    try:
+                        g.add((sub, acdh_ns[arche_prop], URIRef(cur_val.canonic_arche_uri)))
+                    except AttributeError:
+                        g.add((sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))))
         for const in ARCHE_CONST_MAPPINGS:
             arche_prop_domain = ARCHE_PROPS_LOOKUP.get(const[0], 'No Match')
             if arche_prop_domain == 'date':
