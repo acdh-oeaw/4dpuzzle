@@ -220,13 +220,20 @@ def as_arche_res(res, res_type='Resource', arche_prop=False):
                 for obj in cur_val:
                     if obj is not None:
                         try:
-                            g.add((sub, acdh_ns[arche_prop], URIRef(obj.canonic_arche_uri)))
+                            object_uri = obj.canonic_arche_uri
+                            if object_uri != "":
+                                g.add((sub, acdh_ns[arche_prop], URIRef(object_uri)))
                         except AttributeError:
                             g.add((sub, acdh_ns[arche_prop], URIRef(get_arche_id(obj))))
             else:
                 if cur_val is not None:
                     try:
-                        g.add((sub, acdh_ns[arche_prop], URIRef(cur_val.canonic_arche_uri)))
+                        object_uri = cur_val.canonic_arche_uri
+                        print(object_uri)
+                        if object_uri != "":
+                            g.add((sub, acdh_ns[arche_prop], URIRef(object_uri)))
+                        else:
+                            g.add((sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))))
                     except AttributeError:
                         g.add((sub, acdh_ns[arche_prop], URIRef(get_arche_id(cur_val))))
         for const in ARCHE_CONST_MAPPINGS:
