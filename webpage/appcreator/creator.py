@@ -122,6 +122,14 @@ def xlsx_to_classdicts(file):
                     field['arche_prop'] = arche_prop.replace('\n', '').replace(' ', '')
                 else:
                     field['arche_prop'] = False
+                try:
+                    arche_prop_str_template = row['Mapping extra app work']
+                except KeyError:
+                    arche_prop_str_template = None
+                if arche_prop_str_template is not None and isinstance(arche_prop_str_template, str):
+                    field['arche_prop_str_template'] = arche_prop_str_template.replace('\n', '')
+                else:
+                    field['arche_prop_str_template'] = False
 
                 if ' ' in row['field type'].strip():
                     continue

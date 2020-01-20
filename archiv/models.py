@@ -153,10 +153,6 @@ class Actor(models.Model):
         return model_to_dict(self)
 
     @classmethod
-    def is_binary_class(self):
-        return False
-
-    @classmethod
     def get_listview_url(self):
         return reverse('archiv:actor_browse')
 
@@ -720,6 +716,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Document_ID",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -998,6 +995,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Document_ID",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -1392,6 +1390,7 @@ class Convolutecards(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Convolute_subnumber",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP convolute subnumber: <value>",
     )
     filename_old = models.CharField(
         max_length=250,
@@ -1444,6 +1443,7 @@ class Convolutecards(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Resolution_scan_dpi",
         arche_prop="hasTechnicalInfo",
+        arche_prop_str_template="<value> dpi",
     )
     month = models.CharField(
         max_length=250,
@@ -1764,6 +1764,7 @@ class Datenbase(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Document_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -2857,6 +2858,7 @@ class Fielddrawing(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Document_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -2940,6 +2942,7 @@ class Fielddrawing(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Resolution_scan_dpi",
         arche_prop="hasTechnicalInfo",
+        arche_prop_str_template="<value> dpi",
     )
     original_material = models.ManyToManyField(
         SkosConcept,
@@ -2960,6 +2963,7 @@ class Fielddrawing(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Original_inventory_number",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP inventory number of original: <value>",
     )
     find_inventory_number = models.CharField(
         max_length=250,
@@ -3063,6 +3067,7 @@ class Fielddrawing(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Scale",
         arche_prop="hasTechnicalInfo",
+        arche_prop_str_template="Scale: <value>",
     )
     original_comment = models.TextField(
         blank=True, null=True,
@@ -3659,6 +3664,7 @@ class Finddrawing(models.Model):
     ).set_extra(
         is_public=True,
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -3753,6 +3759,7 @@ class Finddrawing(models.Model):
     ).set_extra(
         is_public=True,
         arche_prop="hasTechnicalInfo",
+        arche_prop_str_template="<value> dpi",
     )
     find_date = models.DateField(
         blank=True, null=True,
@@ -4089,6 +4096,7 @@ class Findsheets(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Document_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -4151,6 +4159,7 @@ class Findsheets(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Resolution_scan_dpi",
         arche_prop="hasTechnicalInfo",
+        arche_prop_str_template="<value> dpi",
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
@@ -4734,6 +4743,7 @@ class Fotosgescannt(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Document_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -4771,6 +4781,7 @@ class Fotosgescannt(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Photo_number",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP photo number: <value>",
     )
     creation_date_original = models.DateField(
         blank=True, null=True,
@@ -4836,6 +4847,7 @@ class Fotosgescannt(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Resolution_scan_ppi",
         arche_prop="hasTechnicalInfo",
+        arche_prop_str_template="<value> ppi",
     )
     pixel_size = models.CharField(
         max_length=250,
@@ -4914,6 +4926,7 @@ class Fotosgescannt(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Film_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP film ID: <value>",
     )
     file_extension = models.ForeignKey(
         SkosConcept,
@@ -5887,6 +5900,7 @@ class FundinventarKonvolutnummern(models.Model):
     ).set_extra(
         is_public=False,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Stratum_comment",
+        arche_prop="--",
     )
     stratum_id_absolute_prepub = models.ForeignKey(
         SkosConcept,
@@ -6803,6 +6817,7 @@ class GIS(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Document_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -7167,6 +7182,7 @@ class Geophysics(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Document_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -7531,6 +7547,7 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Bone_stone_inventory_number",
+        arche_prop="-",
     )
     filename = models.CharField(
         max_length=250,
@@ -7551,6 +7568,7 @@ class Inventorybooks(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Document_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -7622,6 +7640,7 @@ class Inventorybooks(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Resolution_scan_dpi",
         arche_prop="hasTechnicalInfo",
+        arche_prop_str_template="<value> dpi",
     )
     find_inventory_number = models.ManyToManyField(
         "FundinventarInventarnummern",
@@ -8085,6 +8104,7 @@ class Protocols(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Document_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -8166,6 +8186,7 @@ class Protocols(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Resolution_scan_dpi",
         arche_prop="hasTechnicalInfo",
+        arche_prop_str_template="<value> dpi",
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
@@ -8185,6 +8206,7 @@ class Protocols(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Number_of_pages",
         arche_prop="hasExtent",
+        arche_prop_str_template="<value> pages",
     )
     original_comment = models.TextField(
         blank=True, null=True,
@@ -8659,6 +8681,7 @@ class Tables(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Document_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -8963,6 +8986,7 @@ class ThreeDimensionalModel(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Document_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -9381,6 +9405,7 @@ class Videos(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Document_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -9712,6 +9737,7 @@ class WallpaintingInventory(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Document_ID",
         arche_prop="hasNonLinkedIdentifier",
+        arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
         max_length=250,
@@ -9783,6 +9809,7 @@ class WallpaintingInventory(models.Model):
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Resolution_scan_dpi",
         arche_prop="hasTechnicalInfo",
+        arche_prop_str_template="<value> dpi",
     )
     fresco_inventory_number = models.CharField(
         max_length=250,

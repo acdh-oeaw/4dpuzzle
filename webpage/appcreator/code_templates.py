@@ -407,6 +407,9 @@ class {{ x.model_name }}(models.Model):
         {%- if y.arche_prop %}
         arche_prop="{{ y.arche_prop }}",
         {%- endif %}
+        {%- if y.arche_prop_str_template %}
+        arche_prop_str_template="{{ y.arche_prop_str_template }}",
+        {%- endif %}
     )
     {%- endfor %}
     orig_data_csv = models.TextField(
