@@ -1,0 +1,185 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block content %}
+<div class="container-planning" style="padding-bottom:150px;">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">About the project</li>
+        <li class="breadcrumb-item"><a href="{% url 'webpage:staticpage' template='archive' %}">Creation of the digital archive</a></li>
+        <li class="breadcrumb-item">Metadata</li>
+      </ol>
+		<div class="text-center">
+			<h1>Digital dataset of TD excavation record </h1>
+			<hr style="border-color:#83C653; border-width: 2px" width="10%">
+		</div>
+        <div class="row">
+    			<div class="col-md-12">
+    				<p>
+            We completed the digitisation of all field drawings and created file-level metadata for all of them.  For the field protocols and inventory books that had been scanned previous to 4DP in Cairo, we created file-level metadata and converted the binaries according to ARCHE requirements. The analogue photo negatives from the years 1966 to 2001 were scanned and enhanced with file-level metadata.  A major part of the original convolute cards from the areas A/II and R/I were digitised and supplied with metadata. Additionally, for the sake of completeness of our case study area F/I square j21, a large number of find sheets from this area were digitised in Cairo and we created metadata for them.
+            </p>
+            <table class="table">
+              <thead class="thead">
+                <tr>
+                  <th scope="col">Resource</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">est. numbers (@OREA)</th>
+                  <th scope="col">Scans/digital objects</th>
+                  <th scope="col">4DP scans + metadata</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Slides (mainly colour, a few b&w) analogue</th>
+                  <td>Framed slides, 24x36 mm, 6x6 cm</td>
+                  <td>4.500</td>
+                  <td>4.630</td>
+                  <td>4.630</td>
+                </tr>
+                <tr>
+                  <th scope="row">Photo negatives (b&w and colour) analogue</th>
+                  <td>Filmstrips, 24x36 mm, 6x6 cm</td>
+                  <td>62.000</td>
+                  <td>48.403</td>
+                  <td>18.710</td>
+                </tr>
+                <tr>
+                  <th scope="row">Find sheets analogue</th>
+                  <td>A6 paper</td>
+                  <td>1 folder/td>
+                  <td>20 folders (with scans from folders in Cairo)</td>
+                  <td>20</td>
+                </tr>
+                <tr>
+                  <th scope="row">Scans of protocols, wall-lists, locus-lists analogue</th>
+                  <td>A4 paper</td>
+                  <td>1 folder</td>
+                  <td>3.490 (with scans from folders in Cairo)</td>
+                  <td>3.490</td>
+                </tr>
+                <tr>
+                  <th scope="row">Field drawings analogue</th>
+                  <td>A3 graph & tracing paper</td>
+                  <td>3.700</td>
+                  <td>3.700</td>
+                  <td>3.700</td>
+                </tr>
+                <tr>
+                  <th scope="row">Convolute cards (ceramic drawings) analogue</th>
+                  <td>A5 cardboard</td>
+                  <td>1.000</td>
+                  <td>495</td>
+                  <td>495</td>
+                </tr>
+                <tr>
+                  <th scope="row">Scans of inventory of wall paintings analogue</th>
+                  <td>A4 paper, b&w</td>
+                  <td>-</td>
+                  <td>3 pdf files (131 pages)</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <th scope="row">Scans of ceramics- & find-inventory analogue</th>
+                  <td>A4 paper (books and sheets)</td>
+                  <td>-</td>
+                  <td>13.924</td>
+                  <td>13.924</td>
+                </tr>
+                <tr>
+                  <th scope="row">Find drawings analogu</th>
+                  <td>A4, paper and tracing paper</td>
+                  <td>23.200</td>
+                  <td>11.700</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <th scope="row">Diaries analogue</th>
+                  <td>A5 and A6 notebooks</td>
+                  <td>15 notebooks</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="description"><b>Table 1:</b> Overview of analogue resources and the quantity of digitised material from OREA archive.</p>
+            <br>
+            <h4>Born-digital resources</h4>
+            <p>
+              Technical conversion was developed in collaboration with ARCHE. The whole process of preparing the resources was documented (<a href="https://4dpuzzle.orea.oeaw.ac.at/downloads" target="_blank">https://4dpuzzle.orea.oeaw.ac.at/downloads</a>).
+            </p>
+            <table class="table">
+              <thead class="thead">
+                <tr>
+                  <th scope="col">Resource type</th>
+                  <th scope="col">Description/file formats</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Conversion and metadata</th>
+                  <th scope="col">To do</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">3D-models</th>
+                  <td>Reconstructions of tombs and a cellar, Walkthrough, Phase-model, Wooden reconstruction / .skp, . unityweb</td>
+                  <td>6 models</td>
+                  <td>complete</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <th scope="row">AutoCAD</th>
+                  <td>Maps of TD and surrounding area / aps/ .dwg</td>
+                  <td>86 files</td>
+                  <td>complete</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <th scope="row">Databases</th>
+                  <td>Protocols, locus- and wall-numbers, inventory, images, wall paintings, seals, literature / .mdb,  .fp5, .fp7, .fp12</td>
+                  <td>24 DB</td>
+                  <td>complete</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <th scope="row">Geophysics</th>
+                  <td>Magnetometer surveys from different campaigns, TD and surrounding area / .srf, .tif, .pdf, .eps</td>
+                  <td>167 file</td>
+                  <td>complete</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <th scope="row">GIS</th>
+                  <td>Prospection and measurement / .geojson, .jpg, .adf, .tif, .cpg, .dbf, .prf, .sbn, .sbx, .shp, .shx</td>
+                  <td>21 files</td>
+                  <td>complete</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <th scope="row">Photos</th>
+                  <td>Digital born photos / .nef, .jpeg, .tiff, .pds, .raw</td>
+                  <td>62.000</td>
+                  <td>complete (processed as collections)</td>
+                  <td>Arche Metadaten</td>
+                </tr>
+                <tr>
+                  <th scope="row">Spreadsheets</th>
+                  <td>Locus- and wall- numbers, inventory, wall paintings, stones, bones, botanical remains, C14, employees, billing / .xls, .xlsx, .mdb</td>
+                  <td>222 files</td>
+                  <td>complete</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <th scope="row">Videos</th>
+                  <td>Mobile Objects, Excavation / .avi, .mov, .mp4, .mpg</td>
+                  <td>56 files</td>
+                  <td>complete</td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="description"><b>Table 2:</b> Overview of born-digital resources prepared for long-term preservation.</p>
+    			</div>
+		   </div>
+    </div>
+</div>
+
+{% endblock %}

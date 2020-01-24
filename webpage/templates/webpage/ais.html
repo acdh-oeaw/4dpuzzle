@@ -15,8 +15,8 @@
 		<div class="row">
       <div class="col-md-4">
         <ul class="images">
-          <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="https://shared.acdh.oeaw.ac.at/4dpuzzle/media/reconstruct_3dGis.jpeg" originalUrl="https://shared.acdh.oeaw.ac.at/4dpuzzle/media/reconstruct_3dGis.jpeg" alt="Screenshot of the GIS project in ArcScene."/>
-          <b>Figure 1</b>: Screenshot of the GIS project in ArcScene.
+          <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/images/AIS_Introduction.jpg' %}" originalUrl="{% static 'webpage/images/AIS_Introduction.jpg' %}" alt="Screenshot of the 3D view of the GIS project in QGIS."/>
+          <p class="description"><b>Figure 1</b>: Screenshot of the 3D view of the GIS project in QGIS.</p>
         </ul>
     <br />
     <br />
@@ -24,21 +24,17 @@
   </div>
   <div class="col-md-8">
           <p>
-            Stratigraphy is the analysis and description of events (a sequence of deposition and removal of material) that form archaeological evidence. It forms the basis for all interpretation of archaeological evidence. To analyse the complex stratigraphy at Tell el-Daba an Archaeological Information System (AIS) was created by project partner LBI ArchPro. The AIS consists of a Geographical Information System (GIS) that is connected with a tool to analyse the stratigraphic sequence (Harris Matrix Composer+). This means that a tool for spatial analysis AND temporal analysis has been created, allowing analysis of the complex evidence at Tell el-Daba in four dimensions – Tell el Daba 4D. In A Puzzle in 4D an add-on to connect the GIS with the stratigraphic sequencer has been developed. The Harris Matrix Composer+ has developed, which includes the possibility to enter levels of confidence about stratigraphic relationships and the possibility to group stratigraphic units according to time intervals has been developed too.
+            Stratigraphy is the analysis and description of events (a sequence of deposition and removal of material) that form archaeological evidence. It is the basis for all interpretation of archaeological evidence. To analyse the complex stratigraphy at Tell el-Daba an Archaeological Information System (AIS) was created by project partner LBI ArchPro. The AIS consists of a Geographical Information System (GIS) that is connected with a tool to analyse the stratigraphic sequence (Harris Matrix Composer+). This means that a tool for spatial analysis AND temporal analysis has been created, allowing analysis of the complex evidence at Tell el-Daba in four dimensions – Tell el Daba 4D. In A Puzzle in 4D an add-on to connect the GIS with the stratigraphic sequencer has been developed. The Harris Matrix Composer+ includes the possibility to enter levels of confidence about stratigraphic relationships and the option to group stratigraphic units according to time intervals has been developed too.
           </p>
           <p>
-            To test the AIS one area of Tell el Daba (F/I) which contains the remains of a palace has been analysed. You can access the 2-dimensional GIS project that was created and explore the archaeological evidence of an Egyptian palace (<a href="http://arcg.is/2yX6Bok" target="_blank">2D ArcGIS online </a>). In this movie you can see the AIS in action, i.e. how the GIS works with the stratigraphic sequencer (<a href="{% url 'webpage:staticpage' template='video_hmc' %}">HMC+ movie</a>).
+            To test the AIS one area of Tell el Daba (F/I) which contains the remains of a palace has been analysed. You can access the 2-dimensional GIS project that was created and explore the archaeological evidence of an Egyptian palace (<a href="http://arcg.is/2yX6Bok" target="_blank">online</a>). In this movie you can see the AIS in action, i.e. how the GIS works with the stratigraphic sequencer (<a href="{% url 'webpage:staticpage' template='video_hmc' %}">HMC+ movie</a>).
           </p>
           <p>
-          In a next step, the archaeological features have been reconstructed in a 3-dimensional GIS (<b>Figure 1</b>) to test hypotheses of archaeological interpretation (3D ArcGIS online).
+          In a next step, the archaeological features have been reconstructed in a 3-dimensional GIS (<b>Figure 1</b>) to test hypotheses of archaeological interpretation
           </p>
           <p>
             The GIS projects have been the basis for some more elaborate reconstructions of area F/I, which you can access here (<a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstructions</a>).
           </p>
-          <p>
-            If you want to know more about the development of the Tell el-Daba Archaeological Information System read here:
-          </p>
-            <i>The Tell el-Daba Archaeological Information System (AIS)</i>
 
 
         </div>

@@ -10,18 +10,19 @@
         <li class="breadcrumb-item">Metadata</li>
       </ol>
 		<div class="text-center">
-			<h1>Metadata and semantic enrichment </h1>
-      <h4>(Gerald Hiebel, Edeltraud Aspöck)</h4>
+			<h1>Metadata concepts and workflow </h1>
 			<hr style="border-color:#83C653; border-width: 2px" width="10%">
 		</div>
         <div class="row">
 					<div class="col-md-4">
             <ul class="images">
       				<img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="https://shared.acdh.oeaw.ac.at/4dpuzzle/media/archive_fig1_tumb.jpeg" originalUrl="https://shared.acdh.oeaw.ac.at/4dpuzzle/media/archive_fig1.jpeg" alt="Main categories of physical reality, documentation and digitizing processes."/>
-              <b>Figure 1</b>: Main categories of physical reality, documentation and digitising processes.
-              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="https://shared.acdh.oeaw.ac.at/4dpuzzle/media/metadata_table.jpeg" originalUrl="https://shared.acdh.oeaw.ac.at/4dpuzzle/media/metadata_table.jpeg" alt="Metadata created for TD resources and documented object."/>
-              <b>Table 1</b>: Metadata created for TD resources and documented object.
-
+              <p class="description"><b>Figure 1</b>: Main categories of physical reality, documentation and digitising processes.
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/images/metadata_entry.png' %}" originalUrl="{% static 'webpage/images/metadata_entry.png' %}" alt="Metadata management and controlled vocabularies."/>
+              <b>Figure 2</b>: Metadata created for TD resources and documented object.
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="https://shared.acdh.oeaw.ac.at/4dpuzzle/media/integration02.jpeg" originalUrl="https://shared.acdh.oeaw.ac.at/4dpuzzle/media/integration02.jpeg" alt="Metadata management and controlled vocabularies."/>
+              <b>Figure 3</b>: System architecture and workflow.
+            </p>
             </ul>
         <br />
 				<br />
@@ -29,43 +30,52 @@
 			</div>
 			<div class="col-md-8">
 				<p>
-          To retrieve resources from the TD archive for archaeological research a data model was required to organise and integrate the metadata of the digital and analogue resources for querying. Entity relationship models have been used widely to model archaeological data in relational databases like Postgres, MySQL or MS Access. However, due to the complexity of archaeological documentation and the relations between physical objects, the processes excavating, documenting and interpreting them and the documentation created on the physical objects and the processes, the use of ontologies as data models increases in archaeology and semantic technologies are employed to implement the ontology and store the data.
+          The 4DP metadata model distinguishes five main categories distinct in their nature: excavation areas, archaeological features and finds, documentation (analogue & digital), physical storage, digital secondary documentation (Figure 1).
         </p>
         <p>
-          We decided to use the CIDOC CRM ontology (Le Boeuf, P. et al. 2015) as the conceptual background to model TD resources, the physical reality they document and the process of creating digital documentation from analogue sources. The CIDOC CRM is an ISO standard for cultural heritage documentation and was extended in the past few years to model archaeological excavations (CRMarchaeo), scientific observation (CRMsci) and digital provenance (CRMdig) (CIDOC CRM 2016).
+          In very simple terms it can be said that the physical reality of archaeological features and finds (including archaeological objects, i.e. buildings, graves, pottery created in the distant past that were found in specific excavation areas (excavation objects such as squares and areas created by the archaeologists in the not so distant past) are documented in analogue and digital documentation. This documentation, which is stored in either physical archives (OREA or archive in Cairo) or digitally on the OREA network drive (‘TD Archive’ folder) is digitised (if analogue) or prepared for digital preservation (if born-digital) in the Puzzle 4D project.
         </p>
         <p>
-          Analysing the available documentation and the process of digitising analogue sources we identified five main categories distinct in their nature: excavation areas, archaeological features and finds, documentation (analogue & digital), physical storage, digital secondary documentation (<b>Figure 1</b>).
-        </p>
-        <p>
-          In very simple terms it can be said that the physical reality of archaeological features and finds (archaeological objects created in the distant past) that were found in specific excavation areas (excavation objects such as squares and areas created by the archaeologists in the not so distant past) are documented in analogue and digital documentation. In the A Puzzle in 4D project we create homogeneous metadata to answer the following questions:
-        </p>
-        <p>
+          Consequently, the 4DP metadata contains the following types of information:
           <ul>
-            <li><i>Which files document an excavation area? For example, which resources document the archaeological evidence and finds in area F/1, square j/21, Planum 3?? </i></li>
-            <li><i>Which files document archaeological features/finds of a specific type (e.g. graves)?  </i></li>
-            <li><i>Which files document a specific archaeological feature/find (e.g. grave 5 and walls in area F/1 square j/21)? </i></li>
-            <li><i>Which archaeological features/finds of a specific type and material are documented in an excavation area?</i></li>
-            <li><i>What stratum was assigned to archaeological features/finds?</i></li>
+            <li>Information on file: filename, -identifier, -title</li>
+            <li>Description of documentation (analogue or born-digital): e.g. document type, creator, creation date/excavation season, physical/digital storage, comments</li>
+            <li>Information on archaeological context (physical reality): e.g. excavation objects, archaeological objects, finds</li>
+            <li>Information on digitisation and/or preparation for digital long-term archiving: e.g. scanner, creator of scan and metadata, comments, etc.</li>
+            <li>Information on access and copyright</li>
           </ul>
         </p>
-        <p>
-          In order to create homogeneous metadata we had to define processes to create identifiers for instances of the main categories. That meant we had to find out in what context is a name of the documentation unique and add the necessary context to the name. For example, “grave 5” is unique within a square such as „j/21”, which is unique in area “F/1”. Hence, the unique identifier for grave 5 would be “TD_F1_j21_grave5” (TD being acronym for the site). The naming conventions used in the TD excavations were very elaborated and allow creation of unique identifiers if context information is added. For archaeological features and finds that were not given names in their local context we assigned “puzzle4D” – identifiers. For resources that had not been assigned the conventional TD identifiers (such as inventory numbers etc.) during excavation we applied the same procedure and added the new identifiers on the analogue documentation or named the files with the identifiers in case of digital documentation. The thesaurus was extended with terms for documentation and digitising processes. Up to October 2017, metadata for the following resources, physical and conceptual objects has been created (<b>Table 1</b>).
-        </p>
-        <p>
-          The main aim of the remaining 2,5 years of 4DP is to create a workflow and metadata entry forms for all types of TD digital and analogue resources.
-        </p>
-
-        <div class="clearfix"></div>
-        <h2><i class="fa fa-book" style="color: #83C653" aria-hidden="true"></i>&nbsp;Bibliography</h2>
-        <p class="text-justify">
-        <ul>
-          <li>
-            <b> Le Boeuf, P. et al. (2015)</b>, 'Definition of the CIDOC Conceptual Reference Model', <a href="http://www.cidoc-crm.org/official_release_cidoc.html" target="_blank">http://www.cidoc-crm.org/official_release_cidoc.html</a>, (accessed 18.09.2017)..<br>
-          </li>
-        </ul>
-        </p>
-
+          <p>
+            Metadata fields were reviewed in 2017 (for midterm evaluation) and fields that were not important or redundant were removed.
+          </p>
+          <p>
+            We chose spreadsheets (MS Excel) for the metadata entry and management of the controlled vocabularies (Figure 2). The metadata master file contained metadata of physical objects such as excavation objects, archaeological objects, finds, bulk finds (convolutes, animal bones, stone registry), locus, stratum/phase. 4DPuzzle identifiers (for archaeological objects and finds without TD inventory numbers) and a list of terms to specify types of archaeological objects (for data entry) are included in the metadata master file. Identifiers for physical objects relate the resource files to the metadata master file.
+          </p>
+          <p>
+            We found the flexibility offered by MS Excel was an advantage compared to other systems which would need development of a user interface or customisation of an existing interface to accommodate the needs of the project. Another big advantage is that users are accustomed to this default piece of office software. After defining the main categories of the data structure and creating an identifier policy we could immediately start the metadata entry process. Furthermore, Excel allows to enter values quickly (e.g. entering the same value to many cells at the same time, where a database only allows to enter one value at a time), which was another important argument to stick with Excel.
+          </p>
+          <p>
+            Disadvantages are that this method is more prone to errors, as identifier handling and management is performed by humans and requires constant monitoring and regular quality assessment. Quality control took place when data from the spreadsheets was further processed, creating the Knowledge Graph and ingesting into the 4DP webapp, which helped to identify errors and inconsistencies in data entries. Several rounds of corrections were required, however, we still think that this workflow allowed to process a larger amount of resources than we would have been able to handle with entering data in a database via an entry form, where data entry would have been much slower, let alone the substantial amount of work that would be needed to develop such a bespoke database application. Only few students were involved in data entry and they became experts in TD documentation and were also able to correct any mistakes quickly.
+          </p>
+          <p>
+            The mappings of the metadata spreadsheets to CIDOC CRM created a knowledge graph, making explicit the individual entities and the relations between them. This knowledge graph represented in RDF (Resource Description Framework;) was ingested into a triple store (Blazegraph, <a href="https://blazegraph.com/" target="_blank">https://blazegraph.com/</a>). Relations between the resources are either established  on the class level (because they belong to the same CIDOC CRM class, e.g. “document” or “physical thing”), on the SKOS concept level (because the same thesaurus term was attributed to them, e.g. “field drawing”) or on an instance level (because they describe the same excavation area or archaeological feature/find, e.g. “Site TD, Area F/1, SQUARE j/21, Planum 3”).
+          </p>
+          <h4>Workflow from metadata entry to integrated web application</h4>
+          <p>
+            The actual final workflow from the metadata to an integrated web application with all metadata and digitized objects integrated and searchable involves a number of components (Figure 3):
+          </p>
+          <p>
+            <ol>
+              <li>Metadata creation/curation via interlinked MS Excel spreadsheets (Figure 2).</li>
+              <li>The manually maintained/created spreadsheets containing the metadata are imported into a PostgreSQL database with PostGIS extension allowing to model and store GIS objects. This import script can either be run in predefined frequencies (cron job) or triggered manually.</li>
+              <li>The data in the PostgreSQL database is made accessible through a user friendly (python/django based) web application (<a href="https://4dpuzzle.orea.oeaw.ac.at/" target="_blank">https://4dpuzzle.orea.oeaw.ac.at/</a>), which represents the primary entry point to all digital data of the project.</li>
+              <li>The Karma models are applied to the spreadsheets and the generated RDF (modelled in CIDOC-CRM) is ingested into the triple store. The main goal of this transformation is to provide a standard-conformant serialization of the data and a versatile querying capability via SPARQL, which allows for any custom advanced queries on the dataset represented in a semantic conceptual model, beyond the querying functionality offered by the default application. In future RDFs will be generated from the PostgresSQL database application, to reflect changes made in the web application. </li>
+              <li>The actual binary data, i.e. the scans resided during the curation process on a file server (see 1.2.10) and are stored in a format which meets all requirements for longterm archiving (TIFF, no compression). Representations of the binaries suitable for a presentation in the context of a website are provided through ARCHE’s dissemination services and integrated into the 4dpuzzle-website. </li>
+              <li>Metadata dumps from the triple store together with the binary files (digitized objects) are imported into ARCHE. The repository provides its own generic search and browse capabilities, thus it represents an alternative mode of access to the data.</li>
+              <li>Metadata entries browsable in <a href="https://4dpuzzle.orea.oeaw.ac.at/" target="_blank">https://4dpuzzle.orea.oeaw.ac.at/</a> are back-linked to the corresponding objects in ARCHE.</li>
+              <li>GIS Data has been published following the WMS and WFS protocols (via Qgis Server) which allows the data integration through third party tools (like QGIS). A basic view on the Data is integrated into 4dpuzzle-website.</li>
+            </ol>
+          </p>
 
 			</div>
 

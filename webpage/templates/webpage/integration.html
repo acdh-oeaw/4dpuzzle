@@ -11,17 +11,16 @@
     </ol>
 
 		<div class="text-center">
-			<h1>Data integration, storage, archiving and open access</h1>
-      <h4>(Gerald Hiebel, Peter Andorfer, Matej Durco, Edeltraud Aspöck)</h4>
+			<h1>TD documentation archive in ARCHE</h1>
 			<hr style="border-color:#83C653; border-width: 2px" width="10%">
 		</div>
         <div class="row">
 					<div class="col-md-4">
             <ul class="images">
-      				<img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="https://shared.acdh.oeaw.ac.at/4dpuzzle/media/integration01.jpeg" originalUrl="https://shared.acdh.oeaw.ac.at/4dpuzzle/media/integration01.jpeg" alt="Metadata mapped to the formal definitions of the CIDOC CRM ontology."/>
-              <b>Figure 1</b>: Metadata mapped to the formal definitions of the CIDOC CRM ontology.
               <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="https://shared.acdh.oeaw.ac.at/4dpuzzle/media/integration02.jpeg" originalUrl="https://shared.acdh.oeaw.ac.at/4dpuzzle/media/integration02.jpeg" alt="System architecture and workflow."/>
-              <b>Figure 2</b>: System architecture and workflow.
+              <p class="description"><b>Figure 1</b>: System architecture and workflow.
+              <img class="img-responsive" style=" width:300px; margin-bottom: 0px; margin-top:30px;" src="{% static 'webpage/images/structure_arche.png' %}" originalUrl="{% static 'webpage/images/structure_arche.png' %}" alt="Structure of TD documentation archive."/>
+              <b>Figure 2</b>: Structure of TD documentation archive.</p>
             </ul>
         <br />
 				<br />
@@ -29,91 +28,33 @@
 			</div>
 			<div class="col-md-8">
 				<p>
-          Based on user requirements defined in 2015 and requirements for long term preservation of data, existing software solutions have been evaluated and an analysis of the preferred system architecture has been conducted. To create, manage and query metadata and digital documents of the Tell el-Daba excavation documentation we identified three main components within the system architecture:
-        </p>
-        <ul>
-          <li>Data Creation & Curation</li>
-          <li>Data Integration, Storage & Archiving</li>
-          <li>Data Presentation & Publication</li>
-        </ul>
-        <p>
-          The goal was to develop a system with open and well-defined interfaces between the components. The leading idea is that the data are the most important asset within the project and it should be possible to choose different software products for each system component and if necessary replace them individually if a better one comes up for the specific purpose.
-        </p>
-        <p>
-          We chose Microsoft Excel for the metadata entry and management of the controlled vocabularies (<a href="{% url 'webpage:staticpage' template='digitisation' %}">see Digitisation of Tell el-Daba resources</a>). We found the flexibility offered by MS Excel was an advantage compared to other systems which would need development of a user interface or customisation of an existing interface to accommodate the needs of the project. Another big advantage is that users are accustomed to this default piece of office software. This arguments outweigh the limitations of Excel in terms of data modelling and data validation capabilities that e.g. a traditional database application would provide (referential integrity, check for allowed values, concurrent user access etc.). After defining the main categories of the data structure and creating an identifier policy we could immediately start the metadata entry process. Excel allows to enter values quickly (e.g. entering the same value to many cells at the same time, where a database only allows to enter one value at a time), which was a main reason to stick with Excel. Disadvantages are that this method is more prone to errors, as identifier handling and management is performed by humans and requires constant monitoring and regular quality assessment. However, as only few students carry out the data entry, they have become experts in TD documentation in the meantime and mistakes have become less frequent.
-        </p>
-        <p>
-          We used Karma (ISI 2016), a semantic web tool to map metadata and vocabularies to the CIDOC CRM data model and SKOS. <b>Figure 1</b> shows how the metadata is mapped to the formal definitions of the CIDOC CRM ontology.
-        </p>
-        <p>
-          Karma creates a knowledge graph to represent the information and exports it in RDF (Resource Description Framework), a data format that is able to relate logical statements within a network (W3C 2014). The RDF structure was ingested in a triple store, where we linked the resources (metadata elements such as a specific excavation area) through the unique identifiers. This process integrates the metadata of the digitised resources such as field drawings or photos. Resources are either linked on a class level (because they belong to the same CIDOC CRM class, e.g. “document” or “physical thing”), on the SKOS concept level (because the same thesaurus term was attributed to them, e.g. “field drawing”) or on an instance level (because they describe the same excavation area or archaeological feature/find, e.g. “Site TD, Area F/1, SQUARE j/21, Planum 3”).  The RDF network of the triple store can be queried using the SPARQL (W3C 2013) query language.
-        </p>
-        <p>
-          Up to date we ingested the metadata of scanned field drawings and photos of the excavation areas F/I and A/II (Table 3.1) and created queries according to the requirements (<a href="{% url 'webpage:staticpage' template='metadata' %}">see metadata and semantic enrichment</a>). They could be fulfilled and in addition a de-normalized export of the data was done and imported in MS Excel. The filter functionality of MS Excel can be used to simulate a faceted search tool with the ability to drill down on excavation areas, archaeological types like graves or documentation types like field drawings or photos and retrieve the filenames corresponding to the specified criteria. This approach was intended as a fast way to review, query and validate the entered metadata and also to explore the feasibility and quality of the semantic mapping.
-        </p>
-
-        <p>
-          <b>Workflow</b>
-        </p>
-        <p>
-          The actual final workflow from the metadata to an integrated web application with all metadata and digitized objects integrated and searchable, involves a number of components, which are displayed in <b>Figure 2</b>:
-          <ol>
-            <li>Metadata creation/curation continues as before. </li>
-            <li>The generated spreadsheets containing the metadata are imported into a PostgreSQL database with PostGIS extension allowing to model and store GIS objects. This import script can either be run in predefined frequencies (cron job) or triggered manually.</li>
-            <li>The data in the PostgreSQL database is made accessible through a user friendly (python/django based) web application (<a href="https://4dpuzzle.orea.oeaw.ac.at/" target="_blank">https://4dpuzzle.orea.oeaw.ac.at/</a>), which represents the primary entry point to all digital data of the project.</li>
-            <li>The Karma models are applied to the data in the PostgreSQL database and the generated RDF (modelled in CIDOC-CRM) is ingested in the triple store. The main goal of this transformation to provide a standard-conformant serialization of the data and a versatile querying capability via SPARQL, which allows for any custom advanced queries on the dataset represented in a semantic conceptual model, beyond the querying functionality offered by the default application.</li>
-            <li>The actual binary data, i.e. the scans reside on a file server (see WP2) and are stored in a format which meets all requirements for long term archiving (.tif, no compression). To make these images easily accessible, compressed (JP2000) derivatives of the ‘master’ images are created and uploaded to an IIIF-conformant (<a href="http://iiif.io" target="_blank">http://iiif.io</a>) image server hosted by the ACDH (e.g. <a href="https://4dpuzzle-iiif.acdh.oeaw.ac.at/TD_FZ_1043__TD_F-I_j21_Ostprofil/" target="_blank">https://4dpuzzle-iiif.acdh.oeaw.ac.at/TD_FZ_1043__TD_F-I_j21_Ostprofil/</a> ), allowing dynamic zooming, panning etc. of the images in user’s browser. From this IIIF-server the images are fetched and displayed by the 4dpuzzle web application (e.g. <a href="https://4dpuzzle.orea.oeaw.ac.at/archiv/fielddrawing/778" target="_blank">https://4dpuzzle.orea.oeaw.ac.at/archiv/fielddrawing/778</a>).</li>
-            <li>Metadata dumps from the triple store together with the binary files (digitized objects) are imported into a repository suitable for long term archiving, maintained by the ACDH (“ARCHE”, see section below). The repository provides own generic search and browse capabilities, thus it represents an alternative mode of access to the data.</li>
-            <li>Metadata entries browsable in <a href="https://4dpuzzle.orea.oeaw.ac.at/" target="_blank">https://4dpuzzle.orea.oeaw.ac.at/</a> are back-linked to the corresponding objects in the repository.</li>
-            <li>GIS Data is published via ArcGIS Server (or feature-equivalent GIS server) and integrated with the main application.</li>
-          </ol>
-        </p>
-        <p>
-          <b>ARCHE - A Resource Centre for HumanitiEs</b>
-        </p>
-        <p>
-          ACDH has been developing and will soon release its new data hosting service – ARCHE.
-        </p>
-        <p>
-          As part of the CLARIAH-AT infrastructure, ARCHE is primarily intended to be a digital data hosting service for the humanities in Austria. Thus data from all humanities fields including modern languages, classical languages, linguistics, literature, history, jurisprudence, philosophy, archaeology, comparative religion, ethics, criticism and theory of the arts are equally welcome.
-        </p>
-        <p>
-          The repository builds on the well-established open-source repository software Fedora Commons version 4 which provides a sound technological basis for implementing the OAIS (Open Archival Information System) reference model by taking care of storage, management and dissemination of our content. The core component is accompanied by a set of custom-built components:
+          All the material processed in the project will be archived in the repository ARCHE. In accordance with OAIS model, ARCHE is not just meant to store the data (Archival Information Package) but also making it available (Dissemination Information Package). Given the access restrictions, most of the digitized resources won’t be publicly available, however at least the structure of the whole collection as well as all the metadata, with important information about the contents of resources, will be accessible.
+          Furthermore, there are additional components of the overall solution that allow alternative ways for exploring the  dataset (Figure 1):
         </p>
         <p>
           <ul>
-            <li>the “doorkeeper” service represents the single point of access to Fedora and ensures adherence to established business rules (transactions, metadata validation, authentication, etc.). It implements the API of Fedora 4, thus it is compatible with any Fedora 4 compliant client.</li>
-            <li>Repo-php-util is a library offering high-level functionality to interact with the repository. It is used by all other components of the system that interact with the repository.</li>
-            <li>Repository Browser - implemented as a drupal 8 module this is the user facing component, which allows to navigate and search through the content of the repository.</li>
-            <li>OAI-PMH endpoint - a simple application implementing the OAI-PMH protocol delivering the metadata about the resources in the repository.</li>
-            <li>Validation routine - a php application that is run on any dataset before it is ingested into the repository to automatically check the structure and formats of the data and to provide an overview of the dataset with respect to the size, structure and file formats used.</li>
+            <li>primary entry point and dissemination channel is the web application 4dpuzzle. It has been developed at the ACDH-OeAW based upon the high-level Python Web framework django and a set of custom developed django packages: <a href="https://4dpuzzle.orea.oeaw.ac.at/explore/" target="_blank">https://4dpuzzle.orea.oeaw.ac.at/explore/</a> (test version). The webapp offers a user friendly interface to query and view the project data, serves as a gateway to other data providers (ARCHE, triple store, Geoserver) and provides a rich API to search and retrieve data in different formats (JSON expression of the relational data model; ARCHE-RDF). The webapp is also used to provide information about the project. The code of the webapp is available at <a href="https://github.com/acdh-oeaw/4dpuzzle" target="_blank">https://github.com/acdh-oeaw/4dpuzzle</a> und MIT license. </li>
+            <li>scanned images are served via a IIIF server a community standard for image delivery. (<a href="http://iiif.io/" target="_blank">http://iiif.io/</a>)</li>
+            <li>metadata in CIDOC-CRM is stored in a triple store, allowing exploration for expert users with arbitrarily complex queries using SPARQL query language either through the default blazegraph query interface (<a href="https://p4d-rdf.acdh-dev.oeaw.ac.at/#query" target="_blank">https://p4d-rdf.acdh-dev.oeaw.ac.at/#query</a>) or from the 4DP webapp (<a href="https://4dpuzzle.orea.oeaw.ac.at/sparql/query/" target="_blank">https://4dpuzzle.orea.oeaw.ac.at/sparql/query/</a>).</li>
+            <li>Parallel to the development of the main application, we have experimented with software solutions for querying our metadata triple store via a user-friendly web-interface (Metaphacts, wisKI: <a href="http://www.metaphacts.com/" target="_blank">http://www.metaphacts.com/</a>, <a href="http://wiss-ki.eu/" target="_blank">http://wiss-ki.eu/</a>).</li>
           </ul>
         </p>
         <p>
-          These core features are currently in its final stage of development and a series of test imports has been performed.
+          <b>ARCHE</b> (<a href="https://arche.acdh.oeaw.ac.at" target="_blank">https://arche.acdh.oeaw.ac.at</a>) is run by ACDH, was launched in December 2017 and is a repository certified with the CoreTrustSeal. ARCHE is primarily intended to be a service for long term storage of  humanities data in Austria. The repository builds on the well-established open-source repository software Fedora Commons version 4 which provides a sound technological basis for implementing the OAIS (Open Archival Information System) reference model by taking care of storage, management and dissemination of our content.
         </p>
         <p>
-          The aims of the remaining 2,5 years of 4DP in WP 4 will be to …
+          The deposition of the data into ARCHE has been a complex, iterative process, in which the actual ingestion (i.e. uploading data into the system) is only the last part. The two other critical aspects were the creation of metadata compliant to the ARCHE metadata schema (already described in section 1.3.8), and the curation and quality checks regarding filename conventions, formats, consistency of descriptions etc. The quality checks were performed by ARCHE curators with the help of a dedicated script (repo-file-checker). All errors were reported back to the 4DP team with request for corrections. After corrections were either applied manually or automated with scripts, the quality checks were executed again by the ARCHE. These iterations were repeated until no errors occurred.
         </p>
         <p>
-          <ul>
-            <li>create Karma models for digital resources such as databases that record locus information or detailed information on inventory objects. The goal is to be able to process digital information from recent excavation campaigns in order to have a workflow that can incorporate newly created digital information into the metadata. </li>
-            <li>import ‘real’ data from the 4DP into the productive hosting instance is foreseen for beginning of 2018. Full access to the TD archive will be provided by the end of the project in 01/2020.</li>
-            <li>develop the 4dpuzzle.orea.oeaw.ac.at User-Interface (ongoing process until end of the project): </li>
-              <ul>
-                <li>implementation of complex filter/search/browsing interface, </li>
-                <li>implementation of custom detail views per data type (excavation objects, documentations object, …), </li>
-                <li>further interlinking of objects, </li>
-                <li>parallel to the development of the main application, we will test software solutions for querying our metadata triple store via a user-friendly web-interface (Metaphacts, wisKI: <a href="http://www.metaphacts.com/" target="_blank">http://www.metaphacts.com/</a>, <a href="http://wiss-ki.eu/" target="_blank">http://wiss-ki.eu/</a>), also aiming to compare the two approaches (triple store vs. traditional relational database) in terms of flexibility, user-friendliness and performance.</li>
-              </ul>
-            <li>Implementation of data transformation/synchronisation workflows (done until end of 2019)</li>
-            <li>Implementation repository ingest workflow (done until end of 2019)</li>
-          </ul>
+          Given the sheer size of the dataset and a number of external factors this curation and ingestion process ran over most of 2019, first test ingest with resources from F-I performed in the beginning of 2019. The actual ingest of TD data and prepared metadata is done by the ARCHE team, while the 4DP team remains available for questions and any required feedback. The final ingest of over 122000 files with overall volume of around 9.6 TB will start in January 2020, but it will take time and may need time after the end of the month when 4DP project finishes.
         </p>
-
-
-			</div>
-
+        <p>
+          The TD documentation archive is available at <a href="https://id.acdh.oeaw.ac.at/td-archiv" target="_blank">https://id.acdh.oeaw.ac.at/td-archiv</a> and it will also persistently referenceable with the handle <a href="http://hdl.handle.net/21.11115/0000-000C-4F1C-E" target="_blank">http://hdl.handle.net/21.11115/0000-000C-4F1C-E</a>.
+        </p>
+        <p>
+          Data in the TD documentation archive is structured according to the contents of documents, containing four main folders related to 1. Documents with information about the TD documentation archive (AboutThisArchive_Archivinformation_E73), 2. Documents about field evidence (PhysicalFeatures_Befunde_S20) , 3. Documents about finds (MobileObjects_Funde_E19) and 4. other documentation, either related to both, finds and field evidence or to other types of documents, e.g. literature, 3D models, and photos without file level metadata pertaining to both, field evidence and finds (OtherDocuments_AndereDokumente_E73).
+        </p>
+      </div>
 		</div>
     </div>
 </div>
