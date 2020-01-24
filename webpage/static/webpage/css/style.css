@@ -44,3 +44,15 @@ a:hover{
 a:active{
   color:#83C653;
 }
+
+.description{
+  font-size:11px;
+}
+
+.thead{
+  background-color:lightgrey;
+}
+
+.table{
+  font-size:13px;
+}

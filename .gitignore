@@ -28,6 +28,7 @@ mysql.py
 server.py
 postgres.py
 dev_secret.py
+dev_acdh.py
 
 # documentation build files
 
