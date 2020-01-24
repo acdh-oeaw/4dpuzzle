@@ -95,37 +95,45 @@
                 </td>
               </tr>
               {% elif not x.extra_fields or x.extra_fields.is_public %}
-              <tr>
-                <th>
-                  {% if x.help_text %}
-                  <abbr title="{{ x.help_text }}">{{ x.verbose_name }}</abbr>
-                  {% else %}
-                  {{ x.verbose_name }}
-                  {% endif %}
-                </th>
-                <td>
-                  {% if x.f_type == 'M2M' %}
-                  {% for y in x.value %}
-                  <li>
-                    <a href="{{ y.get_absolute_url }}">{{ y }}</a>
-                  </li>
-                  {% endfor %}
-                  {% elif  x.f_type == 'FK' %}
-                  <a href="{{ x.value.get_absolute_url }}">{{ x.value }}</a>
-                  {% elif  x.f_type == 'FK' %}
-                  <a href="{{ x.value.get_absolute_url }}">{{ x.value }}</a>
-                  {% elif  x.f_type == 'REVRESE_RELATION' %}
-                  {% for y in x.value %}
-                  <li>
-                    <a href="{{ y.get_absolute_url }}">{{ y }}</a>
-                  </li>
-                  {% endfor %}
+                {% if x.verbose_name != "The original data" and x.verbose_name != "ID" and x.verbose_name != "Matches FileChecker Entry" %}
+                <tr>
+                  <th>
+                    {% if x.help_text %}
+                    <abbr title="{{ x.help_text }}">{{ x.verbose_name }}</abbr>
+                    {% else %}
+                    {{ x.verbose_name }}
+                    {% endif %}
+                  </th>
+                  <td>
+                    {% if x.f_type == 'M2M' %}
+                    {% for y in x.value %}
+                    <li>
+                      <a href="{{ y.get_absolute_url }}">{{ y }}</a>
+                    </li>
+                    {% endfor %}
+                    {% elif  x.f_type == 'FK' %}
+                    <a href="{{ x.value.get_absolute_url }}">
+                      {% if x.verbose_name == "Copyright" %}
+                        {{ x.value|upper }}
+                      {% else %}
+                        {{ x.value }}
+                      {% endif %}
+                      </a>
+                    {% elif  x.f_type == 'FK' %}
+                    <a href="{{ x.value.get_absolute_url }}"></a>
+                    {% elif  x.f_type == 'REVRESE_RELATION' %}
+                    {% for y in x.value %}
+                    <li>
+                      <a href="{{ y.get_absolute_url }}">{{ y|upper }}</a>
+                    </li>
+                    {% endfor %}
 
-                  {% elif  x.f_type == 'SIMPLE' %}
-                  {{ x.value }}
-                  {% endif %}
-                </td>
-              </tr>
+                    {% elif  x.f_type == 'SIMPLE' %}
+                    {{ x.value }}
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endif %}
               {% endif %}
               {% endif %}
               {% endfor %}
