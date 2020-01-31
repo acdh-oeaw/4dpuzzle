@@ -353,12 +353,12 @@ class {{ x.model_name }}(models.Model):
         blank=True, null=True,
         {%- endif %}
         verbose_name="{{ y.field_verbose_name }}",
-        help_text="{{ y.field_helptext }}",
-
+        help_text="{{ y.field_helptext }}"
+        )
     {%- endfor %}
 
     class Meta:
-        {% if x.model_order == 'nan' %}
+        {% if x.model_order == 'nan' or not x.model_order %}
         ordering = [
             'id',
         ]
@@ -368,7 +368,7 @@ class {{ x.model_name }}(models.Model):
         ]
         {%- endif %}
         verbose_name = "{{ x.model_verbose_name }}"
-    {% if x.model_representation == 'nan' %}
+    {% if x.model_representation == 'nan' or not x.model_order %}
     def __str__(self):
         return "{}".format(self.id)
     {%- else %}

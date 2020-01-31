@@ -4,7 +4,7 @@ from jinja2 import Template
 
 from django.apps import apps
 
-from . import code_templates
+from . import code_templates_default as code_templates
 
 
 def model_fields_to_dict(sample):
@@ -254,3 +254,13 @@ def serialize_urls(dicts, app_name="my_app", file_name='output_urls.py'):
     with open(file_name, "w") as text_file:
         print(output, file=text_file)
     return file_name
+
+
+### code example on how to use it:
+
+# from appcreator import creator
+# classdict = creator.app_to_classdicts("my_app")
+# for x in dir(creator):
+#     if x.startswith('seri'):
+#         func = getattr(creator, x)
+#         func(classdict, app_name="my_app")
