@@ -963,6 +963,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creator_metadata",
+        arche_prop="hasMetadataCreator"
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -975,6 +976,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creator_original",
+        arche_prop="hasCreator"
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -987,6 +989,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__creator_archivalObject",
+        arche_prop="hasContributor"
     )
     filename = models.CharField(
         max_length=250,
@@ -996,6 +999,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Filename",
+        arche_prop="hasTitle"
     )
     document_id = models.CharField(
         max_length=250,
@@ -1005,6 +1009,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Document_ID",
+        arche_prop="hasNonLinkedIdentifier",
         arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
@@ -1015,6 +1020,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Document_title",
+        arche_prop="hasAlternativeTitle"
     )
     path_filename_old = models.CharField(
         max_length=250,
@@ -1042,6 +1048,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creation_year_original",
+        arche_prop="hasCreatedDate"
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
@@ -1163,6 +1170,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Access",
+        arche_prop="hasAccessRestriction"
     )
     site_id = models.ForeignKey(
         SkosConcept,
@@ -1309,6 +1317,7 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator"
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -1321,6 +1330,7 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_original",
+        arche_prop="hasCreator"
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -1333,6 +1343,7 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_scan",
+        arche_prop="hasContributor"
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
