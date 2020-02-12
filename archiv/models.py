@@ -675,6 +675,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creator_metadata",
+        arche_prop="hasMetadataCreator",
     )
     creator_original = models.ForeignKey(
         "Actor",
@@ -699,6 +700,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__creator_archivalObject",
+        arche_prop="hasContributor"
     )
     filename = models.CharField(
         max_length=250,
@@ -708,6 +710,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Filename",
+        arche_prop="hasTitle"
     )
     document_id = models.CharField(
         max_length=250,
@@ -717,6 +720,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Document_ID",
+        arche_prop="hasNonLinkedIdentifier",
         arche_prop_str_template="4DP document ID: <value>",
     )
     document_title = models.CharField(
@@ -727,6 +731,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Document_title",
+        arche_prop="hasAlternativeTitle"
     )
     creation_year_original = models.CharField(
         max_length=250,
@@ -744,6 +749,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creation_date_archivalObject",
+        arche_prop="hasCreatedDate"
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -760,6 +766,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Comment",
+        arche_prop="hasNote"
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -796,6 +803,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__File_extension_archivalObject",
+        arche_prop="hasTechnicalInfo"
     )
     copyright = models.ForeignKey(
         SkosConcept,
@@ -820,6 +828,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Access",
+        arche_prop="hasAccessRestriction"
     )
     site_id = models.ForeignKey(
         SkosConcept,
