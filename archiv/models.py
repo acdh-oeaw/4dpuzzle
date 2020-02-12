@@ -7568,7 +7568,6 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Bone_stone_inventory_number",
-        arche_prop="-",
     )
     filename = models.CharField(
         max_length=250,
