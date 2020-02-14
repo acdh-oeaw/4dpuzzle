@@ -45,6 +45,10 @@ a:active{
   color:#83C653;
 }
 
+a:focus {
+  color:#83C653;
+}
+
 .description{
   font-size:11px;
 }
