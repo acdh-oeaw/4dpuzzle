@@ -10,10 +10,10 @@
     <li class="breadcrumb-item"><a href="{% url 'webpage:staticpage' template='reconstruct' %}">Reconstructions</a></li>
     <li class="breadcrumb-item">Walkthrough</li>
   </ol>
-  <script src="{% static 'webpage/ted_viewer_walkthrough/TemplateData/UnityProgress.js' %}"></script>
-  <script src="{% static 'webpage/ted_viewer_walkthrough/Build/UnityLoader.js' %}"></script>
+  <script src="https://shared.acdh.oeaw.ac.at/4dpuzzle/ted/ted_viewer_walkthrough/TemplateData/UnityProgress.js"></script>
+  <script src="https://shared.acdh.oeaw.ac.at/4dpuzzle/ted/ted_viewer_walkthrough/Build/UnityLoader.js"></script>
   <script>
-    var gameInstance = UnityLoader.instantiate("gameContainer", "{% static 'webpage/ted_viewer_walkthrough/Build/ted_FP_WebGL_11.json' %}", {onProgress: UnityProgress});
+    var gameInstance = UnityLoader.instantiate("gameContainer", "https://shared.acdh.oeaw.ac.at/4dpuzzle/ted/ted_viewer_walkthrough/Build/ted_FP_WebGL_11.json", {onProgress: UnityProgress});
   </script>
 
   <h1>Tell el-Daba: Palace Area F/I - Walkthrough</h1>
