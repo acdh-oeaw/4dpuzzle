@@ -177,12 +177,12 @@ def col_from_res(res, arche_uri=ARCHE_BASE_URI):
 
 def as_arche_res(res, res_type='Resource', arche_prop=False):
     g = Graph()
-    sub = URIRef(get_arche_id(res,))
-    g.add((sub, RDF.type, acdh_ns[res_type]))
     try:
-        g.add((sub, acdh_ns.hasIdentifier, URIRef(get_p4d_id(res, arche_prop=arche_prop))))
-    except TypeError:
-        pass
+        sub = URIRef(get_p4d_id(res, arche_prop=arche_prop))
+    except:
+        sub = URIRef(get_arche_id(res,))
+    # sub = URIRef(get_arche_id(res,))
+    g.add((sub, RDF.type, acdh_ns[res_type]))
     g.add((
         sub, acdh_ns.hasDescription, Literal(get_arche_desc(res), lang=ARCHE_LANG)
     ))
