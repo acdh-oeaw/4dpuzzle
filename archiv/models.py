@@ -38,7 +38,7 @@ class Actor(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Actor/Actor.csv__first_name",
-        arche_prop="hasTitle"
+        arche_prop="hasAlternativeTitle"
     )
     drawer_monogram = models.CharField(
         max_length=250,
@@ -710,7 +710,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Filename",
-        arche_prop="hasTitle"
+        arche_prop="hasAlternativeTitle"
     )
     document_id = models.CharField(
         max_length=250,
@@ -999,7 +999,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Filename",
-        arche_prop="hasTitle"
+        arche_prop="hasAlternativeTitle"
     )
     document_id = models.CharField(
         max_length=250,
@@ -1391,7 +1391,7 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Filename_Document_ID",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     convolute_inventory_number = models.CharField(
         max_length=250,
@@ -1774,7 +1774,7 @@ class Datenbase(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Filename",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -2868,7 +2868,7 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Filename",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -3675,7 +3675,7 @@ class Finddrawing(models.Model):
         help_text="Consists of the document_ID (unique identifier) and the document_title (description of the content of the document), separated by two underscores.",
     ).set_extra(
         is_public=True,
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -4106,7 +4106,7 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Filename",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -4753,7 +4753,7 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Filename",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -7577,7 +7577,7 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Filename",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -8113,7 +8113,7 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Filename",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -8690,7 +8690,7 @@ class Tables(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Filename",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -8995,7 +8995,7 @@ class ThreeDimensionalModel(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Filename",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -9414,7 +9414,7 @@ class Videos(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Filename",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -9746,7 +9746,7 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Filename",
-        arche_prop="hasTitle",
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
