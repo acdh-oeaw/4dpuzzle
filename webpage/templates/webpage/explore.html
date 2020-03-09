@@ -13,31 +13,33 @@
             </div>
         </div>
 
-    <div class="container">
-      <h3>Tell el-Daba Documentation</h3>
-        <div class="row">
-            <div class="col-md-12" style="text-align:center">
-            {% create_object_count app='archiv' as models %}
-              {% for x in models %}
-                  {% if x.name == "Fielddrawing" or x.name == "Videos" or x.name == "Tables" or x.name == "3D Models" or x.name == "Protocols" or x.name == "Inventory Books" or x.name == "Protocols" or x.name == "Fotos Gescannt" or x.name == "Database" or x.name == "Autocad" %}
-                  <div class="col-md-4  text-center" >
-                      <div class="card flex-md-row mb-4 box-shadow">
-                          <div class="card-body" style="background-color:#eeeeee; margin:20px; padding: 25px; border-style:solid; border-width:1px;">
-                              <h3 class="mb-0">{{x.name}}</h3>
-                              <hr style="border-color:#83C653; border-width: 2px" width="10%">
-                              <h4 class="count"><br></h4>
-                              {% if x.link %}
-                                  <a class="btn btn-main btn-outline-primary btn-sm" href="{{ x.link }}" role="button">View all ({{x.count}})</a><br>
-                                  <a class="btn btn-main btn-outline-primary btn-sm" href="{{ x.link }}?access=2" role="button">View all public resources</a>
-                              {% endif %}
+
+        <div class="container">
+          <h3>Tell el-Daba Documentation</h3>
+            <div class="row">
+                <div class="col-md-12" style="text-align:center">
+                {% create_object_count app='archiv' as models %}
+                  {% for x in models %}
+                      {% if x.name == "Photographic Film" or x.name == "Fundinventarsteininventar" or x.name == "Freskeninventar" or x.name == "Videos" or x.name == "3D Models" or x.name == "Tables" or x.name == "Protocols" or x.name == "Inventory Books" or x.name == "Gis" or x.name == "Geophysics"  or x.name == "Fotos Gescannt" or x.name == "Fotos Born Digital" or x.name == "Findsheets" or x.name == "Fielddrawing" or x.name == "Database" or x.name == "Convolute Cards" or x.name == "Autocad" or x.name == "Archive Information" or x.name == "Fundinventar Inventarnummern" or x.name == "Fundinventar Konvolutnummern" %}
+                      <div class="col-md-4  text-center" >
+                          <div class="card flex-md-row mb-4 box-shadow">
+                              <div class="card-body" style="background-color:#eeeeee; margin:20px; padding: 25px; border-style:solid; border-width:1px;">
+                                  <h3 class="mb-0">{{x.name}}</h3>
+                                  <hr style="border-color:#83C653; border-width: 2px" width="10%">
+                                  <h4 class="count"><br></h4>
+                                  {% if x.link %}
+                                      <a class="btn btn-main btn-outline-primary btn-sm" href="{{ x.link }}" role="button">View all ({{x.count}})</a><br>
+                                      <a class="btn btn-main btn-outline-primary btn-sm" href="{{ x.link }}?access=2" role="button">View all public resources</a>
+                                  {% endif %}
+                              </div>
                           </div>
                       </div>
-                  </div>
-                  {% endif %}
-              {% endfor %}
+                      {% endif %}
+                  {% endfor %}
+                </div>
             </div>
-        </div>
-      </div>
+          </div>
+
 
       <div class="container">
         <h3>Tell el-Daba IDs</h3>
@@ -45,7 +47,7 @@
               <div class="col-md-12" style="text-align:center">
               {% create_object_count app='archiv' as models %}
                 {% for x in models %}
-                    {% if x.name == "Archaeologicalobjectid" or x.name == "Document Types" or x.name == "Excavation Objects" or x.name == "Document 4Dpuzzle Id" %}
+                    {% if x.name == "Archaeologicalobjectid" or x.name == "Document Types" or x.name == "Excavation Objects" or x.name == "Document 4Dpuzzle Id" or x.name == "Fundinventar 4Dpuzzle Id" or x.name == "Archaeologicalobject4Dpuzzleid" %}
                     <div class="col-md-4  text-center" >
                         <div class="card flex-md-row mb-4 box-shadow">
                             <div class="card-body" style="background-color:#eeeeee; margin:20px; padding: 25px; border-style:solid; border-width:1px;">

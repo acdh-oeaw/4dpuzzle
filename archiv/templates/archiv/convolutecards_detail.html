@@ -114,6 +114,7 @@
                 </td>
               </tr>
               {% elif not x.extra_fields or x.extra_fields.is_public %}
+              {% if x.verbose_name != "The original data" %}
               <tr>
                 <th>
                   {% if x.help_text %}
@@ -130,7 +131,11 @@
                   </li>
                   {% endfor %}
                   {% elif  x.f_type == 'FK' %}
+                  {% if x.verbose_name == 'Copyright' %}
+                  <a href="{{ x.value.get_absolute_url }}">{{ x.value|upper }}</a>
+                  {% else %}
                   <a href="{{ x.value.get_absolute_url }}">{{ x.value }}</a>
+                  {% endif %}
                   {% elif  x.f_type == 'FK' %}
                   <a href="{{ x.value.get_absolute_url }}">{{ x.value }}</a>
                   {% elif  x.f_type == 'REVRESE_RELATION' %}
@@ -145,6 +150,7 @@
                   {% endif %}
                 </td>
               </tr>
+              {% endif %}
               {% endif %}
               {% endif %}
               {% endfor %}
