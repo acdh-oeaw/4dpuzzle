@@ -5,7 +5,18 @@ from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
 
-from . utils import as_arche_res, qs_as_arche_res
+from . utils import as_arche_res, qs_as_arche_res, resolve_p4d_id
+
+
+def resolve_id_to_graph(request):
+    p4d_id = request.GET['id']
+    res = resolve_p4d_id(p4d_id)
+    try:
+        res.id
+    except AttributeError:
+        raise Http404(f"No object with arche-id: {p4d_id} was found")
+    g = as_arche_res(res)
+    return HttpResponse(g.serialize(encoding='utf-8'), content_type='application/xml')
 
 
 def res_as_arche_graph(request, app_name, model_name, pk):
