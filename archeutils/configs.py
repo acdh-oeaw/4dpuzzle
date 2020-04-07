@@ -31,5 +31,5 @@ EXTENSION_HAS_CATEGORY_MAPPING = {
     'points': 'https://vocabs.acdh.oeaw.ac.at/archecategory/dataset',
     'qpj': 'https://vocabs.acdh.oeaw.ac.at/archecategory/dataset',
     'asc': 'https://vocabs.acdh.oeaw.ac.at/archecategory/dataset',
-    'qgs': 'https://vocabs.acdh.oeaw.ac.at/archecategory/dataset>'
+    'qgs': 'https://vocabs.acdh.oeaw.ac.at/archecategory/dataset'
 }
