@@ -11,7 +11,7 @@ from rdflib import Graph, Namespace, URIRef, Literal, XSD
 from rdflib.namespace import RDF
 
 from browsing.browsing_utils import model_to_dict
-
+from webpage.appcreator.import_utils import fetch_models
 from . configs import EXTENSION_HAS_CATEGORY_MAPPING
 
 ARCHE_CONST_MAPPINGS = getattr(settings, 'ARCHE_CONST_MAPPINGS', False)
@@ -106,6 +106,19 @@ def get_p4d_id(res, arche_uri=ARCHE_BASE_URI, arche_prop=False):
             return f"{new_path}{res.fc_filename}"
         else:
             return f"{new_path}/{res.fc_filename}"
+    else:
+        return None
+
+
+def resolve_p4d_id(p4d_id):
+    """ takes a p4d_id and returns a matching archiv-object (if such exits)"""
+    filename = p4d_id.split('/')[-1]
+    path = "/".join(p4d_id.split('/')[:-1]).replace(ARCHE_BASE_URI, '')
+    path = f"{ARCHE_PREFIX_REMOVE}{path}/".replace('//', '/')
+    for x in fetch_models('archiv'):
+        matches = x.objects.filter(fc_directory=path).filter(fc_filename=filename)
+        if matches.count() == 1:
+            return matches[0]
     else:
         return None
 
