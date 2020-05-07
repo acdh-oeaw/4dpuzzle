@@ -266,3 +266,27 @@ def qs_as_arche_res(qs, res_type='Resource'):
         except Exception as e:
             print(res, e)
     return maingraph
+
+
+def fotoborndigital_as_graph(res):
+    if res.fc_directory is not None:
+        g = Graph()
+        sub = URIRef(res.fc_directory)
+        g.add((sub, acdh_ns.hasDescription, Literal(get_arche_desc(res), lang=ARCHE_LANG)))
+        g.add((sub, RDF.type, acdh_ns.Collection))
+        g.add((sub, acdh_ns.hasMetadataCreator, URIRef(res.creator_metadata.canonic_arche_uri)))
+        if res.access.pref_label.startswith('publ') or res.access.pref_label.startswith('open'):
+            g.add((
+                sub,
+                acdh_ns.hasAccessRestriction,
+                URIRef("https://vocabs.acdh.oeaw.ac.at/archeaccessrestrictions/public")
+            ))
+        else:
+            g.add((
+                sub,
+                acdh_ns.hasAccessRestriction,
+                URIRef(FC_DEFAULT_ACCESS_RES)
+            ))
+        return g
+    else:
+        return None
