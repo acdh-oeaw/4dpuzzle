@@ -268,10 +268,30 @@ def qs_as_arche_res(qs, res_type='Resource'):
     return maingraph
 
 
+def arche_path_to_arche_uri(res):
+    new_path = res.path_filename_arche.replace('\\', '/').replace(' ', '_')
+    return f"{ARCHE_BASE_URI}/{new_path}"
+
+
+def extract_date(res):
+    if res.creation_year_original is not None:
+        try:
+            first = re.findall(r'\d\d\d\d', res.creation_year_original)[0]
+        except IndexError:
+            return None
+        try:
+            last = re.findall(r'\d\d\d\d', res.creation_year_original)[-1]
+        except IndexError:
+            last = first
+        return(f"{first}-01-01", f"{last}-12-31")
+    else:
+        return None
+
+
 def fotoborndigital_as_graph(res):
-    if res.fc_directory is not None:
+    if res.path_filename_arche is not None:
         g = Graph()
-        sub = URIRef(res.fc_directory)
+        sub = URIRef(arche_path_to_arche_uri(res))
         g.add((sub, acdh_ns.hasDescription, Literal(get_arche_desc(res), lang=ARCHE_LANG)))
         g.add((sub, RDF.type, acdh_ns.Collection))
         g.add((sub, acdh_ns.hasMetadataCreator, URIRef(res.creator_metadata.canonic_arche_uri)))
@@ -287,6 +307,33 @@ def fotoborndigital_as_graph(res):
                 acdh_ns.hasAccessRestriction,
                 URIRef(FC_DEFAULT_ACCESS_RES)
             ))
+        dates = extract_date(res)
+        print(dates)
+        if dates is not None:
+            g.add(
+                (
+                    sub,
+                    acdh_ns.hasCoverageStartDate,
+                    Literal(dates[0], datatype=XSD.date)
+                )
+            )
+            g.add(
+                (
+                    sub,
+                    acdh_ns.hasCoverageEndDate,
+                    Literal(dates[1], datatype=XSD.date)
+                )
+            )
         return g
     else:
         return None
+
+
+def fbd_as_arche(qs):
+    maingraph = Graph()
+    for res in qs:
+        try:
+            maingraph += fotoborndigital_as_graph(res)
+        except Exception as e:
+            print(res, e)
+    return maingraph
