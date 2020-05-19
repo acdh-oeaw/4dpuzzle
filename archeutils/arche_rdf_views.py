@@ -15,7 +15,7 @@ def fbd_arche_rdf(request, app_name, model_name):
         raise Http404(f"No model: {model_name} in app: {app_name} defined")
     qs = ct.model_class().objects.all()
     g = fbd_as_arche(qs)
-    return HttpResponse(g.serialize(encoding='utf-8', format='turtle'), content_type='application/xml')
+    return HttpResponse(g.serialize(encoding='utf-8', format='turtle'), content_type='text/turtle')
 
 
 def resolve_id_to_graph(request):
@@ -26,7 +26,10 @@ def resolve_id_to_graph(request):
     except AttributeError:
         raise Http404(f"No object with arche-id: {p4d_id} was found")
     g = as_arche_res(res)
-    return HttpResponse(g.serialize(encoding='utf-8', format='turtle'), content_type='application/xml')
+    return HttpResponse(
+        g.serialize(encoding='utf-8', format='turtle'),
+        content_type='text/turtle'
+    )
 
 
 def res_as_arche_graph(request, app_name, model_name, pk):
@@ -40,7 +43,7 @@ def res_as_arche_graph(request, app_name, model_name, pk):
         raise Http404(f"No model: {model_name} with id: {pk} found")
     res = ct.model_class().objects.get(id=int_pk)
     g = as_arche_res(res)
-    return HttpResponse(g.serialize(encoding='utf-8', format='turtle'), content_type='application/xml')
+    return HttpResponse(g.serialize(encoding='utf-8', format='turtle'), content_type='text/turtle')
 
 
 def qs_as_arche_graph(request, app_name, model_name):
@@ -52,4 +55,4 @@ def qs_as_arche_graph(request, app_name, model_name):
         raise Http404(f"No model: {model_name} in app: {app_name} defined")
     qs = ct.model_class().objects.all()
     maingraph = qs_as_arche_res(qs[start:page_size])
-    return HttpResponse(maingraph.serialize(encoding='utf-8', format='turtle'), content_type='application/xml')
+    return HttpResponse(maingraph.serialize(encoding='utf-8', format='turtle'), content_type='text/turtle')
