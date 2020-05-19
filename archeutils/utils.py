@@ -1,4 +1,5 @@
 import pickle
+import json
 import os
 import re
 
@@ -31,9 +32,8 @@ pickle_file = os.path.join(settings.BASE_DIR, 'archeutils', 'arche_descriptions.
 ARCHE_RE_PATTERN = re.compile(r'{(.*?)}', re.IGNORECASE)
 # regex = re.compile(ARCHE_RE_PATTERN, re.IGNORECASE)
 
-with open(pickle_file, "rb") as input_file:
-    ARCHE_DESC_DICT = pickle.load(input_file)
-
+with open("lueckentexte.json") as input_file:
+    ARCHE_DESC_DICT = json.load(input_file)
 
 repo_schema = "https://raw.githubusercontent.com/acdh-oeaw/repo-schema/master/acdh-schema.owl"
 acdh_ns = Namespace("https://vocabs.acdh.oeaw.ac.at/schema#")
