@@ -27,12 +27,12 @@ ARCHE_LANG = getattr(settings, 'ARCHE_LANG', 'en')
 ARCHE_BASE_URI = getattr(settings, 'ARCHE_BASE_URI', 'https://id.acdh.oeaw.ac.at/MYPROJECT')
 ARCHE_PREFIX_REMOVE = getattr(settings, 'ARCHE_PREFIX_REMOVE', '')
 
-pickle_file = os.path.join(settings.BASE_DIR, 'archeutils', 'arche_descriptions.pickle')
+lueckentexte_file = os.path.join(settings.BASE_DIR, 'archeutils', 'lueckentexte.json')
 
 ARCHE_RE_PATTERN = re.compile(r'{(.*?)}', re.IGNORECASE)
 # regex = re.compile(ARCHE_RE_PATTERN, re.IGNORECASE)
 
-with open("lueckentexte.json") as input_file:
+with open(lueckentexte_file) as input_file:
     ARCHE_DESC_DICT = json.load(input_file)
 
 repo_schema = "https://raw.githubusercontent.com/acdh-oeaw/repo-schema/master/acdh-schema.owl"
@@ -62,9 +62,19 @@ def get_arche_desc(res):
     if desc_dict is not None:
         lookup_dict = {}
         for x in set(re.findall(ARCHE_RE_PATTERN, desc_dict)):
-            value = str(getattr(res, x, f"no property {x} defined"))
+            value = getattr(res, x, f"no property {x} defined")
+            if "ManyRe" in f"{type(value)}":
+                try:
+                    value = " ".join(
+                        [f"{x.__str__()}" for x in value.all()]
+                    )
+                except Exception as e:
+                    print(e)
+                    value = f"no value provided for property {x}"
+            else:
+                value = f"{value}"
             if value == 'None' or value.endswith('None'):
-                value = f"no value provided for property {x}"
+                value = f"no value provided for property {value}"
             else:
                 pass
             lookup_dict[x] = f"'{value}'"
