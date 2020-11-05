@@ -907,6 +907,9 @@ class ArchiveINF(models.Model):
     def field_dict(self):
         return model_to_dict(self)
 
+    def import_in_arche(self):
+        return True
+
     @classmethod
     def get_listview_url(self):
         return reverse('archiv:archiveinf_browse')
@@ -1260,6 +1263,10 @@ class AutoCAD(models.Model):
 
     def field_dict(self):
         return model_to_dict(self)
+
+    @classmethod
+    def import_in_arche(self):
+        return True
 
     @classmethod
     def get_listview_url(self):
@@ -1681,6 +1688,10 @@ class Convolutecards(models.Model):
 
     def field_dict(self):
         return model_to_dict(self)
+
+    @classmethod
+    def import_in_arche(self):
+        return True
 
     @classmethod
     def get_listview_url(self):
@@ -3302,6 +3313,10 @@ class Fielddrawing(models.Model):
         return True
 
     @classmethod
+    def import_in_arche(self):
+        return True
+
+    @classmethod
     def get_listview_url(self):
         return reverse('archiv:fielddrawing_browse')
 
@@ -4383,6 +4398,10 @@ class Findsheets(models.Model):
 
     def field_dict(self):
         return model_to_dict(self)
+
+    @classmethod
+    def import_in_arche(self):
+        return True
 
     @classmethod
     def get_listview_url(self):
@@ -7093,6 +7112,10 @@ class GIS(models.Model):
         return reverse('archiv:gis_browse')
 
     @classmethod
+    def import_in_arche(self):
+        return True
+
+    @classmethod
     def get_createview_url(self):
         return reverse('archiv:gis_create')
 
@@ -7449,6 +7472,10 @@ class Geophysics(models.Model):
 
     def field_dict(self):
         return model_to_dict(self)
+
+    @classmethod
+    def import_in_arche(self):
+        return True
 
     @classmethod
     def get_listview_url(self):
@@ -7843,6 +7870,10 @@ class Inventorybooks(models.Model):
 
     def field_dict(self):
         return model_to_dict(self)
+
+    @classmethod
+    def import_in_arche(self):
+        return True
 
     @classmethod
     def get_listview_url(self):
@@ -8421,6 +8452,10 @@ class Protocols(models.Model):
         return model_to_dict(self)
 
     @classmethod
+    def import_in_arche(self):
+        return True
+
+    @classmethod
     def get_listview_url(self):
         return reverse('archiv:protocols_browse')
 
@@ -8943,6 +8978,10 @@ class Tables(models.Model):
         return model_to_dict(self)
 
     @classmethod
+    def import_in_arche(self):
+        return True
+
+    @classmethod
     def get_listview_url(self):
         return reverse('archiv:tables_browse')
 
@@ -9299,6 +9338,10 @@ class ThreeDimensionalModel(models.Model):
         return model_to_dict(self)
 
     @classmethod
+    def import_in_arche(self):
+        return True
+
+    @classmethod
     def get_listview_url(self):
         return reverse('archiv:threedimensionalmodel_browse')
 
@@ -9642,6 +9685,10 @@ class Videos(models.Model):
 
     def field_dict(self):
         return model_to_dict(self)
+
+    @classmethod
+    def import_in_arche(self):
+        return True
 
     @classmethod
     def get_listview_url(self):
