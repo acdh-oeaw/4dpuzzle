@@ -202,10 +202,17 @@ def as_arche_res(res, res_type='Resource', arche_prop=False):
     g = Graph()
     try:
         sub = URIRef(get_p4d_id(res, arche_prop=arche_prop))
+        g.add((
+            sub, acdh_ns.hasIdentifier, sub
+        ))
     except:
         sub = URIRef(get_arche_id(res,))
+        return g
     # sub = URIRef(get_arche_id(res,))
     g.add((sub, RDF.type, acdh_ns[res_type]))
+    g.add((
+        sub, acdh_ns.hasIdentifier, sub
+    ))
     g.add((
         sub, acdh_ns.hasDescription, Literal(get_arche_desc(res), lang=ARCHE_LANG)
     ))
