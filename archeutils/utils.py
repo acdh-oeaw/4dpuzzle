@@ -69,7 +69,7 @@ def get_arche_desc(res):
                         [f"{x.__str__()}" for x in value.all()]
                     )
                 except Exception as e:
-                    print(e)
+                    # print(e)
                     value = f"no value provided for property {x}"
             else:
                 value = f"{value}"
@@ -252,7 +252,7 @@ def as_arche_res(res, res_type='Resource', arche_prop=False):
                 if cur_val is not None:
                     try:
                         object_uri = cur_val.canonic_arche_uri
-                        print(object_uri)
+                        # print(object_uri)
                         if object_uri != "":
                             g.add((sub, acdh_ns[arche_prop], URIRef(object_uri)))
                         else:
@@ -274,7 +274,8 @@ def qs_as_arche_res(qs, res_type='Resource'):
         try:
             maingraph += as_arche_res(res, res_type=res_type)
         except Exception as e:
-            print(res, e)
+            # print(res, e)
+            pass
     return maingraph
 
 
@@ -318,7 +319,7 @@ def fotoborndigital_as_graph(res):
                 URIRef(FC_DEFAULT_ACCESS_RES)
             ))
         dates = extract_date(res)
-        print(dates)
+        # print(dates)
         if dates is not None:
             g.add(
                 (
@@ -345,5 +346,6 @@ def fbd_as_arche(qs):
         try:
             maingraph += fotoborndigital_as_graph(res)
         except Exception as e:
-            print(res, e)
+            # print(res, e)
+            pass
     return maingraph
