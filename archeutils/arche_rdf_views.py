@@ -58,6 +58,9 @@ def qs_as_arche_graph(request, app_name, model_name):
     except ValueError:
         page_size = 100
 
+    if page_size > 100:
+        page_size = 100
+
     page_size = start + page_size
     try:
         ct = ContentType.objects.get(app_label=app_name, model=model_name)
