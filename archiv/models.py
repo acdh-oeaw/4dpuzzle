@@ -907,6 +907,7 @@ class ArchiveINF(models.Model):
     def field_dict(self):
         return model_to_dict(self)
 
+    @classmethod
     def import_in_arche(self):
         return True
 

@@ -1,4 +1,6 @@
-from django.http import HttpResponse, Http404
+from django.apps import apps
+
+from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -55,4 +57,29 @@ def qs_as_arche_graph(request, app_name, model_name):
         raise Http404(f"No model: {model_name} in app: {app_name} defined")
     qs = ct.model_class().objects.all()
     maingraph = qs_as_arche_res(qs[start:page_size])
-    return HttpResponse(maingraph.serialize(encoding='utf-8', format='turtle'), content_type='text/turtle')
+    return HttpResponse(
+        maingraph.serialize(encoding='utf-8', format='turtle'),
+        content_type='text/turtle'
+    )
+
+
+def relevante_classes(request, app_name):
+    models = apps.get_app_config(app_name).get_models()
+    base_uri = request.build_absolute_uri().split('/archeutils')[0]
+    good_models = []
+    for x in models:
+        try:
+            x.import_in_arche()
+            item = {
+                "class_name": f"{x.__name__.lower()}",
+                "object_count": x.objects.all().count(),
+                "endpoint": f"{base_uri}/archeutils/{app_name}/{x.__name__.lower()}"
+            }
+            good_models.append(item)
+        except AttributeError:
+            continue
+    data = {
+        "app_name": app_name,
+        "models": good_models
+    }
+    return JsonResponse(data)

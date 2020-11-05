@@ -4,6 +4,7 @@ from . import arche_rdf_views
 app_name = "archeutils"
 
 urlpatterns = [
+    path('4arche/<app_name>', arche_rdf_views.relevante_classes, name='resolve_id_to_graph'),
     path('resolve', arche_rdf_views.resolve_id_to_graph, name='resolve_id_to_graph'),
     path(
         'fbd/<app_name>/<model_name>',
