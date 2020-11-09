@@ -3233,7 +3233,7 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-II/Fielddrawings.csv__Creator_scan",
-        arche_prop="hasContributor",
+        arche_prop="hasDigitisingAgent",
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
@@ -3663,7 +3663,7 @@ class Finddrawing(models.Model):
         help_text="helptext for creator_scan",
     ).set_extra(
         is_public=True,
-        arche_prop="hasContributor",
+        arche_prop="hasDigitisingAgent",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -3744,7 +3744,7 @@ class Finddrawing(models.Model):
         help_text="helptext for creation_date_scan",
     ).set_extra(
         is_public=True,
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedDateOriginal",
     )
     convolute_inventory_number = models.ForeignKey(
         "FundinventarKonvolutnummern",
@@ -4055,7 +4055,7 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creator_scan",
-        arche_prop="hasContributor",
+        arche_prop="hasDigitisingAgent",
     )
     archaeological_object_id = models.ForeignKey(
         "ArchaeologicalObjectID",
@@ -4181,7 +4181,7 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creation_date_scan",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedDateOriginal",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
