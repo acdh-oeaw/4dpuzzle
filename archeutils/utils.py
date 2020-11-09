@@ -161,6 +161,11 @@ def get_arche_id(res, id_prop="pk", arche_uri=ARCHE_BASE_URI):
         :return: An ARCHE-ID (URI)
 
     """
+    try:
+        return f"{res.same_as_external}"
+    except Exception as e:
+        print(f'oje: {e}')
+        pass
     if isinstance(res, str):
         return res
     else:
