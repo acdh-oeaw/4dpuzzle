@@ -688,6 +688,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creator_original",
+        arche_prop="hasCreator",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
@@ -1351,7 +1352,7 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_scan",
-        arche_prop="hasContributor"
+        arche_prop="hasDigitisingAgent"
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -1437,6 +1438,7 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creation_date_original",
+        arche_prop="hasCreatedDateOriginal",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
@@ -2919,6 +2921,7 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Creation_date_original",
+        arche_prop="hasCreatedDateOriginal",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
