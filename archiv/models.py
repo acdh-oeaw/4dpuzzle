@@ -4766,7 +4766,7 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creator_scan",
-        arche_prop="hasContributor",
+        arche_prop="hasDigitisingAgent",
     )
     filename = models.CharField(
         max_length=250,
@@ -4853,6 +4853,7 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creation_year_original",
+        arche_prop="hasCreatedDateOriginal"
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
@@ -7562,7 +7563,7 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creator_scan",
-        arche_prop="hasContributor",
+        arche_prop="hasDigitisingAgent",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -7656,6 +7657,7 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creation_year_original",
+        arche_prop="hasCreatedDateOriginal"
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
