@@ -162,10 +162,11 @@ def get_arche_id(res, id_prop="pk", arche_uri=ARCHE_BASE_URI):
 
     """
     try:
-        return f"{res.same_as_external}"
+        proper_id = f"{res.same_as_external}"
     except Exception as e:
-        print(f'oje: {e}')
-        pass
+        proper_id = False
+    if proper_id:
+        return proper_id
     if isinstance(res, str):
         return res
     else:
