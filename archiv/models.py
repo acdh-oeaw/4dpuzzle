@@ -8128,7 +8128,7 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creator_scan",
-        arche_prop="hasContributor",
+        arche_prop="hasDigitisingAgent",
     )
     excavation_object_id = models.ForeignKey(
         "ExcavationObjectID",
@@ -8208,6 +8208,7 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creation_year_original",
+        arche_prop="hasCreatedDateOriginal"
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
@@ -9777,7 +9778,7 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creator_scan",
-        arche_prop="hasContributor",
+        arche_prop="hasDigitisingAgent",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
@@ -9847,6 +9848,7 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creation_year_original",
+        arche_prop="hasCreatedDateOriginal"
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
