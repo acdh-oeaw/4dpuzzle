@@ -73,7 +73,8 @@ def get_arche_desc(res):
                     value = f"no value provided"
             else:
                 value = f"{value}"
-            if value == 'None' or value.endswith('None'):
+                print(f'############################# {x, value}')
+            if value == 'None' or value.endswith('None') or value == '':
                 value = f"no value provided"
             else:
                 pass
