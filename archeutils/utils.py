@@ -70,11 +70,11 @@ def get_arche_desc(res):
                     )
                 except Exception as e:
                     # print(e)
-                    value = f"no value provided for property {x}"
+                    value = f"no value provided"
             else:
                 value = f"{value}"
             if value == 'None' or value.endswith('None'):
-                value = f"no value provided for property {value}"
+                value = f"no value provided"
             else:
                 pass
             lookup_dict[x] = f"'{value}'"
