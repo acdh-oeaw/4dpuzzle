@@ -32,7 +32,7 @@ lueckentexte_file = os.path.join(settings.BASE_DIR, 'archeutils', 'lueckentexte.
 ARCHE_RE_PATTERN = re.compile(r'{(.*?)}', re.IGNORECASE)
 # regex = re.compile(ARCHE_RE_PATTERN, re.IGNORECASE)
 
-with open(lueckentexte_file) as input_file:
+with open(lueckentexte_file, encoding='utf-8') as input_file:
     ARCHE_DESC_DICT = json.load(input_file)
 
 repo_schema = "https://raw.githubusercontent.com/acdh-oeaw/arche-schema/ontologyV2.0/acdh-schema.owl"
