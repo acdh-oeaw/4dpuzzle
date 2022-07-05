@@ -28,6 +28,6 @@ rita==0.0.7
 six==1.12.0
 SPARQLWrapper==1.8.5
 sqlparse==0.3.0
-ujson==1.35
+ujson==5.4.0
 urllib3==1.25.6
 wincertstore==0.2
