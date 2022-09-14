@@ -750,7 +750,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creation_date_archivalObject",
-        arche_prop="hasCreatedDate"
+        arche_prop="hasCreatedStartDate"
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -1053,7 +1053,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creation_year_original",
-        arche_prop="hasCreatedDate"
+        arche_prop="hasCreatedStartDate"
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
@@ -1438,7 +1438,7 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creation_date_original",
-        arche_prop="hasCreatedDateOriginal",
+        arche_prop="hasCreatedStartDateOriginal",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
@@ -1447,7 +1447,7 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creation_date_scan",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -1819,7 +1819,7 @@ class Datenbase(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Creation_year_original",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedStartDate",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
@@ -2921,7 +2921,7 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Creation_date_original",
-        arche_prop="hasCreatedDateOriginal",
+        arche_prop="hasCreatedStartDateOriginal",
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
@@ -2930,7 +2930,7 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Creation_date_scan",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -3744,7 +3744,7 @@ class Finddrawing(models.Model):
         help_text="helptext for creation_date_scan",
     ).set_extra(
         is_public=True,
-        arche_prop="hasCreatedDateOriginal",
+        arche_prop="hasCreatedStartDateOriginal",
     )
     convolute_inventory_number = models.ForeignKey(
         "FundinventarKonvolutnummern",
@@ -4181,7 +4181,7 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creation_date_scan",
-        arche_prop="hasCreatedDateOriginal",
+        arche_prop="hasCreatedStartDateOriginal",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -4853,7 +4853,7 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creation_year_original",
-        arche_prop="hasCreatedDateOriginal"
+        arche_prop="hasCreatedStartDateOriginal"
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
@@ -4862,7 +4862,7 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creation_date_scan",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -6899,7 +6899,7 @@ class GIS(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Creation_date_original",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedStartDate",
     )
     software_used = models.CharField(
         max_length=250,
@@ -7259,7 +7259,7 @@ class Geophysics(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creation_date_original",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedStartDate",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
@@ -7657,7 +7657,7 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creation_year_original",
-        arche_prop="hasCreatedDateOriginal"
+        arche_prop="hasCreatedStartDateOriginal"
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
@@ -7666,7 +7666,7 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creation_date_scan",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -8208,7 +8208,7 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creation_year_original",
-        arche_prop="hasCreatedDateOriginal"
+        arche_prop="hasCreatedStartDateOriginal"
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
@@ -8217,7 +8217,7 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creation_date_scan",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
@@ -8772,7 +8772,7 @@ class Tables(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Creation_year_original",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedStartDate",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
@@ -9094,7 +9094,7 @@ class ThreeDimensionalModel(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Creation_year_original",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedStartDate",
     )
     software_used = models.CharField(
         max_length=250,
@@ -9494,7 +9494,7 @@ class Videos(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Creation_date_original",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedStartDate",
     )
     creation_date_archivalobject = models.DateField(
         blank=True, null=True,
@@ -9848,7 +9848,7 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creation_year_original",
-        arche_prop="hasCreatedDateOriginal"
+        arche_prop="hasCreatedStartDateOriginal"
     )
     creation_date_scan = models.DateField(
         blank=True, null=True,
@@ -9857,7 +9857,7 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creation_date_scan",
-        arche_prop="hasCreatedDate",
+        arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
         blank=True, null=True,
