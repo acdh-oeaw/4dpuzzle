@@ -6,7 +6,7 @@ Django==2.2.13
 django-autocomplete-light==3.4.1
 django-crispy-forms==1.8.0
 django-extensions==2.2.5
-django-filter==2.2.0
+django-filter==2.4.0
 django-js-asset==1.2.2
 django-mptt==0.10.0
 django-super-deduper==0.1.2
