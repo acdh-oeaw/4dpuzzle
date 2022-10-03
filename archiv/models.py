@@ -5167,6 +5167,10 @@ class Fotosgescannt(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse('archiv:fotosgescannt_create')
+    
+    @classmethod
+    def import_in_arche(self):
+        return True
 
     def get_absolute_url(self):
         return reverse('archiv:fotosgescannt_detail', kwargs={'pk': self.id})
