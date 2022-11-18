@@ -2960,6 +2960,7 @@ class Fielddrawing(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Creator_original",
+        arche_prop="hasCreator"
     )
     storage_folder_original = models.CharField(
         max_length=250,
@@ -3652,6 +3653,7 @@ class Finddrawing(models.Model):
         help_text="helptext for creator_original",
     ).set_extra(
         is_public=True,
+        arche_prop="hasCreator",
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -4043,6 +4045,7 @@ class Findsheets(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creator_original",
+        arche_prop="hasCreator",
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -4754,6 +4757,7 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creator_original",
+        arche_prop="hasCreator",
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -7555,6 +7559,7 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creator_original",
+        arche_prop="hasCreator",
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -8120,6 +8125,7 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creator_original",
+        arche_prop="hasCreator",
     )
     creator_scan = models.ForeignKey(
         "Actor",
@@ -9770,6 +9776,7 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creator_original",
+        arche_prop="hasCreator",
     )
     creator_scan = models.ForeignKey(
         "Actor",
