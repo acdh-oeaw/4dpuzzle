@@ -1,12 +1,11 @@
 import warnings
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 from archeutils.utils import ARCHE_PREFIX_REMOVE
 
 from filechecker.filechecker_utils import (
     filechecker_to_df,
-    filename_to_arche_id,
     remove_trailing_slash,
     path2cols,
 )

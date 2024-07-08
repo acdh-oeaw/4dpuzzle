@@ -5,7 +5,6 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 from archeutils.utils import get_category
 from browsing.browsing_utils import model_to_dict
-from vocabs.models import SkosConcept
 
 from .filechecker_utils import filename_to_arche_id, remove_trailing_slash
 
@@ -73,9 +72,6 @@ class FcCollection(MPTTModel):
     @classmethod
     def get_createview_url(self):
         return reverse("filechecker:fccollection_create")
-
-    def get_absolute_url(self):
-        return reverse("filechecker:fccollection_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("filechecker:fccollection_detail", kwargs={"pk": self.id})
@@ -158,9 +154,6 @@ class FcResource(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("filechecker:fcresource_create")
-
-    def get_absolute_url(self):
-        return reverse("filechecker:fcresource_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("filechecker:fcresource_detail", kwargs={"pk": self.id})

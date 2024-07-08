@@ -134,9 +134,6 @@ class Actor(models.Model):
     def get_absolute_url(self):
         return reverse("archiv:actor_detail", kwargs={"pk": self.id})
 
-    def get_absolute_url(self):
-        return reverse("archiv:actor_detail", kwargs={"pk": self.id})
-
     def get_delete_url(self):
         return reverse("archiv:actor_delete", kwargs={"pk": self.id})
 
@@ -335,11 +332,6 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:archaeologicalobject4dpuzzleid_create")
-
-    def get_absolute_url(self):
-        return reverse(
-            "archiv:archaeologicalobject4dpuzzleid_detail", kwargs={"pk": self.id}
-        )
 
     def get_absolute_url(self):
         return reverse(
@@ -552,9 +544,6 @@ class ArchaeologicalObjectID(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:archaeologicalobjectid_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:archaeologicalobjectid_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:archaeologicalobjectid_detail", kwargs={"pk": self.id})
@@ -820,9 +809,6 @@ class ArchiveINF(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:archiveinf_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:archiveinf_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:archiveinf_detail", kwargs={"pk": self.id})
@@ -1150,9 +1136,6 @@ class AutoCAD(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:autocad_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:autocad_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:autocad_detail", kwargs={"pk": self.id})
@@ -1556,9 +1539,6 @@ class Convolutecards(models.Model):
     def get_absolute_url(self):
         return reverse("archiv:convolutecards_detail", kwargs={"pk": self.id})
 
-    def get_absolute_url(self):
-        return reverse("archiv:convolutecards_detail", kwargs={"pk": self.id})
-
     def get_delete_url(self):
         return reverse("archiv:convolutecards_delete", kwargs={"pk": self.id})
 
@@ -1899,9 +1879,6 @@ class Datenbase(models.Model):
     def get_absolute_url(self):
         return reverse("archiv:datenbase_detail", kwargs={"pk": self.id})
 
-    def get_absolute_url(self):
-        return reverse("archiv:datenbase_detail", kwargs={"pk": self.id})
-
     def get_delete_url(self):
         return reverse("archiv:datenbase_delete", kwargs={"pk": self.id})
 
@@ -2042,9 +2019,6 @@ class Document4DPuzzleID(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:document4dpuzzleid_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:document4dpuzzleid_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:document4dpuzzleid_detail", kwargs={"pk": self.id})
@@ -2190,9 +2164,6 @@ class DocumentTypes(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:documenttypes_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:documenttypes_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:documenttypes_detail", kwargs={"pk": self.id})
@@ -2413,9 +2384,6 @@ class ExcavationObjectID(models.Model):
     def get_absolute_url(self):
         return reverse("archiv:excavationobjectid_detail", kwargs={"pk": self.id})
 
-    def get_absolute_url(self):
-        return reverse("archiv:excavationobjectid_detail", kwargs={"pk": self.id})
-
     def get_delete_url(self):
         return reverse("archiv:excavationobjectid_delete", kwargs={"pk": self.id})
 
@@ -2551,9 +2519,6 @@ class ExcavationSeasons(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:excavationseasons_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:excavationseasons_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:excavationseasons_detail", kwargs={"pk": self.id})
@@ -3024,9 +2989,6 @@ class Fielddrawing(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:fielddrawing_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:fielddrawing_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:fielddrawing_detail", kwargs={"pk": self.id})

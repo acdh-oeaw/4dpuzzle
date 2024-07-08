@@ -78,8 +78,7 @@ def get_arche_desc(res):
             if "ManyRe" in f"{type(value)}":
                 try:
                     value = " ".join([f"{x.__str__()}" for x in value.all()])
-                except Exception as e:
-                    # print(e)
+                except:  # noqa
                     value = "no value provided"
             else:
                 value = f"{value}"
