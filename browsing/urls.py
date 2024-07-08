@@ -1,8 +1,8 @@
-from django.conf.urls import url
+from django.urls import path
 from . import views
 
-app_name = 'browsing'
+app_name = "browsing"
 
 urlpatterns = [
-    url(r'^merge-objects/$', views.merge_objects, name='merge_objects'),
+    path("merge-objects/", views.merge_objects, name="merge_objects"),
 ]

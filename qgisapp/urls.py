@@ -1,11 +1,7 @@
-from django.conf.urls import url
+from django.urls import path
 from . import views
 
-app_name = 'qgisapp'
+app_name = "qgisapp"
 urlpatterns = [
-    url(
-        r'^map/$',
-        views.QgisMapView.as_view(),
-        name='qgis_map'
-    ),
+    path("map/", views.QgisMapView.as_view(), name="qgis_map"),
 ]
