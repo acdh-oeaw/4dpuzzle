@@ -6,13 +6,12 @@ import django_filters
 
 from django.apps import apps
 from django.conf import settings
-from django.db.models.fields.related import ManyToManyField
 from django.http import HttpResponse
 from django.utils.safestring import mark_safe
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML
+from crispy_forms.layout import Submit
 
 from .models import BrowsConf
 
@@ -89,12 +88,6 @@ class GenericListView(django_tables2.SingleTableView):
             return self.table_class
         else:
             return get_entities_table(self.model)
-
-        raise ImproperlyConfigured(
-            "You must either specify {0}.table_class or {0}.model".format(
-                type(self).__name__
-            )
-        )
 
     def get_all_cols(self):
         all_cols = list(self.get_table().base_columns.keys())

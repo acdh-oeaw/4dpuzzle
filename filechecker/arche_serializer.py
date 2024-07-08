@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from rdflib import Graph, Namespace, URIRef, Literal, XSD
+from rdflib import Graph, URIRef, Literal, XSD
 from rdflib.namespace import RDF
 
 from .models import FcResource
@@ -42,7 +42,6 @@ def get_arche_fields(res):
     fields = []
     for x in res._meta._get_fields():
         if getattr(x, "extra", False) and getattr(res, x.name, False):
-            value = getattr(res, x.name, False)
             datatype = ARCHE_PROPS_LOOKUP.get(x.extra["arche_prop"])
             fields.append(
                 {

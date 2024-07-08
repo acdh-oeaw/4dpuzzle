@@ -1,8 +1,22 @@
 from rest_framework import viewsets
 from rest_framework import pagination
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import *
-from .serializers import *
+from .models import (
+    Metadata,
+    SkosCollection,
+    SkosConcept,
+    SkosConceptScheme,
+    SkosLabel,
+    SkosNamespace,
+)
+from .serializers import (
+    MetadataSerializer,
+    SkosCollectionSerializer,
+    SkosConceptSchemeSerializer,
+    SkosConceptSerializer,
+    SkosLabelSerializer,
+    SkosNamespaceSerializer,
+)
 from .filters import SkosConceptFilter
 from .api_renderers import RDFRenderer, SKOSRenderer
 from rest_framework.settings import api_settings
@@ -15,37 +29,31 @@ class LargeResultsSetPagination(pagination.PageNumberPagination):
 
 
 class MetadataViewSet(viewsets.ReadOnlyModelViewSet):
-
     queryset = Metadata.objects.all()
     serializer_class = MetadataSerializer
 
 
 class SkosLabelViewSet(viewsets.ModelViewSet):
-
     queryset = SkosLabel.objects.all()
     serializer_class = SkosLabelSerializer
 
 
 class SkosNamespaceViewSet(viewsets.ModelViewSet):
-
     queryset = SkosNamespace.objects.all()
     serializer_class = SkosNamespaceSerializer
 
 
 class SkosConceptSchemeViewSet(viewsets.ModelViewSet):
-
     queryset = SkosConceptScheme.objects.all()
     serializer_class = SkosConceptSchemeSerializer
 
 
 class SkosCollectionViewSet(viewsets.ModelViewSet):
-
     queryset = SkosCollection.objects.all()
     serializer_class = SkosCollectionSerializer
 
 
 class SkosConceptViewSet(viewsets.ModelViewSet):
-
     queryset = SkosConcept.objects.all()
     serializer_class = SkosConceptSerializer
     filter_backends = (DjangoFilterBackend,)

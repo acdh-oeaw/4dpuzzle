@@ -44,7 +44,6 @@ def find_matching_objects(model_list, matching_chars, matching_prop="legacy_id")
         :param matching_prop: The object's properties which value should match
         return: the matching object or None
     """
-    leg_id = matching_chars
     all_qs = []
     for x in model_list:
         kwargs = {matching_prop: matching_chars}

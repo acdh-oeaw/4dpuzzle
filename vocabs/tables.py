@@ -2,7 +2,12 @@ import django_tables2 as tables
 from django_tables2.utils import A
 
 from browsing.browsing_utils import MergeColumn
-from vocabs.models import *
+from .models import (
+    SkosConceptScheme,
+    SkosCollection,
+    SkosConcept,
+    SkosLabel,
+)
 
 
 class SkosLabelTable(tables.Table):

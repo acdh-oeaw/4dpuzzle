@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import path
 from . import arche_rdf_views
 
 app_name = "archeutils"
