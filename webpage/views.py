@@ -13,7 +13,6 @@ from .forms import form_user_login
 from .metadata import PROJECT_METADATA as PM
 
 
-
 class ImprintView(TemplateView):
     template_name = "webpage/imprint.html"
 
@@ -28,9 +27,7 @@ class ImprintView(TemplateView):
         if r.status_code == 200:
             context["imprint_body"] = f"{r.text}"
         else:
-            context[
-                "imprint_body"
-            ] = """
+            context["imprint_body"] = """
             On of our services is currently not available.\
             Please try it later or write an email to\
             acdh-ch-helpdesk@oeaw.ac.at; if you are service provide,\
@@ -89,7 +86,6 @@ def handler404(request, exception):
 
 
 def project_info(request):
-
     """
     returns a dict providing metadata about the current project
     """
