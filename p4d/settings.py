@@ -5,7 +5,8 @@ Django settings for CBAB project.
 import os
 from pathlib import Path
 
-
+SHARED_URL = "https://shared.acdh.oeaw.ac.at/"
+PROJECT_NAME = "p4d"
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 BASE_DIR = Path(__file__).resolve().parent.parent

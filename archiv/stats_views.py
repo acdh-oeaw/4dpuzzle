@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 
-from webpage.appcreator.import_utils import fetch_models
+from archeutils.utils import fetch_models
 
 from . models import *
 
@@ -13,14 +13,13 @@ class MatchBinaryView(TemplateView):
         summary = []
         for x in fetch_models('archiv'):
             class_name = x.__name__
-            class_list_view = x.get_listview_url()
             items = x.objects.all()
             all_objects = items.count()
             match = items.exclude(fc_match=False).count()
             no_match = items.exclude(fc_match=True).count()
             try:
                 percentage = (match / all_objects) * 100
-            except Exception as e:
+            except:  # noqa:
                 percentage = 0
             summary.append(
                 [
