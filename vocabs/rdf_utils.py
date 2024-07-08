@@ -172,7 +172,7 @@ def graph_construct(results):
                         (concept, SKOS.altLabel, Literal(x["name"], lang=x["isoCode"]))
                     )
         # top concepts
-        if obj["top_concept"] == True:
+        if obj["top_concept"] is True:
             g.add((mainConceptScheme, SKOS.hasTopConcept, URIRef(concept)))
             g.add((concept, SKOS.topConceptOf, mainConceptScheme))
         # modelling broader/narrower relationships
@@ -405,7 +405,7 @@ def graph_construct_qs(results):
                 else:
                     g.add((concept, SKOS.altLabel, Literal(x.name, lang=x.isoCode)))
         # top concepts
-        if obj.top_concept == True:
+        if obj.top_concept is True:
             g.add((mainConceptScheme, SKOS.hasTopConcept, URIRef(concept)))
             g.add((concept, SKOS.topConceptOf, mainConceptScheme))
         # modelling broader/narrower relationships

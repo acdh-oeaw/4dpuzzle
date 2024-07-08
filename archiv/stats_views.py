@@ -2,8 +2,6 @@ from django.views.generic import TemplateView
 
 from archeutils.utils import fetch_models
 
-from .models import *
-
 
 class MatchBinaryView(TemplateView):
     template_name = "archiv/match_stats.html"

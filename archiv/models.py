@@ -3266,9 +3266,6 @@ class Film(models.Model):
     def get_absolute_url(self):
         return reverse("archiv:film_detail", kwargs={"pk": self.id})
 
-    def get_absolute_url(self):
-        return reverse("archiv:film_detail", kwargs={"pk": self.id})
-
     def get_delete_url(self):
         return reverse("archiv:film_delete", kwargs={"pk": self.id})
 
@@ -3627,9 +3624,6 @@ class Finddrawing(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:finddrawing_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:finddrawing_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:finddrawing_detail", kwargs={"pk": self.id})
@@ -4039,9 +4033,6 @@ class Findsheets(models.Model):
     def get_absolute_url(self):
         return reverse("archiv:findsheets_detail", kwargs={"pk": self.id})
 
-    def get_absolute_url(self):
-        return reverse("archiv:findsheets_detail", kwargs={"pk": self.id})
-
     def get_delete_url(self):
         return reverse("archiv:findsheets_delete", kwargs={"pk": self.id})
 
@@ -4284,9 +4275,6 @@ class Fotoborndigital(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:fotoborndigital_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:fotoborndigital_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:fotoborndigital_detail", kwargs={"pk": self.id})
@@ -4747,9 +4735,6 @@ class Fotosgescannt(models.Model):
     def get_absolute_url(self):
         return reverse("archiv:fotosgescannt_detail", kwargs={"pk": self.id})
 
-    def get_absolute_url(self):
-        return reverse("archiv:fotosgescannt_detail", kwargs={"pk": self.id})
-
     def get_delete_url(self):
         return reverse("archiv:fotosgescannt_delete", kwargs={"pk": self.id})
 
@@ -5036,9 +5021,6 @@ class Fundinventar4DPuzzleID(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:fundinventar4dpuzzleid_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:fundinventar4dpuzzleid_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:fundinventar4dpuzzleid_detail", kwargs={"pk": self.id})
@@ -5330,11 +5312,6 @@ class FundinventarInventarnummern(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:fundinventarinventarnummern_create")
-
-    def get_absolute_url(self):
-        return reverse(
-            "archiv:fundinventarinventarnummern_detail", kwargs={"pk": self.id}
-        )
 
     def get_absolute_url(self):
         return reverse(
@@ -5636,11 +5613,6 @@ class FundinventarKonvolutnummern(models.Model):
             "archiv:fundinventarkonvolutnummern_detail", kwargs={"pk": self.id}
         )
 
-    def get_absolute_url(self):
-        return reverse(
-            "archiv:fundinventarkonvolutnummern_detail", kwargs={"pk": self.id}
-        )
-
     def get_delete_url(self):
         return reverse(
             "archiv:fundinventarkonvolutnummern_delete", kwargs={"pk": self.id}
@@ -5936,11 +5908,6 @@ class FundinventarMaterialproben(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:fundinventarmaterialproben_create")
-
-    def get_absolute_url(self):
-        return reverse(
-            "archiv:fundinventarmaterialproben_detail", kwargs={"pk": self.id}
-        )
 
     def get_absolute_url(self):
         return reverse(
@@ -6591,9 +6558,6 @@ class GIS(models.Model):
     def get_absolute_url(self):
         return reverse("archiv:gis_detail", kwargs={"pk": self.id})
 
-    def get_absolute_url(self):
-        return reverse("archiv:gis_detail", kwargs={"pk": self.id})
-
     def get_delete_url(self):
         return reverse("archiv:gis_delete", kwargs={"pk": self.id})
 
@@ -6926,9 +6890,6 @@ class Geophysics(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:geophysics_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:geophysics_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:geophysics_detail", kwargs={"pk": self.id})
@@ -7303,9 +7264,6 @@ class Inventorybooks(models.Model):
     def get_absolute_url(self):
         return reverse("archiv:inventorybooks_detail", kwargs={"pk": self.id})
 
-    def get_absolute_url(self):
-        return reverse("archiv:inventorybooks_detail", kwargs={"pk": self.id})
-
     def get_delete_url(self):
         return reverse("archiv:inventorybooks_delete", kwargs={"pk": self.id})
 
@@ -7437,9 +7395,6 @@ class PhasenID(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:phasenid_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:phasenid_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:phasenid_detail", kwargs={"pk": self.id})
@@ -7832,9 +7787,6 @@ class Protocols(models.Model):
     def get_absolute_url(self):
         return reverse("archiv:protocols_detail", kwargs={"pk": self.id})
 
-    def get_absolute_url(self):
-        return reverse("archiv:protocols_detail", kwargs={"pk": self.id})
-
     def get_delete_url(self):
         return reverse("archiv:protocols_delete", kwargs={"pk": self.id})
 
@@ -7962,9 +7914,6 @@ class StratenID(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:stratenid_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:stratenid_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:stratenid_detail", kwargs={"pk": self.id})
@@ -8298,9 +8247,6 @@ class Tables(models.Model):
     def get_absolute_url(self):
         return reverse("archiv:tables_detail", kwargs={"pk": self.id})
 
-    def get_absolute_url(self):
-        return reverse("archiv:tables_detail", kwargs={"pk": self.id})
-
     def get_delete_url(self):
         return reverse("archiv:tables_delete", kwargs={"pk": self.id})
 
@@ -8630,9 +8576,6 @@ class ThreeDimensionalModel(models.Model):
     def get_absolute_url(self):
         return reverse("archiv:threedimensionalmodel_detail", kwargs={"pk": self.id})
 
-    def get_absolute_url(self):
-        return reverse("archiv:threedimensionalmodel_detail", kwargs={"pk": self.id})
-
     def get_delete_url(self):
         return reverse("archiv:threedimensionalmodel_delete", kwargs={"pk": self.id})
 
@@ -8952,9 +8895,6 @@ class Videos(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:videos_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:videos_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:videos_detail", kwargs={"pk": self.id})
@@ -9305,9 +9245,6 @@ class WallpaintingInventory(models.Model):
     @classmethod
     def get_createview_url(self):
         return reverse("archiv:wallpaintinginventory_create")
-
-    def get_absolute_url(self):
-        return reverse("archiv:wallpaintinginventory_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
         return reverse("archiv:wallpaintinginventory_detail", kwargs={"pk": self.id})

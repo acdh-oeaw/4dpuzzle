@@ -961,7 +961,8 @@ class FielddrawingForm(forms.ModelForm):
     )
     source_original_copy_edited_copy = forms.ModelChoiceField(
         required=False,
-        label="Scan was either made from an original fielddrawing, a copy of a fielddrawing or copy of a fielddrawing that was edited",
+        label="Scan was either made from an original fielddrawing,\
+            a copy of a fielddrawing or copy of a fielddrawing that was edited",
         queryset=SkosConcept.objects.filter(
             collection__name="source_original_copy_edited_copy"
         ),
@@ -2793,7 +2794,11 @@ class ThreeDimensionalModelForm(forms.ModelForm):
     )
     excavation_post_excavation = forms.ModelChoiceField(
         required=False,
-        label="The document ID is a project-specific unique identifier which consists of the abbreviation for the site (TD for Tell el-Daba), the abbreviation for the document type (e.g. SWnegfilm for black &white negative film, FDfilm for colour slide film, FDdig for colour slide film digitised ) and the inventory numbers (from_to).",
+        label="The document ID is a project-specific unique identifier which consists of the abbreviation for the site\
+            (TD for Tell el-Daba), the abbreviation for the document type\
+                (e.g. SWnegfilm for black &white negative film,\
+                FDfilm for colour slide film, FDdig for colour slide film digitised)\
+                and the inventory numbers (from_to).",
         queryset=SkosConcept.objects.filter(
             collection__name="excavation_post_excavation"
         ),
