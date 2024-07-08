@@ -1,11 +1,9 @@
-import pickle
 import json
 import os
 import re
 
-
+from django.apps import apps
 from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist, FieldDoesNotExist
 from django.db.models.query import QuerySet
 
 from rdflib import Graph, Namespace, URIRef, Literal, XSD
@@ -82,11 +80,11 @@ def get_arche_desc(res):
                     value = " ".join([f"{x.__str__()}" for x in value.all()])
                 except Exception as e:
                     # print(e)
-                    value = f"no value provided"
+                    value = "no value provided"
             else:
                 value = f"{value}"
             if value == "None" or value.endswith("None") or value == "":
-                value = f"no value provided"
+                value = "no value provided"
             else:
                 pass
             lookup_dict[x] = f"'{value}'"
@@ -178,7 +176,7 @@ def get_arche_id(res, id_prop="pk", arche_uri=ARCHE_BASE_URI):
     """
     try:
         proper_id = f"{res.same_as_external}"
-    except Exception as e:
+    except AttributeError:
         proper_id = False
     if proper_id:
         return proper_id
@@ -224,7 +222,7 @@ def as_arche_res(res, res_type="Resource", arche_prop=False):
     try:
         sub = URIRef(get_p4d_id(res, arche_prop=arche_prop))
         g.add((sub, acdh_ns.hasIdentifier, sub))
-    except:
+    except:  # noqa:
         sub = URIRef(
             get_arche_id(
                 res,
@@ -309,8 +307,7 @@ def qs_as_arche_res(qs, res_type="Resource"):
     for res in qs:
         try:
             maingraph += as_arche_res(res, res_type=res_type)
-        except Exception as e:
-            # print(res, e)
+        except:  # noqa
             pass
     return maingraph
 
@@ -387,7 +384,6 @@ def fbd_as_arche(qs):
     for res in qs:
         try:
             maingraph += fotoborndigital_as_graph(res)
-        except Exception as e:
-            # print(res, e)
+        except:  # noqa
             pass
     return maingraph
