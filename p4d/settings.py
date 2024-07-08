@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "mptt",
     "django_extensions",
     "crispy_forms",
+    'crispy_bootstrap3',
     "django_filters",
     "django_tables2",
     "rest_framework",
