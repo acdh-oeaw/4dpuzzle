@@ -13,8 +13,8 @@ exclude =
     env
     infos
     appcreator
-    djangobaseproject/settings
+    p4d/settings
     webpage
-    djangobaseproject/settings/pg_local.py
+    p4d/settings/pg_local.py
     stanza
     venv

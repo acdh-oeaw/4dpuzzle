@@ -1,0 +1,10 @@
+myenv
+env
+db.sqlite3
+.env
+.git
+.github
+secret.env
+*.env
+/data
+/venv
