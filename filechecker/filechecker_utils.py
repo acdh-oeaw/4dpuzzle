@@ -7,34 +7,32 @@ from archeutils.utils import ARCHE_BASE_URI, ARCHE_PREFIX_REMOVE
 
 
 def remove_trailing_slash(string):
-    if string.endswith('/'):
+    if string.endswith("/"):
         return string[:-1]
     else:
         return string
 
 
 def filename_to_arche_id(
-    filename,
-    pre_remove=ARCHE_PREFIX_REMOVE,
-    pre_add=ARCHE_BASE_URI
+    filename, pre_remove=ARCHE_PREFIX_REMOVE, pre_add=ARCHE_BASE_URI
 ):
-    if pre_add.endswith('/'):
+    if pre_add.endswith("/"):
         pass
     else:
         pre_add = f"{pre_add}/"
-    filename = filename.replace(pre_remove, '')
+    filename = filename.replace(pre_remove, "")
     filename = f"{pre_add}{filename}"
     return filename.replace(pre_remove, pre_add)
 
 
 def filechecker_to_df(filelist_json):
     """reads a fileList.json and returns a pandas DataFrame
-        :param filelist_json": The path to the fileList.json
-        :return: A pandas DataFrame
+    :param filelist_json": The path to the fileList.json
+    :return: A pandas DataFrame
     """
     file = filelist_json
     data = json.load(open(file, "r", encoding="utf-8"))
-    df = pd.DataFrame(data['data'])
+    df = pd.DataFrame(data["data"])
     return df
 
 
@@ -49,9 +47,7 @@ def find_matching_objects(model_list, matching_chars, matching_prop="legacy_id")
     leg_id = matching_chars
     all_qs = []
     for x in model_list:
-        kwargs = {
-            matching_prop: matching_chars
-        }
+        kwargs = {matching_prop: matching_chars}
         qs = x.objects.filter(**kwargs)
         if not qs:
             continue
@@ -63,24 +59,18 @@ def find_matching_objects(model_list, matching_chars, matching_prop="legacy_id")
             return None
 
 
-def path2cols(
-    path, separator="/", app_label="filechecker", model="FcCollection"
-):
+def path2cols(path, separator="/", app_label="filechecker", model="FcCollection"):
     """takes a splittable string and creates nested collections"""
     counter = 1
     current = 0
-    ct = ContentType.objects.get(
-        app_label=app_label, model=model.lower()
-    ).model_class()
+    ct = ContentType.objects.get(app_label=app_label, model=model.lower()).model_class()
     cols = []
     path_parts = path.split(separator)
     path_length = len(path_parts)
     prefix = path_length
     for x in reversed(path_parts):
-        col_title = '/'.join(path_parts[0:prefix])
-        col, _ = ct.objects.get_or_create(
-            fc_fullname=col_title
-        )
+        col_title = "/".join(path_parts[0:prefix])
+        col, _ = ct.objects.get_or_create(fc_fullname=col_title)
         cols.append(col)
         prefix = prefix - 1
         if prefix == 0:

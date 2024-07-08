@@ -29,9 +29,7 @@ urlpatterns = [
         views.FcCollectionDelete.as_view(),
         name="fccollection_delete",
     ),
-    path(
-        "fcresource/", views.FcResourceListView.as_view(), name="fcresource_browse"
-    ),
+    path("fcresource/", views.FcResourceListView.as_view(), name="fcresource_browse"),
     path(
         "fcresource/detail/<int:pk>",
         views.FcResourceDetailView.as_view(),

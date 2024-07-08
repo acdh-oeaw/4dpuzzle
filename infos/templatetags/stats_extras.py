@@ -17,28 +17,20 @@ def create_object_count(app=None):
             model = x.model_class()
             try:
                 item = {
-                    'name': model._meta.verbose_name.title(),
-                    'count': model.objects.count()
+                    "name": model._meta.verbose_name.title(),
+                    "count": model.objects.count(),
                 }
             except Exception as e:
-                item = {
-                    'name': x,
-                    'count': e
-                }
+                item = {"name": x, "count": e}
                 model = None
-                item['link'] = None
+                item["link"] = None
             try:
-                item['link'] = model.get_listview_url()
+                item["link"] = model.get_listview_url()
             except AttributeError:
-                item['link'] = None
+                item["link"] = None
             result.append(item)
         return result
 
     else:
-        result = [
-            {
-                'name': 'no parameter passed in',
-                'count': '1'
-            }
-        ]
+        result = [{"name": "no parameter passed in", "count": "1"}]
         return result

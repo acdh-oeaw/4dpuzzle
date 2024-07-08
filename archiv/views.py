@@ -7,10 +7,10 @@ from django.views.generic.edit import DeleteView
 
 from archeutils.utils import get_p4d_id
 
-from . filters import *
-from . forms import *
-from . tables import *
-from . models import (
+from .filters import *
+from .forms import *
+from .tables import *
+from .models import (
     Actor,
     ArchaeologicalObject4DPuzzleID,
     ArchaeologicalObjectID,
@@ -42,10 +42,13 @@ from . models import (
     Tables,
     ThreeDimensionalModel,
     Videos,
-    WallpaintingInventory
+    WallpaintingInventory,
 )
 from browsing.browsing_utils import (
-    GenericListView, BaseCreateView, BaseUpdateView, BaseDetailView
+    GenericListView,
+    BaseCreateView,
+    BaseUpdateView,
+    BaseDetailView,
 )
 
 
@@ -56,7 +59,8 @@ class ActorListView(GenericListView):
     formhelper_class = ActorFilterFormHelper
     table_class = ActorTable
     init_columns = [
-        'id', 'name',
+        "id",
+        "name",
     ]
     enable_merge = True
 
@@ -64,7 +68,7 @@ class ActorListView(GenericListView):
 class ActorDetailView(BaseDetailView):
 
     model = Actor
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class ActorCreate(BaseCreateView):
@@ -89,8 +93,8 @@ class ActorUpdate(BaseUpdateView):
 
 class ActorDelete(DeleteView):
     model = Actor
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:actor_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:actor_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -104,7 +108,8 @@ class ArchaeologicalObject4DPuzzleIDListView(GenericListView):
     formhelper_class = ArchaeologicalObject4DPuzzleIDFilterFormHelper
     table_class = ArchaeologicalObject4DPuzzleIDTable
     init_columns = [
-        'id', 'archaeological_object_id',
+        "id",
+        "archaeological_object_id",
     ]
     enable_merge = True
 
@@ -112,7 +117,7 @@ class ArchaeologicalObject4DPuzzleIDListView(GenericListView):
 class ArchaeologicalObject4DPuzzleIDDetailView(BaseDetailView):
 
     model = ArchaeologicalObject4DPuzzleID
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class ArchaeologicalObject4DPuzzleIDCreate(BaseCreateView):
@@ -122,7 +127,9 @@ class ArchaeologicalObject4DPuzzleIDCreate(BaseCreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ArchaeologicalObject4DPuzzleIDCreate, self).dispatch(*args, **kwargs)
+        return super(ArchaeologicalObject4DPuzzleIDCreate, self).dispatch(
+            *args, **kwargs
+        )
 
 
 class ArchaeologicalObject4DPuzzleIDUpdate(BaseUpdateView):
@@ -132,17 +139,21 @@ class ArchaeologicalObject4DPuzzleIDUpdate(BaseUpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ArchaeologicalObject4DPuzzleIDUpdate, self).dispatch(*args, **kwargs)
+        return super(ArchaeologicalObject4DPuzzleIDUpdate, self).dispatch(
+            *args, **kwargs
+        )
 
 
 class ArchaeologicalObject4DPuzzleIDDelete(DeleteView):
     model = ArchaeologicalObject4DPuzzleID
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:archaeologicalobject4dpuzzleid_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:archaeologicalobject4dpuzzleid_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ArchaeologicalObject4DPuzzleIDDelete, self).dispatch(*args, **kwargs)
+        return super(ArchaeologicalObject4DPuzzleIDDelete, self).dispatch(
+            *args, **kwargs
+        )
 
 
 class ArchaeologicalObjectIDListView(GenericListView):
@@ -152,7 +163,8 @@ class ArchaeologicalObjectIDListView(GenericListView):
     formhelper_class = ArchaeologicalObjectIDFilterFormHelper
     table_class = ArchaeologicalObjectIDTable
     init_columns = [
-        'id', 'archaeological_object_id',
+        "id",
+        "archaeological_object_id",
     ]
     enable_merge = True
 
@@ -160,7 +172,7 @@ class ArchaeologicalObjectIDListView(GenericListView):
 class ArchaeologicalObjectIDDetailView(BaseDetailView):
 
     model = ArchaeologicalObjectID
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class ArchaeologicalObjectIDCreate(BaseCreateView):
@@ -185,8 +197,8 @@ class ArchaeologicalObjectIDUpdate(BaseUpdateView):
 
 class ArchaeologicalObjectIDDelete(DeleteView):
     model = ArchaeologicalObjectID
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:archaeologicalobjectid_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:archaeologicalobjectid_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -200,7 +212,8 @@ class ArchiveINFListView(GenericListView):
     formhelper_class = ArchiveINFFilterFormHelper
     table_class = ArchiveINFTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -208,7 +221,7 @@ class ArchiveINFListView(GenericListView):
 class ArchiveINFDetailView(BaseDetailView):
 
     model = ArchiveINF
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class ArchiveINFCreate(BaseCreateView):
@@ -233,8 +246,8 @@ class ArchiveINFUpdate(BaseUpdateView):
 
 class ArchiveINFDelete(DeleteView):
     model = ArchiveINF
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:archiveinf_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:archiveinf_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -248,7 +261,8 @@ class AutoCADListView(GenericListView):
     formhelper_class = AutoCADFilterFormHelper
     table_class = AutoCADTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -256,7 +270,7 @@ class AutoCADListView(GenericListView):
 class AutoCADDetailView(BaseDetailView):
 
     model = AutoCAD
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class AutoCADCreate(BaseCreateView):
@@ -281,8 +295,8 @@ class AutoCADUpdate(BaseUpdateView):
 
 class AutoCADDelete(DeleteView):
     model = AutoCAD
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:autocad_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:autocad_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -296,7 +310,8 @@ class ConvolutecardsListView(GenericListView):
     formhelper_class = ConvolutecardsFilterFormHelper
     table_class = ConvolutecardsTable
     init_columns = [
-        'id', 'filename_document_id',
+        "id",
+        "filename_document_id",
     ]
     enable_merge = True
 
@@ -304,13 +319,13 @@ class ConvolutecardsListView(GenericListView):
 class ConvolutecardsDetailView(BaseDetailView):
 
     model = Convolutecards
-    template_name = 'archiv/convolutecards_detail.html'
+    template_name = "archiv/convolutecards_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         cur_obj = self.get_object()
-        context['arche_id'] = get_p4d_id(cur_obj)
-        context['arche_thumb'] = f"{context['arche_id']}?format=thumbnail"
+        context["arche_id"] = get_p4d_id(cur_obj)
+        context["arche_thumb"] = f"{context['arche_id']}?format=thumbnail"
         return context
 
 
@@ -336,8 +351,8 @@ class ConvolutecardsUpdate(BaseUpdateView):
 
 class ConvolutecardsDelete(DeleteView):
     model = Convolutecards
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:convolutecards_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:convolutecards_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -351,7 +366,8 @@ class DatenbaseListView(GenericListView):
     formhelper_class = DatenbaseFilterFormHelper
     table_class = DatenbaseTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -359,7 +375,7 @@ class DatenbaseListView(GenericListView):
 class DatenbaseDetailView(BaseDetailView):
 
     model = Datenbase
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class DatenbaseCreate(BaseCreateView):
@@ -384,8 +400,8 @@ class DatenbaseUpdate(BaseUpdateView):
 
 class DatenbaseDelete(DeleteView):
     model = Datenbase
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:datenbase_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:datenbase_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -399,7 +415,8 @@ class Document4DPuzzleIDListView(GenericListView):
     formhelper_class = Document4DPuzzleIDFilterFormHelper
     table_class = Document4DPuzzleIDTable
     init_columns = [
-        'id', 'document_id',
+        "id",
+        "document_id",
     ]
     enable_merge = True
 
@@ -407,7 +424,7 @@ class Document4DPuzzleIDListView(GenericListView):
 class Document4DPuzzleIDDetailView(BaseDetailView):
 
     model = Document4DPuzzleID
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class Document4DPuzzleIDCreate(BaseCreateView):
@@ -432,8 +449,8 @@ class Document4DPuzzleIDUpdate(BaseUpdateView):
 
 class Document4DPuzzleIDDelete(DeleteView):
     model = Document4DPuzzleID
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:document4dpuzzleid_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:document4dpuzzleid_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -447,7 +464,8 @@ class DocumentTypesListView(GenericListView):
     formhelper_class = DocumentTypesFilterFormHelper
     table_class = DocumentTypesTable
     init_columns = [
-        'id', 'document_type',
+        "id",
+        "document_type",
     ]
     enable_merge = True
 
@@ -455,7 +473,7 @@ class DocumentTypesListView(GenericListView):
 class DocumentTypesDetailView(BaseDetailView):
 
     model = DocumentTypes
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class DocumentTypesCreate(BaseCreateView):
@@ -480,8 +498,8 @@ class DocumentTypesUpdate(BaseUpdateView):
 
 class DocumentTypesDelete(DeleteView):
     model = DocumentTypes
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:documenttypes_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:documenttypes_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -495,7 +513,8 @@ class ExcavationObjectIDListView(GenericListView):
     formhelper_class = ExcavationObjectIDFilterFormHelper
     table_class = ExcavationObjectIDTable
     init_columns = [
-        'id', 'excavation_object_id',
+        "id",
+        "excavation_object_id",
     ]
     enable_merge = True
 
@@ -503,7 +522,7 @@ class ExcavationObjectIDListView(GenericListView):
 class ExcavationObjectIDDetailView(BaseDetailView):
 
     model = ExcavationObjectID
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class ExcavationObjectIDCreate(BaseCreateView):
@@ -528,8 +547,8 @@ class ExcavationObjectIDUpdate(BaseUpdateView):
 
 class ExcavationObjectIDDelete(DeleteView):
     model = ExcavationObjectID
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:excavationobjectid_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:excavationobjectid_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -543,7 +562,8 @@ class ExcavationSeasonsListView(GenericListView):
     formhelper_class = ExcavationSeasonsFilterFormHelper
     table_class = ExcavationSeasonsTable
     init_columns = [
-        'id', 'grabungskampagnen',
+        "id",
+        "grabungskampagnen",
     ]
     enable_merge = True
 
@@ -551,7 +571,7 @@ class ExcavationSeasonsListView(GenericListView):
 class ExcavationSeasonsDetailView(BaseDetailView):
 
     model = ExcavationSeasons
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class ExcavationSeasonsCreate(BaseCreateView):
@@ -576,8 +596,8 @@ class ExcavationSeasonsUpdate(BaseUpdateView):
 
 class ExcavationSeasonsDelete(DeleteView):
     model = ExcavationSeasons
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:excavationseasons_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:excavationseasons_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -591,7 +611,8 @@ class FielddrawingListView(GenericListView):
     formhelper_class = FielddrawingFilterFormHelper
     table_class = FielddrawingTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -599,7 +620,7 @@ class FielddrawingListView(GenericListView):
 class FielddrawingDetailView(BaseDetailView):
 
     model = Fielddrawing
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class FielddrawingCreate(BaseCreateView):
@@ -624,8 +645,8 @@ class FielddrawingUpdate(BaseUpdateView):
 
 class FielddrawingDelete(DeleteView):
     model = Fielddrawing
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:fielddrawing_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:fielddrawing_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -639,7 +660,8 @@ class FilmListView(GenericListView):
     formhelper_class = FilmFilterFormHelper
     table_class = FilmTable
     init_columns = [
-        'id', 'film_id',
+        "id",
+        "film_id",
     ]
     enable_merge = True
 
@@ -647,7 +669,7 @@ class FilmListView(GenericListView):
 class FilmDetailView(BaseDetailView):
 
     model = Film
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class FilmCreate(BaseCreateView):
@@ -672,8 +694,8 @@ class FilmUpdate(BaseUpdateView):
 
 class FilmDelete(DeleteView):
     model = Film
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:film_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:film_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -687,7 +709,8 @@ class FinddrawingListView(GenericListView):
     formhelper_class = FinddrawingFilterFormHelper
     table_class = FinddrawingTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -695,7 +718,7 @@ class FinddrawingListView(GenericListView):
 class FinddrawingDetailView(BaseDetailView):
 
     model = Finddrawing
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class FinddrawingCreate(BaseCreateView):
@@ -720,8 +743,8 @@ class FinddrawingUpdate(BaseUpdateView):
 
 class FinddrawingDelete(DeleteView):
     model = Finddrawing
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:finddrawing_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:finddrawing_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -735,7 +758,8 @@ class FindsheetsListView(GenericListView):
     formhelper_class = FindsheetsFilterFormHelper
     table_class = FindsheetsTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -743,7 +767,7 @@ class FindsheetsListView(GenericListView):
 class FindsheetsDetailView(BaseDetailView):
 
     model = Findsheets
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class FindsheetsCreate(BaseCreateView):
@@ -768,8 +792,8 @@ class FindsheetsUpdate(BaseUpdateView):
 
 class FindsheetsDelete(DeleteView):
     model = Findsheets
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:findsheets_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:findsheets_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -783,7 +807,8 @@ class FotoborndigitalListView(GenericListView):
     formhelper_class = FotoborndigitalFilterFormHelper
     table_class = FotoborndigitalTable
     init_columns = [
-        'id', 'folder_name',
+        "id",
+        "folder_name",
     ]
     enable_merge = True
 
@@ -791,7 +816,7 @@ class FotoborndigitalListView(GenericListView):
 class FotoborndigitalDetailView(BaseDetailView):
 
     model = Fotoborndigital
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class FotoborndigitalCreate(BaseCreateView):
@@ -816,8 +841,8 @@ class FotoborndigitalUpdate(BaseUpdateView):
 
 class FotoborndigitalDelete(DeleteView):
     model = Fotoborndigital
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:fotoborndigital_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:fotoborndigital_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -831,7 +856,8 @@ class FotosgescanntListView(GenericListView):
     formhelper_class = FotosgescanntFilterFormHelper
     table_class = FotosgescanntTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -839,7 +865,7 @@ class FotosgescanntListView(GenericListView):
 class FotosgescanntDetailView(BaseDetailView):
 
     model = Fotosgescannt
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class FotosgescanntCreate(BaseCreateView):
@@ -864,8 +890,8 @@ class FotosgescanntUpdate(BaseUpdateView):
 
 class FotosgescanntDelete(DeleteView):
     model = Fotosgescannt
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:fotosgescannt_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:fotosgescannt_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -879,7 +905,8 @@ class Fundinventar4DPuzzleIDListView(GenericListView):
     formhelper_class = Fundinventar4DPuzzleIDFilterFormHelper
     table_class = Fundinventar4DPuzzleIDTable
     init_columns = [
-        'id', 'find_inventory_4dpuzzle_number',
+        "id",
+        "find_inventory_4dpuzzle_number",
     ]
     enable_merge = True
 
@@ -887,7 +914,7 @@ class Fundinventar4DPuzzleIDListView(GenericListView):
 class Fundinventar4DPuzzleIDDetailView(BaseDetailView):
 
     model = Fundinventar4DPuzzleID
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class Fundinventar4DPuzzleIDCreate(BaseCreateView):
@@ -912,8 +939,8 @@ class Fundinventar4DPuzzleIDUpdate(BaseUpdateView):
 
 class Fundinventar4DPuzzleIDDelete(DeleteView):
     model = Fundinventar4DPuzzleID
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:fundinventar4dpuzzleid_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:fundinventar4dpuzzleid_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -927,7 +954,8 @@ class FundinventarInventarnummernListView(GenericListView):
     formhelper_class = FundinventarInventarnummernFilterFormHelper
     table_class = FundinventarInventarnummernTable
     init_columns = [
-        'id', 'find_inventory_number',
+        "id",
+        "find_inventory_number",
     ]
     enable_merge = True
 
@@ -935,7 +963,7 @@ class FundinventarInventarnummernListView(GenericListView):
 class FundinventarInventarnummernDetailView(BaseDetailView):
 
     model = FundinventarInventarnummern
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class FundinventarInventarnummernCreate(BaseCreateView):
@@ -960,8 +988,8 @@ class FundinventarInventarnummernUpdate(BaseUpdateView):
 
 class FundinventarInventarnummernDelete(DeleteView):
     model = FundinventarInventarnummern
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:fundinventarinventarnummern_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:fundinventarinventarnummern_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -975,7 +1003,8 @@ class FundinventarKonvolutnummernListView(GenericListView):
     formhelper_class = FundinventarKonvolutnummernFilterFormHelper
     table_class = FundinventarKonvolutnummernTable
     init_columns = [
-        'id', 'convolute_inventory_number',
+        "id",
+        "convolute_inventory_number",
     ]
     enable_merge = True
 
@@ -983,7 +1012,7 @@ class FundinventarKonvolutnummernListView(GenericListView):
 class FundinventarKonvolutnummernDetailView(BaseDetailView):
 
     model = FundinventarKonvolutnummern
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class FundinventarKonvolutnummernCreate(BaseCreateView):
@@ -1008,8 +1037,8 @@ class FundinventarKonvolutnummernUpdate(BaseUpdateView):
 
 class FundinventarKonvolutnummernDelete(DeleteView):
     model = FundinventarKonvolutnummern
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:fundinventarkonvolutnummern_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:fundinventarkonvolutnummern_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -1023,7 +1052,8 @@ class FundinventarMaterialprobenListView(GenericListView):
     formhelper_class = FundinventarMaterialprobenFilterFormHelper
     table_class = FundinventarMaterialprobenTable
     init_columns = [
-        'id', 'material_sample_inventory_number',
+        "id",
+        "material_sample_inventory_number",
     ]
     enable_merge = True
 
@@ -1031,7 +1061,7 @@ class FundinventarMaterialprobenListView(GenericListView):
 class FundinventarMaterialprobenDetailView(BaseDetailView):
 
     model = FundinventarMaterialproben
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class FundinventarMaterialprobenCreate(BaseCreateView):
@@ -1056,8 +1086,8 @@ class FundinventarMaterialprobenUpdate(BaseUpdateView):
 
 class FundinventarMaterialprobenDelete(DeleteView):
     model = FundinventarMaterialproben
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:fundinventarmaterialproben_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:fundinventarmaterialproben_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -1071,7 +1101,8 @@ class FundinventarSteininventarListView(GenericListView):
     formhelper_class = FundinventarSteininventarFilterFormHelper
     table_class = FundinventarSteininventarTable
     init_columns = [
-        'id', 'find_inventory_number',
+        "id",
+        "find_inventory_number",
     ]
     enable_merge = True
 
@@ -1079,7 +1110,7 @@ class FundinventarSteininventarListView(GenericListView):
 class FundinventarSteininventarDetailView(BaseDetailView):
 
     model = FundinventarSteininventar
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class FundinventarSteininventarCreate(BaseCreateView):
@@ -1104,8 +1135,8 @@ class FundinventarSteininventarUpdate(BaseUpdateView):
 
 class FundinventarSteininventarDelete(DeleteView):
     model = FundinventarSteininventar
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:fundinventarsteininventar_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:fundinventarsteininventar_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -1119,7 +1150,8 @@ class GISListView(GenericListView):
     formhelper_class = GISFilterFormHelper
     table_class = GISTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -1127,7 +1159,7 @@ class GISListView(GenericListView):
 class GISDetailView(BaseDetailView):
 
     model = GIS
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class GISCreate(BaseCreateView):
@@ -1152,8 +1184,8 @@ class GISUpdate(BaseUpdateView):
 
 class GISDelete(DeleteView):
     model = GIS
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:gis_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:gis_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -1167,7 +1199,8 @@ class GeophysicsListView(GenericListView):
     formhelper_class = GeophysicsFilterFormHelper
     table_class = GeophysicsTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -1175,7 +1208,7 @@ class GeophysicsListView(GenericListView):
 class GeophysicsDetailView(BaseDetailView):
 
     model = Geophysics
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class GeophysicsCreate(BaseCreateView):
@@ -1200,8 +1233,8 @@ class GeophysicsUpdate(BaseUpdateView):
 
 class GeophysicsDelete(DeleteView):
     model = Geophysics
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:geophysics_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:geophysics_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -1215,7 +1248,8 @@ class InventorybooksListView(GenericListView):
     formhelper_class = InventorybooksFilterFormHelper
     table_class = InventorybooksTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -1223,7 +1257,7 @@ class InventorybooksListView(GenericListView):
 class InventorybooksDetailView(BaseDetailView):
 
     model = Inventorybooks
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class InventorybooksCreate(BaseCreateView):
@@ -1248,8 +1282,8 @@ class InventorybooksUpdate(BaseUpdateView):
 
 class InventorybooksDelete(DeleteView):
     model = Inventorybooks
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:inventorybooks_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:inventorybooks_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -1263,7 +1297,8 @@ class PhasenIDListView(GenericListView):
     formhelper_class = PhasenIDFilterFormHelper
     table_class = PhasenIDTable
     init_columns = [
-        'id', 'phase_id',
+        "id",
+        "phase_id",
     ]
     enable_merge = True
 
@@ -1271,7 +1306,7 @@ class PhasenIDListView(GenericListView):
 class PhasenIDDetailView(BaseDetailView):
 
     model = PhasenID
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class PhasenIDCreate(BaseCreateView):
@@ -1296,8 +1331,8 @@ class PhasenIDUpdate(BaseUpdateView):
 
 class PhasenIDDelete(DeleteView):
     model = PhasenID
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:phasenid_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:phasenid_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -1311,7 +1346,8 @@ class ProtocolsListView(GenericListView):
     formhelper_class = ProtocolsFilterFormHelper
     table_class = ProtocolsTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -1319,7 +1355,7 @@ class ProtocolsListView(GenericListView):
 class ProtocolsDetailView(BaseDetailView):
 
     model = Protocols
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class ProtocolsCreate(BaseCreateView):
@@ -1344,8 +1380,8 @@ class ProtocolsUpdate(BaseUpdateView):
 
 class ProtocolsDelete(DeleteView):
     model = Protocols
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:protocols_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:protocols_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -1359,7 +1395,8 @@ class StratenIDListView(GenericListView):
     formhelper_class = StratenIDFilterFormHelper
     table_class = StratenIDTable
     init_columns = [
-        'id', 'stratum_id',
+        "id",
+        "stratum_id",
     ]
     enable_merge = True
 
@@ -1367,7 +1404,7 @@ class StratenIDListView(GenericListView):
 class StratenIDDetailView(BaseDetailView):
 
     model = StratenID
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class StratenIDCreate(BaseCreateView):
@@ -1392,8 +1429,8 @@ class StratenIDUpdate(BaseUpdateView):
 
 class StratenIDDelete(DeleteView):
     model = StratenID
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:stratenid_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:stratenid_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -1407,7 +1444,8 @@ class TablesListView(GenericListView):
     formhelper_class = TablesFilterFormHelper
     table_class = TablesTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -1415,7 +1453,7 @@ class TablesListView(GenericListView):
 class TablesDetailView(BaseDetailView):
 
     model = Tables
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class TablesCreate(BaseCreateView):
@@ -1440,8 +1478,8 @@ class TablesUpdate(BaseUpdateView):
 
 class TablesDelete(DeleteView):
     model = Tables
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:tables_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:tables_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -1455,7 +1493,8 @@ class ThreeDimensionalModelListView(GenericListView):
     formhelper_class = ThreeDimensionalModelFilterFormHelper
     table_class = ThreeDimensionalModelTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -1463,7 +1502,7 @@ class ThreeDimensionalModelListView(GenericListView):
 class ThreeDimensionalModelDetailView(BaseDetailView):
 
     model = ThreeDimensionalModel
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class ThreeDimensionalModelCreate(BaseCreateView):
@@ -1488,8 +1527,8 @@ class ThreeDimensionalModelUpdate(BaseUpdateView):
 
 class ThreeDimensionalModelDelete(DeleteView):
     model = ThreeDimensionalModel
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:threedimensionalmodel_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:threedimensionalmodel_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -1503,7 +1542,8 @@ class VideosListView(GenericListView):
     formhelper_class = VideosFilterFormHelper
     table_class = VideosTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -1511,7 +1551,7 @@ class VideosListView(GenericListView):
 class VideosDetailView(BaseDetailView):
 
     model = Videos
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class VideosCreate(BaseCreateView):
@@ -1536,8 +1576,8 @@ class VideosUpdate(BaseUpdateView):
 
 class VideosDelete(DeleteView):
     model = Videos
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:videos_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:videos_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -1551,7 +1591,8 @@ class WallpaintingInventoryListView(GenericListView):
     formhelper_class = WallpaintingInventoryFilterFormHelper
     table_class = WallpaintingInventoryTable
     init_columns = [
-        'id', 'filename',
+        "id",
+        "filename",
     ]
     enable_merge = True
 
@@ -1559,7 +1600,7 @@ class WallpaintingInventoryListView(GenericListView):
 class WallpaintingInventoryDetailView(BaseDetailView):
 
     model = WallpaintingInventory
-    template_name = 'browsing/generic_detail.html'
+    template_name = "browsing/generic_detail.html"
 
 
 class WallpaintingInventoryCreate(BaseCreateView):
@@ -1584,8 +1625,8 @@ class WallpaintingInventoryUpdate(BaseUpdateView):
 
 class WallpaintingInventoryDelete(DeleteView):
     model = WallpaintingInventory
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('archiv:wallpaintinginventory_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("archiv:wallpaintinginventory_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):

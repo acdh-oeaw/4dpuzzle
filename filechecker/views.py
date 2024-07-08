@@ -4,15 +4,15 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
-from . filters import *
-from . forms import *
-from . tables import *
-from . models import (
-    FcCollection,
-    FcResource
-)
+from .filters import *
+from .forms import *
+from .tables import *
+from .models import FcCollection, FcResource
 from browsing.browsing_utils import (
-    GenericListView, BaseCreateView, BaseUpdateView, BaseDetailView
+    GenericListView,
+    BaseCreateView,
+    BaseUpdateView,
+    BaseDetailView,
 )
 
 
@@ -23,8 +23,8 @@ class FcCollectionListView(GenericListView):
     formhelper_class = FcCollectionFilterFormHelper
     table_class = FcCollectionTable
     init_columns = [
-        'id',
-        'fc_name',
+        "id",
+        "fc_name",
     ]
     enable_merge = True
 
@@ -32,7 +32,7 @@ class FcCollectionListView(GenericListView):
 class FcCollectionDetailView(BaseDetailView):
 
     model = FcCollection
-    template_name = 'filechecker/fc_collection_detail.html'
+    template_name = "filechecker/fc_collection_detail.html"
 
 
 class FcCollectionCreate(BaseCreateView):
@@ -57,8 +57,8 @@ class FcCollectionUpdate(BaseUpdateView):
 
 class FcCollectionDelete(DeleteView):
     model = FcCollection
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('filechecker:fccollection_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("filechecker:fccollection_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -72,8 +72,8 @@ class FcResourceListView(GenericListView):
     formhelper_class = FcResourceFilterFormHelper
     table_class = FcResourceTable
     init_columns = [
-        'id',
-        'fc_filename',
+        "id",
+        "fc_filename",
     ]
     enable_merge = True
 
@@ -81,7 +81,7 @@ class FcResourceListView(GenericListView):
 class FcResourceDetailView(BaseDetailView):
 
     model = FcResource
-    template_name = 'filechecker/fc_resource_detail.html'
+    template_name = "filechecker/fc_resource_detail.html"
 
 
 class FcResourceCreate(BaseCreateView):
@@ -106,8 +106,8 @@ class FcResourceUpdate(BaseUpdateView):
 
 class FcResourceDelete(DeleteView):
     model = FcResource
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('filechecker:fcresource_browse')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("filechecker:fcresource_browse")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):

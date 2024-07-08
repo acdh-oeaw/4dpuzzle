@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "mptt",
     "django_extensions",
     "crispy_forms",
-    'crispy_bootstrap3',
+    "crispy_bootstrap3",
     "django_filters",
     "django_tables2",
     "rest_framework",
@@ -129,9 +129,7 @@ else:
     }
 
 
-AUTHENTICATION_BACKENDS = (
-    "django.contrib.auth.backends.ModelBackend",
-)
+AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

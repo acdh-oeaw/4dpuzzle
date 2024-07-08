@@ -4,14 +4,15 @@ from django.db.models import Q
 
 
 class SpecificConceptsByCollection(autocomplete.Select2QuerySetView):
-
     def get_result_label(self, item):
         return "{}".format(item.label)
 
     def get_queryset(self):
         try:
-            collection = self.kwargs['collection']
-            selected_collection = SkosCollection.objects.filter(name__icontains=collection)
+            collection = self.kwargs["collection"]
+            selected_collection = SkosCollection.objects.filter(
+                name__icontains=collection
+            )
         except KeyError:
             selected_collection = None
         if selected_collection:
@@ -28,14 +29,15 @@ class SpecificConceptsByCollection(autocomplete.Select2QuerySetView):
 
 
 class SpecificConcepts(autocomplete.Select2QuerySetView):
-
     def get_result_label(self, item):
         return "{}".format(item.label)
 
     def get_queryset(self):
         try:
-            scheme = self.kwargs['scheme']
-            selected_scheme = SkosConceptScheme.objects.filter(dc_title__icontains=scheme)
+            scheme = self.kwargs["scheme"]
+            selected_scheme = SkosConceptScheme.objects.filter(
+                dc_title__icontains=scheme
+            )
         except KeyError:
             selected_scheme = None
         if selected_scheme:
@@ -52,9 +54,8 @@ class SpecificConcepts(autocomplete.Select2QuerySetView):
 
 
 class SKOSConstraintACNoHierarchy(autocomplete.Select2QuerySetView):
-
     def get_queryset(self):
-        scheme = self.request.GET.get('scheme')
+        scheme = self.request.GET.get("scheme")
         try:
             selected_scheme = SkosConceptScheme.objects.get(dc_title=scheme)
             qs = SkosConcept.objects.filter(scheme=selected_scheme)
@@ -62,9 +63,7 @@ class SKOSConstraintACNoHierarchy(autocomplete.Select2QuerySetView):
             qs = SkosConcept.objects.all()
 
         if self.q:
-            qs = qs.filter(
-                Q(pref_label__icontains=self.q)
-            )
+            qs = qs.filter(Q(pref_label__icontains=self.q))
 
         return qs
 
@@ -77,7 +76,7 @@ class SKOSConstraintAC(autocomplete.Select2QuerySetView):
             return "{}".format(item.pref_label)
 
     def get_queryset(self):
-        scheme = self.request.GET.get('scheme')
+        scheme = self.request.GET.get("scheme")
         try:
             selected_scheme = SkosConceptScheme.objects.get(dc_title=scheme)
             qs = SkosConcept.objects.filter(scheme=selected_scheme)
@@ -102,7 +101,6 @@ class SkosLabelAC(autocomplete.Select2QuerySetView):
 
 
 class SkosConceptAC(autocomplete.Select2QuerySetView):
-
     def get_result_label(self, item):
         return "{}".format(item.label)
 
@@ -117,7 +115,6 @@ class SkosConceptAC(autocomplete.Select2QuerySetView):
 
 
 class SkosConceptPrefLabalAC(autocomplete.Select2ListView):
-
     def get_list(self):
         concepts = SkosConcept.objects.filter(pref_label__icontains=self.q)
         pref_labels = set([x.pref_label for x in concepts])

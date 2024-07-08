@@ -18,18 +18,12 @@ models.Field.set_extra = set_extra
 
 
 class Actor(models.Model):
-    """ Person involved in TD excavations and/or A Puzzle in 4D project """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Person involved in TD excavations and/or A Puzzle in 4D project"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     canonic_arche_uri = models.TextField(
-        blank=True,
-        verbose_name="authority file URI"
-    ).set_extra(
-        is_public=True,
-        arche_prop="hasIdentifier"
-    )
+        blank=True, verbose_name="authority file URI"
+    ).set_extra(is_public=True, arche_prop="hasIdentifier")
     name = models.CharField(
         max_length=250,
         blank=True,
@@ -38,7 +32,7 @@ class Actor(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Actor/Actor.csv__first_name",
-        arche_prop="hasAlternativeTitle"
+        arche_prop="hasAlternativeTitle",
     )
     drawer_monogram = models.CharField(
         max_length=250,
@@ -78,7 +72,7 @@ class Actor(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_actor_access_skosconcept',
+        related_name="rvn_actor_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -89,49 +83,25 @@ class Actor(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Actor/Actor.csv__Access",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -140,7 +110,7 @@ class Actor(models.Model):
     class Meta:
 
         ordering = [
-            'name',
+            "name",
         ]
         verbose_name = "Actor"
 
@@ -155,52 +125,44 @@ class Actor(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:actor_browse')
+        return reverse("archiv:actor_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:actor_create')
+        return reverse("archiv:actor_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:actor_detail', kwargs={'pk': self.id})
+        return reverse("archiv:actor_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:actor_detail', kwargs={'pk': self.id})
+        return reverse("archiv:actor_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:actor_delete', kwargs={'pk': self.id})
+        return reverse("archiv:actor_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:actor_edit', kwargs={'pk': self.id})
+        return reverse("archiv:actor_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:actor_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:actor_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:actor_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:actor_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class ArchaeologicalObject4DPuzzleID(models.Model):
-    """ A 4DPuzzleID was created for archaeological objects that did not have an ID """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """A 4DPuzzleID was created for archaeological objects that did not have an ID"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_archaeologicalobject4dpuzzleid_creator_metadata_actor',
+        related_name="rvn_archaeologicalobject4dpuzzleid_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -212,7 +174,7 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
     )
     archaeological_object_id = models.ForeignKey(
         "ArchaeologicalObjectID",
-        related_name='rvn_archaeologicalobject4dpuzzleid_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_archaeologicalobject4dpuzzleid_archaeological_object_id_archaeologicalobjectid",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -232,7 +194,8 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Archaeological_object_4DPuzzle_ID",
     )
     archaeological_object_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Archaeological object comment",
         help_text="helptext for archaeological_object_comment",
     ).set_extra(
@@ -241,7 +204,7 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_archaeologicalobject4dpuzzleid_excavation_object_id_excavationobjectid',
+        related_name="rvn_archaeologicalobject4dpuzzleid_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="helptext for excavation_object_id",
@@ -250,7 +213,8 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Excavation_object_ID",
     )
     position = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Position",
         help_text="helptext for position",
     ).set_extra(
@@ -258,7 +222,8 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Position",
     )
     stratum_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Stratum Comment",
         help_text="helptext for stratum_comment",
     ).set_extra(
@@ -266,7 +231,8 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Stratum_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="helptext for digitisation_comment",
     ).set_extra(
@@ -275,7 +241,7 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
     )
     archaeological_object_type = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_archaeologicalobject4dpuzzleid_archaeological_object_type_skosconcept',
+        related_name="rvn_archaeologicalobject4dpuzzleid_archaeological_object_type_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -287,7 +253,7 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
     )
     stratum_id_relative = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_archaeologicalobject4dpuzzleid_stratum_id_relative_skosconcept',
+        related_name="rvn_archaeologicalobject4dpuzzleid_stratum_id_relative_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -299,7 +265,7 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
     )
     stratum_id_absolute_prepub = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_archaeologicalobject4dpuzzleid_stratum_id_absolute_prepub_skosconcept',
+        related_name="rvn_archaeologicalobject4dpuzzleid_stratum_id_absolute_prepub_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -311,7 +277,7 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
     )
     phase_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_archaeologicalobject4dpuzzleid_phase_id_skosconcept',
+        related_name="rvn_archaeologicalobject4dpuzzleid_phase_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -322,49 +288,25 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObject4DPuzzleID/Archaeological_object_4DPuzzle.scv__Phase_ID",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -373,7 +315,7 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
     class Meta:
 
         ordering = [
-            'archaeological_object_id',
+            "archaeological_object_id",
         ]
         verbose_name = "ArchaeologicalObject4DPuzzleID"
 
@@ -388,52 +330,58 @@ class ArchaeologicalObject4DPuzzleID(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:archaeologicalobject4dpuzzleid_browse')
+        return reverse("archiv:archaeologicalobject4dpuzzleid_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:archaeologicalobject4dpuzzleid_create')
+        return reverse("archiv:archaeologicalobject4dpuzzleid_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:archaeologicalobject4dpuzzleid_detail', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:archaeologicalobject4dpuzzleid_detail", kwargs={"pk": self.id}
+        )
 
     def get_absolute_url(self):
-        return reverse('archiv:archaeologicalobject4dpuzzleid_detail', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:archaeologicalobject4dpuzzleid_detail", kwargs={"pk": self.id}
+        )
 
     def get_delete_url(self):
-        return reverse('archiv:archaeologicalobject4dpuzzleid_delete', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:archaeologicalobject4dpuzzleid_delete", kwargs={"pk": self.id}
+        )
 
     def get_edit_url(self):
-        return reverse('archiv:archaeologicalobject4dpuzzleid_edit', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:archaeologicalobject4dpuzzleid_edit", kwargs={"pk": self.id}
+        )
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:archaeologicalobject4dpuzzleid_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:archaeologicalobject4dpuzzleid_detail",
+                kwargs={"pk": next.first().id},
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:archaeologicalobject4dpuzzleid_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:archaeologicalobject4dpuzzleid_detail",
+                kwargs={"pk": prev.first().id},
             )
         return False
 
 
 class ArchaeologicalObjectID(models.Model):
-    """ ID of archaeological object  """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """ID of archaeological object"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_archaeologicalobjectid_creator_metadata_actor',
+        related_name="rvn_archaeologicalobjectid_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -453,7 +401,8 @@ class ArchaeologicalObjectID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObjectID/Archaeological_object_ID.csv__Archaeological_object_ID",
     )
     archaeological_object_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Archaeological object comment",
         help_text="helptext for archaeological_object_comment",
     ).set_extra(
@@ -462,7 +411,7 @@ class ArchaeologicalObjectID(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_archaeologicalobjectid_excavation_object_id_excavationobjectid',
+        related_name="rvn_archaeologicalobjectid_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="helptext for excavation_object_id",
@@ -517,7 +466,7 @@ class ArchaeologicalObjectID(models.Model):
     )
     corresponding_to_archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
-        related_name='rvn_archaeologicalobjectid_corresponding_to_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_archaeologicalobjectid_corresponding_to_archaeological_object_id_archaeologicalobjectid",
         blank=True,
         verbose_name="Corresponding to archaeological object ID",
         help_text="helptext for corresponding_to_archaeological_object_id",
@@ -535,7 +484,8 @@ class ArchaeologicalObjectID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObjectID/Archaeological_object_ID.csv__RelatedTo",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="helptext for digitisation_comment",
     ).set_extra(
@@ -544,7 +494,7 @@ class ArchaeologicalObjectID(models.Model):
     )
     archaeological_object_type = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_archaeologicalobjectid_archaeological_object_type_skosconcept',
+        related_name="rvn_archaeologicalobjectid_archaeological_object_type_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -555,49 +505,25 @@ class ArchaeologicalObjectID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchaeologicalObjectID/Archaeological_object_ID.csv__Archaeological_object_type",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -606,7 +532,7 @@ class ArchaeologicalObjectID(models.Model):
     class Meta:
 
         ordering = [
-            'archaeological_object_id',
+            "archaeological_object_id",
         ]
         verbose_name = "ArchaeologicalObjectID"
 
@@ -621,52 +547,48 @@ class ArchaeologicalObjectID(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:archaeologicalobjectid_browse')
+        return reverse("archiv:archaeologicalobjectid_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:archaeologicalobjectid_create')
+        return reverse("archiv:archaeologicalobjectid_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:archaeologicalobjectid_detail', kwargs={'pk': self.id})
+        return reverse("archiv:archaeologicalobjectid_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:archaeologicalobjectid_detail', kwargs={'pk': self.id})
+        return reverse("archiv:archaeologicalobjectid_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:archaeologicalobjectid_delete', kwargs={'pk': self.id})
+        return reverse("archiv:archaeologicalobjectid_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:archaeologicalobjectid_edit', kwargs={'pk': self.id})
+        return reverse("archiv:archaeologicalobjectid_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:archaeologicalobjectid_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:archaeologicalobjectid_detail", kwargs={"pk": next.first().id}
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:archaeologicalobjectid_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:archaeologicalobjectid_detail", kwargs={"pk": prev.first().id}
             )
         return False
 
 
 class ArchiveINF(models.Model):
-    """ Document with information about the Tell el-Daba documentation archive """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Document with information about the Tell el-Daba documentation archive"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_archiveinf_creator_metadata_actor',
+        related_name="rvn_archiveinf_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -679,7 +601,7 @@ class ArchiveINF(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_archiveinf_creator_original_actor',
+        related_name="rvn_archiveinf_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -692,7 +614,7 @@ class ArchiveINF(models.Model):
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
-        related_name='rvn_archiveinf_creator_archivalobject_actor',
+        related_name="rvn_archiveinf_creator_archivalobject_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -701,7 +623,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__creator_archivalObject",
-        arche_prop="hasContributor"
+        arche_prop="hasContributor",
     )
     filename = models.CharField(
         max_length=250,
@@ -711,7 +633,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Filename",
-        arche_prop="hasAlternativeTitle"
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -732,7 +654,7 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Document_title",
-        arche_prop="hasAlternativeTitle"
+        arche_prop="hasAlternativeTitle",
     )
     creation_year_original = models.CharField(
         max_length=250,
@@ -744,16 +666,18 @@ class ArchiveINF(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creation_year_original",
     )
     creation_date_archivalobject = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date archival object",
         help_text="helptext for creation_date_archivalobject",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creation_date_archivalObject",
-        arche_prop="hasCreatedStartDate"
+        arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -761,17 +685,18 @@ class ArchiveINF(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Creation_date_metadata",
     )
     comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment",
         help_text="helptext for comment",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Comment",
-        arche_prop="hasNote"
+        arche_prop="hasNote",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_archiveinf_document_type_documenttypes',
+        related_name="rvn_archiveinf_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -783,7 +708,7 @@ class ArchiveINF(models.Model):
     )
     relatedto = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_archiveinf_relatedto_documenttypes',
+        related_name="rvn_archiveinf_relatedto_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -795,7 +720,7 @@ class ArchiveINF(models.Model):
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_archiveinf_file_extension_archivalobject_skosconcept',
+        related_name="rvn_archiveinf_file_extension_archivalobject_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -804,11 +729,11 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__File_extension_archivalObject",
-        arche_prop="hasTechnicalInfo"
+        arche_prop="hasTechnicalInfo",
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_archiveinf_copyright_skosconcept',
+        related_name="rvn_archiveinf_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -820,7 +745,7 @@ class ArchiveINF(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_archiveinf_access_skosconcept',
+        related_name="rvn_archiveinf_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -829,11 +754,11 @@ class ArchiveINF(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Access",
-        arche_prop="hasAccessRestriction"
+        arche_prop="hasAccessRestriction",
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_archiveinf_site_id_skosconcept',
+        related_name="rvn_archiveinf_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -844,49 +769,25 @@ class ArchiveINF(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ArchiveINF/ArchiveINF_metadata.csv__Site_ID",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -895,7 +796,7 @@ class ArchiveINF(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "Archive information"
 
@@ -914,52 +815,44 @@ class ArchiveINF(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:archiveinf_browse')
+        return reverse("archiv:archiveinf_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:archiveinf_create')
+        return reverse("archiv:archiveinf_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:archiveinf_detail', kwargs={'pk': self.id})
+        return reverse("archiv:archiveinf_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:archiveinf_detail', kwargs={'pk': self.id})
+        return reverse("archiv:archiveinf_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:archiveinf_delete', kwargs={'pk': self.id})
+        return reverse("archiv:archiveinf_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:archiveinf_edit', kwargs={'pk': self.id})
+        return reverse("archiv:archiveinf_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:archiveinf_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:archiveinf_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:archiveinf_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:archiveinf_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class AutoCAD(models.Model):
-    """ AutoCAD Files """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """AutoCAD Files"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_autocad_creator_metadata_actor',
+        related_name="rvn_autocad_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -968,11 +861,11 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creator_metadata",
-        arche_prop="hasMetadataCreator"
+        arche_prop="hasMetadataCreator",
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_autocad_creator_original_actor',
+        related_name="rvn_autocad_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -981,11 +874,11 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creator_original",
-        arche_prop="hasCreator"
+        arche_prop="hasCreator",
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
-        related_name='rvn_autocad_creator_archivalobject_actor',
+        related_name="rvn_autocad_creator_archivalobject_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -994,7 +887,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__creator_archivalObject",
-        arche_prop="hasContributor"
+        arche_prop="hasContributor",
     )
     filename = models.CharField(
         max_length=250,
@@ -1004,7 +897,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Filename",
-        arche_prop="hasAlternativeTitle"
+        arche_prop="hasAlternativeTitle",
     )
     document_id = models.CharField(
         max_length=250,
@@ -1025,7 +918,7 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Document_title",
-        arche_prop="hasAlternativeTitle"
+        arche_prop="hasAlternativeTitle",
     )
     path_filename_old = models.CharField(
         max_length=250,
@@ -1053,10 +946,11 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creation_year_original",
-        arche_prop="hasCreatedStartDate"
+        arche_prop="hasCreatedStartDate",
     )
     creation_date_archivalobject = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation year archival object",
         help_text="helptext for creation_date_archivalobject",
     ).set_extra(
@@ -1064,7 +958,8 @@ class AutoCAD(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Creation_date_archivalObject",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -1073,7 +968,7 @@ class AutoCAD(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_autocad_excavation_object_id_excavationobjectid',
+        related_name="rvn_autocad_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
@@ -1083,7 +978,7 @@ class AutoCAD(models.Model):
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
-        related_name='rvn_autocad_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_autocad_archaeological_object_id_archaeologicalobjectid",
         blank=True,
         verbose_name="Archeological object ID",
         help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
@@ -1101,7 +996,8 @@ class AutoCAD(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__RelatedTo",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -1109,7 +1005,8 @@ class AutoCAD(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -1118,7 +1015,7 @@ class AutoCAD(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_autocad_document_type_documenttypes',
+        related_name="rvn_autocad_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1130,7 +1027,7 @@ class AutoCAD(models.Model):
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_autocad_file_extension_original_skosconcept',
+        related_name="rvn_autocad_file_extension_original_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1142,7 +1039,7 @@ class AutoCAD(models.Model):
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_autocad_file_extension_archivalobject_skosconcept',
+        related_name="rvn_autocad_file_extension_archivalobject_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1154,7 +1051,7 @@ class AutoCAD(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_autocad_copyright_skosconcept',
+        related_name="rvn_autocad_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1166,7 +1063,7 @@ class AutoCAD(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_autocad_access_skosconcept',
+        related_name="rvn_autocad_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1175,11 +1072,11 @@ class AutoCAD(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Access",
-        arche_prop="hasAccessRestriction"
+        arche_prop="hasAccessRestriction",
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_autocad_site_id_skosconcept',
+        related_name="rvn_autocad_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1191,7 +1088,7 @@ class AutoCAD(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_autocad_excavation_post_excavation_skosconcept',
+        related_name="rvn_autocad_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1202,49 +1099,25 @@ class AutoCAD(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_AutoCAD/AutoCAD_metadata__Excavation__post_excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -1253,7 +1126,7 @@ class AutoCAD(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "AutoCAD"
 
@@ -1272,52 +1145,44 @@ class AutoCAD(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:autocad_browse')
+        return reverse("archiv:autocad_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:autocad_create')
+        return reverse("archiv:autocad_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:autocad_detail', kwargs={'pk': self.id})
+        return reverse("archiv:autocad_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:autocad_detail', kwargs={'pk': self.id})
+        return reverse("archiv:autocad_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:autocad_delete', kwargs={'pk': self.id})
+        return reverse("archiv:autocad_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:autocad_edit', kwargs={'pk': self.id})
+        return reverse("archiv:autocad_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:autocad_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:autocad_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:autocad_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:autocad_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class Convolutecards(models.Model):
-    """ Digitised convolute cards """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Digitised convolute cards"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_convolutecards_creator_metadata_actor',
+        related_name="rvn_convolutecards_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1326,11 +1191,11 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_metadata",
-        arche_prop="hasMetadataCreator"
+        arche_prop="hasMetadataCreator",
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_convolutecards_creator_original_actor',
+        related_name="rvn_convolutecards_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1339,11 +1204,11 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_original",
-        arche_prop="hasCreator"
+        arche_prop="hasCreator",
     )
     creator_scan = models.ForeignKey(
         "Actor",
-        related_name='rvn_convolutecards_creator_scan_actor',
+        related_name="rvn_convolutecards_creator_scan_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1352,11 +1217,11 @@ class Convolutecards(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creator_scan",
-        arche_prop="hasDigitisingAgent"
+        arche_prop="hasDigitisingAgent",
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_convolutecards_document_type_documenttypes',
+        related_name="rvn_convolutecards_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1368,7 +1233,7 @@ class Convolutecards(models.Model):
     )
     excavation_id = models.ManyToManyField(
         "ExcavationSeasons",
-        related_name='rvn_convolutecards_excavation_id_excavationseasons',
+        related_name="rvn_convolutecards_excavation_id_excavationseasons",
         blank=True,
         verbose_name="Excavation Season",
         help_text="helptext for excavation_id",
@@ -1377,7 +1242,8 @@ class Convolutecards(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Excavation_id",
     )
     creation_year_original = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation year of original document",
         help_text="helptext for creation_year_original",
     ).set_extra(
@@ -1385,7 +1251,8 @@ class Convolutecards(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Creation_year_original",
     )
     season = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Season",
         help_text="helptext for season",
     ).set_extra(
@@ -1432,7 +1299,8 @@ class Convolutecards(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Filename_old",
     )
     creation_date_original = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of original document",
         help_text="helptext for creation_date_original",
     ).set_extra(
@@ -1441,7 +1309,8 @@ class Convolutecards(models.Model):
         arche_prop="hasCreatedStartDateOriginal",
     )
     creation_date_scan = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of scan",
         help_text="helptext for creation_date_scan",
     ).set_extra(
@@ -1450,7 +1319,8 @@ class Convolutecards(models.Model):
         arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -1467,7 +1337,8 @@ class Convolutecards(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Storage_folder_original",
     )
     resolution_scan_dpi = models.IntegerField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Scan resolution",
         help_text="helptext for resolution_scan_dpi",
     ).set_extra(
@@ -1513,7 +1384,8 @@ class Convolutecards(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Maximum_height_meters_standard_elevation_zero",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -1521,7 +1393,8 @@ class Convolutecards(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -1531,7 +1404,7 @@ class Convolutecards(models.Model):
     )
     file_extension = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_convolutecards_file_extension_skosconcept',
+        related_name="rvn_convolutecards_file_extension_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1543,7 +1416,7 @@ class Convolutecards(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_convolutecards_copyright_skosconcept',
+        related_name="rvn_convolutecards_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1555,7 +1428,7 @@ class Convolutecards(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_convolutecards_access_skosconcept',
+        related_name="rvn_convolutecards_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1568,7 +1441,7 @@ class Convolutecards(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_convolutecards_site_id_skosconcept',
+        related_name="rvn_convolutecards_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1580,7 +1453,7 @@ class Convolutecards(models.Model):
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_convolutecards_equipment_scan_skosconcept',
+        related_name="rvn_convolutecards_equipment_scan_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1593,7 +1466,7 @@ class Convolutecards(models.Model):
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_convolutecards_source_original_copy_edited_copy_skosconcept',
+        related_name="rvn_convolutecards_source_original_copy_edited_copy_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1605,7 +1478,7 @@ class Convolutecards(models.Model):
     )
     original_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_convolutecards_original_material_skosconcept',
+        related_name="rvn_convolutecards_original_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1617,7 +1490,7 @@ class Convolutecards(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_convolutecards_excavation_post_excavation_skosconcept',
+        related_name="rvn_convolutecards_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1628,49 +1501,25 @@ class Convolutecards(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Konvolutkarten/Convolute_ID.csv__Excavation__post_excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -1679,7 +1528,7 @@ class Convolutecards(models.Model):
     class Meta:
 
         ordering = [
-            'filename_document_id',
+            "filename_document_id",
         ]
         verbose_name = "Convolute cards"
 
@@ -1698,52 +1547,48 @@ class Convolutecards(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:convolutecards_browse')
+        return reverse("archiv:convolutecards_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:convolutecards_create')
+        return reverse("archiv:convolutecards_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:convolutecards_detail', kwargs={'pk': self.id})
+        return reverse("archiv:convolutecards_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:convolutecards_detail', kwargs={'pk': self.id})
+        return reverse("archiv:convolutecards_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:convolutecards_delete', kwargs={'pk': self.id})
+        return reverse("archiv:convolutecards_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:convolutecards_edit', kwargs={'pk': self.id})
+        return reverse("archiv:convolutecards_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:convolutecards_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:convolutecards_detail", kwargs={"pk": next.first().id}
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:convolutecards_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:convolutecards_detail", kwargs={"pk": prev.first().id}
             )
         return False
 
 
 class Datenbase(models.Model):
-    """ Database files """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Database files"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_datenbase_creator_metadata_actor',
+        related_name="rvn_datenbase_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1756,7 +1601,7 @@ class Datenbase(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_datenbase_creator_original_actor',
+        related_name="rvn_datenbase_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1769,7 +1614,7 @@ class Datenbase(models.Model):
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
-        related_name='rvn_datenbase_creator_archivalobject_actor',
+        related_name="rvn_datenbase_creator_archivalobject_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1822,7 +1667,8 @@ class Datenbase(models.Model):
         arche_prop="hasCreatedStartDate",
     )
     creation_date_archivalobject = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation year archival object",
         help_text="helptext for creation_date_archivalobject",
     ).set_extra(
@@ -1830,7 +1676,8 @@ class Datenbase(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Creation_date_archivalObject",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -1857,7 +1704,7 @@ class Datenbase(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_datenbase_excavation_object_id_excavationobjectid',
+        related_name="rvn_datenbase_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
@@ -1867,7 +1714,7 @@ class Datenbase(models.Model):
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
-        related_name='rvn_datenbase_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_datenbase_archaeological_object_id_archaeologicalobjectid",
         blank=True,
         verbose_name="Archaeological object ID",
         help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
@@ -1885,7 +1732,8 @@ class Datenbase(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__RelatedTo",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -1893,7 +1741,8 @@ class Datenbase(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -1903,7 +1752,7 @@ class Datenbase(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_datenbase_document_type_documenttypes',
+        related_name="rvn_datenbase_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1915,7 +1764,7 @@ class Datenbase(models.Model):
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_datenbase_file_extension_original_skosconcept',
+        related_name="rvn_datenbase_file_extension_original_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1927,7 +1776,7 @@ class Datenbase(models.Model):
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_datenbase_file_extension_archivalobject_skosconcept',
+        related_name="rvn_datenbase_file_extension_archivalobject_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1939,7 +1788,7 @@ class Datenbase(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_datenbase_copyright_skosconcept',
+        related_name="rvn_datenbase_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1951,7 +1800,7 @@ class Datenbase(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_datenbase_access_skosconcept',
+        related_name="rvn_datenbase_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1964,7 +1813,7 @@ class Datenbase(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_datenbase_site_id_skosconcept',
+        related_name="rvn_datenbase_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1976,7 +1825,7 @@ class Datenbase(models.Model):
     )
     find_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_datenbase_find_material_skosconcept',
+        related_name="rvn_datenbase_find_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1988,7 +1837,7 @@ class Datenbase(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_datenbase_excavation_post_excavation_skosconcept',
+        related_name="rvn_datenbase_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -1999,49 +1848,25 @@ class Datenbase(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Datenbanken/Database_metadata__Excavation__post_excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -2050,7 +1875,7 @@ class Datenbase(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "Database"
 
@@ -2065,52 +1890,44 @@ class Datenbase(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:datenbase_browse')
+        return reverse("archiv:datenbase_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:datenbase_create')
+        return reverse("archiv:datenbase_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:datenbase_detail', kwargs={'pk': self.id})
+        return reverse("archiv:datenbase_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:datenbase_detail', kwargs={'pk': self.id})
+        return reverse("archiv:datenbase_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:datenbase_delete', kwargs={'pk': self.id})
+        return reverse("archiv:datenbase_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:datenbase_edit', kwargs={'pk': self.id})
+        return reverse("archiv:datenbase_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:datenbase_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:datenbase_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:datenbase_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:datenbase_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class Document4DPuzzleID(models.Model):
-    """ A 4DPuzzleID was created for documents that did not have an ID """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """A 4DPuzzleID was created for documents that did not have an ID"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_document4dpuzzleid_creator_metadata_actor',
+        related_name="rvn_document4dpuzzleid_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -2122,7 +1939,7 @@ class Document4DPuzzleID(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_document4dpuzzleid_document_type_documenttypes',
+        related_name="rvn_document4dpuzzleid_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -2160,7 +1977,8 @@ class Document4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Document_4DPuzzleID/Document_4DPuzzleID.csv__Document_title",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="helptext for digitisation_comment",
     ).set_extra(
@@ -2177,49 +1995,25 @@ class Document4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Document_4DPuzzleID/Document_4DPuzzleID.csv__Corresponding_to",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -2228,7 +2022,7 @@ class Document4DPuzzleID(models.Model):
     class Meta:
 
         ordering = [
-            'document_id',
+            "document_id",
         ]
         verbose_name = "Document 4DPuzzle ID"
 
@@ -2243,49 +2037,45 @@ class Document4DPuzzleID(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:document4dpuzzleid_browse')
+        return reverse("archiv:document4dpuzzleid_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:document4dpuzzleid_create')
+        return reverse("archiv:document4dpuzzleid_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:document4dpuzzleid_detail', kwargs={'pk': self.id})
+        return reverse("archiv:document4dpuzzleid_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:document4dpuzzleid_detail', kwargs={'pk': self.id})
+        return reverse("archiv:document4dpuzzleid_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:document4dpuzzleid_delete', kwargs={'pk': self.id})
+        return reverse("archiv:document4dpuzzleid_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:document4dpuzzleid_edit', kwargs={'pk': self.id})
+        return reverse("archiv:document4dpuzzleid_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:document4dpuzzleid_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:document4dpuzzleid_detail", kwargs={"pk": next.first().id}
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:document4dpuzzleid_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:document4dpuzzleid_detail", kwargs={"pk": prev.first().id}
             )
         return False
 
 
 class DocumentTypes(models.Model):
-    """ Types of documents """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Types of documents"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     document_type = models.CharField(
         max_length=250,
         blank=True,
@@ -2332,7 +2122,8 @@ class DocumentTypes(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_DocumentTypes/Tabelle1.csv__DS_abbr",
     )
     description = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Description",
         help_text="Description of document type.",
     ).set_extra(
@@ -2341,7 +2132,7 @@ class DocumentTypes(models.Model):
     )
     analogue_borndigital = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_documenttypes_analogue_borndigital_skosconcept',
+        related_name="rvn_documenttypes_analogue_borndigital_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -2352,49 +2143,25 @@ class DocumentTypes(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_DocumentTypes/Tabelle1.csv__Analog_bornDigital",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -2403,7 +2170,7 @@ class DocumentTypes(models.Model):
     class Meta:
 
         ordering = [
-            'document_type',
+            "document_type",
         ]
         verbose_name = "Document types"
 
@@ -2418,52 +2185,48 @@ class DocumentTypes(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:documenttypes_browse')
+        return reverse("archiv:documenttypes_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:documenttypes_create')
+        return reverse("archiv:documenttypes_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:documenttypes_detail', kwargs={'pk': self.id})
+        return reverse("archiv:documenttypes_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:documenttypes_detail', kwargs={'pk': self.id})
+        return reverse("archiv:documenttypes_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:documenttypes_delete', kwargs={'pk': self.id})
+        return reverse("archiv:documenttypes_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:documenttypes_edit', kwargs={'pk': self.id})
+        return reverse("archiv:documenttypes_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:documenttypes_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:documenttypes_detail", kwargs={"pk": next.first().id}
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:documenttypes_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:documenttypes_detail", kwargs={"pk": prev.first().id}
             )
         return False
 
 
 class ExcavationObjectID(models.Model):
-    """ ID of excavation object (area, square etc.) """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """ID of excavation object (area, square etc.)"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_excavationobjectid_creator_metadata_actor',
+        related_name="rvn_excavationobjectid_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -2493,7 +2256,7 @@ class ExcavationObjectID(models.Model):
     )
     excavation_id = models.ManyToManyField(
         "ExcavationSeasons",
-        related_name='rvn_excavationobjectid_excavation_id_excavationseasons',
+        related_name="rvn_excavationobjectid_excavation_id_excavationseasons",
         blank=True,
         verbose_name="Excavation Season",
         help_text="Years during work at an excavation object has been carried out.",
@@ -2502,7 +2265,8 @@ class ExcavationObjectID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Excavation_id",
     )
     year = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Year",
         help_text="Years during work at an excavation object has been carried out.",
     ).set_extra(
@@ -2510,7 +2274,8 @@ class ExcavationObjectID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Year",
     )
     season = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Season",
         help_text="Season during work at an excavation object has been carried out.",
     ).set_extra(
@@ -2519,7 +2284,7 @@ class ExcavationObjectID(models.Model):
     )
     part_of_excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_excavationobjectid_part_of_excavation_object_id_excavationobjectid',
+        related_name="rvn_excavationobjectid_part_of_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Part of another Excavation Object.",
         help_text="An excavation object which was part of another excavation object.",
@@ -2528,7 +2293,8 @@ class ExcavationObjectID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Part_of_excavation_object_ID",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments of the metadata creator (e.g. noticing errors, etc.).",
     ).set_extra(
@@ -2537,7 +2303,7 @@ class ExcavationObjectID(models.Model):
     )
     excavation_object_type = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_excavationobjectid_excavation_object_type_skosconcept',
+        related_name="rvn_excavationobjectid_excavation_object_type_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -2549,7 +2315,7 @@ class ExcavationObjectID(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_excavationobjectid_site_id_skosconcept',
+        related_name="rvn_excavationobjectid_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -2561,7 +2327,7 @@ class ExcavationObjectID(models.Model):
     )
     area = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_excavationobjectid_area_skosconcept',
+        related_name="rvn_excavationobjectid_area_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -2573,7 +2339,7 @@ class ExcavationObjectID(models.Model):
     )
     square_trench = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_excavationobjectid_square_trench_skosconcept',
+        related_name="rvn_excavationobjectid_square_trench_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -2585,7 +2351,7 @@ class ExcavationObjectID(models.Model):
     )
     planum = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_excavationobjectid_planum_skosconcept',
+        related_name="rvn_excavationobjectid_planum_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -2596,49 +2362,25 @@ class ExcavationObjectID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Metadaten/Excavation_object_ID.csv__Planum",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -2647,7 +2389,7 @@ class ExcavationObjectID(models.Model):
     class Meta:
 
         ordering = [
-            'excavation_object_id',
+            "excavation_object_id",
         ]
         verbose_name = "Excavation Objects"
 
@@ -2662,49 +2404,45 @@ class ExcavationObjectID(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:excavationobjectid_browse')
+        return reverse("archiv:excavationobjectid_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:excavationobjectid_create')
+        return reverse("archiv:excavationobjectid_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:excavationobjectid_detail', kwargs={'pk': self.id})
+        return reverse("archiv:excavationobjectid_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:excavationobjectid_detail', kwargs={'pk': self.id})
+        return reverse("archiv:excavationobjectid_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:excavationobjectid_delete', kwargs={'pk': self.id})
+        return reverse("archiv:excavationobjectid_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:excavationobjectid_edit', kwargs={'pk': self.id})
+        return reverse("archiv:excavationobjectid_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:excavationobjectid_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:excavationobjectid_detail", kwargs={"pk": next.first().id}
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:excavationobjectid_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:excavationobjectid_detail", kwargs={"pk": prev.first().id}
             )
         return False
 
 
 class ExcavationSeasons(models.Model):
-    """ Excavation season """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Excavation season"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     excavation_id = models.CharField(
         max_length=250,
         blank=True,
@@ -2724,7 +2462,8 @@ class ExcavationSeasons(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ExcavationSeasons/ExcavationSeasons.csv__Grabungskampagnen",
     )
     start_date_end_date = DateRangeField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Start date - end date",
         help_text="helptext for start_date_end_date",
     ).set_extra(
@@ -2742,7 +2481,7 @@ class ExcavationSeasons(models.Model):
     )
     season = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_excavationseasons_season_skosconcept',
+        related_name="rvn_excavationseasons_season_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -2754,7 +2493,7 @@ class ExcavationSeasons(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_excavationseasons_access_skosconcept',
+        related_name="rvn_excavationseasons_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -2765,49 +2504,25 @@ class ExcavationSeasons(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_ExcavationSeasons/ExcavationSeasons.csv__Access",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -2816,7 +2531,7 @@ class ExcavationSeasons(models.Model):
     class Meta:
 
         ordering = [
-            'grabungskampagnen',
+            "grabungskampagnen",
         ]
         verbose_name = "Excavation Seasons"
 
@@ -2831,49 +2546,45 @@ class ExcavationSeasons(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:excavationseasons_browse')
+        return reverse("archiv:excavationseasons_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:excavationseasons_create')
+        return reverse("archiv:excavationseasons_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:excavationseasons_detail', kwargs={'pk': self.id})
+        return reverse("archiv:excavationseasons_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:excavationseasons_detail', kwargs={'pk': self.id})
+        return reverse("archiv:excavationseasons_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:excavationseasons_delete', kwargs={'pk': self.id})
+        return reverse("archiv:excavationseasons_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:excavationseasons_edit', kwargs={'pk': self.id})
+        return reverse("archiv:excavationseasons_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:excavationseasons_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:excavationseasons_detail", kwargs={"pk": next.first().id}
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:excavationseasons_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:excavationseasons_detail", kwargs={"pk": prev.first().id}
             )
         return False
 
 
 class Fielddrawing(models.Model):
-    """ Digitised fielddrawing """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Digitised fielddrawing"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -2906,7 +2617,7 @@ class Fielddrawing(models.Model):
     )
     document_type = models.ManyToManyField(
         "DocumentTypes",
-        related_name='rvn_fielddrawing_document_type_documenttypes',
+        related_name="rvn_fielddrawing_document_type_documenttypes",
         blank=True,
         verbose_name="Document type",
         help_text="Type of document – for field drawing metadata this is always ‘Feldzeichnung’ (Fielddrawing).",
@@ -2915,7 +2626,8 @@ class Fielddrawing(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Document_type",
     )
     creation_date_original = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of original document",
         help_text="Date when the field drawing was made.",
     ).set_extra(
@@ -2924,7 +2636,8 @@ class Fielddrawing(models.Model):
         arche_prop="hasCreatedStartDateOriginal",
     )
     creation_date_scan = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date scan",
         help_text="Date when the scan was made.",
     ).set_extra(
@@ -2933,7 +2646,8 @@ class Fielddrawing(models.Model):
         arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date metadata",
         help_text="Date when metadata was created.",
     ).set_extra(
@@ -2942,7 +2656,7 @@ class Fielddrawing(models.Model):
     )
     creator_metadata = models.ManyToManyField(
         "Actor",
-        related_name='rvn_fielddrawing_creator_metadata_actor',
+        related_name="rvn_fielddrawing_creator_metadata_actor",
         blank=True,
         verbose_name="Creator of metadata",
         help_text="Person who created the metadata.",
@@ -2953,14 +2667,14 @@ class Fielddrawing(models.Model):
     )
     creator_original = models.ManyToManyField(
         "Actor",
-        related_name='rvn_fielddrawing_creator_original_actor',
+        related_name="rvn_fielddrawing_creator_original_actor",
         blank=True,
         verbose_name="Creator of original",
         help_text="Person who created the original field drawing.",
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Creator_original",
-        arche_prop="hasCreator"
+        arche_prop="hasCreator",
     )
     storage_folder_original = models.CharField(
         max_length=250,
@@ -2972,7 +2686,8 @@ class Fielddrawing(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Storage_folder_original",
     )
     resolution_scan_ppi = models.IntegerField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Scan resolution",
         help_text="Scan resolution settings. ",
     ).set_extra(
@@ -2983,7 +2698,7 @@ class Fielddrawing(models.Model):
     )
     original_material = models.ManyToManyField(
         SkosConcept,
-        related_name='rvn_fielddrawing_original_material_skosconcept',
+        related_name="rvn_fielddrawing_original_material_skosconcept",
         blank=True,
         verbose_name="Material of original document",
         help_text="Material of original (Millimetrepaper (Millimeterpapier), Transparentpapier (tracing paper), Kopierpapier (photocopy)).",
@@ -3013,7 +2728,7 @@ class Fielddrawing(models.Model):
     )
     amendment_drawn_by = models.ManyToManyField(
         "Actor",
-        related_name='rvn_fielddrawing_amendment_drawn_by_actor',
+        related_name="rvn_fielddrawing_amendment_drawn_by_actor",
         blank=True,
         verbose_name="Drawer of amendment to the fielddrawing",
         help_text="Person who made amendments to the field drawing.",
@@ -3032,7 +2747,7 @@ class Fielddrawing(models.Model):
     )
     drawer_monogram = models.ManyToManyField(
         "Actor",
-        related_name='rvn_fielddrawing_drawer_monogram_actor',
+        related_name="rvn_fielddrawing_drawer_monogram_actor",
         blank=True,
         verbose_name="Monogram of drawer",
         help_text="Monogram of the person who drew the field drawing.  ",
@@ -3042,7 +2757,7 @@ class Fielddrawing(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_fielddrawing_excavation_object_id_excavationobjectid',
+        related_name="rvn_fielddrawing_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
@@ -3052,7 +2767,7 @@ class Fielddrawing(models.Model):
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
-        related_name='rvn_fielddrawing_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_fielddrawing_archaeological_object_id_archaeologicalobjectid",
         blank=True,
         verbose_name="Archaeological object ID",
         help_text=" ",
@@ -3079,7 +2794,8 @@ class Fielddrawing(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Stratum_ID_absolute_prepub",
     )
     stratum_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Stratum (comment)",
         help_text="Transcript of the handwritten comments and notes on the stratum written on the field drawing. ",
     ).set_extra(
@@ -3107,7 +2823,8 @@ class Fielddrawing(models.Model):
         arche_prop_str_template="Scale: <value>",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Transcript of additional information found on the field drawing.",
     ).set_extra(
@@ -3115,7 +2832,8 @@ class Fielddrawing(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from creation of the scan (e.g. noticing of measurement errors, etc.) ",
     ).set_extra(
@@ -3125,7 +2843,7 @@ class Fielddrawing(models.Model):
     )
     excavation_id = models.ManyToManyField(
         "ExcavationSeasons",
-        related_name='rvn_fielddrawing_excavation_id_excavationseasons',
+        related_name="rvn_fielddrawing_excavation_id_excavationseasons",
         blank=True,
         verbose_name="Excavation Season",
         help_text="helptext for excavation_id",
@@ -3134,7 +2852,8 @@ class Fielddrawing(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Excavation_id",
     )
     creation_year_original = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation year of original document",
         help_text="Year when the field drawing was made.",
     ).set_extra(
@@ -3142,7 +2861,8 @@ class Fielddrawing(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Creation_year_original",
     )
     season = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Fieldwork season",
         help_text="Fieldwork season when the field drawing was made (H = Herbst = autumn; F = Frühling = spring).",
     ).set_extra(
@@ -3151,7 +2871,7 @@ class Fielddrawing(models.Model):
     )
     file_extension = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fielddrawing_file_extension_skosconcept',
+        related_name="rvn_fielddrawing_file_extension_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3163,7 +2883,7 @@ class Fielddrawing(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fielddrawing_copyright_skosconcept',
+        related_name="rvn_fielddrawing_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3175,7 +2895,7 @@ class Fielddrawing(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fielddrawing_access_skosconcept',
+        related_name="rvn_fielddrawing_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3188,7 +2908,7 @@ class Fielddrawing(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fielddrawing_site_id_skosconcept',
+        related_name="rvn_fielddrawing_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3200,7 +2920,7 @@ class Fielddrawing(models.Model):
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fielddrawing_equipment_scan_skosconcept',
+        related_name="rvn_fielddrawing_equipment_scan_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3213,7 +2933,7 @@ class Fielddrawing(models.Model):
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fielddrawing_source_original_copy_edited_copy_skosconcept',
+        related_name="rvn_fielddrawing_source_original_copy_edited_copy_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3225,7 +2945,7 @@ class Fielddrawing(models.Model):
     )
     creator_scan = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fielddrawing_creator_scan_skosconcept',
+        related_name="rvn_fielddrawing_creator_scan_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3238,7 +2958,7 @@ class Fielddrawing(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fielddrawing_excavation_post_excavation_skosconcept',
+        related_name="rvn_fielddrawing_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3249,49 +2969,25 @@ class Fielddrawing(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Feldzeichnungen_F-I/Fielddrawings.csv__Excavation__post_excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -3300,7 +2996,7 @@ class Fielddrawing(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "Fielddrawing"
 
@@ -3323,49 +3019,41 @@ class Fielddrawing(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:fielddrawing_browse')
+        return reverse("archiv:fielddrawing_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:fielddrawing_create')
+        return reverse("archiv:fielddrawing_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:fielddrawing_detail', kwargs={'pk': self.id})
+        return reverse("archiv:fielddrawing_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:fielddrawing_detail', kwargs={'pk': self.id})
+        return reverse("archiv:fielddrawing_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:fielddrawing_delete', kwargs={'pk': self.id})
+        return reverse("archiv:fielddrawing_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:fielddrawing_edit', kwargs={'pk': self.id})
+        return reverse("archiv:fielddrawing_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:fielddrawing_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:fielddrawing_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:fielddrawing_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:fielddrawing_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class Film(models.Model):
-    """ Analogue photographic film negatives """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Analogue photographic film negatives"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     film_id = models.CharField(
         max_length=250,
         blank=True,
@@ -3376,7 +3064,8 @@ class Film(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Film_ID",
     )
     film_number = models.IntegerField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Film number",
         help_text="helptext for film_number",
     ).set_extra(
@@ -3402,7 +3091,8 @@ class Film(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Foto_numbers_missing",
     )
     decomposition_phenomenon = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Decomposition phenomenon",
         help_text="The films were visually examined if they show signs of damage and decomposition. This field contains a description of the results.",
     ).set_extra(
@@ -3428,7 +3118,8 @@ class Film(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Storage_folder_original",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -3436,7 +3127,8 @@ class Film(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -3445,7 +3137,7 @@ class Film(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_film_document_type_documenttypes',
+        related_name="rvn_film_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3457,7 +3149,7 @@ class Film(models.Model):
     )
     excavation_id = models.ManyToManyField(
         "ExcavationSeasons",
-        related_name='rvn_film_excavation_id_excavationseasons',
+        related_name="rvn_film_excavation_id_excavationseasons",
         blank=True,
         verbose_name="Excavation Season",
         help_text="helptext for excavation_id",
@@ -3466,7 +3158,8 @@ class Film(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Excavation_id",
     )
     creation_year_original = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation year original",
         help_text="helptext for creation_year_original",
     ).set_extra(
@@ -3475,7 +3168,7 @@ class Film(models.Model):
     )
     film_format = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_film_film_format_skosconcept',
+        related_name="rvn_film_film_format_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3487,7 +3180,7 @@ class Film(models.Model):
     )
     film_brand = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_film_film_brand_skosconcept',
+        related_name="rvn_film_film_brand_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3499,7 +3192,7 @@ class Film(models.Model):
     )
     equipment_camera_brand = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_film_equipment_camera_brand_skosconcept',
+        related_name="rvn_film_equipment_camera_brand_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3511,7 +3204,7 @@ class Film(models.Model):
     )
     original_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_film_original_material_skosconcept',
+        related_name="rvn_film_original_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3522,49 +3215,25 @@ class Film(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Filme/Films.csv__Original_material",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -3573,7 +3242,7 @@ class Film(models.Model):
     class Meta:
 
         ordering = [
-            'film_id',
+            "film_id",
         ]
         verbose_name = "Photographic Film"
 
@@ -3588,52 +3257,44 @@ class Film(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:film_browse')
+        return reverse("archiv:film_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:film_create')
+        return reverse("archiv:film_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:film_detail', kwargs={'pk': self.id})
+        return reverse("archiv:film_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:film_detail', kwargs={'pk': self.id})
+        return reverse("archiv:film_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:film_delete', kwargs={'pk': self.id})
+        return reverse("archiv:film_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:film_edit', kwargs={'pk': self.id})
+        return reverse("archiv:film_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:film_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:film_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:film_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:film_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class Finddrawing(models.Model):
-    """ Digitised finddrawing """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Digitised finddrawing"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_finddrawing_creator_metadata_actor',
+        related_name="rvn_finddrawing_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3645,7 +3306,7 @@ class Finddrawing(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_finddrawing_creator_original_actor',
+        related_name="rvn_finddrawing_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3657,7 +3318,7 @@ class Finddrawing(models.Model):
     )
     creator_scan = models.ForeignKey(
         "Actor",
-        related_name='rvn_finddrawing_creator_scan_actor',
+        related_name="rvn_finddrawing_creator_scan_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3669,7 +3330,7 @@ class Finddrawing(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_finddrawing_document_type_documenttypes',
+        related_name="rvn_finddrawing_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3680,7 +3341,7 @@ class Finddrawing(models.Model):
     )
     find_inventory_number = models.ForeignKey(
         "FundinventarInventarnummern",
-        related_name='rvn_finddrawing_find_inventory_number_fundinventarinventarnummern',
+        related_name="rvn_finddrawing_find_inventory_number_fundinventarinventarnummern",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3726,7 +3387,8 @@ class Finddrawing(models.Model):
         is_public=False,
     )
     creation_date_original = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of original document",
         help_text="helptext for creation_date_original",
     ).set_extra(
@@ -3741,7 +3403,8 @@ class Finddrawing(models.Model):
         is_public=True,
     )
     creation_date_scan = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of scan",
         help_text="helptext for creation_date_scan",
     ).set_extra(
@@ -3750,7 +3413,7 @@ class Finddrawing(models.Model):
     )
     convolute_inventory_number = models.ForeignKey(
         "FundinventarKonvolutnummern",
-        related_name='rvn_finddrawing_convolute_inventory_number_fundinventarkonvolutnummern',
+        related_name="rvn_finddrawing_convolute_inventory_number_fundinventarkonvolutnummern",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3760,7 +3423,8 @@ class Finddrawing(models.Model):
         is_public=True,
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -3768,7 +3432,7 @@ class Finddrawing(models.Model):
     )
     bone_stone_inventory_number = models.ForeignKey(
         "FundinventarSteininventar",
-        related_name='rvn_finddrawing_bone_stone_inventory_number_fundinventarsteininventar',
+        related_name="rvn_finddrawing_bone_stone_inventory_number_fundinventarsteininventar",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3795,7 +3459,8 @@ class Finddrawing(models.Model):
         arche_prop="hasUsedHardware",
     )
     resolution_scan_dpi = models.IntegerField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Scan resolution",
         help_text="helptext for resolution_scan_dpi",
     ).set_extra(
@@ -3804,7 +3469,8 @@ class Finddrawing(models.Model):
         arche_prop_str_template="<value> dpi",
     )
     find_date = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Find datum",
         help_text="helptext for find_date",
     ).set_extra(
@@ -3819,14 +3485,16 @@ class Finddrawing(models.Model):
         is_public=True,
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
         is_public=True,
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -3835,7 +3503,7 @@ class Finddrawing(models.Model):
     )
     file_extension = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_finddrawing_file_extension_skosconcept',
+        related_name="rvn_finddrawing_file_extension_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3846,7 +3514,7 @@ class Finddrawing(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_finddrawing_copyright_skosconcept',
+        related_name="rvn_finddrawing_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3857,7 +3525,7 @@ class Finddrawing(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_finddrawing_access_skosconcept',
+        related_name="rvn_finddrawing_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3869,7 +3537,7 @@ class Finddrawing(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_finddrawing_site_id_skosconcept',
+        related_name="rvn_finddrawing_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3880,7 +3548,7 @@ class Finddrawing(models.Model):
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_finddrawing_source_original_copy_edited_copy_skosconcept',
+        related_name="rvn_finddrawing_source_original_copy_edited_copy_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3891,7 +3559,7 @@ class Finddrawing(models.Model):
     )
     original_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_finddrawing_original_material_skosconcept',
+        related_name="rvn_finddrawing_original_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3902,7 +3570,7 @@ class Finddrawing(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_finddrawing_excavation_post_excavation_skosconcept',
+        related_name="rvn_finddrawing_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -3912,49 +3580,25 @@ class Finddrawing(models.Model):
         is_public=True,
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -3963,7 +3607,7 @@ class Finddrawing(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "Finddrawing"
 
@@ -3978,52 +3622,44 @@ class Finddrawing(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:finddrawing_browse')
+        return reverse("archiv:finddrawing_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:finddrawing_create')
+        return reverse("archiv:finddrawing_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:finddrawing_detail', kwargs={'pk': self.id})
+        return reverse("archiv:finddrawing_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:finddrawing_detail', kwargs={'pk': self.id})
+        return reverse("archiv:finddrawing_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:finddrawing_delete', kwargs={'pk': self.id})
+        return reverse("archiv:finddrawing_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:finddrawing_edit', kwargs={'pk': self.id})
+        return reverse("archiv:finddrawing_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:finddrawing_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:finddrawing_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:finddrawing_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:finddrawing_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class Findsheets(models.Model):
-    """ Digitised find sheets """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Digitised find sheets"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_findsheets_creator_metadata_actor',
+        related_name="rvn_findsheets_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4036,7 +3672,7 @@ class Findsheets(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_findsheets_creator_original_actor',
+        related_name="rvn_findsheets_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4049,7 +3685,7 @@ class Findsheets(models.Model):
     )
     creator_scan = models.ForeignKey(
         "Actor",
-        related_name='rvn_findsheets_creator_scan_actor',
+        related_name="rvn_findsheets_creator_scan_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4062,7 +3698,7 @@ class Findsheets(models.Model):
     )
     archaeological_object_id = models.ForeignKey(
         "ArchaeologicalObjectID",
-        related_name='rvn_findsheets_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_findsheets_archaeological_object_id_archaeologicalobjectid",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4074,7 +3710,7 @@ class Findsheets(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_findsheets_document_type_documenttypes',
+        related_name="rvn_findsheets_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4086,7 +3722,7 @@ class Findsheets(models.Model):
     )
     find_inventory_number = models.ForeignKey(
         "FundinventarInventarnummern",
-        related_name='rvn_findsheets_find_inventory_number_fundinventarinventarnummern',
+        related_name="rvn_findsheets_find_inventory_number_fundinventarinventarnummern",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4098,7 +3734,7 @@ class Findsheets(models.Model):
     )
     convolute_inventory_number = models.ForeignKey(
         "FundinventarKonvolutnummern",
-        related_name='rvn_findsheets_convolute_inventory_number_fundinventarkonvolutnummern',
+        related_name="rvn_findsheets_convolute_inventory_number_fundinventarkonvolutnummern",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4110,7 +3746,7 @@ class Findsheets(models.Model):
     )
     bone_stone_inventory_number = models.ForeignKey(
         "FundinventarSteininventar",
-        related_name='rvn_findsheets_bone_stone_inventory_number_fundinventarsteininventar',
+        related_name="rvn_findsheets_bone_stone_inventory_number_fundinventarsteininventar",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4161,7 +3797,8 @@ class Findsheets(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Filename_old",
     )
     creation_date_original = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of original document",
         help_text="helptext for creation_date_original",
     ).set_extra(
@@ -4178,7 +3815,8 @@ class Findsheets(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creation_year_original",
     )
     creation_date_scan = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of scan",
         help_text="helptext for creation_date_scan",
     ).set_extra(
@@ -4187,7 +3825,8 @@ class Findsheets(models.Model):
         arche_prop="hasCreatedStartDateOriginal",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -4195,7 +3834,8 @@ class Findsheets(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Creation_date_metadata",
     )
     resolution_scan_dpi = models.IntegerField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Scan resolution",
         help_text="helptext for resolution_scan_dpi",
     ).set_extra(
@@ -4206,7 +3846,7 @@ class Findsheets(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_findsheets_excavation_object_id_excavationobjectid',
+        related_name="rvn_findsheets_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
@@ -4215,7 +3855,8 @@ class Findsheets(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Excavation_object_ID",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -4223,7 +3864,8 @@ class Findsheets(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -4233,7 +3875,7 @@ class Findsheets(models.Model):
     )
     file_extension = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_findsheets_file_extension_skosconcept',
+        related_name="rvn_findsheets_file_extension_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4245,7 +3887,7 @@ class Findsheets(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_findsheets_copyright_skosconcept',
+        related_name="rvn_findsheets_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4257,7 +3899,7 @@ class Findsheets(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_findsheets_access_skosconcept',
+        related_name="rvn_findsheets_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4270,7 +3912,7 @@ class Findsheets(models.Model):
     )
     storage_original = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_findsheets_storage_original_skosconcept',
+        related_name="rvn_findsheets_storage_original_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4282,7 +3924,7 @@ class Findsheets(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_findsheets_site_id_skosconcept',
+        related_name="rvn_findsheets_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4294,7 +3936,7 @@ class Findsheets(models.Model):
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_findsheets_equipment_scan_skosconcept',
+        related_name="rvn_findsheets_equipment_scan_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4307,7 +3949,7 @@ class Findsheets(models.Model):
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_findsheets_source_original_copy_edited_copy_skosconcept',
+        related_name="rvn_findsheets_source_original_copy_edited_copy_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4319,7 +3961,7 @@ class Findsheets(models.Model):
     )
     original_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_findsheets_original_material_skosconcept',
+        related_name="rvn_findsheets_original_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4331,7 +3973,7 @@ class Findsheets(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_findsheets_excavation_post_excavation_skosconcept',
+        related_name="rvn_findsheets_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4342,49 +3984,25 @@ class Findsheets(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundzettel/Find_sheets.csv__Excavation__post_excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -4393,7 +4011,7 @@ class Findsheets(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "Findsheets"
 
@@ -4412,52 +4030,44 @@ class Findsheets(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:findsheets_browse')
+        return reverse("archiv:findsheets_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:findsheets_create')
+        return reverse("archiv:findsheets_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:findsheets_detail', kwargs={'pk': self.id})
+        return reverse("archiv:findsheets_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:findsheets_detail', kwargs={'pk': self.id})
+        return reverse("archiv:findsheets_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:findsheets_delete', kwargs={'pk': self.id})
+        return reverse("archiv:findsheets_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:findsheets_edit', kwargs={'pk': self.id})
+        return reverse("archiv:findsheets_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:findsheets_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:findsheets_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:findsheets_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:findsheets_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class Fotoborndigital(models.Model):
-    """ Folder with born-digital photos """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Folder with born-digital photos"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_fotoborndigital_creator_metadata_actor',
+        related_name="rvn_fotoborndigital_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4523,7 +4133,8 @@ class Fotoborndigital(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Path_filename_ARCHE",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -4541,7 +4152,7 @@ class Fotoborndigital(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_fotoborndigital_excavation_object_id_excavationobjectid',
+        related_name="rvn_fotoborndigital_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
@@ -4559,7 +4170,8 @@ class Fotoborndigital(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Creation_year_original",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -4567,7 +4179,8 @@ class Fotoborndigital(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -4576,7 +4189,7 @@ class Fotoborndigital(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_fotoborndigital_document_type_documenttypes',
+        related_name="rvn_fotoborndigital_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4588,7 +4201,7 @@ class Fotoborndigital(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotoborndigital_copyright_skosconcept',
+        related_name="rvn_fotoborndigital_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4600,7 +4213,7 @@ class Fotoborndigital(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotoborndigital_access_skosconcept',
+        related_name="rvn_fotoborndigital_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4613,7 +4226,7 @@ class Fotoborndigital(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotoborndigital_site_id_skosconcept',
+        related_name="rvn_fotoborndigital_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4624,49 +4237,25 @@ class Fotoborndigital(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_born_digital/Fotos_born_digital.csv__Site_ID",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -4675,7 +4264,7 @@ class Fotoborndigital(models.Model):
     class Meta:
 
         ordering = [
-            'folder_name',
+            "folder_name",
         ]
         verbose_name = "Fotos born digital"
 
@@ -4690,52 +4279,48 @@ class Fotoborndigital(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:fotoborndigital_browse')
+        return reverse("archiv:fotoborndigital_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:fotoborndigital_create')
+        return reverse("archiv:fotoborndigital_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:fotoborndigital_detail', kwargs={'pk': self.id})
+        return reverse("archiv:fotoborndigital_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:fotoborndigital_detail', kwargs={'pk': self.id})
+        return reverse("archiv:fotoborndigital_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:fotoborndigital_delete', kwargs={'pk': self.id})
+        return reverse("archiv:fotoborndigital_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:fotoborndigital_edit', kwargs={'pk': self.id})
+        return reverse("archiv:fotoborndigital_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:fotoborndigital_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:fotoborndigital_detail", kwargs={"pk": next.first().id}
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:fotoborndigital_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:fotoborndigital_detail", kwargs={"pk": prev.first().id}
             )
         return False
 
 
 class Fotosgescannt(models.Model):
-    """ Digitised photos """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Digitised photos"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_fotosgescannt_creator_metadata_actor',
+        related_name="rvn_fotosgescannt_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4748,7 +4333,7 @@ class Fotosgescannt(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_fotosgescannt_creator_original_actor',
+        related_name="rvn_fotosgescannt_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4761,7 +4346,7 @@ class Fotosgescannt(models.Model):
     )
     creator_scan = models.ForeignKey(
         "Actor",
-        related_name='rvn_fotosgescannt_creator_scan_actor',
+        related_name="rvn_fotosgescannt_creator_scan_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4813,7 +4398,8 @@ class Fotosgescannt(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Filename_old",
     )
     film_number = models.IntegerField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Film number",
         help_text="helptext for film_number",
     ).set_extra(
@@ -4832,7 +4418,8 @@ class Fotosgescannt(models.Model):
         arche_prop_str_template="4DP photo number: <value>",
     )
     creation_date_original = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of analogue photo",
         help_text="helptext for creation_date_original",
     ).set_extra(
@@ -4841,7 +4428,7 @@ class Fotosgescannt(models.Model):
     )
     excavation_id = models.ManyToManyField(
         "ExcavationSeasons",
-        related_name='rvn_fotosgescannt_excavation_id_excavationseasons',
+        related_name="rvn_fotosgescannt_excavation_id_excavationseasons",
         blank=True,
         verbose_name="Excavation Season",
         help_text="helptext for excavation_id",
@@ -4857,10 +4444,11 @@ class Fotosgescannt(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Creation_year_original",
-        arche_prop="hasCreatedStartDateOriginal"
+        arche_prop="hasCreatedStartDateOriginal",
     )
     creation_date_scan = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of scan",
         help_text="helptext for creation_date_scan",
     ).set_extra(
@@ -4869,7 +4457,8 @@ class Fotosgescannt(models.Model):
         arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -4878,7 +4467,7 @@ class Fotosgescannt(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_fotosgescannt_document_type_documenttypes',
+        related_name="rvn_fotosgescannt_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4889,7 +4478,8 @@ class Fotosgescannt(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Document_type",
     )
     resolution_scan_ppi = models.IntegerField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Resolution of scan",
         help_text="helptext for resolution_scan_ppi",
     ).set_extra(
@@ -4919,7 +4509,7 @@ class Fotosgescannt(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_fotosgescannt_excavation_object_id_excavationobjectid',
+        related_name="rvn_fotosgescannt_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
@@ -4929,7 +4519,7 @@ class Fotosgescannt(models.Model):
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
-        related_name='rvn_fotosgescannt_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_fotosgescannt_archaeological_object_id_archaeologicalobjectid",
         blank=True,
         verbose_name="Archaeological object ID",
         help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
@@ -4947,7 +4537,8 @@ class Fotosgescannt(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Season",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -4955,7 +4546,8 @@ class Fotosgescannt(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -4965,7 +4557,7 @@ class Fotosgescannt(models.Model):
     )
     film_id = models.ForeignKey(
         "Film",
-        related_name='rvn_fotosgescannt_film_id_film',
+        related_name="rvn_fotosgescannt_film_id_film",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4979,7 +4571,7 @@ class Fotosgescannt(models.Model):
     )
     file_extension = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotosgescannt_file_extension_skosconcept',
+        related_name="rvn_fotosgescannt_file_extension_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -4991,7 +4583,7 @@ class Fotosgescannt(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotosgescannt_copyright_skosconcept',
+        related_name="rvn_fotosgescannt_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5003,7 +4595,7 @@ class Fotosgescannt(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotosgescannt_access_skosconcept',
+        related_name="rvn_fotosgescannt_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5016,7 +4608,7 @@ class Fotosgescannt(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotosgescannt_site_id_skosconcept',
+        related_name="rvn_fotosgescannt_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5028,7 +4620,7 @@ class Fotosgescannt(models.Model):
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotosgescannt_equipment_scan_skosconcept',
+        related_name="rvn_fotosgescannt_equipment_scan_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5041,7 +4633,7 @@ class Fotosgescannt(models.Model):
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotosgescannt_source_original_copy_edited_copy_skosconcept',
+        related_name="rvn_fotosgescannt_source_original_copy_edited_copy_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5053,7 +4645,7 @@ class Fotosgescannt(models.Model):
     )
     archaeological_object_type = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotosgescannt_archaeological_object_type_skosconcept',
+        related_name="rvn_fotosgescannt_archaeological_object_type_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5065,7 +4657,7 @@ class Fotosgescannt(models.Model):
     )
     find_type = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotosgescannt_find_type_skosconcept',
+        related_name="rvn_fotosgescannt_find_type_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5077,7 +4669,7 @@ class Fotosgescannt(models.Model):
     )
     find_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotosgescannt_find_material_skosconcept',
+        related_name="rvn_fotosgescannt_find_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5089,7 +4681,7 @@ class Fotosgescannt(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fotosgescannt_excavation_post_excavation_skosconcept',
+        related_name="rvn_fotosgescannt_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5100,49 +4692,25 @@ class Fotosgescannt(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fotos_gescannt/Photos.csv__excavation__post-excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -5151,7 +4719,7 @@ class Fotosgescannt(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "Fotos gescannt"
 
@@ -5166,56 +4734,52 @@ class Fotosgescannt(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:fotosgescannt_browse')
+        return reverse("archiv:fotosgescannt_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:fotosgescannt_create')
-    
+        return reverse("archiv:fotosgescannt_create")
+
     @classmethod
     def import_in_arche(self):
         return True
 
     def get_absolute_url(self):
-        return reverse('archiv:fotosgescannt_detail', kwargs={'pk': self.id})
+        return reverse("archiv:fotosgescannt_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:fotosgescannt_detail', kwargs={'pk': self.id})
+        return reverse("archiv:fotosgescannt_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:fotosgescannt_delete', kwargs={'pk': self.id})
+        return reverse("archiv:fotosgescannt_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:fotosgescannt_edit', kwargs={'pk': self.id})
+        return reverse("archiv:fotosgescannt_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:fotosgescannt_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:fotosgescannt_detail", kwargs={"pk": next.first().id}
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:fotosgescannt_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:fotosgescannt_detail", kwargs={"pk": prev.first().id}
             )
         return False
 
 
 class Fundinventar4DPuzzleID(models.Model):
-    """ A 4DPuzzleID was created for find inventories that did not have an ID """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """A 4DPuzzleID was created for find inventories that did not have an ID"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     excavation_object_id = models.ForeignKey(
         "ExcavationObjectID",
-        related_name='rvn_fundinventar4dpuzzleid_excavation_object_id_excavationobjectid',
+        related_name="rvn_fundinventar4dpuzzleid_excavation_object_id_excavationobjectid",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5262,7 +4826,8 @@ class Fundinventar4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Corresponding_to_inventory_number",
     )
     find_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Find comment",
         help_text="helptext for find_comment",
     ).set_extra(
@@ -5270,7 +4835,8 @@ class Fundinventar4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Find_comment",
     )
     stratum_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Stratum Comment",
         help_text="helptext for stratum_comment",
     ).set_extra(
@@ -5278,7 +4844,8 @@ class Fundinventar4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Stratum_comment",
     )
     find_date = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Find date",
         help_text="helptext for find_date",
     ).set_extra(
@@ -5296,7 +4863,7 @@ class Fundinventar4DPuzzleID(models.Model):
     )
     relatedto = models.ManyToManyField(
         SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_relatedto_skosconcept',
+        related_name="rvn_fundinventar4dpuzzleid_relatedto_skosconcept",
         blank=True,
         verbose_name="File is related to other TD resources",
         help_text="helptext for relatedto",
@@ -5306,7 +4873,7 @@ class Fundinventar4DPuzzleID(models.Model):
     )
     find_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_find_material_skosconcept',
+        related_name="rvn_fundinventar4dpuzzleid_find_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5317,7 +4884,8 @@ class Fundinventar4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Find_material",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="helptext for digitisation_comment",
     ).set_extra(
@@ -5326,7 +4894,7 @@ class Fundinventar4DPuzzleID(models.Model):
     )
     find_type = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_find_type_skosconcept',
+        related_name="rvn_fundinventar4dpuzzleid_find_type_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5338,7 +4906,7 @@ class Fundinventar4DPuzzleID(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_access_skosconcept',
+        related_name="rvn_fundinventar4dpuzzleid_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5350,7 +4918,7 @@ class Fundinventar4DPuzzleID(models.Model):
     )
     uncertainty_excavation_digitisation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_uncertainty_excavation_digitisation_skosconcept',
+        related_name="rvn_fundinventar4dpuzzleid_uncertainty_excavation_digitisation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5362,7 +4930,7 @@ class Fundinventar4DPuzzleID(models.Model):
     )
     creator_metadata = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_creator_metadata_skosconcept',
+        related_name="rvn_fundinventar4dpuzzleid_creator_metadata_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5374,7 +4942,7 @@ class Fundinventar4DPuzzleID(models.Model):
     )
     archaeological_object_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_archaeological_object_id_skosconcept',
+        related_name="rvn_fundinventar4dpuzzleid_archaeological_object_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5386,7 +4954,7 @@ class Fundinventar4DPuzzleID(models.Model):
     )
     stratum_id_relative = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_stratum_id_relative_skosconcept',
+        related_name="rvn_fundinventar4dpuzzleid_stratum_id_relative_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5398,7 +4966,7 @@ class Fundinventar4DPuzzleID(models.Model):
     )
     stratum_id_absolute_prepub = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_stratum_id_absolute_prepub_skosconcept',
+        related_name="rvn_fundinventar4dpuzzleid_stratum_id_absolute_prepub_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5410,7 +4978,7 @@ class Fundinventar4DPuzzleID(models.Model):
     )
     phase_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventar4dpuzzleid_phase_id_skosconcept',
+        related_name="rvn_fundinventar4dpuzzleid_phase_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5421,49 +4989,25 @@ class Fundinventar4DPuzzleID(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_4DPuzzleID/Find_inventory_4DPuzzle_number.csv__Phase_ID",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -5472,7 +5016,7 @@ class Fundinventar4DPuzzleID(models.Model):
     class Meta:
 
         ordering = [
-            'find_inventory_4dpuzzle_number',
+            "find_inventory_4dpuzzle_number",
         ]
         verbose_name = "Fundinventar 4DPuzzle ID"
 
@@ -5487,52 +5031,48 @@ class Fundinventar4DPuzzleID(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:fundinventar4dpuzzleid_browse')
+        return reverse("archiv:fundinventar4dpuzzleid_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:fundinventar4dpuzzleid_create')
+        return reverse("archiv:fundinventar4dpuzzleid_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:fundinventar4dpuzzleid_detail', kwargs={'pk': self.id})
+        return reverse("archiv:fundinventar4dpuzzleid_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:fundinventar4dpuzzleid_detail', kwargs={'pk': self.id})
+        return reverse("archiv:fundinventar4dpuzzleid_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:fundinventar4dpuzzleid_delete', kwargs={'pk': self.id})
+        return reverse("archiv:fundinventar4dpuzzleid_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:fundinventar4dpuzzleid_edit', kwargs={'pk': self.id})
+        return reverse("archiv:fundinventar4dpuzzleid_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:fundinventar4dpuzzleid_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:fundinventar4dpuzzleid_detail", kwargs={"pk": next.first().id}
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:fundinventar4dpuzzleid_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:fundinventar4dpuzzleid_detail", kwargs={"pk": prev.first().id}
             )
         return False
 
 
 class FundinventarInventarnummern(models.Model):
-    """ Inventory numbers of find inventories """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Inventory numbers of find inventories"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_fundinventarinventarnummern_creator_metadata_actor',
+        related_name="rvn_fundinventarinventarnummern_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5544,7 +5084,7 @@ class FundinventarInventarnummern(models.Model):
     )
     archaeological_object_id = models.ForeignKey(
         "ArchaeologicalObjectID",
-        related_name='rvn_fundinventarinventarnummern_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_fundinventarinventarnummern_archaeological_object_id_archaeologicalobjectid",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5556,7 +5096,7 @@ class FundinventarInventarnummern(models.Model):
     )
     corresponding_to_inventory_number = models.ForeignKey(
         "FundinventarInventarnummern",
-        related_name='rvn_fundinventarinventarnummern_corresponding_to_inventory_number_fundinventarinventarnummern',
+        related_name="rvn_fundinventarinventarnummern_corresponding_to_inventory_number_fundinventarinventarnummern",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5594,7 +5134,8 @@ class FundinventarInventarnummern(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Convolute_inventory_number",
     )
     find_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Find comment",
         help_text="helptext for find_comment",
     ).set_extra(
@@ -5603,7 +5144,7 @@ class FundinventarInventarnummern(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_fundinventarinventarnummern_excavation_object_id_excavationobjectid',
+        related_name="rvn_fundinventarinventarnummern_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="helptext for excavation_object_id",
@@ -5613,7 +5154,7 @@ class FundinventarInventarnummern(models.Model):
     )
     find_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarinventarnummern_find_material_skosconcept',
+        related_name="rvn_fundinventarinventarnummern_find_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5625,7 +5166,7 @@ class FundinventarInventarnummern(models.Model):
     )
     find_type = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarinventarnummern_find_type_skosconcept',
+        related_name="rvn_fundinventarinventarnummern_find_type_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5636,7 +5177,8 @@ class FundinventarInventarnummern(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Find_type",
     )
     stratum_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Stratum Comment",
         help_text="helptext for stratum_comment",
     ).set_extra(
@@ -5645,7 +5187,7 @@ class FundinventarInventarnummern(models.Model):
     )
     stratum_id_relative = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarinventarnummern_stratum_id_relative_skosconcept',
+        related_name="rvn_fundinventarinventarnummern_stratum_id_relative_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5656,7 +5198,8 @@ class FundinventarInventarnummern(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Stratum_ID_relative",
     )
     find_date = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Find date",
         help_text="helptext for find_date",
     ).set_extra(
@@ -5674,7 +5217,7 @@ class FundinventarInventarnummern(models.Model):
     )
     stratum_id_absolute_prepub = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarinventarnummern_stratum_id_absolute_prepub_skosconcept',
+        related_name="rvn_fundinventarinventarnummern_stratum_id_absolute_prepub_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5686,7 +5229,7 @@ class FundinventarInventarnummern(models.Model):
     )
     phase_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarinventarnummern_phase_id_skosconcept',
+        related_name="rvn_fundinventarinventarnummern_phase_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5698,7 +5241,7 @@ class FundinventarInventarnummern(models.Model):
     )
     relatedto = models.ManyToManyField(
         SkosConcept,
-        related_name='rvn_fundinventarinventarnummern_relatedto_skosconcept',
+        related_name="rvn_fundinventarinventarnummern_relatedto_skosconcept",
         blank=True,
         verbose_name="File is related to other TD resources",
         help_text="helptext for relatedto",
@@ -5708,7 +5251,7 @@ class FundinventarInventarnummern(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarinventarnummern_access_skosconcept',
+        related_name="rvn_fundinventarinventarnummern_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5719,7 +5262,8 @@ class FundinventarInventarnummern(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Access",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="helptext for digitisation_comment",
     ).set_extra(
@@ -5728,7 +5272,7 @@ class FundinventarInventarnummern(models.Model):
     )
     uncertainty_excavation_digitisation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarinventarnummern_uncertainty_excavation_digitisation_skosconcept',
+        related_name="rvn_fundinventarinventarnummern_uncertainty_excavation_digitisation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5739,49 +5283,25 @@ class FundinventarInventarnummern(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Inventarnummern/Find_inventory_number.csv__Uncertainty__excavation_digitisation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -5790,7 +5310,7 @@ class FundinventarInventarnummern(models.Model):
     class Meta:
 
         ordering = [
-            'find_inventory_number',
+            "find_inventory_number",
         ]
         verbose_name = "Fundinventar Inventarnummern"
 
@@ -5805,49 +5325,55 @@ class FundinventarInventarnummern(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:fundinventarinventarnummern_browse')
+        return reverse("archiv:fundinventarinventarnummern_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:fundinventarinventarnummern_create')
+        return reverse("archiv:fundinventarinventarnummern_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:fundinventarinventarnummern_detail', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarinventarnummern_detail", kwargs={"pk": self.id}
+        )
 
     def get_absolute_url(self):
-        return reverse('archiv:fundinventarinventarnummern_detail', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarinventarnummern_detail", kwargs={"pk": self.id}
+        )
 
     def get_delete_url(self):
-        return reverse('archiv:fundinventarinventarnummern_delete', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarinventarnummern_delete", kwargs={"pk": self.id}
+        )
 
     def get_edit_url(self):
-        return reverse('archiv:fundinventarinventarnummern_edit', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarinventarnummern_edit", kwargs={"pk": self.id}
+        )
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:fundinventarinventarnummern_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:fundinventarinventarnummern_detail",
+                kwargs={"pk": next.first().id},
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:fundinventarinventarnummern_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:fundinventarinventarnummern_detail",
+                kwargs={"pk": prev.first().id},
             )
         return False
 
 
 class FundinventarKonvolutnummern(models.Model):
-    """ Inventory of convolute numbers """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Inventory of convolute numbers"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     convolute_inventory_number = models.CharField(
         max_length=250,
         blank=True,
@@ -5886,7 +5412,7 @@ class FundinventarKonvolutnummern(models.Model):
     )
     find_material = models.ManyToManyField(
         SkosConcept,
-        related_name='rvn_fundinventarkonvolutnummern_find_material_skosconcept',
+        related_name="rvn_fundinventarkonvolutnummern_find_material_skosconcept",
         blank=True,
         verbose_name="Find material",
         help_text="helptext for find_material",
@@ -5895,7 +5421,8 @@ class FundinventarKonvolutnummern(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Find_material",
     )
     find_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Find comment",
         help_text="helptext for find_comment",
     ).set_extra(
@@ -5904,7 +5431,7 @@ class FundinventarKonvolutnummern(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_fundinventarkonvolutnummern_excavation_object_id_excavationobjectid',
+        related_name="rvn_fundinventarkonvolutnummern_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="helptext for excavation_object_id",
@@ -5914,7 +5441,7 @@ class FundinventarKonvolutnummern(models.Model):
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
-        related_name='rvn_fundinventarkonvolutnummern_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_fundinventarkonvolutnummern_archaeological_object_id_archaeologicalobjectid",
         blank=True,
         verbose_name="Archaeological object ID",
         help_text="helptext for archaeological_object_id",
@@ -5924,7 +5451,7 @@ class FundinventarKonvolutnummern(models.Model):
     )
     find_type = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarkonvolutnummern_find_type_skosconcept',
+        related_name="rvn_fundinventarkonvolutnummern_find_type_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5936,7 +5463,7 @@ class FundinventarKonvolutnummern(models.Model):
     )
     stratum_id_relative = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarkonvolutnummern_stratum_id_relative_skosconcept',
+        related_name="rvn_fundinventarkonvolutnummern_stratum_id_relative_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5947,7 +5474,8 @@ class FundinventarKonvolutnummern(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Stratum_ID_relative",
     )
     stratum_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Stratum Comment",
         help_text="helptext for stratum_comment",
     ).set_extra(
@@ -5957,7 +5485,7 @@ class FundinventarKonvolutnummern(models.Model):
     )
     stratum_id_absolute_prepub = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarkonvolutnummern_stratum_id_absolute_prepub_skosconcept',
+        related_name="rvn_fundinventarkonvolutnummern_stratum_id_absolute_prepub_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5968,7 +5496,8 @@ class FundinventarKonvolutnummern(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Stratum_ID_absolute_prepub",
     )
     find_date = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Find date",
         help_text="helptext for find_date",
     ).set_extra(
@@ -5977,7 +5506,7 @@ class FundinventarKonvolutnummern(models.Model):
     )
     phase_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarkonvolutnummern_phase_id_skosconcept',
+        related_name="rvn_fundinventarkonvolutnummern_phase_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -5989,7 +5518,7 @@ class FundinventarKonvolutnummern(models.Model):
     )
     storage_find = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarkonvolutnummern_storage_find_skosconcept',
+        related_name="rvn_fundinventarkonvolutnummern_storage_find_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6001,7 +5530,7 @@ class FundinventarKonvolutnummern(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarkonvolutnummern_access_skosconcept',
+        related_name="rvn_fundinventarkonvolutnummern_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6022,7 +5551,7 @@ class FundinventarKonvolutnummern(models.Model):
     )
     uncertainty_excavation_digitisation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarkonvolutnummern_uncertainty_excavation_digitisation_skosconcept',
+        related_name="rvn_fundinventarkonvolutnummern_uncertainty_excavation_digitisation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6033,7 +5562,8 @@ class FundinventarKonvolutnummern(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Uncertainty__excavation_digitisation",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="helptext for digitisation_comment",
     ).set_extra(
@@ -6042,7 +5572,7 @@ class FundinventarKonvolutnummern(models.Model):
     )
     creator_metadata = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarkonvolutnummern_creator_metadata_skosconcept',
+        related_name="rvn_fundinventarkonvolutnummern_creator_metadata_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6053,49 +5583,25 @@ class FundinventarKonvolutnummern(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Konvolutnummern/Convolute_inventory_number.csv__Creator_metadata",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -6104,7 +5610,7 @@ class FundinventarKonvolutnummern(models.Model):
     class Meta:
 
         ordering = [
-            'convolute_inventory_number',
+            "convolute_inventory_number",
         ]
         verbose_name = "Fundinventar Konvolutnummern"
 
@@ -6119,52 +5625,58 @@ class FundinventarKonvolutnummern(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:fundinventarkonvolutnummern_browse')
+        return reverse("archiv:fundinventarkonvolutnummern_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:fundinventarkonvolutnummern_create')
+        return reverse("archiv:fundinventarkonvolutnummern_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:fundinventarkonvolutnummern_detail', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarkonvolutnummern_detail", kwargs={"pk": self.id}
+        )
 
     def get_absolute_url(self):
-        return reverse('archiv:fundinventarkonvolutnummern_detail', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarkonvolutnummern_detail", kwargs={"pk": self.id}
+        )
 
     def get_delete_url(self):
-        return reverse('archiv:fundinventarkonvolutnummern_delete', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarkonvolutnummern_delete", kwargs={"pk": self.id}
+        )
 
     def get_edit_url(self):
-        return reverse('archiv:fundinventarkonvolutnummern_edit', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarkonvolutnummern_edit", kwargs={"pk": self.id}
+        )
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:fundinventarkonvolutnummern_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:fundinventarkonvolutnummern_detail",
+                kwargs={"pk": next.first().id},
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:fundinventarkonvolutnummern_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:fundinventarkonvolutnummern_detail",
+                kwargs={"pk": prev.first().id},
             )
         return False
 
 
 class FundinventarMaterialproben(models.Model):
-    """ Inventory of material samples """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Inventory of material samples"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_fundinventarmaterialproben_creator_metadata_actor',
+        related_name="rvn_fundinventarmaterialproben_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6176,7 +5688,7 @@ class FundinventarMaterialproben(models.Model):
     )
     archaeological_object_id = models.ForeignKey(
         "ExcavationObjectID",
-        related_name='rvn_fundinventarmaterialproben_archaeological_object_id_excavationobjectid',
+        related_name="rvn_fundinventarmaterialproben_archaeological_object_id_excavationobjectid",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6188,7 +5700,7 @@ class FundinventarMaterialproben(models.Model):
     )
     relatedto = models.ForeignKey(
         "Fundinventar4DPuzzleID",
-        related_name='rvn_fundinventarmaterialproben_relatedto_fundinventar4dpuzzleid',
+        related_name="rvn_fundinventarmaterialproben_relatedto_fundinventar4dpuzzleid",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6236,7 +5748,7 @@ class FundinventarMaterialproben(models.Model):
     )
     find_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarmaterialproben_find_material_skosconcept',
+        related_name="rvn_fundinventarmaterialproben_find_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6247,7 +5759,8 @@ class FundinventarMaterialproben(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Find_material",
     )
     find_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Find comment",
         help_text="helptext for find_comment",
     ).set_extra(
@@ -6256,7 +5769,7 @@ class FundinventarMaterialproben(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_fundinventarmaterialproben_excavation_object_id_excavationobjectid',
+        related_name="rvn_fundinventarmaterialproben_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="helptext for excavation_object_id",
@@ -6266,7 +5779,7 @@ class FundinventarMaterialproben(models.Model):
     )
     find_type = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarmaterialproben_find_type_skosconcept',
+        related_name="rvn_fundinventarmaterialproben_find_type_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6278,7 +5791,7 @@ class FundinventarMaterialproben(models.Model):
     )
     stratum_id_relative = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarmaterialproben_stratum_id_relative_skosconcept',
+        related_name="rvn_fundinventarmaterialproben_stratum_id_relative_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6290,7 +5803,7 @@ class FundinventarMaterialproben(models.Model):
     )
     stratum_id_absolute_prepub = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarmaterialproben_stratum_id_absolute_prepub_skosconcept',
+        related_name="rvn_fundinventarmaterialproben_stratum_id_absolute_prepub_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6301,7 +5814,8 @@ class FundinventarMaterialproben(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Stratum_ID_absolute_prepub",
     )
     stratum_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Stratum Comment",
         help_text="helptext for stratum_comment",
     ).set_extra(
@@ -6310,7 +5824,7 @@ class FundinventarMaterialproben(models.Model):
     )
     phase_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarmaterialproben_phase_id_skosconcept',
+        related_name="rvn_fundinventarmaterialproben_phase_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6321,7 +5835,8 @@ class FundinventarMaterialproben(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Phase_ID",
     )
     find_year = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Find year",
         help_text="helptext for find_year",
     ).set_extra(
@@ -6330,7 +5845,7 @@ class FundinventarMaterialproben(models.Model):
     )
     storage_find = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarmaterialproben_storage_find_skosconcept',
+        related_name="rvn_fundinventarmaterialproben_storage_find_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6342,7 +5857,7 @@ class FundinventarMaterialproben(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarmaterialproben_access_skosconcept',
+        related_name="rvn_fundinventarmaterialproben_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6354,7 +5869,7 @@ class FundinventarMaterialproben(models.Model):
     )
     uncertainty_excavation_digitisation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarmaterialproben_uncertainty_excavation_digitisation_skosconcept',
+        related_name="rvn_fundinventarmaterialproben_uncertainty_excavation_digitisation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6365,7 +5880,8 @@ class FundinventarMaterialproben(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Uncertainty__excavation_digitisation",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="helptext for digitisation_comment",
     ).set_extra(
@@ -6373,49 +5889,25 @@ class FundinventarMaterialproben(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Materialproben/Material_sample_inventory_no.csv__Digitisation_comment",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -6424,7 +5916,7 @@ class FundinventarMaterialproben(models.Model):
     class Meta:
 
         ordering = [
-            'material_sample_inventory_number',
+            "material_sample_inventory_number",
         ]
         verbose_name = "Fundinventar Materialproben"
 
@@ -6439,52 +5931,56 @@ class FundinventarMaterialproben(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:fundinventarmaterialproben_browse')
+        return reverse("archiv:fundinventarmaterialproben_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:fundinventarmaterialproben_create')
+        return reverse("archiv:fundinventarmaterialproben_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:fundinventarmaterialproben_detail', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarmaterialproben_detail", kwargs={"pk": self.id}
+        )
 
     def get_absolute_url(self):
-        return reverse('archiv:fundinventarmaterialproben_detail', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarmaterialproben_detail", kwargs={"pk": self.id}
+        )
 
     def get_delete_url(self):
-        return reverse('archiv:fundinventarmaterialproben_delete', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarmaterialproben_delete", kwargs={"pk": self.id}
+        )
 
     def get_edit_url(self):
-        return reverse('archiv:fundinventarmaterialproben_edit', kwargs={'pk': self.id})
+        return reverse("archiv:fundinventarmaterialproben_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:fundinventarmaterialproben_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:fundinventarmaterialproben_detail",
+                kwargs={"pk": next.first().id},
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:fundinventarmaterialproben_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:fundinventarmaterialproben_detail",
+                kwargs={"pk": prev.first().id},
             )
         return False
 
 
 class FundinventarSteininventar(models.Model):
-    """ Inventory of stones """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Inventory of stones"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_fundinventarsteininventar_creator_metadata_actor',
+        related_name="rvn_fundinventarsteininventar_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6496,7 +5992,7 @@ class FundinventarSteininventar(models.Model):
     )
     archaeological_object_id = models.ForeignKey(
         "ExcavationObjectID",
-        related_name='rvn_fundinventarsteininventar_archaeological_object_id_excavationobjectid',
+        related_name="rvn_fundinventarsteininventar_archaeological_object_id_excavationobjectid",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6508,7 +6004,7 @@ class FundinventarSteininventar(models.Model):
     )
     find_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarsteininventar_find_material_skosconcept',
+        related_name="rvn_fundinventarsteininventar_find_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6520,7 +6016,7 @@ class FundinventarSteininventar(models.Model):
     )
     find_type = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarsteininventar_find_type_skosconcept',
+        related_name="rvn_fundinventarsteininventar_find_type_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6568,7 +6064,7 @@ class FundinventarSteininventar(models.Model):
     )
     stratum_id_relative = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarsteininventar_stratum_id_relative_skosconcept',
+        related_name="rvn_fundinventarsteininventar_stratum_id_relative_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6580,7 +6076,7 @@ class FundinventarSteininventar(models.Model):
     )
     stratum_id_absolute_prepub = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarsteininventar_stratum_id_absolute_prepub_skosconcept',
+        related_name="rvn_fundinventarsteininventar_stratum_id_absolute_prepub_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6591,7 +6087,8 @@ class FundinventarSteininventar(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Stratum_ID_absolute_prepub",
     )
     find_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Find comment",
         help_text="helptext for find_comment",
     ).set_extra(
@@ -6600,7 +6097,7 @@ class FundinventarSteininventar(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_fundinventarsteininventar_excavation_object_id_excavationobjectid',
+        related_name="rvn_fundinventarsteininventar_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="helptext for excavation_object_id",
@@ -6610,7 +6107,7 @@ class FundinventarSteininventar(models.Model):
     )
     phase_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarsteininventar_phase_id_skosconcept',
+        related_name="rvn_fundinventarsteininventar_phase_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6622,7 +6119,7 @@ class FundinventarSteininventar(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarsteininventar_access_skosconcept',
+        related_name="rvn_fundinventarsteininventar_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6634,7 +6131,7 @@ class FundinventarSteininventar(models.Model):
     )
     storage_find = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarsteininventar_storage_find_skosconcept',
+        related_name="rvn_fundinventarsteininventar_storage_find_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6645,7 +6142,8 @@ class FundinventarSteininventar(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Storage_find",
     )
     stratum_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Stratum Comment",
         help_text="helptext for stratum_comment",
     ).set_extra(
@@ -6654,7 +6152,7 @@ class FundinventarSteininventar(models.Model):
     )
     uncertainty_excavation_digitisation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_fundinventarsteininventar_uncertainty_excavation_digitisation_skosconcept',
+        related_name="rvn_fundinventarsteininventar_uncertainty_excavation_digitisation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6665,7 +6163,8 @@ class FundinventarSteininventar(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Uncertainty__excavation_digitisation",
     )
     find_date = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Find date",
         help_text="helptext for find_date",
     ).set_extra(
@@ -6674,7 +6173,7 @@ class FundinventarSteininventar(models.Model):
     )
     relatedto = models.ManyToManyField(
         SkosConcept,
-        related_name='rvn_fundinventarsteininventar_relatedto_skosconcept',
+        related_name="rvn_fundinventarsteininventar_relatedto_skosconcept",
         blank=True,
         verbose_name="File is related to other TD resources",
         help_text="helptext for relatedto",
@@ -6683,7 +6182,8 @@ class FundinventarSteininventar(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__RelatedTo",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="helptext for digitisation_comment",
     ).set_extra(
@@ -6691,49 +6191,25 @@ class FundinventarSteininventar(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Fundinventar_Steininventar/Bone_Stone_inventory_number.csv__Digitisation_comment",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -6742,7 +6218,7 @@ class FundinventarSteininventar(models.Model):
     class Meta:
 
         ordering = [
-            'find_inventory_number',
+            "find_inventory_number",
         ]
         verbose_name = "FundinventarSteininventar"
 
@@ -6757,52 +6233,51 @@ class FundinventarSteininventar(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:fundinventarsteininventar_browse')
+        return reverse("archiv:fundinventarsteininventar_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:fundinventarsteininventar_create')
+        return reverse("archiv:fundinventarsteininventar_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:fundinventarsteininventar_detail', kwargs={'pk': self.id})
-
-    def get_absolute_url(self):
-        return reverse('archiv:fundinventarsteininventar_detail', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarsteininventar_detail", kwargs={"pk": self.id}
+        )
 
     def get_delete_url(self):
-        return reverse('archiv:fundinventarsteininventar_delete', kwargs={'pk': self.id})
+        return reverse(
+            "archiv:fundinventarsteininventar_delete", kwargs={"pk": self.id}
+        )
 
     def get_edit_url(self):
-        return reverse('archiv:fundinventarsteininventar_edit', kwargs={'pk': self.id})
+        return reverse("archiv:fundinventarsteininventar_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:fundinventarsteininventar_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:fundinventarsteininventar_detail",
+                kwargs={"pk": next.first().id},
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:fundinventarsteininventar_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:fundinventarsteininventar_detail",
+                kwargs={"pk": prev.first().id},
             )
         return False
 
 
 class GIS(models.Model):
-    """ Geographical information system """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Geographical information system"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_gis_creator_metadata_actor',
+        related_name="rvn_gis_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6815,7 +6290,7 @@ class GIS(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_gis_creator_original_actor',
+        related_name="rvn_gis_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6828,7 +6303,7 @@ class GIS(models.Model):
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
-        related_name='rvn_gis_creator_archivalobject_actor',
+        related_name="rvn_gis_creator_archivalobject_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6841,7 +6316,7 @@ class GIS(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_gis_document_type_documenttypes',
+        related_name="rvn_gis_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6901,7 +6376,8 @@ class GIS(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Path_filename_ARCHE",
     )
     creation_date_original = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of original document",
         help_text="helptext for creation_date_original",
     ).set_extra(
@@ -6920,7 +6396,8 @@ class GIS(models.Model):
         arche_prop="hasUsedSoftware",
     )
     creation_date_archivalobject = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of archival object",
         help_text="helptext for creation_date_archivalobject",
     ).set_extra(
@@ -6928,7 +6405,8 @@ class GIS(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Creation_date_archivalObject",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -6937,7 +6415,7 @@ class GIS(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_gis_excavation_object_id_excavationobjectid',
+        related_name="rvn_gis_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
@@ -6947,7 +6425,7 @@ class GIS(models.Model):
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
-        related_name='rvn_gis_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_gis_archaeological_object_id_archaeologicalobjectid",
         blank=True,
         verbose_name="Archaeological object ID",
         help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
@@ -6957,7 +6435,7 @@ class GIS(models.Model):
     )
     relatedto = models.ManyToManyField(
         "DocumentTypes",
-        related_name='rvn_gis_relatedto_documenttypes',
+        related_name="rvn_gis_relatedto_documenttypes",
         blank=True,
         verbose_name="File is related to other TD resources",
         help_text="helptext for relatedto",
@@ -6966,7 +6444,8 @@ class GIS(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__RelatedTo",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -6974,7 +6453,8 @@ class GIS(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -6984,7 +6464,7 @@ class GIS(models.Model):
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_gis_file_extension_original_skosconcept',
+        related_name="rvn_gis_file_extension_original_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -6996,7 +6476,7 @@ class GIS(models.Model):
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_gis_file_extension_archivalobject_skosconcept',
+        related_name="rvn_gis_file_extension_archivalobject_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7008,7 +6488,7 @@ class GIS(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_gis_copyright_skosconcept',
+        related_name="rvn_gis_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7020,7 +6500,7 @@ class GIS(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_gis_access_skosconcept',
+        related_name="rvn_gis_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7033,7 +6513,7 @@ class GIS(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_gis_site_id_skosconcept',
+        related_name="rvn_gis_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7045,7 +6525,7 @@ class GIS(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_gis_excavation_post_excavation_skosconcept',
+        related_name="rvn_gis_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7056,49 +6536,25 @@ class GIS(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_GIS/GIS_metadata.csv__Excavation__post_excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -7107,7 +6563,7 @@ class GIS(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "GIS"
 
@@ -7122,7 +6578,7 @@ class GIS(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:gis_browse')
+        return reverse("archiv:gis_browse")
 
     @classmethod
     def import_in_arche(self):
@@ -7130,48 +6586,40 @@ class GIS(models.Model):
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:gis_create')
+        return reverse("archiv:gis_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:gis_detail', kwargs={'pk': self.id})
+        return reverse("archiv:gis_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:gis_detail', kwargs={'pk': self.id})
+        return reverse("archiv:gis_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:gis_delete', kwargs={'pk': self.id})
+        return reverse("archiv:gis_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:gis_edit', kwargs={'pk': self.id})
+        return reverse("archiv:gis_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:gis_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:gis_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:gis_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:gis_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class Geophysics(models.Model):
-    """ Files from geophysical surveys """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Files from geophysical surveys"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_geophysics_creator_metadata_actor',
+        related_name="rvn_geophysics_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7184,7 +6632,7 @@ class Geophysics(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_geophysics_creator_original_actor',
+        related_name="rvn_geophysics_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7197,7 +6645,7 @@ class Geophysics(models.Model):
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
-        related_name='rvn_geophysics_creator_archivalobject_actor',
+        related_name="rvn_geophysics_creator_archivalobject_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7210,7 +6658,7 @@ class Geophysics(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_geophysics_document_type_documenttypes',
+        related_name="rvn_geophysics_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7261,7 +6709,8 @@ class Geophysics(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Filename_old",
     )
     creation_date_original = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of original document",
         help_text="helptext for creation_date_original",
     ).set_extra(
@@ -7270,7 +6719,8 @@ class Geophysics(models.Model):
         arche_prop="hasCreatedStartDate",
     )
     creation_date_archivalobject = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of archival object",
         help_text="helptext for creation_date_archivalobject",
     ).set_extra(
@@ -7278,7 +6728,8 @@ class Geophysics(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Creation_date_archivalObject",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -7296,7 +6747,7 @@ class Geophysics(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_geophysics_excavation_object_id_excavationobjectid',
+        related_name="rvn_geophysics_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
@@ -7305,7 +6756,8 @@ class Geophysics(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Excavation_object_ID",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -7314,7 +6766,8 @@ class Geophysics(models.Model):
         arche_prop="hasDescription",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -7324,7 +6777,7 @@ class Geophysics(models.Model):
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_geophysics_file_extension_original_skosconcept',
+        related_name="rvn_geophysics_file_extension_original_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7336,7 +6789,7 @@ class Geophysics(models.Model):
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_geophysics_file_extension_archivalobject_skosconcept',
+        related_name="rvn_geophysics_file_extension_archivalobject_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7348,7 +6801,7 @@ class Geophysics(models.Model):
     )
     method = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_geophysics_method_skosconcept',
+        related_name="rvn_geophysics_method_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7361,7 +6814,7 @@ class Geophysics(models.Model):
     )
     equipment = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_geophysics_equipment_skosconcept',
+        related_name="rvn_geophysics_equipment_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7374,7 +6827,7 @@ class Geophysics(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_geophysics_copyright_skosconcept',
+        related_name="rvn_geophysics_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7386,7 +6839,7 @@ class Geophysics(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_geophysics_access_skosconcept',
+        related_name="rvn_geophysics_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7399,7 +6852,7 @@ class Geophysics(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_geophysics_site_id_skosconcept',
+        related_name="rvn_geophysics_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7411,7 +6864,7 @@ class Geophysics(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_geophysics_excavation_post_excavation_skosconcept',
+        related_name="rvn_geophysics_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7422,49 +6875,25 @@ class Geophysics(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Geomagnetik/Geophysik_Metadata.csv__Excavation__post_excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -7473,7 +6902,7 @@ class Geophysics(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "Geophysics"
 
@@ -7492,52 +6921,44 @@ class Geophysics(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:geophysics_browse')
+        return reverse("archiv:geophysics_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:geophysics_create')
+        return reverse("archiv:geophysics_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:geophysics_detail', kwargs={'pk': self.id})
+        return reverse("archiv:geophysics_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:geophysics_detail', kwargs={'pk': self.id})
+        return reverse("archiv:geophysics_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:geophysics_delete', kwargs={'pk': self.id})
+        return reverse("archiv:geophysics_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:geophysics_edit', kwargs={'pk': self.id})
+        return reverse("archiv:geophysics_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:geophysics_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:geophysics_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:geophysics_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:geophysics_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class Inventorybooks(models.Model):
-    """ Digitised inventory books """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Digitised inventory books"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_inventorybooks_creator_metadata_actor',
+        related_name="rvn_inventorybooks_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7550,7 +6971,7 @@ class Inventorybooks(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_inventorybooks_creator_original_actor',
+        related_name="rvn_inventorybooks_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7563,7 +6984,7 @@ class Inventorybooks(models.Model):
     )
     creator_scan = models.ForeignKey(
         "Actor",
-        related_name='rvn_inventorybooks_creator_scan_actor',
+        related_name="rvn_inventorybooks_creator_scan_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7576,7 +6997,7 @@ class Inventorybooks(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_inventorybooks_document_type_documenttypes',
+        related_name="rvn_inventorybooks_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7588,7 +7009,7 @@ class Inventorybooks(models.Model):
     )
     convolute_inventory_number = models.ForeignKey(
         "FundinventarKonvolutnummern",
-        related_name='rvn_inventorybooks_convolute_inventory_number_fundinventarkonvolutnummern',
+        related_name="rvn_inventorybooks_convolute_inventory_number_fundinventarkonvolutnummern",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7600,7 +7021,7 @@ class Inventorybooks(models.Model):
     )
     bone_stone_inventory_number = models.ForeignKey(
         "FundinventarSteininventar",
-        related_name='rvn_inventorybooks_bone_stone_inventory_number_fundinventarsteininventar',
+        related_name="rvn_inventorybooks_bone_stone_inventory_number_fundinventarsteininventar",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7651,7 +7072,8 @@ class Inventorybooks(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Filename_old",
     )
     creation_date_original = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of original document",
         help_text="helptext for creation_date_original",
     ).set_extra(
@@ -7666,10 +7088,11 @@ class Inventorybooks(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Creation_year_original",
-        arche_prop="hasCreatedStartDateOriginal"
+        arche_prop="hasCreatedStartDateOriginal",
     )
     creation_date_scan = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of scan",
         help_text="helptext for creation_date_scan",
     ).set_extra(
@@ -7678,7 +7101,8 @@ class Inventorybooks(models.Model):
         arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -7695,7 +7119,8 @@ class Inventorybooks(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Storage_folder_original",
     )
     resolution_scan_dpi = models.IntegerField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Scan resolution",
         help_text="helptext for resolution_scan_dpi",
     ).set_extra(
@@ -7706,7 +7131,7 @@ class Inventorybooks(models.Model):
     )
     find_inventory_number = models.ManyToManyField(
         "FundinventarInventarnummern",
-        related_name='rvn_inventorybooks_find_inventory_number_fundinventarinventarnummern',
+        related_name="rvn_inventorybooks_find_inventory_number_fundinventarinventarnummern",
         blank=True,
         verbose_name="Find inventory number",
         help_text="helptext for find_inventory_number",
@@ -7715,7 +7140,8 @@ class Inventorybooks(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Find_inventory_number",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -7725,7 +7151,7 @@ class Inventorybooks(models.Model):
     )
     file_extension = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_inventorybooks_file_extension_skosconcept',
+        related_name="rvn_inventorybooks_file_extension_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7737,7 +7163,7 @@ class Inventorybooks(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_inventorybooks_copyright_skosconcept',
+        related_name="rvn_inventorybooks_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7749,7 +7175,7 @@ class Inventorybooks(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_inventorybooks_access_skosconcept',
+        related_name="rvn_inventorybooks_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7762,7 +7188,7 @@ class Inventorybooks(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_inventorybooks_site_id_skosconcept',
+        related_name="rvn_inventorybooks_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7774,7 +7200,7 @@ class Inventorybooks(models.Model):
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_inventorybooks_equipment_scan_skosconcept',
+        related_name="rvn_inventorybooks_equipment_scan_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7787,7 +7213,7 @@ class Inventorybooks(models.Model):
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_inventorybooks_source_original_copy_edited_copy_skosconcept',
+        related_name="rvn_inventorybooks_source_original_copy_edited_copy_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7799,7 +7225,7 @@ class Inventorybooks(models.Model):
     )
     original_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_inventorybooks_original_material_skosconcept',
+        related_name="rvn_inventorybooks_original_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7811,7 +7237,7 @@ class Inventorybooks(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_inventorybooks_excavation_post_excavation_skosconcept',
+        related_name="rvn_inventorybooks_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7822,49 +7248,25 @@ class Inventorybooks(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Inventarbuecher/Find_inventory.csv__Excavation__post_excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -7873,7 +7275,7 @@ class Inventorybooks(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "Inventory books"
 
@@ -7892,52 +7294,48 @@ class Inventorybooks(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:inventorybooks_browse')
+        return reverse("archiv:inventorybooks_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:inventorybooks_create')
+        return reverse("archiv:inventorybooks_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:inventorybooks_detail', kwargs={'pk': self.id})
+        return reverse("archiv:inventorybooks_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:inventorybooks_detail', kwargs={'pk': self.id})
+        return reverse("archiv:inventorybooks_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:inventorybooks_delete', kwargs={'pk': self.id})
+        return reverse("archiv:inventorybooks_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:inventorybooks_edit', kwargs={'pk': self.id})
+        return reverse("archiv:inventorybooks_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:inventorybooks_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:inventorybooks_detail", kwargs={"pk": next.first().id}
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:inventorybooks_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:inventorybooks_detail", kwargs={"pk": prev.first().id}
             )
         return False
 
 
 class PhasenID(models.Model):
-    """ Identifier of archaeological phases """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Identifier of archaeological phases"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     phase_type = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_phasenid_phase_type_skosconcept',
+        related_name="rvn_phasenid_phase_type_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7948,7 +7346,7 @@ class PhasenID(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_phasenid_site_id_skosconcept',
+        related_name="rvn_phasenid_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -7975,7 +7373,7 @@ class PhasenID(models.Model):
     )
     area = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_phasenid_area_excavationobjectid',
+        related_name="rvn_phasenid_area_excavationobjectid",
         blank=True,
         verbose_name="Area",
         help_text="helptext for area",
@@ -7984,7 +7382,7 @@ class PhasenID(models.Model):
     )
     containing_phase_id = models.ManyToManyField(
         SkosConcept,
-        related_name='rvn_phasenid_containing_phase_id_skosconcept',
+        related_name="rvn_phasenid_containing_phase_id_skosconcept",
         blank=True,
         verbose_name="Containing phase ID",
         help_text="helptext for containing_phase_id",
@@ -7992,49 +7390,25 @@ class PhasenID(models.Model):
         is_public=False,
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -8043,7 +7417,7 @@ class PhasenID(models.Model):
     class Meta:
 
         ordering = [
-            'phase_id',
+            "phase_id",
         ]
         verbose_name = "Phasen ID"
 
@@ -8058,52 +7432,44 @@ class PhasenID(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:phasenid_browse')
+        return reverse("archiv:phasenid_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:phasenid_create')
+        return reverse("archiv:phasenid_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:phasenid_detail', kwargs={'pk': self.id})
+        return reverse("archiv:phasenid_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:phasenid_detail', kwargs={'pk': self.id})
+        return reverse("archiv:phasenid_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:phasenid_delete', kwargs={'pk': self.id})
+        return reverse("archiv:phasenid_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:phasenid_edit', kwargs={'pk': self.id})
+        return reverse("archiv:phasenid_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:phasenid_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:phasenid_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:phasenid_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:phasenid_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class Protocols(models.Model):
-    """ Digitised protocols """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Digitised protocols"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_protocols_creator_metadata_actor',
+        related_name="rvn_protocols_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8116,7 +7482,7 @@ class Protocols(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_protocols_creator_original_actor',
+        related_name="rvn_protocols_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8129,7 +7495,7 @@ class Protocols(models.Model):
     )
     creator_scan = models.ForeignKey(
         "Actor",
-        related_name='rvn_protocols_creator_scan_actor',
+        related_name="rvn_protocols_creator_scan_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8142,7 +7508,7 @@ class Protocols(models.Model):
     )
     excavation_object_id = models.ForeignKey(
         "ExcavationObjectID",
-        related_name='rvn_protocols_excavation_object_id_excavationobjectid',
+        related_name="rvn_protocols_excavation_object_id_excavationobjectid",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8194,7 +7560,7 @@ class Protocols(models.Model):
     )
     document_type = models.ManyToManyField(
         "DocumentTypes",
-        related_name='rvn_protocols_document_type_documenttypes',
+        related_name="rvn_protocols_document_type_documenttypes",
         blank=True,
         verbose_name="Document type",
         help_text="helptext for document_type",
@@ -8203,7 +7569,8 @@ class Protocols(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Document_type",
     )
     creation_date_original = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of original document",
         help_text="helptext for creation_date_original",
     ).set_extra(
@@ -8218,10 +7585,11 @@ class Protocols(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Creation_year_original",
-        arche_prop="hasCreatedStartDateOriginal"
+        arche_prop="hasCreatedStartDateOriginal",
     )
     creation_date_scan = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of scan",
         help_text="helptext for creation_date_scan",
     ).set_extra(
@@ -8230,7 +7598,8 @@ class Protocols(models.Model):
         arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -8247,7 +7616,8 @@ class Protocols(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Storage_folder_original",
     )
     resolution_scan_dpi = models.IntegerField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Scan resolution",
         help_text="helptext for resolution_scan_dpi",
     ).set_extra(
@@ -8258,7 +7628,7 @@ class Protocols(models.Model):
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
-        related_name='rvn_protocols_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_protocols_archaeological_object_id_archaeologicalobjectid",
         blank=True,
         verbose_name="Archaeological object ID",
         help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
@@ -8267,7 +7637,8 @@ class Protocols(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Archaeological_object_ID",
     )
     number_of_pages = models.IntegerField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Number of pages",
         help_text="helptext for number_of_pages",
     ).set_extra(
@@ -8277,7 +7648,8 @@ class Protocols(models.Model):
         arche_prop_str_template="<value> pages",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -8285,7 +7657,8 @@ class Protocols(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -8295,7 +7668,7 @@ class Protocols(models.Model):
     )
     file_extension = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_protocols_file_extension_skosconcept',
+        related_name="rvn_protocols_file_extension_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8307,7 +7680,7 @@ class Protocols(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_protocols_copyright_skosconcept',
+        related_name="rvn_protocols_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8319,7 +7692,7 @@ class Protocols(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_protocols_access_skosconcept',
+        related_name="rvn_protocols_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8332,7 +7705,7 @@ class Protocols(models.Model):
     )
     storage = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_protocols_storage_skosconcept',
+        related_name="rvn_protocols_storage_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8344,7 +7717,7 @@ class Protocols(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_protocols_site_id_skosconcept',
+        related_name="rvn_protocols_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8356,7 +7729,7 @@ class Protocols(models.Model):
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_protocols_equipment_scan_skosconcept',
+        related_name="rvn_protocols_equipment_scan_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8369,7 +7742,7 @@ class Protocols(models.Model):
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_protocols_source_original_copy_edited_copy_skosconcept',
+        related_name="rvn_protocols_source_original_copy_edited_copy_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8381,7 +7754,7 @@ class Protocols(models.Model):
     )
     original_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_protocols_original_material_skosconcept',
+        related_name="rvn_protocols_original_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8393,7 +7766,7 @@ class Protocols(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_protocols_excavation_post_excavation_skosconcept',
+        related_name="rvn_protocols_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8404,49 +7777,25 @@ class Protocols(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Protokolle/Protocol.csv__Excavation__post_excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -8455,7 +7804,7 @@ class Protocols(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "Protocols"
 
@@ -8474,52 +7823,44 @@ class Protocols(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:protocols_browse')
+        return reverse("archiv:protocols_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:protocols_create')
+        return reverse("archiv:protocols_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:protocols_detail', kwargs={'pk': self.id})
+        return reverse("archiv:protocols_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:protocols_detail', kwargs={'pk': self.id})
+        return reverse("archiv:protocols_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:protocols_delete', kwargs={'pk': self.id})
+        return reverse("archiv:protocols_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:protocols_edit', kwargs={'pk': self.id})
+        return reverse("archiv:protocols_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:protocols_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:protocols_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:protocols_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:protocols_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class StratenID(models.Model):
-    """ Identifier of archaeological strata """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Identifier of archaeological strata"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     stratum_type = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_stratenid_stratum_type_skosconcept',
+        related_name="rvn_stratenid_stratum_type_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8530,7 +7871,7 @@ class StratenID(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_stratenid_site_id_skosconcept',
+        related_name="rvn_stratenid_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8557,7 +7898,7 @@ class StratenID(models.Model):
     )
     area = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_stratenid_area_excavationobjectid',
+        related_name="rvn_stratenid_area_excavationobjectid",
         blank=True,
         verbose_name="Area",
         help_text="helptext for area",
@@ -8566,7 +7907,7 @@ class StratenID(models.Model):
     )
     containing_stratum_id = models.ManyToManyField(
         SkosConcept,
-        related_name='rvn_stratenid_containing_stratum_id_skosconcept',
+        related_name="rvn_stratenid_containing_stratum_id_skosconcept",
         blank=True,
         verbose_name="Containing stratum ID",
         help_text="helptext for containing_stratum_id",
@@ -8574,49 +7915,25 @@ class StratenID(models.Model):
         is_public=False,
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -8625,7 +7942,7 @@ class StratenID(models.Model):
     class Meta:
 
         ordering = [
-            'stratum_id',
+            "stratum_id",
         ]
         verbose_name = "Straten ID"
 
@@ -8640,52 +7957,44 @@ class StratenID(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:stratenid_browse')
+        return reverse("archiv:stratenid_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:stratenid_create')
+        return reverse("archiv:stratenid_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:stratenid_detail', kwargs={'pk': self.id})
+        return reverse("archiv:stratenid_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:stratenid_detail', kwargs={'pk': self.id})
+        return reverse("archiv:stratenid_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:stratenid_delete', kwargs={'pk': self.id})
+        return reverse("archiv:stratenid_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:stratenid_edit', kwargs={'pk': self.id})
+        return reverse("archiv:stratenid_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:stratenid_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:stratenid_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:stratenid_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:stratenid_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class Tables(models.Model):
-    """ Tables """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Tables"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_tables_creator_metadata_actor',
+        related_name="rvn_tables_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8698,7 +8007,7 @@ class Tables(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_tables_creator_original_actor',
+        related_name="rvn_tables_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8711,7 +8020,7 @@ class Tables(models.Model):
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
-        related_name='rvn_tables_creator_archivalobject_actor',
+        related_name="rvn_tables_creator_archivalobject_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8724,7 +8033,7 @@ class Tables(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_tables_document_type_documenttypes',
+        related_name="rvn_tables_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8785,7 +8094,8 @@ class Tables(models.Model):
         arche_prop="hasCreatedStartDate",
     )
     creation_date_archivalobject = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of archival object",
         help_text="helptext for creation_date_archivalobject",
     ).set_extra(
@@ -8793,7 +8103,8 @@ class Tables(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Creation_date_archivalObject",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -8811,7 +8122,7 @@ class Tables(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_tables_excavation_object_id_excavationobjectid',
+        related_name="rvn_tables_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
@@ -8821,7 +8132,7 @@ class Tables(models.Model):
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
-        related_name='rvn_tables_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_tables_archaeological_object_id_archaeologicalobjectid",
         blank=True,
         verbose_name="Archaeological object ID",
         help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
@@ -8831,7 +8142,7 @@ class Tables(models.Model):
     )
     relatedto = models.ManyToManyField(
         "DocumentTypes",
-        related_name='rvn_tables_relatedto_documenttypes',
+        related_name="rvn_tables_relatedto_documenttypes",
         blank=True,
         verbose_name="File is related to other TD resources",
         help_text="helptext for relatedto",
@@ -8840,7 +8151,8 @@ class Tables(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__RelatedTo",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -8848,7 +8160,8 @@ class Tables(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -8858,7 +8171,7 @@ class Tables(models.Model):
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_tables_file_extension_original_skosconcept',
+        related_name="rvn_tables_file_extension_original_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8870,7 +8183,7 @@ class Tables(models.Model):
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_tables_file_extension_archivalobject_skosconcept',
+        related_name="rvn_tables_file_extension_archivalobject_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8882,7 +8195,7 @@ class Tables(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_tables_copyright_skosconcept',
+        related_name="rvn_tables_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8894,7 +8207,7 @@ class Tables(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_tables_access_skosconcept',
+        related_name="rvn_tables_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8907,7 +8220,7 @@ class Tables(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_tables_site_id_skosconcept',
+        related_name="rvn_tables_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8919,7 +8232,7 @@ class Tables(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_tables_excavation_post_excavation_skosconcept',
+        related_name="rvn_tables_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -8930,49 +8243,25 @@ class Tables(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Tabellen/Tabelle_metadata.csv__Excavation__post_excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -8981,7 +8270,7 @@ class Tables(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "Tables"
 
@@ -9000,49 +8289,41 @@ class Tables(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:tables_browse')
+        return reverse("archiv:tables_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:tables_create')
+        return reverse("archiv:tables_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:tables_detail', kwargs={'pk': self.id})
+        return reverse("archiv:tables_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:tables_detail', kwargs={'pk': self.id})
+        return reverse("archiv:tables_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:tables_delete', kwargs={'pk': self.id})
+        return reverse("archiv:tables_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:tables_edit', kwargs={'pk': self.id})
+        return reverse("archiv:tables_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:tables_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:tables_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:tables_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:tables_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class ThreeDimensionalModel(models.Model):
-    """ 3D models """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """3D models"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     filename = models.CharField(
         max_length=250,
         blank=True,
@@ -9085,7 +8366,7 @@ class ThreeDimensionalModel(models.Model):
     )
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_threedimensionalmodel_creator_metadata_actor',
+        related_name="rvn_threedimensionalmodel_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9117,7 +8398,8 @@ class ThreeDimensionalModel(models.Model):
         arche_prop="hasUsedSoftware",
     )
     creation_date_archivalobject = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of archival object",
         help_text="Date when the resource was prepared for long-term archiving.",
     ).set_extra(
@@ -9126,7 +8408,7 @@ class ThreeDimensionalModel(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_threedimensionalmodel_creator_original_actor',
+        related_name="rvn_threedimensionalmodel_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9139,7 +8421,7 @@ class ThreeDimensionalModel(models.Model):
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
-        related_name='rvn_threedimensionalmodel_creator_archivalobject_actor',
+        related_name="rvn_threedimensionalmodel_creator_archivalobject_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9151,7 +8433,8 @@ class ThreeDimensionalModel(models.Model):
         arche_prop="hasContributor",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -9160,7 +8443,7 @@ class ThreeDimensionalModel(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_threedimensionalmodel_excavation_object_id_excavationobjectid',
+        related_name="rvn_threedimensionalmodel_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
@@ -9170,7 +8453,7 @@ class ThreeDimensionalModel(models.Model):
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
-        related_name='rvn_threedimensionalmodel_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_threedimensionalmodel_archaeological_object_id_archaeologicalobjectid",
         blank=True,
         verbose_name="Archaeological object ID",
         help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
@@ -9188,7 +8471,8 @@ class ThreeDimensionalModel(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__RelatedTo",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -9196,7 +8480,8 @@ class ThreeDimensionalModel(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -9206,7 +8491,7 @@ class ThreeDimensionalModel(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_threedimensionalmodel_document_type_documenttypes',
+        related_name="rvn_threedimensionalmodel_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9218,7 +8503,7 @@ class ThreeDimensionalModel(models.Model):
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_threedimensionalmodel_file_extension_original_skosconcept',
+        related_name="rvn_threedimensionalmodel_file_extension_original_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9230,7 +8515,7 @@ class ThreeDimensionalModel(models.Model):
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_threedimensionalmodel_file_extension_archivalobject_skosconcept',
+        related_name="rvn_threedimensionalmodel_file_extension_archivalobject_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9242,7 +8527,7 @@ class ThreeDimensionalModel(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_threedimensionalmodel_copyright_skosconcept',
+        related_name="rvn_threedimensionalmodel_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9254,7 +8539,7 @@ class ThreeDimensionalModel(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_threedimensionalmodel_access_skosconcept',
+        related_name="rvn_threedimensionalmodel_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9267,7 +8552,7 @@ class ThreeDimensionalModel(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_threedimensionalmodel_site_id_skosconcept',
+        related_name="rvn_threedimensionalmodel_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9279,7 +8564,7 @@ class ThreeDimensionalModel(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_threedimensionalmodel_excavation_post_excavation_skosconcept',
+        related_name="rvn_threedimensionalmodel_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9290,49 +8575,25 @@ class ThreeDimensionalModel(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_3D/3D_metadata.csv__Excavation__post_excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -9341,7 +8602,7 @@ class ThreeDimensionalModel(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "3D models"
 
@@ -9360,52 +8621,48 @@ class ThreeDimensionalModel(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:threedimensionalmodel_browse')
+        return reverse("archiv:threedimensionalmodel_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:threedimensionalmodel_create')
+        return reverse("archiv:threedimensionalmodel_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:threedimensionalmodel_detail', kwargs={'pk': self.id})
+        return reverse("archiv:threedimensionalmodel_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:threedimensionalmodel_detail', kwargs={'pk': self.id})
+        return reverse("archiv:threedimensionalmodel_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:threedimensionalmodel_delete', kwargs={'pk': self.id})
+        return reverse("archiv:threedimensionalmodel_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:threedimensionalmodel_edit', kwargs={'pk': self.id})
+        return reverse("archiv:threedimensionalmodel_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:threedimensionalmodel_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:threedimensionalmodel_detail", kwargs={"pk": next.first().id}
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:threedimensionalmodel_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:threedimensionalmodel_detail", kwargs={"pk": prev.first().id}
             )
         return False
 
 
 class Videos(models.Model):
-    """ Videos """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Videos"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_videos_creator_metadata_actor',
+        related_name="rvn_videos_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9418,7 +8675,7 @@ class Videos(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_videos_creator_original_actor',
+        related_name="rvn_videos_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9431,7 +8688,7 @@ class Videos(models.Model):
     )
     creator_archivalobject = models.ForeignKey(
         "Actor",
-        related_name='rvn_videos_creator_archivalobject_actor',
+        related_name="rvn_videos_creator_archivalobject_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9444,7 +8701,7 @@ class Videos(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_videos_document_type_documenttypes',
+        related_name="rvn_videos_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9456,7 +8713,7 @@ class Videos(models.Model):
     )
     find_inventory_number = models.ForeignKey(
         "FundinventarInventarnummern",
-        related_name='rvn_videos_find_inventory_number_fundinventarinventarnummern',
+        related_name="rvn_videos_find_inventory_number_fundinventarinventarnummern",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9498,7 +8755,8 @@ class Videos(models.Model):
         arche_prop="hasAlternativeTitle",
     )
     creation_date_original = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of original document",
         help_text="helptext for creation_date_original",
     ).set_extra(
@@ -9507,7 +8765,8 @@ class Videos(models.Model):
         arche_prop="hasCreatedStartDate",
     )
     creation_date_archivalobject = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of archival object",
         help_text="helptext for creation_date_archivalobject",
     ).set_extra(
@@ -9515,7 +8774,8 @@ class Videos(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Creation_date_archivalObject",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -9542,7 +8802,7 @@ class Videos(models.Model):
     )
     excavation_object_id = models.ManyToManyField(
         "ExcavationObjectID",
-        related_name='rvn_videos_excavation_object_id_excavationobjectid',
+        related_name="rvn_videos_excavation_object_id_excavationobjectid",
         blank=True,
         verbose_name="Excavation object ID",
         help_text="The unique identifier of an excavation object. Excavation objects are created by the archaeologist and include for example squares or sections. The excavation object ID consists of the abbreviation of site_area_square trench_description of excavation object (e.g.: TD_F-I_o19_Planum1 means Tell el-Daba, area F-I, square o19, level 1).",
@@ -9552,7 +8812,7 @@ class Videos(models.Model):
     )
     archaeological_object_id = models.ManyToManyField(
         "ArchaeologicalObjectID",
-        related_name='rvn_videos_archaeological_object_id_archaeologicalobjectid',
+        related_name="rvn_videos_archaeological_object_id_archaeologicalobjectid",
         blank=True,
         verbose_name="Archaeological object ID",
         help_text="The unique identifier of an archaeological object. Archaeological objects are all objects that were created in the past, e.g. in the Bronze Age. An archaeological object ID contains the abbreviation of site_area_square trench_name of archaeological object (e.g.: TD_F-I_o19_Grab1 means Tell el-Daba, area F-I, square o19, grave 1).",
@@ -9561,7 +8821,8 @@ class Videos(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Archaeological_object_ID",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -9569,7 +8830,8 @@ class Videos(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -9579,7 +8841,7 @@ class Videos(models.Model):
     )
     file_extension_original = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_videos_file_extension_original_skosconcept',
+        related_name="rvn_videos_file_extension_original_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9591,7 +8853,7 @@ class Videos(models.Model):
     )
     file_extension_archivalobject = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_videos_file_extension_archivalobject_skosconcept',
+        related_name="rvn_videos_file_extension_archivalobject_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9603,7 +8865,7 @@ class Videos(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_videos_copyright_skosconcept',
+        related_name="rvn_videos_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9615,7 +8877,7 @@ class Videos(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_videos_access_skosconcept',
+        related_name="rvn_videos_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9628,7 +8890,7 @@ class Videos(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_videos_site_id_skosconcept',
+        related_name="rvn_videos_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9639,49 +8901,25 @@ class Videos(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Video/Video_metadata.csv__Site_ID",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -9690,7 +8928,7 @@ class Videos(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "Videos"
 
@@ -9709,52 +8947,44 @@ class Videos(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:videos_browse')
+        return reverse("archiv:videos_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:videos_create')
+        return reverse("archiv:videos_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:videos_detail', kwargs={'pk': self.id})
+        return reverse("archiv:videos_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:videos_detail', kwargs={'pk': self.id})
+        return reverse("archiv:videos_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:videos_delete', kwargs={'pk': self.id})
+        return reverse("archiv:videos_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:videos_edit', kwargs={'pk': self.id})
+        return reverse("archiv:videos_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
-            return reverse(
-                'archiv:videos_detail',
-                kwargs={'pk': next.first().id}
-            )
+            return reverse("archiv:videos_detail", kwargs={"pk": next.first().id})
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
-            return reverse(
-                'archiv:videos_detail',
-                kwargs={'pk': prev.first().id}
-            )
+            return reverse("archiv:videos_detail", kwargs={"pk": prev.first().id})
         return False
 
 
 class WallpaintingInventory(models.Model):
-    """ Digitised inventory of wallpaintings """
-    legacy_id = models.CharField(
-        max_length=300, blank=True,
-        verbose_name="Legacy ID"
-        )
+    """Digitised inventory of wallpaintings"""
+
+    legacy_id = models.CharField(max_length=300, blank=True, verbose_name="Legacy ID")
     creator_metadata = models.ForeignKey(
         "Actor",
-        related_name='rvn_wallpaintinginventory_creator_metadata_actor',
+        related_name="rvn_wallpaintinginventory_creator_metadata_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9767,7 +8997,7 @@ class WallpaintingInventory(models.Model):
     )
     creator_original = models.ForeignKey(
         "Actor",
-        related_name='rvn_wallpaintinginventory_creator_original_actor',
+        related_name="rvn_wallpaintinginventory_creator_original_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9780,7 +9010,7 @@ class WallpaintingInventory(models.Model):
     )
     creator_scan = models.ForeignKey(
         "Actor",
-        related_name='rvn_wallpaintinginventory_creator_scan_actor',
+        related_name="rvn_wallpaintinginventory_creator_scan_actor",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9793,7 +9023,7 @@ class WallpaintingInventory(models.Model):
     )
     document_type = models.ForeignKey(
         "DocumentTypes",
-        related_name='rvn_wallpaintinginventory_document_type_documenttypes',
+        related_name="rvn_wallpaintinginventory_document_type_documenttypes",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9844,7 +9074,8 @@ class WallpaintingInventory(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Filename_old",
     )
     creation_date_original = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of original document",
         help_text="helptext for creation_date_original",
     ).set_extra(
@@ -9859,10 +9090,11 @@ class WallpaintingInventory(models.Model):
     ).set_extra(
         is_public=True,
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Creation_year_original",
-        arche_prop="hasCreatedStartDateOriginal"
+        arche_prop="hasCreatedStartDateOriginal",
     )
     creation_date_scan = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of scan",
         help_text="helptext for creation_date_scan",
     ).set_extra(
@@ -9871,7 +9103,8 @@ class WallpaintingInventory(models.Model):
         arche_prop="hasCreatedStartDate",
     )
     creation_date_metadata = models.DateField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Creation date of metadata",
         help_text="helptext for creation_date_metadata",
     ).set_extra(
@@ -9888,7 +9121,8 @@ class WallpaintingInventory(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Storage_folder_original",
     )
     resolution_scan_dpi = models.IntegerField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Scan resolution",
         help_text="helptext for resolution_scan_dpi",
     ).set_extra(
@@ -9907,7 +9141,8 @@ class WallpaintingInventory(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Fresco_inventory_number",
     )
     original_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment on the original document",
         help_text="Comments from the creation of the original resource.",
     ).set_extra(
@@ -9915,7 +9150,8 @@ class WallpaintingInventory(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Original_comment",
     )
     digitisation_comment = models.TextField(
-        blank=True, null=True,
+        blank=True,
+        null=True,
         verbose_name="Comment from digitisation",
         help_text="Comments from digitisation.",
     ).set_extra(
@@ -9925,7 +9161,7 @@ class WallpaintingInventory(models.Model):
     )
     file_extension = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_wallpaintinginventory_file_extension_skosconcept',
+        related_name="rvn_wallpaintinginventory_file_extension_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9937,7 +9173,7 @@ class WallpaintingInventory(models.Model):
     )
     copyright = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_wallpaintinginventory_copyright_skosconcept',
+        related_name="rvn_wallpaintinginventory_copyright_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9949,7 +9185,7 @@ class WallpaintingInventory(models.Model):
     )
     access = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_wallpaintinginventory_access_skosconcept',
+        related_name="rvn_wallpaintinginventory_access_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9962,7 +9198,7 @@ class WallpaintingInventory(models.Model):
     )
     site_id = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_wallpaintinginventory_site_id_skosconcept',
+        related_name="rvn_wallpaintinginventory_site_id_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9974,7 +9210,7 @@ class WallpaintingInventory(models.Model):
     )
     equipment_scan = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_wallpaintinginventory_equipment_scan_skosconcept',
+        related_name="rvn_wallpaintinginventory_equipment_scan_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9987,7 +9223,7 @@ class WallpaintingInventory(models.Model):
     )
     source_original_copy_edited_copy = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_wallpaintinginventory_source_original_copy_edited_copy_skosconcept',
+        related_name="rvn_wallpaintinginventory_source_original_copy_edited_copy_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -9999,7 +9235,7 @@ class WallpaintingInventory(models.Model):
     )
     original_material = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_wallpaintinginventory_original_material_skosconcept',
+        related_name="rvn_wallpaintinginventory_original_material_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -10011,7 +9247,7 @@ class WallpaintingInventory(models.Model):
     )
     excavation_post_excavation = models.ForeignKey(
         SkosConcept,
-        related_name='rvn_wallpaintinginventory_excavation_post_excavation_skosconcept',
+        related_name="rvn_wallpaintinginventory_excavation_post_excavation_skosconcept",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -10022,49 +9258,25 @@ class WallpaintingInventory(models.Model):
         data_lookup="excel2csv/archiv/4DP_Metadaten_Freskeninventar/Fresco_inventory.csv__Excavation__post_excavation",
     )
     orig_data_csv = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="The original data"
-        ).set_extra(
-            is_public=True
-        )
+        blank=True, null=True, verbose_name="The original data"
+    ).set_extra(is_public=True)
     fc_name = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field name"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field name"
+    ).set_extra(is_public=False)
     fc_directory = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field directory"
-        ).set_extra(
-            is_public=False,
-        )
+        blank=True, null=True, verbose_name="filechecker field directory"
+    ).set_extra(
+        is_public=False,
+    )
     fc_type = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field type"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field type"
+    ).set_extra(is_public=False)
     fc_filename = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name="filechecker field filename"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, verbose_name="filechecker field filename"
+    ).set_extra(is_public=False)
     fc_extension = models.CharField(
-        blank=True,
-        null=True,
-        max_length=40,
-        verbose_name="filechecker field extension"
-        ).set_extra(
-            is_public=False
-        )
+        blank=True, null=True, max_length=40, verbose_name="filechecker field extension"
+    ).set_extra(is_public=False)
     fc_match = models.BooleanField(
         default=False,
         verbose_name="Matches FileChecker Entry",
@@ -10073,7 +9285,7 @@ class WallpaintingInventory(models.Model):
     class Meta:
 
         ordering = [
-            'filename',
+            "filename",
         ]
         verbose_name = "Freskeninventar"
 
@@ -10088,38 +9300,36 @@ class WallpaintingInventory(models.Model):
 
     @classmethod
     def get_listview_url(self):
-        return reverse('archiv:wallpaintinginventory_browse')
+        return reverse("archiv:wallpaintinginventory_browse")
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:wallpaintinginventory_create')
+        return reverse("archiv:wallpaintinginventory_create")
 
     def get_absolute_url(self):
-        return reverse('archiv:wallpaintinginventory_detail', kwargs={'pk': self.id})
+        return reverse("archiv:wallpaintinginventory_detail", kwargs={"pk": self.id})
 
     def get_absolute_url(self):
-        return reverse('archiv:wallpaintinginventory_detail', kwargs={'pk': self.id})
+        return reverse("archiv:wallpaintinginventory_detail", kwargs={"pk": self.id})
 
     def get_delete_url(self):
-        return reverse('archiv:wallpaintinginventory_delete', kwargs={'pk': self.id})
+        return reverse("archiv:wallpaintinginventory_delete", kwargs={"pk": self.id})
 
     def get_edit_url(self):
-        return reverse('archiv:wallpaintinginventory_edit', kwargs={'pk': self.id})
+        return reverse("archiv:wallpaintinginventory_edit", kwargs={"pk": self.id})
 
     def get_next(self):
         next = self.__class__.objects.filter(id__gt=self.id)
         if next:
             return reverse(
-                'archiv:wallpaintinginventory_detail',
-                kwargs={'pk': next.first().id}
+                "archiv:wallpaintinginventory_detail", kwargs={"pk": next.first().id}
             )
         return False
 
     def get_prev(self):
-        prev = self.__class__.objects.filter(id__lt=self.id).order_by('-id')
+        prev = self.__class__.objects.filter(id__lt=self.id).order_by("-id")
         if prev:
             return reverse(
-                'archiv:wallpaintinginventory_detail',
-                kwargs={'pk': prev.first().id}
+                "archiv:wallpaintinginventory_detail", kwargs={"pk": prev.first().id}
             )
         return False

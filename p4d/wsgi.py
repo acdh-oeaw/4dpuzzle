@@ -11,8 +11,8 @@ import os
 
 import sys
 
-sys.path.append('/var/www/html')
-sys.path.append('/var/www/html/p4d/myenv/lib/python3.6/site-packages')
+sys.path.append("/var/www/html")
+sys.path.append("/var/www/html/p4d/myenv/lib/python3.6/site-packages")
 
 
 from django.core.wsgi import get_wsgi_application

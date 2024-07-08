@@ -8,7 +8,12 @@ from django_tables2 import SingleTableView, RequestConfig
 from .models import SkosConcept, SkosConceptScheme, SkosLabel, SkosCollection, Metadata
 from .forms import *
 from .tables import *
-from .filters import SkosConceptListFilter, SkosConceptSchemeListFilter, SkosLabelListFilter, SkosCollectionListFilter
+from .filters import (
+    SkosConceptListFilter,
+    SkosConceptSchemeListFilter,
+    SkosLabelListFilter,
+    SkosCollectionListFilter,
+)
 from browsing.browsing_utils import GenericListView, BaseCreateView, BaseUpdateView
 from .rdf_utils import *
 from django.http import HttpResponse
@@ -25,7 +30,7 @@ import datetime
 class MetadataListView(ListView):
 
     model = Metadata
-    template_name = 'vocabs/metadata_list.html'
+    template_name = "vocabs/metadata_list.html"
 
     def get_context_data(self, **kwargs):
         context = super(MetadataListView, self).get_context_data(**kwargs)
@@ -36,7 +41,7 @@ class MetadataListView(ListView):
 class MetadataDetailView(DetailView):
 
     model = Metadata
-    template_name = 'vocabs/metadata_detail.html'
+    template_name = "vocabs/metadata_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super(MetadataDetailView, self).get_context_data(**kwargs)
@@ -66,8 +71,8 @@ class MetadataUpdate(BaseUpdateView):
 
 class MetadataDelete(DeleteView):
     model = Metadata
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('vocabs:metadata')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("vocabs:metadata")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -85,8 +90,8 @@ class SkosCollectionListView(GenericListView):
     filter_class = SkosCollectionListFilter
     formhelper_class = SkosCollectionFormHelper
     init_columns = [
-        'id',
-        'name',
+        "id",
+        "name",
     ]
 
     def get_all_cols(self):
@@ -96,15 +101,17 @@ class SkosCollectionListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(SkosCollectionListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -116,7 +123,7 @@ class SkosCollectionListView(GenericListView):
 class SkosCollectionDetailView(DetailView):
 
     model = SkosCollection
-    template_name = 'vocabs/skoscollection_detail.html'
+    template_name = "vocabs/skoscollection_detail.html"
 
 
 class SkosCollectionCreate(BaseCreateView):
@@ -141,8 +148,8 @@ class SkosCollectionUpdate(BaseUpdateView):
 
 class SkosCollectionDelete(DeleteView):
     model = SkosCollection
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('vocabs:browse_skoscollections')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("vocabs:browse_skoscollections")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -160,9 +167,9 @@ class SkosConceptListView(GenericListView):
     filter_class = SkosConceptListFilter
     formhelper_class = SkosConceptFormHelper
     init_columns = [
-        'id',
-        'pref_label',
-        'broader_concept',
+        "id",
+        "pref_label",
+        "broader_concept",
     ]
     enable_merge = True
 
@@ -170,7 +177,7 @@ class SkosConceptListView(GenericListView):
 class SkosConceptDetailView(DetailView):
 
     model = SkosConcept
-    template_name = 'vocabs/skosconcept_detail.html'
+    template_name = "vocabs/skosconcept_detail.html"
 
 
 class SkosConceptCreate(BaseCreateView):
@@ -195,8 +202,8 @@ class SkosConceptUpdate(BaseUpdateView):
 
 class SkosConceptDelete(DeleteView):
     model = SkosConcept
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('vocabs:browse_vocabs')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("vocabs:browse_vocabs")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -214,8 +221,8 @@ class SkosConceptSchemeListView(GenericListView):
     filter_class = SkosConceptSchemeListFilter
     formhelper_class = SkosConceptSchemeFormHelper
     init_columns = [
-        'id',
-        'dc_title',
+        "id",
+        "dc_title",
     ]
 
     def get_all_cols(self):
@@ -225,15 +232,17 @@ class SkosConceptSchemeListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(SkosConceptSchemeListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -245,11 +254,11 @@ class SkosConceptSchemeListView(GenericListView):
 class SkosConceptSchemeDetailView(DetailView):
 
     model = SkosConceptScheme
-    template_name = 'vocabs/skosconceptscheme_detail.html'
+    template_name = "vocabs/skosconceptscheme_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super(SkosConceptSchemeDetailView, self).get_context_data(**kwargs)
-        context["concepts"] = SkosConcept.objects.filter(scheme=self.kwargs.get('pk'))
+        context["concepts"] = SkosConcept.objects.filter(scheme=self.kwargs.get("pk"))
         return context
 
 
@@ -275,8 +284,8 @@ class SkosConceptSchemeUpdate(BaseUpdateView):
 
 class SkosConceptSchemeDelete(DeleteView):
     model = SkosConceptScheme
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('vocabs:browse_schemes')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("vocabs:browse_schemes")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -294,8 +303,8 @@ class SkosLabelListView(GenericListView):
     filter_class = SkosLabelListFilter
     formhelper_class = SkosLabelFormHelper
     init_columns = [
-        'id',
-        'name',
+        "id",
+        "name",
     ]
 
     def get_all_cols(self):
@@ -305,15 +314,17 @@ class SkosLabelListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(SkosLabelListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        togglable_colums = [x for x in self.get_all_cols() if x not in self.init_columns]
-        context['togglable_colums'] = togglable_colums
+        togglable_colums = [
+            x for x in self.get_all_cols() if x not in self.init_columns
+        ]
+        context["togglable_colums"] = togglable_colums
         return context
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by
-        }).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         default_cols = self.init_columns
         all_cols = self.get_all_cols()
         selected_cols = self.request.GET.getlist("columns") + default_cols
@@ -325,7 +336,7 @@ class SkosLabelListView(GenericListView):
 class SkosLabelDetailView(DetailView):
 
     model = SkosLabel
-    template_name = 'vocabs/skoslabel_detail.html'
+    template_name = "vocabs/skoslabel_detail.html"
 
 
 class SkosLabelCreate(BaseCreateView):
@@ -350,8 +361,8 @@ class SkosLabelUpdate(BaseUpdateView):
 
 class SkosLabelDelete(DeleteView):
     model = SkosLabel
-    template_name = 'webpage/confirm_delete.html'
-    success_url = reverse_lazy('vocabs:browse_skoslabels')
+    template_name = "webpage/confirm_delete.html"
+    success_url = reverse_lazy("vocabs:browse_skoslabels")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -362,6 +373,7 @@ class SkosLabelDelete(DeleteView):
 # SkosConcepts download as one ConceptScheme
 ###################################################
 
+
 class SkosConceptDL(GenericListView):
     model = SkosConcept
     table_class = SkosConceptTable
@@ -369,11 +381,15 @@ class SkosConceptDL(GenericListView):
     formhelper_class = SkosConceptFormHelper
 
     def render_to_response(self, context):
-        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-        response = HttpResponse(content_type='application/xml; charset=utf-8')
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime(
+            "%Y-%m-%d-%H-%M-%S"
+        )
+        response = HttpResponse(content_type="application/xml; charset=utf-8")
         filename = "download_{}".format(timestamp)
-        response['Content-Disposition'] = 'attachment; filename="{}.rdf"'.format(filename)
+        response["Content-Disposition"] = 'attachment; filename="{}.rdf"'.format(
+            filename
+        )
         g = graph_construct_qs(self.get_queryset())
-        get_format = self.request.GET.get('format', default='pretty-xml')
+        get_format = self.request.GET.get("format", default="pretty-xml")
         result = g.serialize(destination=response, format=get_format)
         return response

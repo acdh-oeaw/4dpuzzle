@@ -3,7 +3,7 @@ import django_tables2 as tables
 from django_tables2.utils import A
 
 from browsing.browsing_utils import MergeColumn
-from . models import (
+from .models import (
     Actor,
     ArchaeologicalObject4DPuzzleID,
     ArchaeologicalObjectID,
@@ -35,145 +35,145 @@ from . models import (
     Tables,
     ThreeDimensionalModel,
     Videos,
-    WallpaintingInventory
+    WallpaintingInventory,
 )
 
 
 class ActorTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
 
     class Meta:
         model = Actor
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class ArchaeologicalObject4DPuzzleIDTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = ArchaeologicalObject4DPuzzleID
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class ArchaeologicalObjectIDTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
     corresponding_to_archaeological_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = ArchaeologicalObjectID
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class ArchiveINFTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
 
     class Meta:
         model = ArchiveINF
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class AutoCADTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = AutoCAD
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class ConvolutecardsTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Convolutecards
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class DatenbaseTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Datenbase
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class Document4DPuzzleIDTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
 
     class Meta:
         model = Document4DPuzzleID
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class DocumentTypesTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
 
     class Meta:
         model = DocumentTypes
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class ExcavationObjectIDTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_id = tables.columns.ManyToManyColumn()
     part_of_excavation_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = ExcavationObjectID
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class ExcavationSeasonsTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
 
     class Meta:
         model = ExcavationSeasons
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class FielddrawingTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     document_type = tables.columns.ManyToManyColumn()
     creator_metadata = tables.columns.ManyToManyColumn()
     creator_original = tables.columns.ManyToManyColumn()
@@ -186,258 +186,258 @@ class FielddrawingTable(tables.Table):
 
     class Meta:
         model = Fielddrawing
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class FilmTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Film
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class FinddrawingTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
 
     class Meta:
         model = Finddrawing
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class FindsheetsTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Findsheets
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class FotoborndigitalTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Fotoborndigital
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class FotosgescanntTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_id = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Fotosgescannt
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class Fundinventar4DPuzzleIDTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     relatedto = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Fundinventar4DPuzzleID
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class FundinventarInventarnummernTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
     relatedto = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = FundinventarInventarnummern
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class FundinventarKonvolutnummernTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     find_material = tables.columns.ManyToManyColumn()
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = FundinventarKonvolutnummern
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class FundinventarMaterialprobenTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = FundinventarMaterialproben
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class FundinventarSteininventarTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
     relatedto = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = FundinventarSteininventar
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class GISTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
     relatedto = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = GIS
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class GeophysicsTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Geophysics
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class InventorybooksTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     find_inventory_number = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Inventorybooks
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class PhasenIDTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     area = tables.columns.ManyToManyColumn()
     containing_phase_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = PhasenID
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class ProtocolsTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     document_type = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Protocols
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class StratenIDTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     area = tables.columns.ManyToManyColumn()
     containing_stratum_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = StratenID
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class TablesTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
     relatedto = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Tables
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class ThreeDimensionalModelTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = ThreeDimensionalModel
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class VideosTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
     excavation_object_id = tables.columns.ManyToManyColumn()
     archaeological_object_id = tables.columns.ManyToManyColumn()
 
     class Meta:
         model = Videos
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}
 
 
 class WallpaintingInventoryTable(tables.Table):
 
-    id = tables.LinkColumn(verbose_name='ID')
-    merge = MergeColumn(verbose_name='keep | remove', accessor='pk')
+    id = tables.LinkColumn(verbose_name="ID")
+    merge = MergeColumn(verbose_name="keep | remove", accessor="pk")
 
     class Meta:
         model = WallpaintingInventory
-        sequence = ('id',)
+        sequence = ("id",)
         attrs = {"class": "table table-responsive table-hover"}

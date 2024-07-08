@@ -126,9 +126,7 @@ urlpatterns = [
         views.DatenbaseDetailView.as_view(),
         name="datenbase_detail",
     ),
-    path(
-        "datenbase/create/", views.DatenbaseCreate.as_view(), name="datenbase_create"
-    ),
+    path("datenbase/create/", views.DatenbaseCreate.as_view(), name="datenbase_create"),
     path(
         "datenbase/edit/<int:pk>",
         views.DatenbaseUpdate.as_view(),
@@ -562,9 +560,7 @@ urlpatterns = [
         views.ProtocolsDetailView.as_view(),
         name="protocols_detail",
     ),
-    path(
-        "protocols/create/", views.ProtocolsCreate.as_view(), name="protocols_create"
-    ),
+    path("protocols/create/", views.ProtocolsCreate.as_view(), name="protocols_create"),
     path(
         "protocols/edit/<int:pk>",
         views.ProtocolsUpdate.as_view(),
@@ -581,9 +577,7 @@ urlpatterns = [
         views.StratenIDDetailView.as_view(),
         name="stratenid_detail",
     ),
-    path(
-        "stratenid/create/", views.StratenIDCreate.as_view(), name="stratenid_create"
-    ),
+    path("stratenid/create/", views.StratenIDCreate.as_view(), name="stratenid_create"),
     path(
         "stratenid/edit/<int:pk>",
         views.StratenIDUpdate.as_view(),
