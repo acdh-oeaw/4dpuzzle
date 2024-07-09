@@ -3,18 +3,11 @@ ignore = D203 W504 E501
 max-line-length = 120
 exclude =
     */migrations,
-    */migrations,
     manage.py
     .git,
-    .tox,
     docs/conf.py,
     build,
     dist
     env
-    infos
-    appcreator
-    p4d/settings
     webpage
-    p4d/settings/pg_local.py
-    stanza
     venv
