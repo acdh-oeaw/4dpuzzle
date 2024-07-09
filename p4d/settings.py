@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "mptt",
+    "fixture_magic",
     "django_extensions",
     "crispy_forms",
     "crispy_bootstrap3",

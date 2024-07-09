@@ -159,7 +159,6 @@ class GenericListView(django_tables2.SingleTableView):
         if "charts" in settings.INSTALLED_APPS:
             model = self.model
             app_label = model._meta.app_label
-            print(app_label)
             filtered_objs = ChartConfig.objects.filter(
                 model_name=model.__name__.lower(), app_name=app_label
             )
