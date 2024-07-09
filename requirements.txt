@@ -1,11 +1,13 @@
 acdh-django-charts==0.5.3
 acdh-django-netvis==0.1.1
+coverage>=7.5.3,<8
 crispy-bootstrap3>=2024.1,<2025
 Django>=5.0.6,<6
 django-autocomplete-light>=3.9,<4
 django-crispy-forms>=2.1,<3
 django-extensions>=3.2.3,<4
 django-filter>=24.2,<25
+django-fixture-magic>=0.1.5,<1
 django-mptt>=0.16.0,<1
 django-super-deduper>=0.1.4,<1
 django-tables2>=2.7.0,<3

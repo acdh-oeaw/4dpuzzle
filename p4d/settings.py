@@ -1,9 +1,8 @@
-"""
-Django settings for CBAB project.
-"""
-
 import os
 from pathlib import Path
+
+
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
 SHARED_URL = "https://shared.acdh.oeaw.ac.at/"
 PROJECT_NAME = "p4d"
