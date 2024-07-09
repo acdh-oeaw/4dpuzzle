@@ -33,6 +33,8 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade --upgrade-strategy eager -r requirements.txt
+    - name: Run migrations
+      run: python manage.py migrate
     - name: Run tests
       run: coverage run manage.py test -v 2
     - name: create report
