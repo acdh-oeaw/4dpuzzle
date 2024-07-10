@@ -1,4 +1,4 @@
-name: workflows starter
+name: deploy to cluster
 # env: is empty, see setup-env and the outputs there.
 on:
   workflow_dispatch: {}
