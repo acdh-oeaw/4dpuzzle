@@ -26,7 +26,7 @@ jobs:
       fetch-depth: 10
       submodules: "true"
 #      herokuish_base_image: ghcr.io/acdh-oeaw/herokuish-for-cypress/main:latest-22
-      APP_NAME: 4dpuzzle
+      APP_NAME: fourdpuzzle
 # This together with the branch name is also used as the namespace to deploy to
       APP_ROOT: "/"     
       # SERVICE_ID: "99999" # Better use GtiHub environment variables for this
